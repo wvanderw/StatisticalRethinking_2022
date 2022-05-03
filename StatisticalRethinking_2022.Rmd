@@ -1,6 +1,7 @@
 ---
 title: "Companion to Statistical Rethinking"
 author: "Wade VanderWright"
+date: "2022/05/03"
 output: html_notebook
 ---
 
