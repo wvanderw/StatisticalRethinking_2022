@@ -1,10 +1,11 @@
 fig:nice-fig
 tab:nice-tab
 eq:binom
-about
-usage
-render-book
-preview-book
+the-golem-of-prague
+statistical-golems
+statistical-rethinking
+tools-for-golem-engineering
+summary
 hello-bookdown
 a-section
 cross
