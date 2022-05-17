@@ -1,2 +1,3 @@
 # Small worlds and large worlds
 
+Every model has two parts: small world and large world. *The small world* is 
