@@ -1,3 +1,68 @@
 # Small worlds and large worlds
 
-Every model has two parts: small world and large world. *The small world* is 
+Every model has two parts: small world and large world. *The small world* is within the model itself and *the large world* is the broader world we want the model to be applied to. In the small world, everything is defined and there isn't much room for pure surprises. The large world has more opportunities for unforeseen events and because the small world is an incomplete representation of the large world, mistakes are expected. The goal is to create small worlds (models) that approximate reality so that they perform well in the large world.
+
+## The garden of forking data
+
+Bayesian inference is the counting and comparing of possibilities. At each point where a 'decision' may split the path, bayesian inference evaluates each path and eliminates the paths that are not congruent with the data fed into the model.
+
+### Counting possibilities
+
+**Marble Example**
+
+There is a bag of four marbles of two colours (blue and white). This means that there could be 5 possibilities (conjectures); 4:0 white, 3:1 white, 2:2 split, 3:1 blue, and 4:0 blue. 
+
+A sequence of three marbles is pulled from the bag, one at a time, and returned to the bag (repeated sampling)\
+We get blue, white, blue.
+
+Considering a 3:1 white scenario, on the first draw you could get a blue marble or three white marble draws\
+```{r echo=FALSE}
+knitr::include_graphics("./_images/fig2.1.png")
+```
+
+Expanding out one more draw (layer) we can expect the same possibilities because the first marble is replaced before the second draw\
+```{r echo=FALSE}
+knitr::include_graphics("./_images/fig2.2.png")
+```
+
+Expanding one more time gives us the final garden of 64 possibilities (4^3^; 4 marbles with 3 draws)\
+```{r echo=FALSE}
+knitr::include_graphics("./_images/fig2.3.png")
+```
+
+Now recall our draws were blue, white, blue so we can trim the paths that are not congruent with the draws\
+```{r echo=FALSE}
+knitr::include_graphics("./_images/fig2.4.png")
+```
+
+We can also trim other possibilities like all white marbles or all blue marbles because we drew both colours from the bag. Putting our 3:1 white, 2:2 split, and 3:1 blue possibilities together would look something like this\
+```{r echo=FALSE}
+knitr::include_graphics("./_images/fig2.5.png")
+```
+
+You can see that there are different numbers of unique paths to get our observed result\
+3:1 white has 3 paths\
+2:2 split has 8 paths\
+3:1 blue has 9 paths\
+
+We will call these counts our priors.
+
+
+### Combining other information
+
+Suppose we make another marble draw and it is blue. We then count the ways each of our marble possibilities could create this new result\
+
+3:1 white has 1 path\
+2:2 split has 2 paths\
+3:1 blue has 3 paths\
+
+Mutiplying by the prior counts gives us:\
+
+3:1 white has (3x1) 3 paths\
+2:2 split has (8x2) 16 paths\
+3:1 blue has (9x3) 27 paths\
+
+and suggests that our 3:1 blue possibility is more plausible with the new information.\
+*Note that prior data and new data don't have to be of the same type*
+
+
