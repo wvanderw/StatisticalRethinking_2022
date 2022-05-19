@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Wade VanderWright" />
 
 
-<meta name="date" content="2022-05-18" />
+<meta name="date" content="2022-05-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -142,7 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Rethinking Companion</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> The Golem of Prague</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> url: your book url like <span>https://bookdown.org/yihui/bookdown</span></a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#statistical-golems"><i class="fa fa-check"></i><b>1.1</b> Statistical golems</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#statistical-rethinking"><i class="fa fa-check"></i><b>1.2</b> Statistical Rethinking</a>
@@ -165,6 +165,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.1.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#counting-possibilities"><i class="fa fa-check"></i><b>2.1.1</b> Counting possibilities</a></li>
 <li class="chapter" data-level="2.1.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#combining-other-information"><i class="fa fa-check"></i><b>2.1.2</b> Combining other information</a></li>
+<li class="chapter" data-level="2.1.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#from-counts-to-probability"><i class="fa fa-check"></i><b>2.1.3</b> From counts to probability</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#building-a-model"><i class="fa fa-check"></i><b>2.2</b> Building a model</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#a-data-story"><i class="fa fa-check"></i><b>2.2.1</b> A data story</a></li>
+<li class="chapter" data-level="2.2.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#bayesian-updating"><i class="fa fa-check"></i><b>2.2.2</b> Bayesian updating</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html"><i class="fa fa-check"></i><b>3</b> Sampling the imaginary</a></li>
@@ -226,15 +232,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A sequence of three marbles is pulled from the bag, one at a time, and returned to the bag (repeated sampling)<br />
 We get blue, white, blue.</p>
 <p>Considering a 3:1 white scenario, on the first draw you could get a blue marble or three white marble draws<br />
-<img src="_images/fig2.1.png" width="78" /></p>
+<img src="_images/fig2.1.png" width="300px" /></p>
 <p>Expanding out one more draw (layer) we can expect the same possibilities because the first marble is replaced before the second draw<br />
-<img src="_images/fig2.2.png" width="175" /></p>
+<img src="_images/fig2.2.png" width="300px" /></p>
 <p>Expanding one more time gives us the final garden of 64 possibilities (4<sup>3</sup>; 4 marbles with 3 draws)<br />
-<img src="_images/fig2.3.png" width="290" /></p>
+<img src="_images/fig2.3.png" width="300px" /></p>
 <p>Now recall our draws were blue, white, blue so we can trim the paths that are not congruent with the draws<br />
-<img src="_images/fig2.4.png" width="300" /></p>
+<img src="_images/fig2.4.png" width="300px" /></p>
 <p>We can also trim other possibilities like all white marbles or all blue marbles because we drew both colours from the bag. Putting our 3:1 white, 2:2 split, and 3:1 blue possibilities together would look something like this<br />
-<img src="_images/fig2.5.png" width="334" /></p>
+<img src="_images/fig2.5.png" width="300px" /></p>
 <p>You can see that there are different numbers of unique paths to get our observed result<br />
 3:1 white has 3 paths<br />
 2:2 split has 8 paths<br />
@@ -246,7 +252,7 @@ We get blue, white, blue.</p>
 <h3><span class="header-section-number">2.1.2</span> Combining other information<a href="small-worlds-and-large-worlds.html#combining-other-information" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Suppose we make another marble draw and it is blue. We then count the ways each of our marble possibilities could create this new result<br />
 </p>
-<p>3:1 white has 1 paths<br />
+<p>3:1 white has 1 path<br />
 2:2 split has 2 paths<br />
 3:1 blue has 3 paths<br />
 </p>
@@ -257,7 +263,91 @@ We get blue, white, blue.</p>
 3:1 blue has (9x3) 27 paths<br />
 </p>
 <p>and suggests that our 3:1 blue possibility is more plausible with the new information.<br />
-<em>Note that prior data and new data don’t have to be of the same type</em></p>
+<em>Note that prior data and new data don’t have to be of the same type</em><br />
+</p>
+<p>If we knew that the marble factory made the bags of marbles at fixed rates (i.e. there are 3x more 3:1 white bags as there are 3:1 blue bags and 2x as many 2:2 split bags than 3:1 blue bags) we could update our prior knowledge<br />
+</p>
+<p>3:1 white has 3 paths x 3 factory rate = 9<br />
+2:2 split has 16 paths x 2 factory rate = 32<br />
+3:1 blue has 27 paths x 1 factory rate = 27<br />
+</p>
+<p>Now the 2:2 split bag seems to be the most plausible outcome (by a small margin)</p>
+</div>
+<div id="from-counts-to-probability" class="section level3 hasAnchor" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> From counts to probability<a href="small-worlds-and-large-worlds.html#from-counts-to-probability" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To avoid observation counts from getting quickly out of hand (over a million possible sequences after 10 data points) we need to collapse the information in a way that is easy to manipulate with the data.<br />
+</p>
+<p>Continuing our marble example<br />
+The plausibility of 3:1 white after seeing blue, white, blue is proportional to the ways 3:1 white can produce blue, white, blue * prior plausibility of 3:1 white.<br />
+</p>
+<p>In other words if <span class="math inline">\(p\)</span> is the proportion of blue marbles then in a 3:1 white bag <span class="math inline">\(p\)</span> = 0.25 (1/4)<br />
+And if we call our data (blue, white, blue) <span class="math inline">\(D~new~\)</span> we can write:<br />
+</p>
+<p>The plausibility of <span class="math inline">\(p\)</span> after <span class="math inline">\(D~new~\)</span> <span class="math inline">\(\propto\)</span> ways <span class="math inline">\(p\)</span> can produce <span class="math inline">\(D~new~\)</span> <span class="math inline">\(\times\)</span> prior plausibility of <span class="math inline">\(p\)</span><br />
+</p>
+<p>We then standardize the plausibility of <span class="math inline">\(p\)</span> after <span class="math inline">\(D~new~\)</span> by dividing by the sum of the products to make the sum of plausibility to equal 1<br />
+</p>
+<p><span class="math display">\[\begin{equation} 
+  \text{The plausibility of } p \text{ after } D~new~ = \frac{\text{ways } p \text{ can produce } D~new~ \times \text{prior plausibility of } p}{\text{sum of products}}
+\end{equation}\]</span></p>
+<p>If you recall our first count of the paths to obtain our observations we had:<br />
+3:1 white has 3 paths<br />
+2:2 split has 8 paths<br />
+3:1 blue has 9 paths<br />
+</p>
+<p>To illustrate the standardization of plausibility in R:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="small-worlds-and-large-worlds.html#cb1-1" aria-hidden="true" tabindex="-1"></a>ways <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">9</span>)</span>
+<span id="cb1-2"><a href="small-worlds-and-large-worlds.html#cb1-2" aria-hidden="true" tabindex="-1"></a>ways<span class="sc">/</span><span class="fu">sum</span>(ways)</span></code></pre></div>
+<pre><code>## [1] 0.15 0.40 0.45</code></pre>
+<p>We can now think of these plausibilities as <em>probabilities</em> that sum to 1<br />
+</p>
+<p>New terms:<br />
+<em>Parameter</em> : <span class="math inline">\(p\)</span> or the conjectured proportion of blue marbles. (indexing ways to explain the data)<br />
+<em>Likelihood</em> : The relative number of ways that a parameter value (<span class="math inline">\(p\)</span>) can produce the data<br />
+<em>Prior probability</em> : The prior plausibility of any <span class="math inline">\(p\)</span> value<br />
+<em>Posterior probability</em> : The new, updated plausibility of and <span class="math inline">\(p\)</span> value<br />
+</p>
+</div>
+</div>
+<div id="building-a-model" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Building a model<a href="small-worlds-and-large-worlds.html#building-a-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Globe example</strong></p>
+<p>You have a globe and want to know how much surface is covered in water. You throw it in the air multiple times and when you catch it, what lies under your right index finger is recorded. The first nine throws are:<br />
+</p>
+<blockquote>
+<p>W L W W W L W L W</p>
+</blockquote>
+<p>with W meaning water and L meaning land. The ratio of water to land is 6:3 (2:1). This will be our <em>data</em><br />
+</p>
+<p>Steps to design your model:<br />
+</p>
+<ol style="list-style-type: decimal">
+<li>Data story: Motivate the model by narrating how the data might arise</li>
+<li>Update: Educate your model by feeding it data</li>
+<li>Evaluate: All statistical models require supervision, leading to model revision</li>
+</ol>
+<div id="a-data-story" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> A data story<a href="small-worlds-and-large-worlds.html#a-data-story" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>You can be descriptive in your data story by defining associations that can be used to predict outcomes. Or you can have a causal story where some events produce others. Typically casual stories are also descriptive.</p>
+<p>A good place to start is restating the sampling process:<br />
+</p>
+<ol style="list-style-type: decimal">
+<li>The true proportion of water covering the globe is <span class="math inline">\(p\)</span></li>
+<li>A single toss of the globe has probability <span class="math inline">\(p\)</span> of producing a water (W) observation. Land probability is <span class="math inline">\(1 - p\)</span></li>
+<li>Each toss is independent of the others</li>
+</ol>
+</div>
+<div id="bayesian-updating" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Bayesian updating<a href="small-worlds-and-large-worlds.html#bayesian-updating" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A Bayesian model must start with one set of plausibilities for each possible scenario or <em>Prior plausibilities</em>. The model then updates the plausibilities using the input of the data and creates the <em>Postierior plausibilties</em>. For the globe example, the plausibility for each <span class="math inline">\(p\)</span> value is set to be the same.</p>
+<p>So before the first draw, the model assumes an equal uniform plausibility for any proportion of water (<span class="math inline">\(p\)</span>) shown as the dashed line below. After the first draw (W), the model updates its plausibility of water proportion to have a very unlikely chance that there is almost no water and a high chance there is a lot of water (solid line below) because there is no known land<br />
+<img src="_images/fig2.6.png" width="300px" /></p>
+<p>For each additional data point (toss) we see the model adjust its plausibility expectations. After the second toss (L), the model adjusts the plausibility of <span class="math inline">\(p\)</span> to be highest at 0.5 or 1/2 as we have seen a proportion of 0.5 in the data so far<br />
+<img src="_images/fig2.7.png" width="300px" /></p>
+<p>As we add observations, W observations will shift the plausibility peak of <span class="math inline">\(p\)</span> to the right and L observations will pull it back to the left<br />
+<img src="_images/fig2.8.png" width="300px" /></p>
+<p>Note that as observations are added, the height of the peak increases as fewer values of <span class="math inline">\(p\)</span> gain plausibility<br />
+<img src="_images/fig2.9.png" width="600px" /></p>
 
 </div>
 </div>

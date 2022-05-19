@@ -34,3 +34,8 @@ adventures-in-covariance
 missing-data-and-other-opportunities
 generalized-linear-madness
 horoscopes
+url-your-book-url-like-httpsbookdown.orgyihuibookdown
+from-counts-to-probability
+building-a-model
+a-data-story
+bayesian-updating
