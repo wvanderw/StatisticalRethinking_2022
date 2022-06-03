@@ -39,3 +39,9 @@ from-counts-to-probability
 building-a-model
 a-data-story
 bayesian-updating
+evaluate
+components-of-the-model
+variables
+definitions
+observed-variables
+unobserved-variables

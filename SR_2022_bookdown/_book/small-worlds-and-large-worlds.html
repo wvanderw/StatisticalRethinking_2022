@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Wade VanderWright" />
 
 
-<meta name="date" content="2022-05-19" />
+<meta name="date" content="2022-06-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -171,6 +171,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#a-data-story"><i class="fa fa-check"></i><b>2.2.1</b> A data story</a></li>
 <li class="chapter" data-level="2.2.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#bayesian-updating"><i class="fa fa-check"></i><b>2.2.2</b> Bayesian updating</a></li>
+<li class="chapter" data-level="2.2.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#evaluate"><i class="fa fa-check"></i><b>2.2.3</b> Evaluate</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#components-of-the-model"><i class="fa fa-check"></i><b>2.3</b> Components of the model</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#variables"><i class="fa fa-check"></i><b>2.3.1</b> Variables</a></li>
+<li class="chapter" data-level="2.3.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#definitions"><i class="fa fa-check"></i><b>2.3.2</b> Definitions</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html"><i class="fa fa-check"></i><b>3</b> Sampling the imaginary</a></li>
@@ -341,14 +347,70 @@ And if we call our data (blue, white, blue) <span class="math inline">\(D~new~\)
 <h3><span class="header-section-number">2.2.2</span> Bayesian updating<a href="small-worlds-and-large-worlds.html#bayesian-updating" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A Bayesian model must start with one set of plausibilities for each possible scenario or <em>Prior plausibilities</em>. The model then updates the plausibilities using the input of the data and creates the <em>Postierior plausibilties</em>. For the globe example, the plausibility for each <span class="math inline">\(p\)</span> value is set to be the same.</p>
 <p>So before the first draw, the model assumes an equal uniform plausibility for any proportion of water (<span class="math inline">\(p\)</span>) shown as the dashed line below. After the first draw (W), the model updates its plausibility of water proportion to have a very unlikely chance that there is almost no water and a high chance there is a lot of water (solid line below) because there is no known land<br />
-<img src="_images/fig2.6.png" width="300px" /></p>
+<img src="_images/fig2.6.png" width="200px" /></p>
 <p>For each additional data point (toss) we see the model adjust its plausibility expectations. After the second toss (L), the model adjusts the plausibility of <span class="math inline">\(p\)</span> to be highest at 0.5 or 1/2 as we have seen a proportion of 0.5 in the data so far<br />
-<img src="_images/fig2.7.png" width="300px" /></p>
+<img src="_images/fig2.7.png" width="200px" /></p>
 <p>As we add observations, W observations will shift the plausibility peak of <span class="math inline">\(p\)</span> to the right and L observations will pull it back to the left<br />
 <img src="_images/fig2.8.png" width="300px" /></p>
 <p>Note that as observations are added, the height of the peak increases as fewer values of <span class="math inline">\(p\)</span> gain plausibility<br />
 <img src="_images/fig2.9.png" width="600px" /></p>
+</div>
+<div id="evaluate" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Evaluate<a href="small-worlds-and-large-worlds.html#evaluate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To ensure that the model is behaving as it should to be applicable to the large world, it should be always be checked. The model’s certainty is not the same as accuracy. As you increase the amount of tosses of the globe the model will become more and more certain of the plausibility of a <span class="math inline">\(p\)</span> value (a narrow and tall curve). This could be an artifact of the model and could look very different under another model. Also, be sure to supervise and critique your model’s work as it can’t supervise itself.</p>
+</div>
+</div>
+<div id="components-of-the-model" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Components of the model<a href="small-worlds-and-large-worlds.html#components-of-the-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Recall that we have counted a few different things already<br />
+</p>
+<ol style="list-style-type: decimal">
+<li>The number of ways each conjecture (mix of marbles) could produce an observation</li>
+<li>The accumulated number of ways each conjecture could produce the entire data</li>
+<li>The initial plausibility of each conjectured cause of the data</li>
+</ol>
+<p>Here are some components related to these things that will help us understand what is happening within the models we build<br />
+</p>
+<div id="variables" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Variables<a href="small-worlds-and-large-worlds.html#variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Variables are the things we want to infer. They can be proportions, rates, even the data itself. In the globe example we had three variables<br />
+</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(p\)</span>, the proportion of water, our target of inference
+This value was ‘unobservable’ so it could be labled as a <em>paramter</em><br />
+</li>
+<li>Observed counts of water (W)<br />
+</li>
+<li>Observed counts of land (L)</li>
+</ol>
+</div>
+<div id="definitions" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Definitions<a href="small-worlds-and-large-worlds.html#definitions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We must define our variables and how they relate to each other.<br />
+</p>
+<div id="observed-variables" class="section level4 hasAnchor" number="2.3.2.1">
+<h4><span class="header-section-number">2.3.2.1</span> Observed variables<a href="small-worlds-and-large-worlds.html#observed-variables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To determine the plausibility of the data to give the target of inference (<span class="math inline">\(p\)</span>), we must define a distribution function for each observed variable which we will call a <em>likelihood</em>.<br />
+</p>
+<p>For the globe example we are only concerned with W and L as they are the only events that can occur for each toss. We also need to make assumptions:<br />
+</p>
+<ol style="list-style-type: decimal">
+<li>Each toss (sample) is independent of the others<br />
+</li>
+<li>The probability of getting W is the same for each sample (allowing re-sampling)<br />
+</li>
+</ol>
+<p>For instances that are either TRUE or FALSE (0 or 1) we can use something called the <em>binomial distribution</em>. (Also called the ‘coin tossing’ distribution). The probability of observing can be expressed as:</p>
+<p><span class="math display">\[\begin{equation} 
+  \text{Pr}(W, L|p) = \frac{(W + L)! {W!L!}p^W^(1 - p)^L^
+\end{equation}\]</span></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="small-worlds-and-large-worlds.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">6</span>, <span class="at">size =</span> <span class="dv">9</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1640625</code></pre>
+</div>
+<div id="unobserved-variables" class="section level4 hasAnchor" number="2.3.2.2">
+<h4><span class="header-section-number">2.3.2.2</span> Unobserved variables<a href="small-worlds-and-large-worlds.html#unobserved-variables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 
+</div>
 </div>
 </div>
 </div>

@@ -180,10 +180,39 @@ Variables are the things we want to infer. They can be proportions, rates, even 
 
 1. $p$, the proportion of water, our target of inference
 This value was 'unobservable' so it could be labled as a *paramter*\
-2. Observed counts of water (W)
+2. Observed counts of water (W)\
 3. Observed counts of land (L)
 
 ### Definitions
-p. 33
-We must define our variables and how they relate to each other
+We must define our variables and how they relate to each other.\
 
+#### Observed variables
+To determine the plausibility of the data to give the target of inference ($p$), we must define a distribution function for each observed variable which we will call a *likelihood*.\
+
+For the globe example we are only concerned with W and L as they are the only events that can occur for each toss. We also need to make assumptions:\
+
+1. Each toss (sample) is independent of the others\
+2. The probability of getting W is the same for each sample (allowing re-sampling)\
+
+For instances that are either TRUE or FALSE (0 or 1) we can use something called the *binomial distribution*. (Also called the 'coin tossing' distribution). The probability of observing can be expressed as:\
+
+
+$\text{Pr}(W, L|p) = \frac{(W + L)! }{W!L!} p^{W}(1 - p)^{L}$\
+
+In words: *The counts of 'water' (W) and 'land' (L) are distributed binomially with probability p of 'water' for each toss.*\
+
+To calculate the likelihood in R you can use the `dbinom` function
+
+```{r, R code 2.2}
+dbinom(6, size = 9, prob = 0.5)
+```
+
+Recall we had 6 W's from 9 tosses. Here $p$ is held at 0.5 but you can play around with this to see how the likelihood changes.
+
+Hint:
+```{r}
+plot(dbinom(6, size = 9, prob = seq(from = 0, to = 1, by = 0.1)))
+```
+
+#### Unobserved variables
+Because we do not observed 
