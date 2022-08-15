@@ -215,4 +215,53 @@ plot(dbinom(6, size = 9, prob = seq(from = 0, to = 1, by = 0.1)))
 ```
 
 #### Unobserved variables
-Because we do not observed 
+Because we do not observe the $p$ (probability of sampling water) directly, we would define it as a *parameter*. There are other frequent questions that models will try to answer with parameters such as:\
+- What is the differece between group A and group B?
+- How strong is the association between group and outcome?
+- Does the effect of the grouping vary with a covariate?
+- How much variation is there among the groups?\
+
+Each parameter of your model must have its own distribution of plausibility that you provide the model before it runs. These are your *priors*. Flat priors are common (as in figure X above) but are hardly representative of real world observations. If you don't have good prior information to help set your prior assumptions of your paramters, then you should try a variety of priors to see how it affects your model's performance.\
+
+### A model is born
+
+Now we can write our model as:\
+
+$W \text{ ~ } \text{Binomial}(N,p)$\
+
+With the prior for $p$ as:\
+
+$p \text{ ~ } \text{Uniform}(0,1)$
+
+So we can say that the amount of water on the globe is a function with the binomial distribution where $N = W + L$ and the probability of water ($p$) is a uniform distribution ranging from 0 to 1. 
+
+## Maiking the model go
+read up to PDF page 59 (grid approx)
+
+
+
+###grid approx 
+```{r, R code 2.3}
+#define grid
+p_grid <- seq(from = 0, to = 1, length.out = 20)
+
+#define prior
+prior <- rep(1,20)
+
+#compute likelihood at each value in the grid
+likelihood <- dbinom(6 , size = 9, prob = p_grid)
+
+#compute product of likelihood and prior
+unstd.posterior <- likelihood * prior
+
+#standardize posterior so it sums to 1
+posterior <- unstd.posterior / sum(unstd.posterior)
+```
+
+```{r, R code 2.4}
+plot(p_grid, posterior, type = 'b',
+     xlab = "probability of water", ylab = "posterior probability")
+mtext("20 points")
+```
+
+
