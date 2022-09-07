@@ -1,1 +1,112 @@
 # The many variables & the spurious waffles
+
+Here is why we need _Multiple Regression_ to model outcomes.\
+
+1. Statistical control for confounds\
+2. Multiple and complex causation\
+3. Interactions\
+
+## Spurious assoiciation 
+
+Divorce rate seems to be positively correlated with marriage rate. But does higher marriage rate cause a higher divorce rate?  
+
+Divorce rate is also negatively correlated with median age at marriage meaning higher divorce rates for younger couples. But does young marriage are cause more divorce? Let's find out
+
+```{r, Rcode 5.1}
+library(rethinking)
+data(WaffleDivorce)
+d <- WaffleDivorce
+
+#standardize variables
+d$D <- standardize(d$Divorce)
+d$M <- standardize(d$Marriage)
+d$A <- standardize(d$MedianAgeMarriage)
+```
+
+Now we can use some linear modeling skills to see how median age of marriage is related to divorce rates\
+
+\begin{equation}
+D_{i} \sim \text{Normal}(\mu_{i}, \sigma)\
+\mu_{i} = \alpha + \beta_{A}A_{i}\
+\alpha \sim \text{Normal}(0, 0.2)\
+\beta_{A} \sim \text{Normal}(0, 0.5)\
+\sigma \sim \text{Exponential}(1)\
+\end{equation}  
+
+Here $D_{i}$ is the divorce rate in state ${i}$ and $A_{i}$ is the median age of marriage in state $i$. Since both the outcome and predictor are standardized in the above code, the intercept estimate ($\alpha$) should be somewhere near 0. But how do we interpret the slope $\beta_{A}$? Well if it were to be estimated as 1, then one sd increase in median age of marriage would be a 1 sd increase in divorce rate. To know the magnitude of a 1 sd change, you would have to calculate it
+
+```{r, Rcode 5.2}
+sd(d$MedianAgeMarriage)
+```
+
+```{r}
+sd(d$Divorce)
+```
+
+So if $\beta_{A}$ was estimated to be 1, an increase of 1.2 years in median age would increase divorce by 1.82 (units?)
+
+Let's get the posterior of this model
+```{r, Rcode 5.3}
+m5.1 <- quap(
+  alist(
+    D ~ dnorm(mu, sigma),
+    mu <- a + bA * A, 
+    a ~ dnorm(0, 0.2),
+    bA ~ dnorm(0, 0.5),
+    sigma ~ dexp(1)
+  ), data = d
+)
+```
+
+Here is the simulated priors over 2 standard deviations
+```{r, Rcode 5.4}
+set.seed(11)
+prior <- extract.prior(m5.1)
+mu <- link(m5.1, post = prior, data = list(A = c(-2, 2)))
+plot(NULL, xlim = c(-2,2), ylim = c(-2,2), xlab = 'Median age Marriage (std)', ylab = 'Divorce rate (std)')
+for(i in 1:50){
+  lines(c(-2,2), mu[i,], col = col.alpha('black',0.4))
+}
+```
+
+Now the posterior
+```{r, Rcode 5.5}
+#calculate percentiles
+A_seq <- seq(from = -3, to = 3.2, length.out = 30)
+mu <- link(m5.1, data = list(A = A_seq))
+mu.mean <- apply(mu, 2, mean)
+mu.PI <- apply(mu, 2, PI)
+
+#plot
+plot(D ~ A, data = d, col = rangi2, xlab = 'Median age Marriage (std)', ylab = 'Divorce rate (std)')
+lines(A_seq, mu.mean, lwd = 2)
+shade(mu.PI, A_seq)
+```
+
+And now the Marriage rate model
+```{r, Rcode 5.6}
+m5.2 <- quap(
+  alist(
+    D ~ dnorm(mu, sigma),
+    mu <- a + bM * M,
+    a ~ dnorm(0, 0.2),
+    bM ~ dnorm(0, 0.5),
+    sigma ~ dexp(1)
+  ), data = d
+)
+
+#calculate percentiles
+M_seq <- seq(from = -2, to = 2.8, length.out = 30)
+mu <- link(m5.2, data = list(M = M_seq))
+mu.mean <- apply(mu, 2, mean)
+mu.PI <- apply(mu, 2, PI)
+
+#plot
+plot(D ~ M, data = d, col = rangi2, xlab = 'Marriage rate (std)', ylab = 'Divorce rate (std)')
+lines(M_seq, mu.mean, lwd = 2)
+shade(mu.PI, M_seq)
+```
+
+Comparing these two models won't yield much useful information. We need to think about how they may interact together on Divorce rates
+
+### Think before to regress

@@ -264,4 +264,421 @@ plot(p_grid, posterior, type = 'b',
 mtext("20 points")
 ```
 
+5 points (left side of figure 2.7)
+```{r}
+#define grid
+p_grid <- seq(from = 0, to = 1, length.out = 5)
+
+#define prior
+prior <- rep(1,5)
+
+#compute likelihood at each value in the grid
+likelihood <- dbinom(6 , size = 9, prob = p_grid)
+
+#compute product of likelihood and prior
+unstd.posterior <- likelihood * prior
+
+#standardize posterior so it sums to 1
+posterior <- unstd.posterior / sum(unstd.posterior)
+```
+
+```{r}
+plot(p_grid, posterior, type = 'b',
+     xlab = "probability of water", ylab = "posterior probability")
+mtext("5 points")
+```
+100 points
+```{r}
+#define grid
+p_grid <- seq(from = 0, to = 1, length.out = 100)
+
+#define prior
+prior <- rep(1,100)
+
+#compute likelihood at each value in the grid
+likelihood <- dbinom(6 , size = 9, prob = p_grid)
+
+#compute product of likelihood and prior
+unstd.posterior <- likelihood * prior
+
+#standardize posterior so it sums to 1
+posterior <- unstd.posterior / sum(unstd.posterior)
+```
+
+```{r}
+plot(p_grid, posterior, type = 'b',
+     xlab = "probability of water", ylab = "posterior probability")
+mtext("20 points")
+```
+
+1000 points
+```{r}
+#define grid
+p_grid <- seq(from = 0, to = 1, length.out = 1000)
+
+#define prior
+prior <- rep(1,1000)
+
+#compute likelihood at each value in the grid
+likelihood <- dbinom(6 , size = 9, prob = p_grid)
+
+#compute product of likelihood and prior
+unstd.posterior <- likelihood * prior
+
+#standardize posterior so it sums to 1
+posterior <- unstd.posterior / sum(unstd.posterior)
+```
+
+```{r}
+plot(p_grid, posterior, type = 'b',
+     xlab = "probability of water", ylab = "posterior probability")
+mtext("20 points")
+```
+
+
+Changing priors (recreating fig 2.6)
+
+```{r}
+#define grid
+p_grid <- seq(from = 0, to = 1, length.out = 20)
+
+#define new priors
+prior <- ifelse(p_grid < 0.5, 0, 1)
+
+#compute likelihood at each value in the grid
+likelihood <- dbinom(6 , size = 9, prob = p_grid)
+
+#compute product of likelihood and prior
+unstd.posterior <- likelihood * prior
+
+#standardize posterior so it sums to 1
+posterior <- unstd.posterior / sum(unstd.posterior)
+```
+
+
+
+```{r}
+plot(p_grid, posterior, type = 'b',
+     xlab = "probability of water", ylab = "posterior probability")
+mtext("20 points")
+```
+
+
+```{r}
+#define grid
+p_grid <- seq(from = 0, to = 1, length.out = 20)
+
+prior <- exp(-5*abs(p_grid - 0.5))
+#compute likelihood at each value in the grid
+likelihood <- dbinom(6 , size = 9, prob = p_grid)
+
+#compute product of likelihood and prior
+unstd.posterior <- likelihood * prior
+
+#standardize posterior so it sums to 1
+posterior <- unstd.posterior / sum(unstd.posterior)
+```
+
+```{r}
+plot(p_grid, posterior, type = 'b',
+     xlab = "probability of water", ylab = "posterior probability")
+mtext("20 points")
+```
+
+### Quadratic
+Nine tosses (n = 9)
+```{r, R code 2.6}
+library(rethinking)
+globe.qa <- quap(
+  alist(
+        W ~ dbinom(W+L, p) , #binomial likelihood
+    p ~ dunif(0,1) #uniform prior
+  ) ,
+  data = list(W=6, L=3) )
+
+#display the summary of the quadratic approximation
+precis(globe.qa)
+```
+plot analytical vs. the quadratic approximation
+```{r, Rcode 2.7}
+#analytical calculation
+W <- 6
+L <- 3
+curve( dbeta(x , W+1, L+1), from = 0, to = 1)
+
+#quadratic calculation
+curve( dnorm(x, 0.67, 0.16), lty = 2, add = TRUE)
+```
+
+compare 9 tosses to 18 and 36 (via Kurs, fig 2.8)
+```{r}
+library(dplyr)
+library(ggplot2)
+library(stringr)
+n_grid <- 100
+
+tibble(p_grid                  = seq(from = 0, to = 1, length.out = n_grid) %>% rep(., times = 3),
+       prior                   = 1,
+       w                       = rep(c(6, 12, 24), each = n_grid),
+       n                       = rep(c(9, 18, 36), each = n_grid),
+       m                       = .67,
+       s                       = rep(c(.16, .11, .08), each = n_grid)) %>%
+  mutate(likelihood            = dbinom(w, size = n, prob = p_grid)) %>%
+  mutate(unstd_grid_posterior  = likelihood * prior,
+         unstd_quad_posterior  = dnorm(p_grid, m, s)) %>%
+  group_by(w) %>% 
+  mutate(grid_posterior        = unstd_grid_posterior / sum(unstd_grid_posterior),
+         quad_posterior        = unstd_quad_posterior / sum(unstd_quad_posterior),
+         n = str_c("n = ", n)) %>% 
+  mutate(n = factor(n, levels = c("n = 9", "n = 18", "n = 36"))) %>% 
+  
+  ggplot(aes(x = p_grid)) +
+  geom_line(aes(y = grid_posterior), color = "blue") +
+  geom_line(aes(y = quad_posterior),
+            color = "black") +
+  labs(x = "proportion water",
+       y = "density") +
+  theme(panel.grid = element_blank()) +
+  facet_wrap(~n, scales = "free")
+```
+
+
+### MCMC
+```{r, Rcode 2.8}
+n_samples <- 1000
+p <- rep(NA, n_samples)
+p[1] <- 0.5
+W <- 6
+L <- 3
+for(i in 2:n_samples){
+  p_new <- rnorm(1, p[i-1], 0.1)
+  if(p_new < 0) p_new <- abs(p_new)
+  if(p_new > 1) p_new <- 2 - p_new
+  q0 <- dbinom(W, W+L, p[i-1])
+  q1 <- dbinom(W, W+L, p_new)
+  p[i] <- ifelse(runif(1) < q1/q0, p_new, p[i-1])
+}
+```
+
+```{r, Rcode 2.9}
+#dens(p, xlim=c(0,1))
+d <- density(p)
+plot(d)
+curve(dbeta(x, W+1, L+1), lty = 2, add = TRUE) #quadratic
+```
+```{r, brms example}
+library(brms)
+
+globe_qa_brms <-
+  brm(data = list(w = 24), 
+      family = binomial(link = "identity"),
+      w | trials(36) ~ 1,
+      prior(beta(1, 1), class = Intercept),
+      iter = 4000, warmup = 1000,
+      control = list(adapt_delta = .9),
+      seed = 4)
+```
+
+```{r}
+print(globe_qa_brms)
+```
+
+```{r}
+posterior_samples(globe_qa_brms) %>% 
+  mutate(n = "n = 36") %>%
+
+  ggplot(aes(x = b_Intercept)) +
+  geom_density(fill = "black") +
+  labs(x = "proportion water") +
+  xlim(0, 1) +
+  theme(panel.grid = element_blank()) +
+  facet_wrap(~n)
+```
+## Select practice questions
+
+*2M1.* Compute and plot grid approximations for the following:
+
+1. W, W, W
+```{r}
+#define grid
+p_grid <- seq(from = 0, to = 1, length.out = 20)
+
+#define prior
+prior <- rep(1,20)
+
+#compute likelihood at each value in the grid
+likelihood <- dbinom(3 , size = 3, prob = p_grid)
+
+#compute product of likelihood and prior
+unstd.posterior <- likelihood * prior
+
+#standardize posterior so it sums to 1
+posterior <- unstd.posterior / sum(unstd.posterior)
+```
+
+```{r}
+plot(p_grid, posterior, type = 'b',
+     xlab = "probability of water", ylab = "posterior probability")
+mtext("20 points")
+```
+2. W, W, W, L
+```{r}
+#define grid
+p_grid <- seq(from = 0, to = 1, length.out = 20)
+
+#define prior
+prior <- rep(1,20)
+
+#compute likelihood at each value in the grid
+likelihood <- dbinom(3 , size = 4, prob = p_grid)
+
+#compute product of likelihood and prior
+unstd.posterior <- likelihood * prior
+
+#standardize posterior so it sums to 1
+posterior <- unstd.posterior / sum(unstd.posterior)
+```
+
+```{r}
+plot(p_grid, posterior, type = 'b',
+     xlab = "probability of water", ylab = "posterior probability")
+mtext("20 points")
+```
+
+3. L, W, W, L, W, W, W
+```{r}
+
+#define grid
+p_grid <- seq(from = 0, to = 1, length.out = 20)
+
+#define prior
+prior <- rep(1,20)
+
+#compute likelihood at each value in the grid
+likelihood <- dbinom(5 , size = 7, prob = p_grid)
+
+#compute product of likelihood and prior
+unstd.posterior <- likelihood * prior
+
+#standardize posterior so it sums to 1
+posterior <- unstd.posterior / sum(unstd.posterior)
+```
+
+```{r}
+plot(p_grid, posterior, type = 'b',
+     xlab = "probability of water", ylab = "posterior probability")
+mtext("20 points")
+```
+
+
+*2M2.* Compute the above again but with priors that change from 0 when p<0.5 to a constant when p>0.5.
+
+
+1. W, W, W
+```{r}
+#define grid
+p_grid <- seq(from = 0, to = 1, length.out = 20)
+
+#define prior
+prior <- ifelse(p_grid < 0.5, 0, 3)
+
+#compute likelihood at each value in the grid
+likelihood <- dbinom(3 , size = 3, prob = p_grid)
+
+#compute product of likelihood and prior
+unstd.posterior <- likelihood * prior
+
+#standardize posterior so it sums to 1
+posterior <- unstd.posterior / sum(unstd.posterior)
+```
+
+```{r}
+plot(p_grid, posterior, type = 'b',
+     xlab = "probability of water", ylab = "posterior probability")
+mtext("20 points")
+```
+2. W, W, W, L
+```{r}
+#define grid
+p_grid <- seq(from = 0, to = 1, length.out = 20)
+
+#define prior
+prior <- ifelse(p_grid < 0.5, 0, 3)
+#compute likelihood at each value in the grid
+likelihood <- dbinom(3 , size = 4, prob = p_grid)
+
+#compute product of likelihood and prior
+unstd.posterior <- likelihood * prior
+
+#standardize posterior so it sums to 1
+posterior <- unstd.posterior / sum(unstd.posterior)
+```
+
+```{r}
+plot(p_grid, posterior, type = 'b',
+     xlab = "probability of water", ylab = "posterior probability")
+mtext("20 points")
+```
+
+3. L, W, W, L, W, W, W
+```{r}
+
+#define grid
+p_grid <- seq(from = 0, to = 1, length.out = 20)
+
+#define prior
+prior <- ifelse(p_grid < 0.5, 0, 3)
+#compute likelihood at each value in the grid
+likelihood <- dbinom(5 , size = 7, prob = p_grid)
+
+#compute product of likelihood and prior
+unstd.posterior <- likelihood * prior
+
+#standardize posterior so it sums to 1
+posterior <- unstd.posterior / sum(unstd.posterior)
+```
+
+```{r}
+plot(p_grid, posterior, type = 'b',
+     xlab = "probability of water", ylab = "posterior probability")
+mtext("20 points")
+```
+
+
+*2M4.* Three cards have two sides that can be  black or white. one card is B/B, one is B/W, and one is W/W. They are placed in a bag and shuffled with one drawn and placed on the table black side up. Show the probability of the other side of the card being black.
+
+```{r}
+# p = probability of black (initial 6 sides; 3W, 3B; p = 0.5)
+
+# W/W = 0 paths to observed black; p = 0
+# B/W = 1 paths to observed black; p = 1/2
+# B/B = 1 paths to observed black; p = 1
+
+
+# W/W = 0 x 0 = 0
+# B/W = 1 x 1/2 = 1/2
+# B/B = 1 x 1 = 1
+
+ways <- c(0 ,0.5, 1)
+ways/sum(ways)
+```
+
+*2M5.* A fourth card is added to the example above and it is B/B. Calculate the new probability of the other side of the drawn card being black.
+```{r}
+# p = 5/8 (eight card sides, 3 W, 5 B)
+
+# W/W = 0 paths to observed black; p = 0
+# B/W = 1 path to observed black; p = 1/2
+# B/B = 1 path to observed black; p = 1
+# B/B = 1 path to observed black; p = 1
+
+
+# W/W = 0 x 0 = 0
+# B/W = 1 x 1/2 = 1/2
+# B/B = 1 x 1 = 1
+# B/B = 1 x 1 = 1 ; add two black cards together (2)
+
+ways <- c(0 ,0.5, 2)
+ways/sum(ways)
+```
 
