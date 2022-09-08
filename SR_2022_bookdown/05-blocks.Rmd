@@ -1,30 +1,138 @@
 # The haunted dag & the casual terror
 
-## Equations
+Let's build a model that incorporates both predictors
+```{r, Rcode 5.39}
+m5.7 <- quap(
+  alist(
+    K ~ dnorm(mu, sigma),
+    mu <- a + bN*N + bM*M,
+    a ~ dnorm(0, 0.2),
+    bN ~ dnorm(0, 0.5),
+    bM ~ dnorm(0, 0.5),
+    sigma ~ dexp(1)
+  ), data = dcc
+)
+precis(m5.7)
+```
 
-Here is an equation.
+The interesting part here is how $\beta_{M}$ and $\beta_{N}$ have changed when they are considered together. A plot can be made to show the comparison.
+```{r, Rcode 5.40}
+plot(coeftab(m5.5, m5.6, m5.7, ), pars = c('bM', 'bN'))
+```
 
-\begin{equation} 
-  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
-  (\#eq:binom)
-\end{equation} 
-
-You may refer to using `\@ref(eq:binom)`, like see Equation \@ref(eq:binom).
-
-
-## Theorems and proofs
-
-Labeled theorems can be referenced in text using `\@ref(thm:tri)`, for example, check out this smart theorem \@ref(thm:tri).
-
-::: {.theorem #tri}
-For a right triangle, if $c$ denotes the *length* of the hypotenuse
-and $a$ and $b$ denote the lengths of the **other** two sides, we have
-$$a^2 + b^2 = c^2$$
-:::
-
-Read more here <https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html>.
-
-## Callout blocks
+Let's see how these variables are related to better understand what happened
+```{r}
+pairs(~K + M + N, dcc)
+```
 
 
-The R Markdown Cookbook provides more help on how to use custom blocks to design your own callouts: https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html
+Now we can use our counterfactual skills to visualize the effect each predictor has on the outcome $K$.
+
+```{r, Rcode 5.41}
+xseq <- seq(from = min(dcc$M)-0.15, to = max(dcc$M)+0.15, length.out = 30)
+mu <- link(m5.7, data = data.frame(M = xseq, N=0))
+mu_mean <- apply(mu, 2, mean)
+mu_PI <- apply(mu, 2, PI)
+plot(NULL, xlim = range(dcc$M), ylim = range(dcc$K),
+     xlab = 'log body mass (std)', ylab = 'kilocal / g (std)')
+mtext('Counterfactual holding N = 0')
+lines(xseq, mu_mean, lwd = 2)
+shade(mu_PI, xseq)
+```
+
+```{r}
+xseq <- seq(from = min(dcc$N)-0.15, to = max(dcc$N)+0.15, length.out = 30)
+mu <- link(m5.7, data = data.frame(N = xseq, M = 0))
+mu_mean <- apply(mu, 2, mean)
+mu_PI <- apply(mu, 2, PI)
+plot(NULL, xlim = range(dcc$N), ylim = range(dcc$K),
+     xlab = 'log body mass (std)', ylab = 'kilocal / g (std)')
+mtext('Counterfactual holding N = 0')
+lines(xseq, mu_mean, lwd = 2)
+shade(mu_PI, xseq)
+```
+
+
+**OVERTHINKING BOX**
+
+## Categorical variables
+
+How do we deal with non-continuous variables like categories (unordered, discrete)? First we will consider an easy binary example of categories from earlier.
+```{r, Rcode 5.45}
+data(Howell1)
+d <- Howell1
+str(d)
+```
+
+### Binary categories
+Now we will see how sex influences height and weight in the Kalahari dataset. We can try and use the 0's and 1's already coded in the dataset for 1 meaning male and 0 meaning female. Here is a brief look at the priors for this use of category:
+```{r, Rcode 5.46}
+mu_female <- rnorm(1e4, 178, 20)
+mu_male <- rnorm(1e4, 178, 20) + rnorm(1e4, 0, 10)
+precis(data.frame(mu_female, mu_male))
+```
+
+```{r, 5.47}
+d$sex <- ifelse(d$male == 1, 2, 1)
+str(d$sex)
+```
+
+```{r, Rcode 5.48}
+m5.8 <- quap(
+  alist(
+    height ~ dnorm(mu, sigma),
+    mu <- a[sex], 
+    a[sex] ~ dnorm(178, 20),
+    sigma ~ dunif(0, 50)
+  ), data = d
+)
+precis(m5.8, depth = 2)
+```
+
+```{r, 5.49}
+post <- extract.samples(5.8)
+post$diff_fm <- post$a[,1] - post$a[,2]
+precis(post, depth = 2)
+```
+
+```{r, Rcode 5.50}
+data(milk)
+d <- milk
+levels(d$clade)
+```
+
+```{r, Rcode 5.51}
+d$clade_id <- as.integer(d$clade)
+```
+
+```{r, Rode 5.52}
+d$K <- standardize(d$kcal.per.g)
+m5.9 <- quap(
+  alist(
+    K ~ dnorm(mu, sigma),
+    mu <- a[clade_id],
+    a[clade_id] ~ dnorm(0, 0.5),
+    sigma ~ dexp(1)
+  ), data = d
+)
+labels <- paste('a[', 1:4, ']:' , levels(d$clade), sep = '')
+plot(precis(m5.9, depth = 2, pars = 'a'), labels = labels, xlab = 'expected kcal (std)')
+```
+
+```{r, Rcode 5.53}
+set.seed(11)
+d$house <- sample(rep(1:4, each = 8), size = nrow(d))
+```
+
+```{r, Rcode 5.54}
+m5.10 <- quap(
+  alist(
+    K ~ dnorm(mu, sigma),
+    mu <- a[clade_id] + h[house],
+    a[clade_id] ~ dnorm(0, 0.5),
+    h[house] ~ dnorm(0, 0.5),
+    sigma ~ dexp(1)
+  )
+)
+```
+
