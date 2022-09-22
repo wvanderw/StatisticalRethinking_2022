@@ -198,7 +198,7 @@ precis(m5.3)
 Let's see how the slopes have changed in each model
 
 ```{r, Rcode 5.11}
-plot(coeftab(m5.1, m5.2, m5.3), par = c('bA','bM'))
+coeftab_plot(coeftab(m5.1, m5.2, m5.3), par = c('bA','bM'))
 ```
 
 Here we see that the estimate for $\beta_{A}$ is relatively the same between models where the estimate for $\beta_{M}$ is much closer to 0 when considered with $\beta_{A}$. This suggests that once $A$ is in the model, adding $M$ doesn't add much more information. This is congruent with our second __DAG__ and tells us that the first __DAG__ is not causally correct because $M$ no longer has a direct effect on $D$ once $A$ is in the model. 
@@ -519,3 +519,312 @@ mtext("total counterfactual effect of A on D")
 ```
 
 ## Masked relationship
+
+This section is devoted to measuring multiple direct effects from multiple predictors on an outcome. This is particularly useful when the predictors seem to have little effect on the outcome on their own.
+
+We will load in some new data on milk composition from different primates
+```{r, Rcode 5.28}
+library(rethinking)
+data(milk)
+d <- milk
+str(d)
+```
+
+We will focus on the relationship between kilocalories per gram of milk and brain mass (neocortex percent). We will also include mass later on.
+```{r, Rcode 5.29}
+d$K <- standardize(d$kcal.per.g)
+d$N <- standardize(d$neocortex.perc)
+d$M <- standardize(log(d$mass))
+```
+
+First lets look at $K \sim N$ directly
+```{r, Rcode 5.30}
+m5.5_draft <- quap(
+  alist(
+    K ~ dnorm(mu, sigma),
+    mu <- a + bN*N,
+    a ~ dnorm(0, 1),
+    bN ~ dnorm(0, 1),
+    sigma ~ dexp(1)
+  ), data = d
+)
+```
+Ooops, too many `NA` values in the data
+```{r, Rcode 5.32}
+dcc <- d[complete.cases(d$K, d$N, d$M),]
+
+# 5.33
+m5.5_draft <- quap(
+  alist(
+    K ~ dnorm(mu, sigma),
+    mu <- a + bN*N,
+    a ~ dnorm(0, 1),
+    bN ~ dnorm(0, 1),
+    sigma ~ dexp(1)
+  ), data = dcc #update data source
+)
+```
+
+Let's look at the validity of the priors
+```{r, Rcode 5.34}
+prior <- extract.prior(m5.5_draft)
+xseq <- c(-2,2)
+mu <- link(m5.5_draft, post = prior, data = list(N = xseq))
+plot(NULL, xlim = xseq, ylim = xseq, xlab = 'neocortex % (std)', ylab = 'kilocal / g (std)')
+mtext('a ~ dnorm(0, 1) \ bN ~ dnorm(0, 1)')
+for(i in 1:50){
+  lines(xseq, mu[i,], col = col.alpha('black',0.3))
+}
+```
+
+Not great... \
+
+Because we know that these variables are standardized, we can constrain $\alpha$ to be a bit closer to 0. $\beta_{N}$ can also be tightened to avoid impossibly strong relationships.
+
+```{r, Rcode 5.35}
+m5.5 <- quap(
+  alist(
+    K ~ dnorm(mu, sigma),
+    mu <- a + bN*N,
+    a ~ dnorm(0, 0.2),
+    bN ~ dnorm(0, 0.5),
+    sigma ~ dexp(1)
+  ), data = dcc )
+
+prior <- extract.prior(m5.5)
+xseq <- c(-2,2)
+mu <- link(m5.5, post = prior, data = list(N = xseq))
+plot(NULL, xlim = xseq, ylim = xseq, xlab = 'neocortex % (std)', ylab = 'kilocal / g (std)')
+mtext('a ~ dnorm(0, 0.2) \ bN ~ dnorm(0, 0.5)')
+for(i in 1:50){
+  lines(xseq, mu[i,], col = col.alpha('black',0.3))
+}
+
+```
+
+Now we have lines that are still quite vague, but at least they largely fall within the observable data.\
+
+Let's turn to the posterior
+```{r, Rcode 5.36}
+precis(m5.5)
+```
+
+And plotted
+```{r, Rcode 5.37}
+xseq <- seq(from = min(dcc$N)-0.15, to = max(dcc$N)+0.15, length.out = 30)
+mu <- link(m5.5, data = list(N = xseq))
+mu_mean <- apply(mu, 2, mean)
+mu_PI <- apply(mu, 2, PI)
+plot(K ~ N, data = dcc, col=col.alpha(rangi2, 0.5), 
+      xlab = 'neocortex % (std)', ylab = 'kilocal / g (std)')
+lines(xseq, mu_mean, lwd = 2)
+shade(mu_PI, xseq)
+```
+
+Not a great relationship given the large residuals around the mean line.
+
+Let's see how body mass does at explaining calorie content of milk
+```{r, Rcode 5.38}
+m5.6 <- quap(
+  alist(
+    K ~ dnorm(mu, sigma),
+    mu <- a + bM*M,
+    a ~ dnorm(0, 0.2),
+    bM ~ dnorm(0, 0.5),
+    sigma ~ dexp(1)
+  ), data = dcc #update data source
+)
+precis(m5.6)
+```
+
+Let's have a look
+```{r}
+xseq <- seq(from = min(dcc$M)-0.15, to = max(dcc$M)+0.15, length.out = 30)
+mu <- link(m5.6, data = list(M = xseq))
+mu_mean <- apply(mu, 2, mean)
+mu_PI <- apply(mu, 2, PI)
+plot(K ~ M, data = dcc, col=col.alpha(rangi2, 0.5), 
+      xlab = 'log body mass (std)', ylab = 'kilocal / g (std)')
+lines(xseq, mu_mean, lwd = 2)
+shade(mu_PI, xseq)
+```
+
+Negative relationship but still not great.\
+
+Let's build a model that incorporates both predictors
+```{r, Rcode 5.39}
+m5.7 <- quap(
+  alist(
+    K ~ dnorm(mu, sigma),
+    mu <- a + bN*N + bM*M,
+    a ~ dnorm(0, 0.2),
+    bN ~ dnorm(0, 0.5),
+    bM ~ dnorm(0, 0.5),
+    sigma ~ dexp(1)
+  ), data = dcc
+)
+precis(m5.7)
+```
+
+The interesting part here is how $\beta_{M}$ and $\beta_{N}$ have changed when they are considered together (`m5.7`). A plot can be made to show the comparison.
+```{r, Rcode 5.40}
+coeftab_plot(coeftab(m5.5, m5.6, m5.7), pars = c('bM', 'bN'))
+```
+
+Let's see how these variables are related to better understand what happened
+```{r}
+pairs(~K + M + N, dcc)
+```
+
+
+You can see where $M$ and $N$ interact there is some strong positive association.\
+
+Now we can use our counterfactual skills to visualize the effect each predictor has on the outcome $K$.
+
+```{r, Rcode 5.41}
+xseq <- seq(from = min(dcc$M)-0.15, to = max(dcc$M)+0.15, length.out = 30)
+mu <- link(m5.7, data = data.frame(M = xseq, N=0))
+mu_mean <- apply(mu, 2, mean)
+mu_PI <- apply(mu, 2, PI)
+plot(NULL, xlim = range(dcc$M), ylim = range(dcc$K),
+     xlab = 'log body mass (std)', ylab = 'kilocal / g (std)')
+mtext('Counterfactual holding N = 0')
+lines(xseq, mu_mean, lwd = 2)
+shade(mu_PI, xseq)
+```
+
+```{r}
+xseq <- seq(from = min(dcc$N)-0.15, to = max(dcc$N)+0.15, length.out = 30)
+mu <- link(m5.7, data = data.frame(N = xseq, M = 0))
+mu_mean <- apply(mu, 2, mean)
+mu_PI <- apply(mu, 2, PI)
+plot(NULL, xlim = range(dcc$N), ylim = range(dcc$K),
+     xlab = 'neocortex % (std)', ylab = 'kilocal / g (std)')
+mtext('Counterfactual holding M = 0')
+lines(xseq, mu_mean, lwd = 2)
+shade(mu_PI, xseq)
+```
+
+
+**OVERTHINKING BOX**
+
+## Categorical variables
+
+How do we deal with non-continuous variables like categories (unordered, discrete)? First we will consider an easy binary example of categories from earlier.
+```{r, Rcode 5.45}
+data(Howell1)
+d <- Howell1
+str(d)
+```
+
+### Binary categories
+Now we will see how sex influences height and weight in the Kalahari dataset. We can try and use the 0's and 1's already coded in the dataset for 1 meaning male and 0 meaning female. 
+
+\begin{equation}
+h_{i} \sim \text{Normal}(\mu_{i}, \sigma)\
+\mu_{i} = \alpha + \beta_{m}m_{i}\
+\alpha \sim \text{Normal}(178, 20)\
+\beta_{m} \sim \text{Normal}(0, 10)\
+\sigma \sim \text{Uniform}(0, 50)
+\end{equation}
+
+So by this definition, being female means $\mu_{i}$ is solely dependent on $\alpha$ where as males have both $\alpha$ and $\beta_{m}m_{i}$ influencing the height outcome.
+
+Here is a brief look at the priors for this use of category:
+```{r, Rcode 5.46}
+mu_female <- rnorm(1e4, 178, 20)
+mu_male <- rnorm(1e4, 178, 20) + rnorm(1e4, 0, 10)
+precis(data.frame(mu_female, mu_male))
+```
+As we can see here, the male prior is a bit wider because it is using both $\alpha$ and $\beta_{m}$ priors. To avoid these potentially problematic priors we can try __Index variables__. Index variables assign non-zero integers (in no particular order) to categorical variables. 
+```{r, 5.47}
+d$sex <- ifelse(d$male == 1, 2, 1)
+str(d$sex)
+```
+
+Now we have males labeled as '2' and females as '1'. And now we can adjust our model to reflect this change.\
+
+\begin{equation}
+h_{i} \sim \text{Normal}(\mu_{i}, \sigma)\
+\mu_{i} = \alpha_{SEX[i]}\
+\alpha_{j} \sim \text{Normal}(178, 20) \text{for} j = 1..2\
+\beta_{m} \sim \text{Normal}(0, 10)\
+\sigma \sim \text{Uniform}(0, 50)
+\end{equation}
+
+Now our model will have $\alpha$ values for each category in the dataset. For this example we will have $\alpha_{1}$ and $\alpha_{2}$ representing our two sex variables. 
+
+```{r, Rcode 5.48}
+m5.8 <- quap(
+  alist(
+    height ~ dnorm(mu, sigma),
+    mu <- a[sex], 
+    a[sex] ~ dnorm(178, 20),
+    sigma ~ dunif(0, 50)
+  ), data = d
+)
+precis(m5.8, depth = 2)
+```
+
+Now we can pull samples from the posterior to see the expected difference between males and females or _contrast_
+
+```{r, 5.49}
+post <- extract.samples(m5.8)
+post$diff_fm <- post$a[,1] - post$a[,2]
+precis(post, depth = 2)
+```
+
+So the variable of interest here is the `diff_fm` which tells the difference from $\alpha_{1}$ and $\alpha_{2}$. (or you could manually subtract the parameter means by hand).\
+
+### Many categories
+
+
+
+```{r, Rcode 5.50}
+data(milk)
+d <- milk
+levels(d$clade)
+```
+
+```{r, Rcode 5.51}
+d$clade_id <- as.integer(d$clade)
+```
+
+```{r, Rode 5.52}
+d$K <- standardize(d$kcal.per.g)
+m5.9 <- quap(
+  alist(
+    K ~ dnorm(mu, sigma),
+    mu <- a[clade_id],
+    a[clade_id] ~ dnorm(0, 0.5),
+    sigma ~ dexp(1)
+  ), data = d
+)
+labels <- paste('a[', 1:4, ']:' , levels(d$clade), sep = '')
+precis_plot(precis(m5.9, depth = 2, pars = 'a'), labels = labels)
+```
+
+And you can easily add additional categorical variables to the same model. Here we can add a random assignment of `house` which can take the values of [1] Gryffindor, [2] Hufflepuff, [3] Ravenclaw, and [4] Slytherin.
+
+```{r, Rcode 5.53}
+set.seed(11)
+d$house <- sample(rep(1:4, each = 8), size = nrow(d))
+```
+
+Now we can update our model to also consider an index variable of `house` and look at the expected values for each house.
+
+```{r, Rcode 5.54}
+m5.10 <- quap(
+  alist(
+    K ~ dnorm(mu, sigma),
+    mu <- a[clade_id] + h[house],
+    a[clade_id] ~ dnorm(0, 0.5),
+    h[house] ~ dnorm(0, 0.5),
+    sigma ~ dexp(1)
+  ), data = d
+)
+
+precis(m5.10, depth = 2)
+```
+
+

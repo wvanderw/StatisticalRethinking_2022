@@ -1,1 +1,265 @@
 # Conditional manatees
+
+## Building an interaction
+$R$ = ruggedness, $G$ = GDP, $C$ = continent, $U$ = unobserved variables.
+```{r}
+library(dagitty)
+dag_8.1 <- dagitty("dag{
+                   R -> G
+                   C -> G
+                   U -> G
+                   U -> R
+                   }")
+coordinates(dag_8.1) <- list(y = c(R = 0, G = 0, C = 0, U = 1),
+                             x = c(R = 0, G = 1, U = 1, C = 2))
+drawdag(dag_8.1)
+```
+
+$G = f(R,C)$ 
+
+### Making a rugged model
+
+```{r, Rcode 8.1}
+library(rethinking)
+data(rugged)
+d <- rugged
+
+#log transform GDP
+d$log_gdp <- log(d$rgdppc_2000)
+
+#only include countries with GDP data
+dd <- d[complete.cases(d$rgdppc_2000),]
+
+#rescale variables
+dd$log_gdp_std <- (dd$log_gdp) / mean(dd$log_gdp) # values of 1 is average
+dd$rugged_std <- (dd$rugged) / max(dd$rugged) # values range from 0 to max ruggedness (1)
+
+```
+
+Basic model
+$$\text{log}(y_{i}) \sim \text{Normal}(\mu_{i}, \sigma)\\
+\mu_{i} = \alpha + \beta(r_{i} - \overline{r})\\
+\alpha \sim \text{Normal}|(1,1)\\
+\beta \sim \text{Normal}(0, 1)\\
+\sigma \sim \text{Exponential}(1)$$
+
+In R:
+```{r, Rcode 8.2}
+m8.1 <- quap(
+  alist(
+    log_gdp_std ~ dnorm(mu, sigma),
+    mu <- a + b*(rugged_std - 0.215),
+    a ~ dnorm(1, 1),
+    b ~ dnorm(0, 1),
+    sigma ~ dexp(1)
+  ), data = dd
+)
+```
+
+Sample priors:
+```{r, Rcode 8.3}
+set.seed(11)
+prior <- extract.prior(m8.1)
+
+#set plot
+plot(NULL, xlim=c(0,1), ylim=c(0.5, 1.5), xlab = "ruggedness", ylab = "log GDP")
+abline(h=min(dd$log_gdp_std), lty = 2)
+abline(h=max(dd$log_gdp_std), lty = 2)
+
+#draw lines from prior
+rugged_seq <- seq(from = -0.1, to = 1.1, length.out=30)
+mu <- link(m8.1, post = prior, data = data.frame(rugged_std=rugged_seq))
+for(i in 1:50){
+  lines(rugged_seq, mu[i,], col=col.alpha('black',0.3))
+  }
+```
+
+$\alpha$ is too wild. intercept should be somewhere around where the mean of ruggedness hits 1 on the log GDP scale so adjust to Normal(1, 0.1).
+
+$\beta$ is also out of control. we need something (positive or negative) that spans the difference between the dashed lines
+
+Slope should be $\pm 0.6$ which is the differece between the maximum and minimum values of GDP
+```{r}
+max(dd$log_gdp_std) - min(dd$log_gdp_std)
+```
+
+```{r, echo=FALSE}
+#set plot
+plot(NULL, xlim=c(0,1), ylim=c(0.5, 1.5), xlab = "ruggedness", ylab = "log GDP")
+abline(h=min(dd$log_gdp_std), lty = 2)
+abline(h=max(dd$log_gdp_std), lty = 2)
+
+#draw lines from prior
+rugged_seq <- seq(from = -0.1, to = 1.1, length.out=30)
+mu <- link(m8.1, post = prior, data = data.frame(rugged_std=rugged_seq))
+for(i in 1:50){
+  lines(rugged_seq, mu[i,], col=col.alpha('black',0.3))
+  }
+
+abline(a=1.3, b = -0.6, lwd = 3, col = rangi2)
+abline(a = 0.7, 0.6, lwd = 3, col = rangi2)
+
+```
+
+```{r}
+#proportion of slopes greater than 0.6
+sum(abs(prior$b) > 0.6) / length(prior$b)
+```
+
+Let's fix the model
+```{r}
+m8.1 <- quap(
+  alist(
+    log_gdp_std ~dnorm(mu,sigma),
+    mu <-a+b*(rugged_std-0.215),
+    a ~dnorm(1,0.1),
+    b ~dnorm(0,0.3),
+    sigma ~dexp(1)
+  ), data = dd
+)
+
+```
+
+```{r, echo=FALSE}
+set.seed(11)
+prior <- extract.prior(m8.1)
+
+
+#set plot
+plot(NULL, xlim=c(0,1), ylim=c(0.5, 1.5), xlab = "ruggedness", ylab = "log GDP")
+abline(h=min(dd$log_gdp_std), lty = 2)
+abline(h=max(dd$log_gdp_std), lty = 2)
+
+#draw lines from prior
+rugged_seq <- seq(from = -0.1, to = 1.1, length.out=30)
+mu <- link(m8.1, post = prior, data = data.frame(rugged_std=rugged_seq))
+for(i in 1:50){
+  lines(rugged_seq, mu[i,], col=col.alpha('black',0.3))
+  }
+
+abline(a=1.3, b = -0.6, lwd = 3, col = rangi2)
+abline(a = 0.7, 0.6, lwd = 3, col = rangi2)
+
+```
+
+```{r}
+precis(m8.1)
+```
+
+
+No association seen yet
+
+### Adding an indicator isn't enough
+
+Update $\mu$ 
+
+$$\mu_{i} = \alpha_{CID[i]} + \beta(r_{i} - \overline{r})$$
+
+
+
+```{r}
+#make an index variable for Africa (1) and other continents (2)
+dd$cid <- ifelse(dd$cont_africa == 1, 1, 2)
+```
+
+Now update the model
+```{r}
+m8.2 <- quap(
+  alist(
+    log_gdp_std ~ dnorm(mu, sigma),
+    mu <-a[cid] + b * (rugged_std - 0.215),
+    a[cid] ~ dnorm(1, 0.1),
+    b ~ dnorm(0, 0.3),
+    sigma ~dexp(1)
+  ), data = dd
+)
+```
+
+
+```{r}
+compare(m8.1, m8.2)
+```
+
+```{r}
+precis(m8.2, depth = 2)
+```
+
+```{r}
+post <- extract.samples(m8.2)
+diff_a1_a2 <- post$a[,1] - post$a[,2]
+PI(diff_a1_a2)
+```
+
+```{r}
+rugged.seq <- seq(from = -0.1, to = 1.1, length.out = 30)
+mu.NotAfrica <- link(m8.2, data = data.frame(cid=2, rugged_std=rugged.seq))
+mu.Africa <- link(m8.2, data = data.frame(cid = 1, rugged_std = rugged.seq))
+mu.NotAfrica_mu <- apply(mu.NotAfrica, 2, mean)
+mu.NotAfrica_ci <- apply(mu.NotAfrica, 2, PI, prob = 0.97)
+mu.Africa_mu <- apply(mu.Africa, 2, mean)
+mu.Africa_ci <- apply(mu.Africa, 2, PI)
+
+plot(NULL, xlim=c(0,1), ylim=c(0.5, 1.5), xlab = "ruggedness", ylab = "log GDP")
+points(dd$rugged_std, dd$log_gdp_std, col = dd$cid, pch = 16)
+lines(rugged.seq, mu.Africa_mu, lwd = 2, col = 1)
+shade(mu.Africa_ci, rugged.seq)
+lines(rugged.seq, mu.NotAfrica_mu, lwd = 2, col = 2)
+shade(mu.NotAfrica_ci, rugged.seq, col = col.alpha(2, 0.3))
+
+```
+
+### Adding an interaction does work
+
+$$\mu_{i} = \alpha_{CID[i]} + \beta_{CID[i]}(r_{i} - \overline{r})$$
+
+```{r}
+m8.3 <- quap(
+  alist(
+     log_gdp_std ~ dnorm(mu, sigma),
+    mu <-a[cid] + b[cid] * (rugged_std - 0.215),
+    a[cid] ~ dnorm(1, 0.1),
+    b[cid] ~ dnorm(0, 0.3),
+    sigma ~dexp(1)
+  ), data = dd
+)
+
+precis(m8.3, depth = 2)
+```
+
+```{r}
+compare(m8.1, m8.2, m8.3, func=PSIS)
+```
+
+```{r}
+plot(PSIS(m8.3, pointwise = TRUE)$k)
+```
+
+### Plotting the interaction
+
+```{r}
+par(mfrow=c(1,2))
+# plot Africa - cid = 1
+d.A1 <-dd[dd$cid == 1,]
+plot(d.A1$rugged_std, d.A1$log_gdp_std, pch=16, col=rangi2,
+xlab="ruggedness (standardized)",ylab="log GDP (as proportion of mean)",
+xlim=c(0,1) )
+mu <-link(m8.3,data=data.frame(cid=1,rugged_std=rugged_seq))
+mu_mean <-apply(mu,2,mean)
+mu_ci <-apply(mu,2,PI,prob=0.97)
+lines( rugged_seq,mu_mean,lwd=2)
+shade( mu_ci,rugged_seq,col=col.alpha(rangi2,0.3))
+mtext("African nations")
+# plotnon-Africa-cid=2
+d.A0 <-dd[dd$cid==2,]
+plot( d.A0$rugged_std,d.A0$log_gdp_std,pch=1,col="black",
+xlab="ruggedness (standardized)",ylab="logGDP(asproportionofmean)",
+xlim=c(0,1) )
+mu <-link(m8.3,data=data.frame(cid=2,rugged_std=rugged_seq))
+mu_mean <-apply(mu,2,mean)
+mu_ci <-apply(mu,2,PI,prob=0.97)
+lines( rugged_seq,mu_mean,lwd=2)
+shade( mu_ci,rugged_seq)
+mtext("Non-African nations")
+```
+
+## Symmetry of interactions
