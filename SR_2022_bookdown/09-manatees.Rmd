@@ -4,6 +4,7 @@
 $R$ = ruggedness, $G$ = GDP, $C$ = continent, $U$ = unobserved variables.
 ```{r}
 library(dagitty)
+library(rethinking)
 dag_8.1 <- dagitty("dag{
                    R -> G
                    C -> G
@@ -263,3 +264,17 @@ mtext("Non-African nations")
 ```
 
 ## Symmetry of interactions
+
+You can break an interaction into 2 identical phrasings\
+1. GDP ~ ruggedness depending on Africa\
+2. Africa ~ GDP depending on rugedness\
+
+$$\mu_{i} = (2 - CID_{i})(\alpha_{1} + \beta_{1}(r_{i} - \overline{r})) + (CID_{i} - 1)(\alpha_{2} + \beta_{2}(r_{i} - \overline{r}))$$
+
+```{r}
+rugged_seq <- seq(from = -0.2, to = 1.2, length.out = 30)
+muA <- link(m8.3, data=data.frame(cid=1, rugged_std=rugged_seq))
+muN <- link(m8.3, data=data.frame(cid=2, rugged_std=rugged_seq))
+delta <- muA - muN
+```
+
