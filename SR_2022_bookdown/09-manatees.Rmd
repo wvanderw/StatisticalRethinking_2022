@@ -276,5 +276,76 @@ rugged_seq <- seq(from = -0.2, to = 1.2, length.out = 30)
 muA <- link(m8.3, data=data.frame(cid=1, rugged_std=rugged_seq))
 muN <- link(m8.3, data=data.frame(cid=2, rugged_std=rugged_seq))
 delta <- muA - muN
+
+
+mu.delta <- apply(delta, 2, mean)
+PI.delta <- apply(delta, 2, PI)
+
+plot(x=rugged_seq, type = 'n', xlim = c(0,1), ylim = c(-0.3, 0.2),
+     xlab = 'ruggedness (std)', ylab = 'expected difference log GDP')
+shade(PI.delta, rugged_seq, col='grey')
+abline(h = 0, lty = 2)
+text(x = 0.2, y = 0, label = "Africa higher GDP\nAfrica lower GDP")
+lines(rugged_seq, mu.delta)
+
+
+```
+
+At high ruggedness, being in Africa gives higher than expected GDP.
+
+## Continuous interactions
+
+### A winter flower
+
+```{r}
+data(tulips)
+d <- tulips
+str(d)
+```
+
+### the models
+
+Water and Shade work together to create Blooms; $W \rightarrow B \leftarrow S ; B = f(W,S)$
+
+1. water\
+$$\beta_{i} \sim \text{Normal}(\mu_{i}, \sigma)\\
+\mu_{i} = \alpha + \beta_{W}(W_{i} - \overline{W})\\
+\alpha \sim \text{Normal}(0.5,1)\\
+\beta_{W} \sim \text{Normal}(0,1)\\
+\sigma \sim \text{Exponential}(1)$$
+2. shade\
+$$\beta_{i} \sim \text{Normal}(\mu_{i}, \sigma)\\
+\mu_{i} = \alpha + \beta_{S}(S_{i} - \overline{S})\\
+\alpha \sim \text{Normal}(0.5,1)\\
+\beta_{S} \sim \text{Normal}(0,1)\\
+\sigma \sim \text{Exponential}(1)$$
+3. water + shade\
+$$\beta_{i} \sim \text{Normal}(\mu_{i}, \sigma)\\
+\mu_{i} = \alpha + \beta_{W}(W_{i} - \overline{W}) + \beta_{S}(S_{i} - \overline{S})\\
+\alpha \sim \text{Normal}(0.5,1)\\
+\beta_{W} \sim \text{Normal}(0,1)\\
+\beta_{S} \sim \text{Normal}(0,1)\\
+\sigma \sim \text{Exponential}(1)$$
+4. water * shade\
+$$$$
+
+```{r}
+#center predictors and scale outcome
+d$blooms_std <- d$blooms / max(d$blooms)
+d$water_cent <- d$water - mean(d$water)
+d$shade_cent <- d$shade - mean(d$shade)
+```
+
+
+The $\alpha$ prior is likely too broad. We need it to be between 0 and 1. How much is outside that?
+```{r}
+a <- rnorm(1e4, 0.5, 1); sum(a < 0 | a > 1) / length(a)
+
+```
+
+Let's tighten it
+
+```{r}
+a <- rnorm(1e4, 0.5, 0.25); sum(a < 0 | a > 1) / length(a)
 ```
 

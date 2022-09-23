@@ -444,7 +444,7 @@ df %>%
 
 ```{r}
 #show the sampling distributions for each p value above
-
+library(tidyr)
 #number of simulated draws
 n_draws <- 1e5
 
@@ -525,6 +525,7 @@ posterior_summary(brms_3)['b_Intercept', ] %>%
 
 Now we can sample draws with ```fitted()``` in the brms package from the posterior
 ```{r}
+library(purrr)
 f <- fitted(brms_3, summary = FALSE, scale = 'linear') %>% 
   as_tibble() %>% 
   set_names('p')

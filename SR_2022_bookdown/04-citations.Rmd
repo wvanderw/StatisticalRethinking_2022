@@ -538,7 +538,7 @@ d$M <- standardize(log(d$mass))
 ```
 
 First lets look at $K \sim N$ directly
-```{r, Rcode 5.30}
+```{r, Rcode 5.30, eval = FALSE}
 m5.5_draft <- quap(
   alist(
     K ~ dnorm(mu, sigma),
