@@ -1,1 +1,79 @@
-# Markov chain monte carlo
+# Markov Chain Monte Carlo
+
+## Good King Markov and his island kingdom
+
+Ring of 10 islands increasing in size and population as you go around the ring. 
+
+How do we visit each in proportion to population without too much time at see?
+
+*Metropolis Algorithm*\
+
+1. flip a coin each week to decide stay or leave\
+2. Heads - consider clockwise ; Tails - Counterclockwise ; *proposal*\
+3. Count seashells proportionate to *proposal* population. Count stones of current island.\
+4. If seashells > stones then go to *proposal*. If stones > seashells then discard stones equal to the number of seashells and mix remaining seashells and stones together. If he draws a seashell then move to *proposal*. If he draws a stone, stays for a week. This draw probability of moving is equal to seashells / stones.\
+
+In code:
+```{r}
+num_weeks <- 1e5
+positions <- rep(0, num_weeks)
+current <- 10
+for(i in 1:num_weeks){
+  #record current island
+  positions[i] <- current
+  #flip a coin
+  proposal <- current + sample(c(-1,1), size = 1)
+  #link the loop between 10 and 1
+  if(proposal < 1) proposal <- 10
+  if(proposal > 10) proposal <- 1
+  # move ?
+  prob_move <- proposal/current
+  current <- ifelse(runif(1) < prob_move, proposal, current)
+}
+```
+
+Visualized:
+```{r}
+par(mfrow = c(1,2))
+plot(1:100, positions[1:100], col = rangi2, xlab = "week", ylab = "island")
+plot(table(positions), col = rangi2, xlab = "island", ylab = "# of weeks")
+```
+
+## Metropolis algorithims
+
+We can equate the King Markov example to estimating a posterior probability distribution.
+
+- Islands are like parameters that can take on any value\
+- Population sizes are like posterior probabilities at each parameter value\
+- Weeks are like the samples from the joint posterior between the parameters\
+
+### Gibbs sampling
+
+Gibbs sampling uses adaptive proposals that adjusts proposed parameter values in an intelligent manner. It does this by using *conjugate pairs* of prior distributions and likelihoods. 
+
+### High-dimensional problems
+
+Gibbs can get stuck in small regions of the posterior in models with thousands of parameters or highly correlated parameters. 
+
+This arises from the __Concentration of measure__. Basically the mode is not the most likely to be sampled. 
+
+```{r}
+d <- c(1, 10, 100, 1000)
+
+concentration_sim <- function(D, T = 1e3){
+Y <- rmvnorm(T, rep(0, D), diag(D))
+rad_dist <- function(Y) sqrt(sum(Y^2))
+Rd <- sapply(1:T, function(i) rad_dist(Y[i,]))
+}
+
+Rd_a <- lapply(d, concentration_sim)
+Rd_b <- unlist(Rd_a)
+dens(Rd_b)
+text(5, 0.10, "1 & 10")
+text(11, 0.10, "100")
+text(33, 0.10, "1000")
+```
+
+## Hamiltonian Monte Carlo
+
+### Another parable

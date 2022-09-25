@@ -349,3 +349,245 @@ Let's tighten it
 a <- rnorm(1e4, 0.5, 0.25); sum(a < 0 | a > 1) / length(a)
 ```
 
+range of water and shade are each 2 units. range of blooms is one unit. max slopes = 2/1 (0.5) so we can set the prior to 0 with 0.25 sd to get values ranging from -0.5 to 0.5.
+
+```{r}
+#water
+m8.4a <- quap(
+  alist(
+    blooms_std ~ dnorm(mu, sigma),
+    mu <- a + bw*water_cent,
+    a ~ dnorm(0.5,0.25),
+    bw ~ dnorm(0, 0.25),
+    sigma ~ dexp(1)
+  ), data = d
+)
+
+#shade
+m8.4b <- quap(
+  alist(
+    blooms_std ~ dnorm(mu, sigma),
+    mu <- a + bs*shade_cent,
+    a ~ dnorm(0.5,0.25),
+    bs ~ dnorm(0, 0.25),
+    sigma ~ dexp(1)
+  ), data = d
+)
+
+# water + shade
+m8.4c <- quap(
+  alist(
+    blooms_std ~ dnorm(mu, sigma),
+    mu <- a + bw*water_cent + bs*shade_cent,
+    a ~ dnorm(0.5,0.25),
+    bw ~ dnorm(0, 0.25),
+    bs ~ dnorm(0, 0.25),
+    sigma ~ dexp(1)
+  ), data = d
+)
+
+#water * shade
+m8.4d <- quap(
+  alist(
+    blooms_std ~ dnorm(mu, sigma),
+    mu <- a + bw*water_cent + bs*shade_cent + bws*water_cent*shade_cent,
+    a ~ dnorm(0.5,0.25),
+    bw ~ dnorm(0, 0.25),
+    bs ~ dnorm(0, 0.25),
+    bws ~ dnorm(0, 0.25),
+    sigma ~ dexp(1)
+  ), data = d
+)
+```
+
+prior simulations
+```{r}
+set.seed(11)
+prior_a <- extract.prior(m8.4a) #water
+prior_b <- extract.prior(m8.4b) #shade
+prior_c <- extract.prior(m8.4c) #water + shade
+prior_d <- extract.prior(m8.4d) #water * shade
+
+
+#set plot
+plot(NULL, xlim=c(0,2), ylim=c(0, 1.25), xlab = "Water / shade", ylab = "blooms")
+abline(h=min(d$blooms_std), lty = 2)
+abline(h=max(d$blooms_std), lty = 2)
+
+#draw lines from prior
+water_seq <- seq(from = -1.1, to = 1.1, length.out=30)
+shade_seq <- seq(from = -1.1, to = 1.1, length.out=30)
+
+mu_a <- link(m8.4a, post = prior_a, data = data.frame(water_cent=water_seq))
+mu_b <- link(m8.4b, post = prior_b, data = data.frame(shade_cent=shade_seq))
+mu_c <- link(m8.4c, post = prior_c, data = data.frame(water_cent=water_seq, shade_cent=shade_seq))
+mu_d <- link(m8.4d, post = prior_d, data = data.frame(water_cent=water_seq, shade_cent=shade_seq))
+
+#set plot
+plot(NULL, xlim=c(-1,1), ylim=c(0, 1.25), xlab = "Water / shade (centered)", ylab = "blooms (std)")
+abline(h=min(d$blooms_std), lty = 2)
+abline(h=max(d$blooms_std), lty = 2)
+
+
+for(i in 1:50){
+  lines(water_seq, mu_a[i,], col=col.alpha('blue',0.3))
+  }
+
+for(i in 1:50){
+  lines(water_seq, mu_b[i,], col=col.alpha('black',0.3))
+}
+for(i in 1:50){
+  lines(water_seq, mu_c[i,], col=col.alpha('green',0.3))
+}
+
+for(i in 1:50){
+  lines(water_seq, mu_d[i,], col=col.alpha('red',0.3))
+  }
+
+text(x = -0.75, y = 1.2, label = "Water", col = "blue")
+text(x = -0.45, y = 1.2, label = "Shade", col = "black")
+text(x = 0, y = 1.2, label = "Water + Shade", col = "green")
+text(x = 0.5, y = 1.2, label = "Water * Shade", col = 'red')
+```
+
+```{r}
+precis(m8.4a)
+precis(m8.4b)
+precis(m8.4c)
+precis(m8.4d)
+
+```
+
+### Plotting posterior predictions
+
+```{r}
+par(mfrow = c(1,3))
+for (s in -1:1){
+  idx <- d[d$shade_cent == s,]
+  plot(x = idx$water_cent, y = idx$blooms_std, xlim = c(-1,1), ylim = c(0,1),
+       xlab = "water", ylab = "blooms", pch = 16, col = rangi2)
+  mu <- link(m8.4c, data = data.frame(shade_cent=s, water_cent = -1:1))
+  for(i in 1:20){
+    lines(-1:1, mu[i,], col = col.alpha('black',0.3))
+  }
+   mtext(concat("m8.4c post: shade = ", s))
+}
+```
+
+```{r}
+par(mfrow = c(1,3))
+for (s in -1:1){
+  idx <- d[d$shade_cent == s,]
+  plot(x = idx$water_cent, y = idx$blooms_std, xlim = c(-1,1), ylim = c(0,1),
+       xlab = "water", ylab = "blooms", pch = 16, col = rangi2)
+  mu <- link(m8.4d, data = data.frame(shade_cent=s, water_cent = -1:1))
+  for(i in 1:20){
+    lines(-1:1, mu[i,], col = col.alpha('black',0.3))
+  }
+   mtext(concat("m8.4d post: shade = ", s))
+}
+```
+
+
+```{r}
+par(mfrow = c(1,3))
+for (s in -1:1){
+  idx <- d[d$water_cent == s,]
+  plot(x = idx$shade_cent, y = idx$blooms_std, xlim = c(-1,1), ylim = c(0,1),
+       xlab = "shade", ylab = "blooms", pch = 16, col = rangi2)
+  mu <- link(m8.4c, data = data.frame(water_cent=s, shade_cent = -1:1))
+  for(i in 1:20){
+    lines(-1:1, mu[i,], col = col.alpha('black',0.3))
+  }
+  mtext(concat("m8.4c post: water = ", s))
+}
+
+```
+
+
+```{r}
+par(mfrow = c(1,3))
+for (s in -1:1){
+  idx <- d[d$water_cent == s,]
+  plot(x = idx$shade_cent, y = idx$blooms_std, xlim = c(-1,1), ylim = c(0,1),
+       xlab = "shade", ylab = "blooms", pch = 16, col = rangi2)
+  mu <- link(m8.4d, data = data.frame(water_cent=s, shade_cent = -1:1))
+  for(i in 1:20){
+    lines(-1:1, mu[i,], col = col.alpha('black',0.3))
+  }
+  mtext(concat("m8.4c post: water = ", s))
+}
+```
+
+
+### Plotting prior predictions
+
+```{r}
+par(mfrow = c(1,3))
+for (s in -1:1){
+  idx <- d[d$shade_cent == s,]
+  plot(x = idx$water_cent, y = idx$blooms_std, type = 'n', xlim = c(-1,1), ylim = c(-0.5,1.5),
+       xlab = "water", ylab = "blooms")
+  mu <- link(m8.4c, post = prior_c, data = data.frame(shade_cent=s, water_cent = -1:1))
+  for(i in 1:20){
+    lines(-1:1, mu[i,], col = col.alpha('black',0.3))
+  }
+  lines(-1:1, mu[11,], lwd = 2, col = rangi2)
+  abline(h = 0, lty = 2)
+  abline(h = 1, lty = 2)
+  mtext(concat("m8.4c post: shade = ", s))
+}
+```
+
+```{r}
+par(mfrow = c(1,3))
+for (s in -1:1){
+  idx <- d[d$shade_cent == s,]
+  plot(x = idx$water_cent, y = idx$blooms_std, type = 'n', xlim = c(-1,1), ylim = c(-0.5,1.5),
+       xlab = "water", ylab = "blooms")
+  mu <- link(m8.4d, post = prior_d, data = data.frame(shade_cent=s, water_cent = -1:1))
+  for(i in 1:20){
+    lines(-1:1, mu[i,], col = col.alpha('black',0.3))
+  }
+  lines(-1:1, mu[11,], lwd = 2, col = rangi2)
+  abline(h = 0, lty = 2)
+  abline(h = 1, lty = 2)
+  mtext(concat("m8.4c post: shade = ", s))
+}
+```
+
+
+```{r}
+par(mfrow = c(1,3))
+for (s in -1:1){
+  idx <- d[d$water_cent == s,]
+  plot(x = idx$shade_cent, y = idx$blooms_std, type = 'n', xlim = c(-1,1), ylim = c(-0.5,1.5),
+       xlab = "shade", ylab = "blooms")
+  mu <- link(m8.4c, post = prior_c, data = data.frame(water_cent=s, shade_cent = -1:1))
+  for(i in 1:20){
+    lines(-1:1, mu[i,], col = col.alpha('black',0.3))
+  }
+  lines(-1:1, mu[11,], lwd = 2, col = rangi2)
+  abline(h = 0, lty = 2)
+  abline(h = 1, lty = 2)
+  mtext(concat("m8.4c post: water = ", s))
+}
+```
+
+```{r}
+par(mfrow = c(1,3))
+for (s in -1:1){
+  idx <- d[d$water_cent == s,]
+  plot(x = idx$shade_cent, y = idx$blooms_std, type = 'n', xlim = c(-1,1), ylim = c(-0.5,1.5),
+       xlab = "shade", ylab = "blooms")
+  mu <- link(m8.4d, post = prior_d, data = data.frame(water_cent=s, shade_cent = -1:1))
+  for(i in 1:20){
+    lines(-1:1, mu[i,], col = col.alpha('black',0.3))
+  }
+  lines(-1:1, mu[11,], lwd = 2, col = rangi2)
+  abline(h = 0, lty = 2)
+  abline(h = 1, lty = 2)
+  mtext(concat("m8.4c post: water = ", s))
+}
+```
+
