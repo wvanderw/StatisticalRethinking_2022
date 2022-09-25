@@ -77,3 +77,263 @@ text(33, 0.10, "1000")
 ## Hamiltonian Monte Carlo
 
 ### Another parable
+
+King Monty is Markov's cousin on the mainland. Monty's kingdom lays in a narrow valley that runs North-south. The population is inversely related to elevation with most in the bottom of the valley and fewer on the mountainsides. King Monty picks a random direction and takes off with a random momentum. It will travel up and down as far as the momentum will carry it in a determined amount of time. When the time is reached, they stop. They then repeat. This removes any autocorrelation between neighbours. This is the basis of __HMC__ 
+
+### Particles in space
+
+If King Monty's vehicle was like a marble that contained the current parameter values, and the parameter space was a bowl, HMC would be like randomly flicking the marble in the bowl and taking a new position sample at a random amount of time has passed. The marble must follow laws of physics and so too does HMC. 
+
+Suppose there are 100 $x$ values and 100 $y$ values all sampled from Normal(0, 1). 
+
+$$x_{i} \sim \text{Normal}(\mu_{x}, 1)\\
+y_{i} \sim \text{Normal}(\mu_{y}, 1)\\
+\mu_{x} \sim \text{Normal}(0, 0.5)\\
+\mu_{y} \sim \text{Normal}(0, 0.5)$$
+
+Computing the log-probability of parameters and data:
+$$\sum_{i}\text{log}p(y_{i}|\mu_{y}, 1) + \sum_{i}\text{log}p(x_{i}|\mu_{x}, 1) + \text{log}p(\mu_{y}|0, 0.5) + \text{log}p(\mu_{x}|0, 0.5)$$
+
+Compute the gradient or slope in all directions from current position (same for $y$):
+$$\frac{\partial M}{\partial\mu_{x}}=\frac{\partial\text{log}N(x|\mu_{x},1)}{\partial\mu_{x}}+\frac{\partial\text{log}N(\mu_{x}|0, 0.5)}{\partial\mu_{x}}=\sum_{i}\frac{x_{i}-\mu_{x}}{1^2}+\frac{0-\mu_{x}}{0.5^2}$$
+
+Set leapfrog steps and step size. This is largely done for you. If the leapfrog steps and step size were to be the right combination you could run into *U turns* where the samples look a lot like the starting position. This is avoided in newer samplers with a *no-U-Turn Sampler* or *NUTS*. 
+
+Write out HMC in raw code here**
+```{r}
+
+```
+
+### Limitations
+
+>>As always, there are some limitations. HMC requires continuous parameters. It can’t glide through a discrete parameter. In practice, this means that certain techniques, like the imputation of discrete missing data, have to be done differently with HMC. HMC can certainly sample from such models, often much more efficiently than a Gibbs sampler could. But you have to change how you code them. (p. 278)
+
+## Easy HMC: `ulam` (`brm`)
+
+Revisiting the African ruggedness example from the last chapter.
+```{r, echo=FALSE}
+library(rethinking)
+```
+
+```{r}
+data(rugged)
+d <- rugged
+d$log_gdp <- log(d$rgdppc_2000)
+dd <- d[complete.cases(d$rgdppc_2000),]
+dd$log_gdp_std <- dd$log_gdp / mean(dd$log_gdp)
+dd$rugged_std <- dd$rugged / max(dd$rugged)
+dd$cid <- ifelse(dd$cont_africa == 1, 1, 2)
+```
+
+The old way:
+```{r}
+m8.3 <- quap(
+  alist(
+    log_gdp_std ~ dnorm(mu, sigma),
+    mu <- a[cid] + b[cid]*(rugged_std - 0.215),
+    a[cid] ~ dnorm(1, 0.1),
+    b[cid] ~ dnorm(0, 0.3),
+    sigma ~ dexp(1)
+  ), data = dd
+)
+
+precis(m8.3, depth = 2)
+```
+
+### Preperation
+
+Things to do before using HMC:\
+1. Preprocess any variable transformations. You don't want to waste computing power by having these transformations in your model.\
+2. create a trimmed data frame of only parameters of interest. Also, remove `NA` values.\
+
+Create a slim list:
+```{r}
+dat_slim <- list(
+  log_gdp_std = dd$log_gdp_std,
+  rugged_std = dd$rugged_std,
+    mean_rugged_std = mean(dd$rugged_std),
+  cid = as.integer(dd$cid)
+)
+str(dat_slim)
+```
+
+### Sampling from the posterior
+
+```{r}
+m9.1 <- ulam(
+  alist(
+    log_gdp_std ~ dnorm(mu, sigma),
+    mu <- a[cid] + b[cid]*(rugged_std - 0.215),
+    a[cid] ~ dnorm(1, 0.1),
+    b[cid] ~ dnorm(0, 0.3),
+    sigma ~ dexp(1)
+  ), data = dat_slim, chains = 1
+)
+
+precis(m9.1, depth = 2)
+```
+
+`n_eff` is a crude estimate of independent samples. Rhat ($\hat{R}$) is a measure of model convergence. 
+
+### Sampling again, in parallel
+
+To save time and maximize computing power you can run chains at the same time.
+
+```{r}
+m9.1 <- ulam(
+  alist(
+    log_gdp_std ~ dnorm(mu, sigma),
+    mu <- a[cid] + b[cid]*(rugged_std - 0.215),
+    a[cid] ~ dnorm(1, 0.1),
+    b[cid] ~ dnorm(0, 0.3),
+    sigma ~ dexp(1)
+  ), data = dat_slim, chains = 4, cores = 4
+)
+```
+
+```{r}
+show(m9.1)
+```
+
+```{r}
+precis(m9.1, depth = 2)
+```
+
+How did we get more than 1000 independent samples? Stan is so good at sampling that it out performs random. It creates anit-correlated samples that increases the crude estimate of independent samples.
+
+### Visualization
+
+
+Everything is still pretty Gaussian
+```{r}
+pairs(m9.1)
+```
+
+
+### Checking the chain
+
+```{r}
+traceplot(m9.1)
+```
+
+Things to look for in a traceplot:\
+1. stationarity - staying in the same region\
+2. good mixing - good strong zigzags around the parameter space\
+3. convergence - independent chains end up in the same region\
+
+
+There are also trace rank plots that show histograms of ranked samples for each chain. You want them to be largely similar and overlapping. 
+
+```{r}
+trankplot(m9.1)
+```
+
+## Care and feeding of your Markov chain
+
+### How many samples do you need?
+
+### How many chains do you need?
+
+Start with 1 for debugging purposes. After that 1 chain works as expected, run multiples to make sure they all behave the same. Then you can draw your inference from the multiple chains. 
+
+Example: `warmup = 1000, iter = 10000`. You could do 3 chains of `warmup = 1000, iter = 4000` but then you end up throwing away 3000 samples. It is really up to you and your hardware.
+
+### Taming a wild chain
+
+```{r}
+y <- c(-1,1)
+set.seed(11)
+m9.2 <- ulam(
+  alist(
+    y ~ dnorm(mu, sigma),
+    mu <- alpha,
+    alpha ~ dnorm(0, 1000),
+    sigma ~ dexp(0.0001)
+  ), data = list(y=y), chains = 3
+)
+
+precis(m9.2)
+```
+
+```{r}
+pairs(m9.2@stanfit)
+traceplot(m9.2)
+trankplot(m9.2)
+```
+
+```{r}
+set.seed(11)
+m9.3 <- ulam(
+  alist(
+    y ~ dnorm(mu, sigma),
+    mu <- alpha,
+    alpha ~ dnorm(0, 10),
+    sigma ~ dexp(1)
+  ), data = list(y=y), chains = 3
+)
+
+precis(m9.3)
+```
+
+```{r}
+pairs(m9.3@stanfit)
+par(mfrow=c(2,2))
+traceplot(m9.3)
+trankplot(m9.3)
+```
+
+### Non-identifiable parameters
+
+```{r}
+set.seed(11)
+y <- rnorm(100, mean = 0, sd = 1)
+```
+
+$$
+y_{i} \sim \text{Normal}(\mu, \sigma)\\
+\mu = \alpha_{1} + \alpha_{2}\\
+\alpha_{1} \sim \text{Normal}(0, 1000)\\
+\alpha_{2} \sim \text{Normal}(0, 1000)\\
+\sigma \sim \text{Exponential}(1)
+$$
+
+Here $\alpha_{1}$ and $\alpha_{2}$ are unknown but we know that they will sum to nearly 0 (the mean of the simulated $y$)
+
+```{r}
+set.seed(11)
+m9.4 <- ulam(
+  alist(
+    y ~ dnorm(mu, sigma),
+    mu <- a1 + a2,
+    a1 ~ dnorm(0, 1000),
+    a2 ~ dnorm(0, 1000),
+    sigma ~ dexp(1)
+  ), data = list(y = y), chains = 3
+) #this will take a few minutes
+
+precis(m9.4)
+```
+
+```{r}
+traceplot(m9.4)
+```
+
+
+```{r}
+m9.5 <- ulam(
+  alist(
+ y ~ dnorm(mu, sigma),
+    mu <- a1 + a2,
+    a1 ~ dnorm(0, 10),
+    a2 ~ dnorm(0, 10),
+    sigma ~ dexp(1)
+  ), data = list(y = y), chains = 3
+)
+
+precis(m9.5)
+```
+
+```{r}
+traceplot(m9.5)
+```
+
