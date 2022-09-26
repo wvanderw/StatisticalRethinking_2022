@@ -1,2 +1,49 @@
 # Big entropy and the generalized linear model
 
+## Maximum entropy
+
+Recall the information theory function from Chapter 7
+
+$$H(p) = - \sum_{i}p_{i}\text{log}p_{i}$$
+
+This is also known as *information entropy*
+
+Maximum entropy:
+>> The distribution that can happen the most ways is also the distribution with the biggest information entropy. The distribution with the biggest entropy is the most conservative distribution that obeys its constraints. (p. 301)
+
+5 buckets and 10 pebbles. The 10 pebbles can go into any bucket with the same probability.
+
+```{r}
+p <- list()
+p$A <- c(0,0,10,0,0)
+p$B <- c(0,1,8,1,0)
+p$C <- c(0,2,6,2,0)
+p$D <- c(1,2,4,2,1)
+p$E <- c(2,2,2,2,2)
+```
+
+Turn into probability distribution
+```{r}
+p_norm <- lapply(p, function(q) q/sum(q))
+```
+
+Calculate information entropy
+```{r}
+(H <- sapply(p_norm, function(q) -sum(ifelse(q==0, 0, q*log(q)))))
+```
+
+Log(ways) per pebble
+```{r}
+ways <- c(1,90,1260,37800,113400)
+logwayspp <- log(ways)/10
+```
+
+```{r}
+plot(x = logwayspp, y = H, xlab = "log(ways) per pebble", ylab = "entropy", pch = 16)
+abline(a = 0, b = 1.38, lty = 2)
+text(x = logwayspp[1], y = H[1] +0.1, labels = "A")
+text(x = logwayspp[2:5], y = H[2:5] - 0.1, labels = c("B", "C", "D", "E"))
+```
+
+### Gaussian
+
