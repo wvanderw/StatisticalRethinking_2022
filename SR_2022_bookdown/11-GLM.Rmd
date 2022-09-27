@@ -47,3 +47,212 @@ text(x = logwayspp[2:5], y = H[2:5] - 0.1, labels = c("B", "C", "D", "E"))
 
 ### Gaussian
 
+A *generalized normal distribtuion* is defined as the probability density:\
+$$\text{Pr}(y|\mu, \alpha, \beta) = \frac{\beta}{2\alpha\Gamma(1/\beta)}e^{(-\frac{|y -\mu|}{\alpha})^{\beta}}$$
+
+with $\mu$ as the location, $\alpha$ as the scale, and $\beta$ defining the shape. There is no code in the text to dive into this but here is an example from Solomon Kurz <https://bookdown.org/content/4857/big-entropy-and-the-generalized-linear-model.html#gaussian.>
+
+```{r}
+library(tidyverse)
+
+
+alpha_per_beta <- function(beta, variance = 1) {
+  sqrt((variance * gamma(1 / beta)) / gamma(3 / beta))
+}
+
+crossing(value = seq(from = -5, to = 5, by = .1),
+         # I arrived at these values by trial and error
+         beta  = c(1, 1.5, 2, 4)) %>% 
+  mutate(mu    = 0,
+         alpha = alpha_per_beta(beta)) %>% 
+  # behold the formula for the generalized normal distribution in code!
+  mutate(density = (beta / (2 * alpha * gamma(1 / beta))) * 
+           exp(1) ^ (-1 * (abs(value - mu) / alpha) ^ beta)) %>% 
+  
+  # plot
+  ggplot(aes(x = value, y = density, group = beta)) +
+  geom_line(aes(color = beta == 2, size  = beta == 2)) +
+  scale_color_manual(values = c('blue','black')) +
+  scale_size_manual(values = c(1/4, 1.25)) +
+  labs(subtitle = "Guess which color denotes the Gaussian.") +
+  coord_cartesian(xlim = c(-4, 4)) +
+  theme(legend.position = "none",
+        panel.background = element_rect(fill = 'white'),
+        panel.grid = element_blank())
+```
+
+The $\beta$ value of 2 gives the GLD a Gaussian appearance. This distribution also has the highest entropy of any of the 4 distributions. These 4 distributions also all have the same variance of 1.
+```{r}
+crossing(value = -8:8,
+         # this time we need a more densely-packed sequence of `beta` values
+         beta  = seq(from = 1, to = 4, length.out = 100)) %>% 
+  mutate(mu    = 0,
+         alpha = alpha_per_beta(beta)) %>% 
+  mutate(density = (beta / (2 * alpha * gamma(1 / beta))) * 
+           exp(1) ^ (-1 * (abs(value - mu) / alpha) ^ beta)) %>% 
+  group_by(beta) %>% 
+  # this is just an abbreviated version of the formula we used in our first code block
+  summarise(entropy = -sum(density * log(density))) %>% 
+  
+  ggplot(aes(x = beta, y = entropy)) +
+  geom_vline(xintercept = 2, color = "black", lty = 2) +
+  geom_line(size = 2, color = 'blue') +
+  xlab(expression(beta(i.e.*", "*shape))) +
+  coord_cartesian(ylim = c(1.34, 1.42)) +
+  theme(panel.background = element_rect(fill = 'white'),
+        panel.grid = element_blank())
+```
+
+### Binomial
+
+Recall long ago the binomial example of blue and white marbles from chanpter 2. 
+
+The probability of observing $y$ events of outcome 1 and $n-y$ events of outcome 2 is :
+
+$$\text{Pr}(y_{1}, y_{2}, ..., y_{n}|n, p) = p^{y}(1-p)^{n-y}$$
+
+The constraints of this distribution are:\
+1. Only 2 unorderd outcomes\
+2. Constant expected outcome\
+
+Example 1: Bag of unknown amount of blue and white marbles. We draw 2 marbles (with replacement), so there are $2^{2}$ possibilities: BB, BW, WB, and WW. Suppose we know that the expected number of blue marbles is 1 over two draws (n=2). \
+
+Lets propose 4 distributions\
+```{r, echo=FALSE}
+D <- list()
+D$Distribution <- c("A", "B", "C", "D")
+D$ww <- c("1/4", "2/6","1/6","1/8")
+D$bw <- c("1/4","1/6","2/6","4/8")
+D$wb <- c("1/4","1/6","2/6","2/8")
+D$bb <- c("1/4","2/6","1/6","1/8")
+
+knitr::kable(as.data.frame(D))
+
+```
+
+So $A$ here is the usual Binomial distribution with $n = 2$ and $p = 0.5$
+
+$B$, $C$, and $D$ are different distributions with the same expected outcome (1 blue marble).
+```{r}
+p <- list()
+p[[1]] <- c(rep(1/4,4))
+p[[2]] <- c(2/6, 1/6, 1/6, 2/6)
+p[[3]] <- c(1/6, 2/6, 2/6, 1/6)
+p[[4]] <- c(1/8, 4/8, 2/8, 1/8)
+
+sapply(p, function(p) sum(p*c(0,1,1,2))) #calculate the sum of 0 blue, 1 blue, or 2 blues for each distribution
+```
+
+But the entropies are not equal.
+```{r}
+sapply(p, function(p) -sum(p*log(p)))
+```
+
+Because even spread of the probability increases information entropy, Distribution A is favoured.
+```{r}
+par(mfrow = c(2,2))
+
+for(i in 1:4){
+plot(x = c(1:4), y = p[[i]], pch = 1, col = rangi2, ylim = c(0,0.5), type = 'l', xaxt = 'n', xlab = '', ylab = '')
+points(x = c(1:4), y = p[[i]], pch = 16, col = rangi2)
+axis(side = 1, at = 1:4, labels = c("ww","bw","wb","bb"))
+mtext(paste0(LETTERS[i]))
+}
+
+```
+
+What if the expected value was 1.4? ($p = 1.4/2$)
+```{r}
+p <- 0.7
+(A <- c((1-p)^2, p*(1-p), (1-p)*p, p^2))
+```
+
+Hmm, not flat.
+
+What is the entropy?
+```{r}
+-sum(A*log(A))
+```
+
+Let's make sure that no other distribution has more entropy by simulating 100000 distributions.
+```{r}
+sim.p <- function(G=1.4){
+  x123 <- runif(3) #three random numbers 0-1
+  x4 <- ((G)*sum(x123)-x123[2]-x123[3])/(2-G) #solves for relative value of 4th,using G
+  #crate a probability distribution
+  z <- sum(c(x123,x4)) 
+  p <- c(x123, x4)/z
+  list(H = -sum(p*log(p)), p=p)
+}
+```
+
+```{r}
+H <- replicate(1e5, sim.p(1.4))
+dens(as.numeric(H[1,]), adj=0.1)
+```
+
+Let's see what the highest entropy distribution looks like
+```{r}
+entropies <- as.numeric(H[1,])
+distributions <- H[2,]
+
+max(entropies)
+
+distributions[which.max(entropies)]
+```
+
+Nearly identical to our binomial before.
+
+## Generalized linear models
+
+Before we assumed Gaussian distribution and placed the linear model in the mean ($\mu$) of that distribution. For discrete or bounded outcomes, this normal distribution won't work. For example, if you were counting blue marbles, you can't have a negative count. So we need to use something other than Gaussian.
+
+$$y_{i} \sim \text{Binomial}(n,p_{i})\\
+f(p_{i}) = \alpha + \beta(x_{i} - \overline{x})$$
+
+here the count of blue marbles is of the number of draws $n$ and expected value $np$. In the second line $f$ represents the *link function* that bounds the probability between 0 and 1.
+
+### Meet the family
+
+The __Exponential Family__ is a group of maximum entropy distributions (with constraints)
+
+PLOT distributions here**
+
+```{r}
+x <- seq(from = 0, to = 5, length.out = 100)
+g <- seq(from = -5, to = 5, length.out = 100)
+
+Gamma <- dgamma(x, 2, 2)
+Exponential <- dexp(x)
+G_density <- dnorm(seq(from = -5, to = 5, length.out = 100))
+P_density <- dpois(0:20, lambda = 2.5)
+B_density <- dbinom(0:10, size = 10, prob = 0.85)
+
+par(mfrow=c(3, 2))
+plot(x = x, y = Gamma , type = 'l', col = 'blue')
+plot(x = x, y = Exponential , type = 'l', col = 'blue')
+plot(x = g, y = G_density , type = 'l', col = 'blue')
+plot(x = 0:20, y = P_density , type = 'l', col = 'blue')
+plot(x = 0:10, y = B_density , type = 'l', col = 'blue')
+```
+
+### Linking linear models to distributions 
+
+Lets get back to the __Link functions__. Link functions work to avoid mathematicla mistakes like negative counts or probabilities greater than 1. There are two common types of link functions.\
+
+**The Logit Link**
+Made for probability masses that have to be between 0 and 1. Here is what it could look like:
+$$y_{i} \sim \text{Binomial}(n, p_{i})\\
+\text{logit}(p_{i}) = \alpha + \beta x_{i}$$
+
+Where the logit is the *log-odds*
+
+$$\text{logit}(p_{i}) = \text{log}\frac{p_{i}}{1 - p_{i}}$$
+
+so we can write
+
+$$\text{log}\frac{p_{i}}{1 - p_{i}} = \alpha + \beta x_{i}$$
+
+and solve for $p_{i}$
+
+$$p_{i} = \frac{\text{exp}(\alpha + \beta x_{i})}{1 + \text{exp}(\alpha + \beta x_{i})}$$
