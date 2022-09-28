@@ -1,1 +1,228 @@
 # God spiked the integers
+
+GLMs are complex machines that are hard to interpret without understanding the whole and each of the parts within. To get started on trying to understand GLMs, we will look at count data (0, 1, 2, ... etc).
+
+Binomial regression will be when we have 2 defined outcomes that are both measured. (alive/dead, accept/reject)
+
+Poisson regression is for counts that have no known maximum (number of animals in a country) or:
+
+>>number of significance tests in an issue of *Psychological Science*. (p. 323)\
+
+## Binomial regression
+
+Going waaaay back to the globe tossing model
+
+$$y \sim \text{Binomial}(n, p)$$
+here $y$ is the count (0 or positive whole number), $p$ is the probability any 'trial' is a success, and $n$ is the number of trials. For the binomial to work we must have a constant expected value.
+
+There are 2 common GLMs for Binomials\
+1. Logistic regression - independent outcomes are 0 or 1\
+2. Aggregated Binomial Regression - samilar covariate trials are grouped\
+
+Both of the above will make use of the Logit link function
+
+### Logistic regression : Prosocial chimpanzees
+
+EXPERIMENT:\
+chimps can use levers to move food items on a table. The left lever will bring the left food item closer and the right lever will move the right food item closer. This is mirrored across the table but there is only one food item in either the left or the right (not both).
+
+Condition one (control): There is not another chimp across the table. empty social food item will randomly switch from left to right
+
+Condition two: there is another chimp across the table. Choosing to move the side with the social food item is counted as prosocial. choosing to move the empty social food dish is anti-social. Again left and right for the social dish is random.
+
+```{r}
+#library(rethinking)
+data(chimpanzees)
+d <- chimpanzees
+```
+
+We are going to count `pulled_left` ($y$) predicted by `prosoc_left` and `condition`. There are four combinations:\
+
+```{r}
+number <- 1:4
+prosocial_left <- c(0,1,0,1)
+condition <- c(0,0,1,1)
+description <- c("Two food items on the right and no partner",
+                 "Two food items on the left and no partner",
+                 "Two food items on the right and partner present",
+                 "Two food items on the left and partner present")
+experiment <- cbind(number, prosocial_left, condition, description)
+
+knitr::kable(experiment, "html")
+```
+
+Now we can make an index to match each of the 4 outcomes above
+```{r}
+d$treatment <- 1 + d$prosoc_left + 2*d$condition
+```
+
+verify it worked
+```{r}
+xtabs(~treatment + prosoc_left + condition, data = d)
+```
+
+Now lets build the model
+$$L_{i} \sim \text{Binomial}(1, p_{i})\\
+\text{logit}(p_{i}) = \alpha_{ACTOR[i]} + \beta_{TREATMENT[i]}\\
+\alpha_{j} \sim \text{TBD}\\
+\beta_{k} \sim \text{TBD}$$
+
+So $L$ is whether the left lever was pulled. $\alpha$ has 7 parameters (for 7 chimps) and $\beta$ we know has 4 parameters for treatments. 
+
+Now we can go ahead and try to define the priors for our model. We can start conservative
+$$L_{i} \sim \text{Binomial}(1, p_{i})\\
+\text{logit}(p_{i}) = \alpha\\
+\alpha \sim \text{Normal}(0, \omega)$$
+
+we will start with a flat prior where $\omega$ is 10
+```{r}
+m11.1 <- quap(
+  alist(
+    pulled_left ~ dbinom(1, p),
+    logit(p) <- a,
+    a ~ dnorm(0, 10)
+  ), data = d
+)
+```
+
+and sample the prior
+```{r}
+set.seed(11)
+prior <- extract.prior(m11.1, n=1e4)
+```
+
+now we transform the logit to probability space
+```{r}
+p <- inv_logit(prior$a)
+dens(p, adj = 0.1)
+```
+
+So the model (before seeing data) thinks that either its always the left lever or never the left lever.
+```{r}
+m11.1 <- quap(
+  alist(
+    pulled_left ~ dbinom(1, p),
+    logit(p) <- a,
+    a ~ dnorm(0, 1.5)
+  ), data = d
+)
+
+set.seed(11)
+prior <- extract.prior(m11.1, n=1e4)
+
+p2 <- inv_logit(prior$a)
+dens(c(p2), adj = 0.1, col=c('black', rangi2))
+```
+
+```{r}
+m11.2 <- quap(
+  alist(
+    pulled_left ~ dbinom(1, p),
+    logit(p) <- a + b[treatment],
+    a ~ dnorm(0, 1.5),
+    b[treatment] ~ dnorm(0,10)
+  ), data = d
+)
+
+set.seed(11)
+prior <- extract.prior(m11.2, n = 1e4)
+
+p <- sapply(1:4, function(k) inv_logit(prior$a + prior$b[,k]))
+```
+
+`p` now holds the prior probability for each of the 4 treatments. Let's investigate the difference between the first two
+```{r}
+dens(abs(p[,1]-p[,2]), adj = 0.1)
+```
+
+So now the model thinks that these two treatments are either the same, or completely different. Let's tighten it up.
+```{r}
+m11.3 <- quap(
+  alist(
+    pulled_left ~ dbinom(1, p),
+    logit(p) <- a + b[treatment],
+    a ~ dnorm(0, 1.5),
+    b[treatment] ~ dnorm(0,0.5)
+  ), data = d
+)
+
+set.seed(11)
+prior <- extract.prior(m11.3, n = 1e4)
+
+p <- sapply(1:4, function(k) inv_logit(prior$a + prior$b[,k]))
+
+mean(abs(p[,1] - p[,2]))
+
+dens(abs(p[,1]-p[,2]), adj = 0.1)
+```
+
+Now the model finds them rather similar with a mean difference of about 10%.
+
+Great, now lets get ready for HMC
+```{r}
+#trimmed data list
+dat_list <- list(
+  pulled_left = d$pulled_left,
+  actor = d$actor,
+  treatment = as.integer(d$treatment)
+)
+
+m11.4 <- ulam(
+  alist(
+    pulled_left ~ dbinom(1, p),
+    p <- a[actor] + b[treatment],
+    a[actor] ~ dnorm(0, 1.5),
+    b[treatment] ~ dnorm(0, 0.5)
+  ), data = dat_list, chains = 4, cores = 4, log_lik = TRUE 
+)
+
+precis(m11.4, depth = 2)
+```
+
+What? Yeah, me too. Let's break this down.
+```{r}
+post <- extract.samples(m11.4)
+p_left <- inv_logit(post$a)
+precis_plot(as.data.frame(p_left), xlim = c(0,1))
+```
+
+Here each row is a chimpanzee and you can see most actually preferred the right lever. One chimp really liked the left lever. This tells us left or right, but how do we know if they were being prosocial?
+
+```{r}
+labs <- c("R/N", "L/N", "R/P", "L/P")
+precis_plot(m11.4, depth = 2, pars = "b", labels = labs) 
+```
+
+These coefficients are still in logit space so don't take them at face value for each treatment yet. Let's contrast the Right side and the Left side to see if the coefficients are very different.
+
+```{r}
+diffs <- list(
+  db13 = post$b[,1] - post$b[,3],
+  db24 = post$b[,2] - post$b[,4]
+)
+plot(precis(diffs))
+```
+
+So now we are looking at the difference between the no partner/partner on the right (db13) and left sides (db24). The right has a bit of a stronger 'prosocial' signal but not important as they both have large intervals.
+
+Now we can try a posterior predictive check. Let's calculate the proportion of left pulls for each actor in each treatment and see how it matches the posterior.
+```{r}
+pl <- by(d$pulled_left, list(d$actor, d$treatment), mean)
+pl[1,]
+```
+
+Now we can use these observed proportions and compare them to the models predictions for each combination of actor and treatment.
+
+```{r}
+dat <- list(actor = rep(1:7, each=4), treatment = rep(1:4, times = 7))
+p_post <- link(m11.4, data = dat)
+p_mu <- apply(p_post, 2, mean)
+p_ci <- apply(p_post, 2, PI)
+```
+
+And we can plot to see how well our model predicts the data
+```{r}
+##LATER
+```
+
+
