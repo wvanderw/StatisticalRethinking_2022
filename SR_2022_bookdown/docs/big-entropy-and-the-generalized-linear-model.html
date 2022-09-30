@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 10 Big entropy and the generalized linear model | Rethinking Companion</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 10 Big entropy and the generalized linear model | Rethinking Companion" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 10 Big entropy and the generalized linear model | Rethinking Companion" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Wade VanderWright" />
+
+
+<meta name="date" content="2022-09-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="markov-chain-monte-carlo.html"/>
+<link rel="next" href="god-spiked-the-integers.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Rethinking Companion</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> The Golem of Prague</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#statistical-golems"><i class="fa fa-check"></i><b>1.1</b> Statistical golems</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#statistical-rethinking"><i class="fa fa-check"></i><b>1.2</b> Statistical Rethinking</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#what-are-we-trying-to-do-with-the-golems"><i class="fa fa-check"></i><b>1.2.1</b> What are we trying to do with the golems?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#tools-for-golem-engineering"><i class="fa fa-check"></i><b>1.3</b> Tools for golem engineering</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#bayesian-data-analysis"><i class="fa fa-check"></i><b>1.3.1</b> Bayesian data analysis</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#model-comparison-and-predictions"><i class="fa fa-check"></i><b>1.3.2</b> Model comparison and predictions</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#multilevel-models"><i class="fa fa-check"></i><b>1.3.3</b> Multilevel models</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#graphical-causal-models"><i class="fa fa-check"></i><b>1.3.4</b> Graphical causal models</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#summary"><i class="fa fa-check"></i><b>1.4</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#session-info"><i class="fa fa-check"></i>Session Info</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html"><i class="fa fa-check"></i><b>2</b> Small worlds and large worlds</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#the-garden-of-forking-data"><i class="fa fa-check"></i><b>2.1</b> The garden of forking data</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#counting-possibilities"><i class="fa fa-check"></i><b>2.1.1</b> Counting possibilities</a></li>
+<li class="chapter" data-level="2.1.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#combining-other-information"><i class="fa fa-check"></i><b>2.1.2</b> Combining other information</a></li>
+<li class="chapter" data-level="2.1.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#from-counts-to-probability"><i class="fa fa-check"></i><b>2.1.3</b> From counts to probability</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#building-a-model"><i class="fa fa-check"></i><b>2.2</b> Building a model</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#a-data-story"><i class="fa fa-check"></i><b>2.2.1</b> A data story</a></li>
+<li class="chapter" data-level="2.2.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#bayesian-updating"><i class="fa fa-check"></i><b>2.2.2</b> Bayesian updating</a></li>
+<li class="chapter" data-level="2.2.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#evaluate"><i class="fa fa-check"></i><b>2.2.3</b> Evaluate</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#components-of-the-model"><i class="fa fa-check"></i><b>2.3</b> Components of the model</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#variables"><i class="fa fa-check"></i><b>2.3.1</b> Variables</a></li>
+<li class="chapter" data-level="2.3.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#definitions"><i class="fa fa-check"></i><b>2.3.2</b> Definitions</a></li>
+<li class="chapter" data-level="2.3.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#a-model-is-born"><i class="fa fa-check"></i><b>2.3.3</b> A model is born</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#maiking-the-model-go"><i class="fa fa-check"></i><b>2.4</b> Maiking the model go</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#quadratic"><i class="fa fa-check"></i><b>2.4.1</b> Quadratic</a></li>
+<li class="chapter" data-level="2.4.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#mcmc"><i class="fa fa-check"></i><b>2.4.2</b> MCMC</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html"><i class="fa fa-check"></i><b>3</b> Sampling the imaginary</a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#probabilities-vs.-frequency-counts"><i class="fa fa-check"></i><b>3.0.1</b> Probabilities vs. Frequency counts</a></li>
+<li class="chapter" data-level="3.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-from-a-grid-approximate-posterior"><i class="fa fa-check"></i><b>3.1</b> Sampling from a grid-approximate posterior</a></li>
+<li class="chapter" data-level="3.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-to-summarize"><i class="fa fa-check"></i><b>3.2</b> Sampling to summarize</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#intervals-of-defined-boundaries"><i class="fa fa-check"></i><b>3.2.1</b> Intervals of defined boundaries</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#intervals-of-defined-mass"><i class="fa fa-check"></i><b>3.2.2</b> intervals of defined mass</a></li>
+<li class="chapter" data-level="3.2.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#point-estimates"><i class="fa fa-check"></i><b>3.2.3</b> Point estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-to-simulate-prediction"><i class="fa fa-check"></i><b>3.3</b> Sampling to simulate prediction</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#dummy-data"><i class="fa fa-check"></i><b>3.3.1</b> Dummy data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#model-checking"><i class="fa fa-check"></i><b>3.3.2</b> Model checking</a></li>
+<li class="chapter" data-level="3.3.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#practice-with-brms"><i class="fa fa-check"></i><b>3.3.3</b> Practice with brms</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="geocentric-models.html"><a href="geocentric-models.html"><i class="fa fa-check"></i><b>4</b> Geocentric models</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="geocentric-models.html"><a href="geocentric-models.html#why-normal-distributions-are-normal"><i class="fa fa-check"></i><b>4.1</b> Why normal distributions are normal</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-addition"><i class="fa fa-check"></i><b>4.1.1</b> Normal by addition</a></li>
+<li class="chapter" data-level="4.1.2" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-multiplication"><i class="fa fa-check"></i><b>4.1.2</b> Normal by multiplication</a></li>
+<li class="chapter" data-level="4.1.3" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-log-multiplication"><i class="fa fa-check"></i><b>4.1.3</b> Normal by log-multiplication</a></li>
+<li class="chapter" data-level="4.1.4" data-path="geocentric-models.html"><a href="geocentric-models.html#using-gaussian-distributions"><i class="fa fa-check"></i><b>4.1.4</b> Using Gaussian distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="geocentric-models.html"><a href="geocentric-models.html#a-language-for-describing-models"><i class="fa fa-check"></i><b>4.2</b> A language for describing models</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="geocentric-models.html"><a href="geocentric-models.html#re-describing-the-globe-tossing-model."><i class="fa fa-check"></i><b>4.2.1</b> Re-describing the globe tossing model.</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="geocentric-models.html"><a href="geocentric-models.html#gaussian-model-of-height"><i class="fa fa-check"></i><b>4.3</b> Gaussian model of height</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="geocentric-models.html"><a href="geocentric-models.html#the-data"><i class="fa fa-check"></i><b>4.3.1</b> The data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="geocentric-models.html"><a href="geocentric-models.html#the-model"><i class="fa fa-check"></i><b>4.3.2</b> The Model</a></li>
+<li class="chapter" data-level="4.3.3" data-path="geocentric-models.html"><a href="geocentric-models.html#grid-approximation-of-the-posterior-distribution"><i class="fa fa-check"></i><b>4.3.3</b> Grid approximation of the posterior distribution</a></li>
+<li class="chapter" data-level="4.3.4" data-path="geocentric-models.html"><a href="geocentric-models.html#sampling-from-the-posterior"><i class="fa fa-check"></i><b>4.3.4</b> Sampling from the posterior</a></li>
+<li class="chapter" data-level="4.3.5" data-path="geocentric-models.html"><a href="geocentric-models.html#finding-the-posterior-distribution-with-quap"><i class="fa fa-check"></i><b>4.3.5</b> Finding the posterior distribution with <code>quap</code></a></li>
+<li class="chapter" data-level="4.3.6" data-path="geocentric-models.html"><a href="geocentric-models.html#sampling-with-quap"><i class="fa fa-check"></i><b>4.3.6</b> Sampling with <code>quap</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="geocentric-models.html"><a href="geocentric-models.html#linear-prediction"><i class="fa fa-check"></i><b>4.4</b> Linear Prediction</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="geocentric-models.html"><a href="geocentric-models.html#finding-the-posterior-distribtuion"><i class="fa fa-check"></i><b>4.4.1</b> Finding the posterior distribtuion</a></li>
+<li class="chapter" data-level="4.4.2" data-path="geocentric-models.html"><a href="geocentric-models.html#interpreting-the-posterior-distribution"><i class="fa fa-check"></i><b>4.4.2</b> Interpreting the posterior distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="geocentric-models.html"><a href="geocentric-models.html#curves-from-lines"><i class="fa fa-check"></i><b>4.5</b> Curves from lines</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="geocentric-models.html"><a href="geocentric-models.html#polynomial-regression"><i class="fa fa-check"></i><b>4.5.1</b> Polynomial regression</a></li>
+<li class="chapter" data-level="4.5.2" data-path="geocentric-models.html"><a href="geocentric-models.html#splines"><i class="fa fa-check"></i><b>4.5.2</b> Splines</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html"><i class="fa fa-check"></i><b>5</b> The many variables &amp; the spurious waffles</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#spurious-assoiciation"><i class="fa fa-check"></i><b>5.1</b> Spurious assoiciation</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#think-before-to-regress"><i class="fa fa-check"></i><b>5.1.1</b> Think before to regress</a></li>
+<li class="chapter" data-level="5.1.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#testable-implications"><i class="fa fa-check"></i><b>5.1.2</b> Testable implications</a></li>
+<li class="chapter" data-level="5.1.3" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#multiple-regression-notation"><i class="fa fa-check"></i><b>5.1.3</b> Multiple regression notation</a></li>
+<li class="chapter" data-level="5.1.4" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#approximating-the-posterior"><i class="fa fa-check"></i><b>5.1.4</b> Approximating the posterior</a></li>
+<li class="chapter" data-level="5.1.5" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#plotting-multivariate-posteriors"><i class="fa fa-check"></i><b>5.1.5</b> Plotting multivariate posteriors</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#masked-relationship"><i class="fa fa-check"></i><b>5.2</b> Masked relationship</a></li>
+<li class="chapter" data-level="5.3" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Categorical variables</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#binary-categories"><i class="fa fa-check"></i><b>5.3.1</b> Binary categories</a></li>
+<li class="chapter" data-level="5.3.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#many-categories"><i class="fa fa-check"></i><b>5.3.2</b> Many categories</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html"><i class="fa fa-check"></i><b>6</b> The haunted dag &amp; the casual terror</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#multicollinearity"><i class="fa fa-check"></i><b>6.1</b> Multicollinearity</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#example-try-to-predict-height-from-length-of-a-persons-legs."><i class="fa fa-check"></i><b>6.1.1</b> Example: Try to predict height from length of a person’s legs.</a></li>
+<li class="chapter" data-level="6.1.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#multicollinear-milk"><i class="fa fa-check"></i><b>6.1.2</b> Multicollinear milk</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#post-treatrment-bias"><i class="fa fa-check"></i><b>6.2</b> Post-treatrment bias</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#a-prior-is-born"><i class="fa fa-check"></i><b>6.2.1</b> A prior is born</a></li>
+<li class="chapter" data-level="6.2.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#blocked-by-consequence"><i class="fa fa-check"></i><b>6.2.2</b> Blocked by consequence</a></li>
+<li class="chapter" data-level="6.2.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#fungus-and-d-separation"><i class="fa fa-check"></i><b>6.2.3</b> Fungus and d-separation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#collider-bias"><i class="fa fa-check"></i><b>6.3</b> Collider bias</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#collider-for-false-sorrow"><i class="fa fa-check"></i><b>6.3.1</b> Collider for false sorrow</a></li>
+<li class="chapter" data-level="6.3.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#the-haunted-dag"><i class="fa fa-check"></i><b>6.3.2</b> The haunted DAG</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#confronting-confounding"><i class="fa fa-check"></i><b>6.4</b> Confronting confounding</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#shutting-the-backdoor"><i class="fa fa-check"></i><b>6.4.1</b> Shutting the backdoor</a></li>
+<li class="chapter" data-level="6.4.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#two-roads"><i class="fa fa-check"></i><b>6.4.2</b> Two roads</a></li>
+<li class="chapter" data-level="6.4.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#backdoor-waffles"><i class="fa fa-check"></i><b>6.4.3</b> Backdoor waffles</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ulysses-compass.html"><a href="ulysses-compass.html"><i class="fa fa-check"></i><b>7</b> Ulysses’ compass</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#the-problem-with-parameters"><i class="fa fa-check"></i><b>7.1</b> The problem with parameters</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#more-parameters-almost-always-improve-fit"><i class="fa fa-check"></i><b>7.1.1</b> More parameters (almost) always improve fit</a></li>
+<li class="chapter" data-level="7.1.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#too-few-parameters-hurts-too"><i class="fa fa-check"></i><b>7.1.2</b> Too few parameters hurts, too</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#entropy-and-accuracy"><i class="fa fa-check"></i><b>7.2</b> Entropy and accuracy</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#firing-the-weatherperson"><i class="fa fa-check"></i><b>7.2.1</b> Firing the weatherperson</a></li>
+<li class="chapter" data-level="7.2.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#information-and-uncertainty"><i class="fa fa-check"></i><b>7.2.2</b> Information and uncertainty</a></li>
+<li class="chapter" data-level="7.2.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#from-entropy-to-accuracy"><i class="fa fa-check"></i><b>7.2.3</b> From entropy to accuracy</a></li>
+<li class="chapter" data-level="7.2.4" data-path="ulysses-compass.html"><a href="ulysses-compass.html#estimating-divergence"><i class="fa fa-check"></i><b>7.2.4</b> Estimating divergence</a></li>
+<li class="chapter" data-level="7.2.5" data-path="ulysses-compass.html"><a href="ulysses-compass.html#scoring-the-right-data"><i class="fa fa-check"></i><b>7.2.5</b> Scoring the right data</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#golem-taming-regularization"><i class="fa fa-check"></i><b>7.3</b> Golem taming: regularization</a></li>
+<li class="chapter" data-level="7.4" data-path="ulysses-compass.html"><a href="ulysses-compass.html#predicting-predictive-accuracy"><i class="fa fa-check"></i><b>7.4</b> Predicting predictive accuracy</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#cross-validation"><i class="fa fa-check"></i><b>7.4.1</b> Cross-validation</a></li>
+<li class="chapter" data-level="7.4.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#information-criteria"><i class="fa fa-check"></i><b>7.4.2</b> Information criteria</a></li>
+<li class="chapter" data-level="7.4.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#comparing-cv-psis-and-waic"><i class="fa fa-check"></i><b>7.4.3</b> Comparing CV, PSIS, and WAIC</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="ulysses-compass.html"><a href="ulysses-compass.html#model-comparison"><i class="fa fa-check"></i><b>7.5</b> Model comparison</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#model-mis-selection"><i class="fa fa-check"></i><b>7.5.1</b> Model mis-selection</a></li>
+<li class="chapter" data-level="7.5.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#outliers-and-other-illustions"><i class="fa fa-check"></i><b>7.5.2</b> Outliers and other illustions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="conditional-manatees.html"><a href="conditional-manatees.html"><i class="fa fa-check"></i><b>8</b> Conditional manatees</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#building-an-interaction"><i class="fa fa-check"></i><b>8.1</b> Building an interaction</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#making-a-rugged-model"><i class="fa fa-check"></i><b>8.1.1</b> Making a rugged model</a></li>
+<li class="chapter" data-level="8.1.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#adding-an-indicator-isnt-enough"><i class="fa fa-check"></i><b>8.1.2</b> Adding an indicator isn’t enough</a></li>
+<li class="chapter" data-level="8.1.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#adding-an-interaction-does-work"><i class="fa fa-check"></i><b>8.1.3</b> Adding an interaction does work</a></li>
+<li class="chapter" data-level="8.1.4" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-the-interaction"><i class="fa fa-check"></i><b>8.1.4</b> Plotting the interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#symmetry-of-interactions"><i class="fa fa-check"></i><b>8.2</b> Symmetry of interactions</a></li>
+<li class="chapter" data-level="8.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#continuous-interactions"><i class="fa fa-check"></i><b>8.3</b> Continuous interactions</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#a-winter-flower"><i class="fa fa-check"></i><b>8.3.1</b> A winter flower</a></li>
+<li class="chapter" data-level="8.3.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#the-models"><i class="fa fa-check"></i><b>8.3.2</b> the models</a></li>
+<li class="chapter" data-level="8.3.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-posterior-predictions"><i class="fa fa-check"></i><b>8.3.3</b> Plotting posterior predictions</a></li>
+<li class="chapter" data-level="8.3.4" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-prior-predictions"><i class="fa fa-check"></i><b>8.3.4</b> Plotting prior predictions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html"><i class="fa fa-check"></i><b>9</b> Markov Chain Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#good-king-markov-and-his-island-kingdom"><i class="fa fa-check"></i><b>9.1</b> Good King Markov and his island kingdom</a></li>
+<li class="chapter" data-level="9.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#metropolis-algorithims"><i class="fa fa-check"></i><b>9.2</b> Metropolis algorithims</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#gibbs-sampling"><i class="fa fa-check"></i><b>9.2.1</b> Gibbs sampling</a></li>
+<li class="chapter" data-level="9.2.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#high-dimensional-problems"><i class="fa fa-check"></i><b>9.2.2</b> High-dimensional problems</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#hamiltonian-monte-carlo"><i class="fa fa-check"></i><b>9.3</b> Hamiltonian Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#another-parable"><i class="fa fa-check"></i><b>9.3.1</b> Another parable</a></li>
+<li class="chapter" data-level="9.3.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#particles-in-space"><i class="fa fa-check"></i><b>9.3.2</b> Particles in space</a></li>
+<li class="chapter" data-level="9.3.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#limitations"><i class="fa fa-check"></i><b>9.3.3</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#easy-hmc-ulam-brm"><i class="fa fa-check"></i><b>9.4</b> Easy HMC: <code>ulam</code> (<code>brm</code>)</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#preperation"><i class="fa fa-check"></i><b>9.4.1</b> Preperation</a></li>
+<li class="chapter" data-level="9.4.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#sampling-from-the-posterior-1"><i class="fa fa-check"></i><b>9.4.2</b> Sampling from the posterior</a></li>
+<li class="chapter" data-level="9.4.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#sampling-again-in-parallel"><i class="fa fa-check"></i><b>9.4.3</b> Sampling again, in parallel</a></li>
+<li class="chapter" data-level="9.4.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#visualization"><i class="fa fa-check"></i><b>9.4.4</b> Visualization</a></li>
+<li class="chapter" data-level="9.4.5" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#checking-the-chain"><i class="fa fa-check"></i><b>9.4.5</b> Checking the chain</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#care-and-feeding-of-your-markov-chain"><i class="fa fa-check"></i><b>9.5</b> Care and feeding of your Markov chain</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#how-many-samples-do-you-need"><i class="fa fa-check"></i><b>9.5.1</b> How many samples do you need?</a></li>
+<li class="chapter" data-level="9.5.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#how-many-chains-do-you-need"><i class="fa fa-check"></i><b>9.5.2</b> How many chains do you need?</a></li>
+<li class="chapter" data-level="9.5.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#taming-a-wild-chain"><i class="fa fa-check"></i><b>9.5.3</b> Taming a wild chain</a></li>
+<li class="chapter" data-level="9.5.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#non-identifiable-parameters"><i class="fa fa-check"></i><b>9.5.4</b> Non-identifiable parameters</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html"><i class="fa fa-check"></i><b>10</b> Big entropy and the generalized linear model</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#maximum-entropy"><i class="fa fa-check"></i><b>10.1</b> Maximum entropy</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#gaussian"><i class="fa fa-check"></i><b>10.1.1</b> Gaussian</a></li>
+<li class="chapter" data-level="10.1.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#binomial"><i class="fa fa-check"></i><b>10.1.2</b> Binomial</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#generalized-linear-models"><i class="fa fa-check"></i><b>10.2</b> Generalized linear models</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#meet-the-family"><i class="fa fa-check"></i><b>10.2.1</b> Meet the family</a></li>
+<li class="chapter" data-level="10.2.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#linking-linear-models-to-distributions"><i class="fa fa-check"></i><b>10.2.2</b> Linking linear models to distributions</a></li>
+<li class="chapter" data-level="10.2.3" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#omitted-variable-bias-again"><i class="fa fa-check"></i><b>10.2.3</b> Omitted variable bias (again)</a></li>
+<li class="chapter" data-level="10.2.4" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#absolute-relative-differences"><i class="fa fa-check"></i><b>10.2.4</b> Absolute relative differences</a></li>
+<li class="chapter" data-level="10.2.5" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#glms-and-information-criteria"><i class="fa fa-check"></i><b>10.2.5</b> GLMs and information criteria</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html"><i class="fa fa-check"></i><b>11</b> God spiked the integers</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#binomial-regression"><i class="fa fa-check"></i><b>11.1</b> Binomial regression</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#logistic-regression-prosocial-chimpanzees"><i class="fa fa-check"></i><b>11.1.1</b> Logistic regression : Prosocial chimpanzees</a></li>
+<li class="chapter" data-level="11.1.2" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#relative-shark-and-absolute-deer"><i class="fa fa-check"></i><b>11.1.2</b> Relative shark and absolute deer</a></li>
+<li class="chapter" data-level="11.1.3" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#aggregated-binomial-chimps-condensed"><i class="fa fa-check"></i><b>11.1.3</b> Aggregated binomial: Chimps condensed</a></li>
+<li class="chapter" data-level="11.1.4" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#aggregated-admissions"><i class="fa fa-check"></i><b>11.1.4</b> Aggregated admissions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="monsters-and-mixtures.html"><a href="monsters-and-mixtures.html"><i class="fa fa-check"></i><b>12</b> Monsters and mixtures</a></li>
+<li class="chapter" data-level="13" data-path="models-with-memory.html"><a href="models-with-memory.html"><i class="fa fa-check"></i><b>13</b> Models with memory</a></li>
+<li class="chapter" data-level="14" data-path="adventures-in-covariance.html"><a href="adventures-in-covariance.html"><i class="fa fa-check"></i><b>14</b> Adventures in covariance</a></li>
+<li class="chapter" data-level="15" data-path="missing-data-and-other-opportunities.html"><a href="missing-data-and-other-opportunities.html"><i class="fa fa-check"></i><b>15</b> Missing data and other opportunities</a></li>
+<li class="chapter" data-level="16" data-path="generalized-linear-madness.html"><a href="generalized-linear-madness.html"><i class="fa fa-check"></i><b>16</b> Generalized linear madness</a></li>
+<li class="chapter" data-level="17" data-path="horoscopes.html"><a href="horoscopes.html"><i class="fa fa-check"></i><b>17</b> Horoscopes</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Rethinking Companion</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="big-entropy-and-the-generalized-linear-model" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">Chapter 10</span> Big entropy and the generalized linear model<a href="big-entropy-and-the-generalized-linear-model.html#big-entropy-and-the-generalized-linear-model" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="maximum-entropy" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Maximum entropy<a href="big-entropy-and-the-generalized-linear-model.html#maximum-entropy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Recall the information theory function from Chapter 7</p>
+<p><span class="math display">\[H(p) = - \sum_{i}p_{i}\text{log}p_{i}\]</span></p>
+<p>This is also known as <em>information entropy</em></p>
+<p>Maximum entropy:
+&gt;&gt; The distribution that can happen the most ways is also the distribution with the biggest information entropy. The distribution with the biggest entropy is the most conservative distribution that obeys its constraints. (p. 301)</p>
+<p>5 buckets and 10 pebbles. The 10 pebbles can go into any bucket with the same probability.</p>
+<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb658-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb658-2"><a href="big-entropy-and-the-generalized-linear-model.html#cb658-2" aria-hidden="true" tabindex="-1"></a>p<span class="sc">$</span>A <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb658-3"><a href="big-entropy-and-the-generalized-linear-model.html#cb658-3" aria-hidden="true" tabindex="-1"></a>p<span class="sc">$</span>B <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb658-4"><a href="big-entropy-and-the-generalized-linear-model.html#cb658-4" aria-hidden="true" tabindex="-1"></a>p<span class="sc">$</span>C <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">2</span>,<span class="dv">0</span>)</span>
+<span id="cb658-5"><a href="big-entropy-and-the-generalized-linear-model.html#cb658-5" aria-hidden="true" tabindex="-1"></a>p<span class="sc">$</span>D <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">1</span>)</span>
+<span id="cb658-6"><a href="big-entropy-and-the-generalized-linear-model.html#cb658-6" aria-hidden="true" tabindex="-1"></a>p<span class="sc">$</span>E <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>)</span></code></pre></div>
+<p>Turn into probability distribution</p>
+<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb659-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb659-1" aria-hidden="true" tabindex="-1"></a>p_norm <span class="ot">&lt;-</span> <span class="fu">lapply</span>(p, <span class="cf">function</span>(q) q<span class="sc">/</span><span class="fu">sum</span>(q))</span></code></pre></div>
+<p>Calculate information entropy</p>
+<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb660-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb660-1" aria-hidden="true" tabindex="-1"></a>(H <span class="ot">&lt;-</span> <span class="fu">sapply</span>(p_norm, <span class="cf">function</span>(q) <span class="sc">-</span><span class="fu">sum</span>(<span class="fu">ifelse</span>(q<span class="sc">==</span><span class="dv">0</span>, <span class="dv">0</span>, q<span class="sc">*</span><span class="fu">log</span>(q)))))</span></code></pre></div>
+<pre><code>##         A         B         C         D         E 
+## 0.0000000 0.6390319 0.9502705 1.4708085 1.6094379</code></pre>
+<p>Log(ways) per pebble</p>
+<div class="sourceCode" id="cb662"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb662-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb662-1" aria-hidden="true" tabindex="-1"></a>ways <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">90</span>,<span class="dv">1260</span>,<span class="dv">37800</span>,<span class="dv">113400</span>)</span>
+<span id="cb662-2"><a href="big-entropy-and-the-generalized-linear-model.html#cb662-2" aria-hidden="true" tabindex="-1"></a>logwayspp <span class="ot">&lt;-</span> <span class="fu">log</span>(ways)<span class="sc">/</span><span class="dv">10</span></span></code></pre></div>
+<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb663-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb663-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> logwayspp, <span class="at">y =</span> H, <span class="at">xlab =</span> <span class="st">&quot;log(ways) per pebble&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;entropy&quot;</span>, <span class="at">pch =</span> <span class="dv">16</span>)</span>
+<span id="cb663-2"><a href="big-entropy-and-the-generalized-linear-model.html#cb663-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="fl">1.38</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb663-3"><a href="big-entropy-and-the-generalized-linear-model.html#cb663-3" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> logwayspp[<span class="dv">1</span>], <span class="at">y =</span> H[<span class="dv">1</span>] <span class="sc">+</span><span class="fl">0.1</span>, <span class="at">labels =</span> <span class="st">&quot;A&quot;</span>)</span>
+<span id="cb663-4"><a href="big-entropy-and-the-generalized-linear-model.html#cb663-4" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> logwayspp[<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>], <span class="at">y =</span> H[<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>] <span class="sc">-</span> <span class="fl">0.1</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;E&quot;</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-192-1.png" width="672" /></p>
+<div id="gaussian" class="section level3 hasAnchor" number="10.1.1">
+<h3><span class="header-section-number">10.1.1</span> Gaussian<a href="big-entropy-and-the-generalized-linear-model.html#gaussian" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A <em>generalized normal distribtuion</em> is defined as the probability density:<br />
+<span class="math display">\[\text{Pr}(y|\mu, \alpha, \beta) = \frac{\beta}{2\alpha\Gamma(1/\beta)}e^{(-\frac{|y -\mu|}{\alpha})^{\beta}}\]</span></p>
+<p>with <span class="math inline">\(\mu\)</span> as the location, <span class="math inline">\(\alpha\)</span> as the scale, and <span class="math inline">\(\beta\)</span> defining the shape. There is no code in the text to dive into this but here is an example from Solomon Kurz <a href="https://bookdown.org/content/4857/big-entropy-and-the-generalized-linear-model.html#gaussian." class="uri">https://bookdown.org/content/4857/big-entropy-and-the-generalized-linear-model.html#gaussian.</a></p>
+<div class="sourceCode" id="cb664"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb664-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb664-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+<pre><code>## ✔ tibble  3.1.8     ✔ forcats 0.5.1
+## ✔ readr   2.0.1</code></pre>
+<pre><code>## Warning: package &#39;tibble&#39; was built under R version 4.1.2</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ tidyr::extract() masks rstan::extract()
+## ✖ dplyr::filter()  masks stats::filter()
+## ✖ dplyr::lag()     masks stats::lag()
+## ✖ purrr::map()     masks rethinking::map()</code></pre>
+<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb669-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-1" aria-hidden="true" tabindex="-1"></a>alpha_per_beta <span class="ot">&lt;-</span> <span class="cf">function</span>(beta, <span class="at">variance =</span> <span class="dv">1</span>) {</span>
+<span id="cb669-2"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>((variance <span class="sc">*</span> <span class="fu">gamma</span>(<span class="dv">1</span> <span class="sc">/</span> beta)) <span class="sc">/</span> <span class="fu">gamma</span>(<span class="dv">3</span> <span class="sc">/</span> beta))</span>
+<span id="cb669-3"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb669-4"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb669-5"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-5" aria-hidden="true" tabindex="-1"></a><span class="fu">crossing</span>(<span class="at">value =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">5</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">by =</span> .<span class="dv">1</span>),</span>
+<span id="cb669-6"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-6" aria-hidden="true" tabindex="-1"></a>         <span class="co"># I arrived at these values by trial and error</span></span>
+<span id="cb669-7"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">beta  =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="dv">4</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb669-8"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mu    =</span> <span class="dv">0</span>,</span>
+<span id="cb669-9"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">alpha =</span> <span class="fu">alpha_per_beta</span>(beta)) <span class="sc">%&gt;%</span> </span>
+<span id="cb669-10"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># behold the formula for the generalized normal distribution in code!</span></span>
+<span id="cb669-11"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">density =</span> (beta <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> alpha <span class="sc">*</span> <span class="fu">gamma</span>(<span class="dv">1</span> <span class="sc">/</span> beta))) <span class="sc">*</span> </span>
+<span id="cb669-12"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-12" aria-hidden="true" tabindex="-1"></a>           <span class="fu">exp</span>(<span class="dv">1</span>) <span class="sc">^</span> (<span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> (<span class="fu">abs</span>(value <span class="sc">-</span> mu) <span class="sc">/</span> alpha) <span class="sc">^</span> beta)) <span class="sc">%&gt;%</span> </span>
+<span id="cb669-13"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb669-14"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot</span></span>
+<span id="cb669-15"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">y =</span> density, <span class="at">group =</span> beta)) <span class="sc">+</span></span>
+<span id="cb669-16"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">color =</span> beta <span class="sc">==</span> <span class="dv">2</span>, <span class="at">size  =</span> beta <span class="sc">==</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb669-17"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&#39;blue&#39;</span>,<span class="st">&#39;black&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb669-18"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>, <span class="fl">1.25</span>)) <span class="sc">+</span></span>
+<span id="cb669-19"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&quot;Guess which color denotes the Gaussian.&quot;</span>) <span class="sc">+</span></span>
+<span id="cb669-20"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>)) <span class="sc">+</span></span>
+<span id="cb669-21"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb669-22"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&#39;white&#39;</span>),</span>
+<span id="cb669-23"><a href="big-entropy-and-the-generalized-linear-model.html#cb669-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-193-1.png" width="672" /></p>
+<p>The <span class="math inline">\(\beta\)</span> value of 2 gives the GLD a Gaussian appearance. This distribution also has the highest entropy of any of the 4 distributions. These 4 distributions also all have the same variance of 1.</p>
+<div class="sourceCode" id="cb670"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb670-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb670-1" aria-hidden="true" tabindex="-1"></a><span class="fu">crossing</span>(<span class="at">value =</span> <span class="sc">-</span><span class="dv">8</span><span class="sc">:</span><span class="dv">8</span>,</span>
+<span id="cb670-2"><a href="big-entropy-and-the-generalized-linear-model.html#cb670-2" aria-hidden="true" tabindex="-1"></a>         <span class="co"># this time we need a more densely-packed sequence of `beta` values</span></span>
+<span id="cb670-3"><a href="big-entropy-and-the-generalized-linear-model.html#cb670-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">beta  =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">4</span>, <span class="at">length.out =</span> <span class="dv">100</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb670-4"><a href="big-entropy-and-the-generalized-linear-model.html#cb670-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mu    =</span> <span class="dv">0</span>,</span>
+<span id="cb670-5"><a href="big-entropy-and-the-generalized-linear-model.html#cb670-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">alpha =</span> <span class="fu">alpha_per_beta</span>(beta)) <span class="sc">%&gt;%</span> </span>
+<span id="cb670-6"><a href="big-entropy-and-the-generalized-linear-model.html#cb670-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">density =</span> (beta <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> alpha <span class="sc">*</span> <span class="fu">gamma</span>(<span class="dv">1</span> <span class="sc">/</span> beta))) <span class="sc">*</span> </span>
+<span id="cb670-7"><a href="big-entropy-and-the-generalized-linear-model.html#cb670-7" aria-hidden="true" tabindex="-1"></a>           <span class="fu">exp</span>(<span class="dv">1</span>) <span class="sc">^</span> (<span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> (<span class="fu">abs</span>(value <span class="sc">-</span> mu) <span class="sc">/</span> alpha) <span class="sc">^</span> beta)) <span class="sc">%&gt;%</span> </span>
+<span id="cb670-8"><a href="big-entropy-and-the-generalized-linear-model.html#cb670-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(beta) <span class="sc">%&gt;%</span> </span>
+<span id="cb670-9"><a href="big-entropy-and-the-generalized-linear-model.html#cb670-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this is just an abbreviated version of the formula we used in our first code block</span></span>
+<span id="cb670-10"><a href="big-entropy-and-the-generalized-linear-model.html#cb670-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">entropy =</span> <span class="sc">-</span><span class="fu">sum</span>(density <span class="sc">*</span> <span class="fu">log</span>(density))) <span class="sc">%&gt;%</span> </span>
+<span id="cb670-11"><a href="big-entropy-and-the-generalized-linear-model.html#cb670-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb670-12"><a href="big-entropy-and-the-generalized-linear-model.html#cb670-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> beta, <span class="at">y =</span> entropy)) <span class="sc">+</span></span>
+<span id="cb670-13"><a href="big-entropy-and-the-generalized-linear-model.html#cb670-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb670-14"><a href="big-entropy-and-the-generalized-linear-model.html#cb670-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">&#39;blue&#39;</span>) <span class="sc">+</span></span>
+<span id="cb670-15"><a href="big-entropy-and-the-generalized-linear-model.html#cb670-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="fu">beta</span>(i.e.<span class="sc">*</span><span class="st">&quot;, &quot;</span><span class="sc">*</span>shape))) <span class="sc">+</span></span>
+<span id="cb670-16"><a href="big-entropy-and-the-generalized-linear-model.html#cb670-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">1.34</span>, <span class="fl">1.42</span>)) <span class="sc">+</span></span>
+<span id="cb670-17"><a href="big-entropy-and-the-generalized-linear-model.html#cb670-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&#39;white&#39;</span>),</span>
+<span id="cb670-18"><a href="big-entropy-and-the-generalized-linear-model.html#cb670-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-194-1.png" width="672" /></p>
+</div>
+<div id="binomial" class="section level3 hasAnchor" number="10.1.2">
+<h3><span class="header-section-number">10.1.2</span> Binomial<a href="big-entropy-and-the-generalized-linear-model.html#binomial" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Recall long ago the binomial example of blue and white marbles from chanpter 2.</p>
+<p>The probability of observing <span class="math inline">\(y\)</span> events of outcome 1 and <span class="math inline">\(n-y\)</span> events of outcome 2 is :</p>
+<p><span class="math display">\[\text{Pr}(y_{1}, y_{2}, ..., y_{n}|n, p) = p^{y}(1-p)^{n-y}\]</span></p>
+<p>The constraints of this distribution are:<br />
+1. Only 2 unorderd outcomes<br />
+2. Constant expected outcome<br />
+</p>
+<p>Example 1: Bag of unknown amount of blue and white marbles. We draw 2 marbles (with replacement), so there are <span class="math inline">\(2^{2}\)</span> possibilities: BB, BW, WB, and WW. Suppose we know that the expected number of blue marbles is 1 over two draws (n=2).<br />
+</p>
+<p>Lets propose 4 distributions<br />
+</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Distribution</th>
+<th align="left">ww</th>
+<th align="left">bw</th>
+<th align="left">wb</th>
+<th align="left">bb</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">A</td>
+<td align="left">1/4</td>
+<td align="left">1/4</td>
+<td align="left">1/4</td>
+<td align="left">1/4</td>
+</tr>
+<tr class="even">
+<td align="left">B</td>
+<td align="left">2/6</td>
+<td align="left">1/6</td>
+<td align="left">1/6</td>
+<td align="left">2/6</td>
+</tr>
+<tr class="odd">
+<td align="left">C</td>
+<td align="left">1/6</td>
+<td align="left">2/6</td>
+<td align="left">2/6</td>
+<td align="left">1/6</td>
+</tr>
+<tr class="even">
+<td align="left">D</td>
+<td align="left">1/8</td>
+<td align="left">4/8</td>
+<td align="left">2/8</td>
+<td align="left">1/8</td>
+</tr>
+</tbody>
+</table>
+<p>So <span class="math inline">\(A\)</span> here is the usual Binomial distribution with <span class="math inline">\(n = 2\)</span> and <span class="math inline">\(p = 0.5\)</span></p>
+<p><span class="math inline">\(B\)</span>, <span class="math inline">\(C\)</span>, and <span class="math inline">\(D\)</span> are different distributions with the same expected outcome (1 blue marble).</p>
+<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb671-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb671-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb671-2"><a href="big-entropy-and-the-generalized-linear-model.html#cb671-2" aria-hidden="true" tabindex="-1"></a>p[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>,<span class="dv">4</span>))</span>
+<span id="cb671-3"><a href="big-entropy-and-the-generalized-linear-model.html#cb671-3" aria-hidden="true" tabindex="-1"></a>p[[<span class="dv">2</span>]] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>, <span class="dv">2</span><span class="sc">/</span><span class="dv">6</span>)</span>
+<span id="cb671-4"><a href="big-entropy-and-the-generalized-linear-model.html#cb671-4" aria-hidden="true" tabindex="-1"></a>p[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>, <span class="dv">2</span><span class="sc">/</span><span class="dv">6</span>, <span class="dv">2</span><span class="sc">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>)</span>
+<span id="cb671-5"><a href="big-entropy-and-the-generalized-linear-model.html#cb671-5" aria-hidden="true" tabindex="-1"></a>p[[<span class="dv">4</span>]] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">8</span>, <span class="dv">4</span><span class="sc">/</span><span class="dv">8</span>, <span class="dv">2</span><span class="sc">/</span><span class="dv">8</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">8</span>)</span>
+<span id="cb671-6"><a href="big-entropy-and-the-generalized-linear-model.html#cb671-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb671-7"><a href="big-entropy-and-the-generalized-linear-model.html#cb671-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(p, <span class="cf">function</span>(p) <span class="fu">sum</span>(p<span class="sc">*</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>))) <span class="co">#calculate the sum of 0 blue, 1 blue, or 2 blues for each distribution</span></span></code></pre></div>
+<pre><code>## [1] 1 1 1 1</code></pre>
+<p>But the entropies are not equal.</p>
+<div class="sourceCode" id="cb673"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb673-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb673-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(p, <span class="cf">function</span>(p) <span class="sc">-</span><span class="fu">sum</span>(p<span class="sc">*</span><span class="fu">log</span>(p)))</span></code></pre></div>
+<pre><code>## [1] 1.386294 1.329661 1.329661 1.213008</code></pre>
+<p>Because even spread of the probability increases information entropy, Distribution A is favoured.</p>
+<div class="sourceCode" id="cb675"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb675-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb675-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb675-2"><a href="big-entropy-and-the-generalized-linear-model.html#cb675-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb675-3"><a href="big-entropy-and-the-generalized-linear-model.html#cb675-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>){</span>
+<span id="cb675-4"><a href="big-entropy-and-the-generalized-linear-model.html#cb675-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>), <span class="at">y =</span> p[[i]], <span class="at">pch =</span> <span class="dv">1</span>, <span class="at">col =</span> rangi2, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.5</span>), <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">xaxt =</span> <span class="st">&#39;n&#39;</span>, <span class="at">xlab =</span> <span class="st">&#39;&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;&#39;</span>)</span>
+<span id="cb675-5"><a href="big-entropy-and-the-generalized-linear-model.html#cb675-5" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>), <span class="at">y =</span> p[[i]], <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> rangi2)</span>
+<span id="cb675-6"><a href="big-entropy-and-the-generalized-linear-model.html#cb675-6" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="at">side =</span> <span class="dv">1</span>, <span class="at">at =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;ww&quot;</span>,<span class="st">&quot;bw&quot;</span>,<span class="st">&quot;wb&quot;</span>,<span class="st">&quot;bb&quot;</span>))</span>
+<span id="cb675-7"><a href="big-entropy-and-the-generalized-linear-model.html#cb675-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="fu">paste0</span>(LETTERS[i]))</span>
+<span id="cb675-8"><a href="big-entropy-and-the-generalized-linear-model.html#cb675-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-198-1.png" width="672" /></p>
+<p>What if the expected value was 1.4? (<span class="math inline">\(p = 1.4/2\)</span>)</p>
+<div class="sourceCode" id="cb676"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb676-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb676-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
+<span id="cb676-2"><a href="big-entropy-and-the-generalized-linear-model.html#cb676-2" aria-hidden="true" tabindex="-1"></a>(A <span class="ot">&lt;-</span> <span class="fu">c</span>((<span class="dv">1</span><span class="sc">-</span>p)<span class="sc">^</span><span class="dv">2</span>, p<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p), (<span class="dv">1</span><span class="sc">-</span>p)<span class="sc">*</span>p, p<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div>
+<pre><code>## [1] 0.09 0.21 0.21 0.49</code></pre>
+<p>Hmm, not flat.</p>
+<p>What is the entropy?</p>
+<div class="sourceCode" id="cb678"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb678-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb678-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fu">sum</span>(A<span class="sc">*</span><span class="fu">log</span>(A))</span></code></pre></div>
+<pre><code>## [1] 1.221729</code></pre>
+<p>Let’s make sure that no other distribution has more entropy by simulating 100000 distributions.</p>
+<div class="sourceCode" id="cb680"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb680-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb680-1" aria-hidden="true" tabindex="-1"></a>sim.p <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">G=</span><span class="fl">1.4</span>){</span>
+<span id="cb680-2"><a href="big-entropy-and-the-generalized-linear-model.html#cb680-2" aria-hidden="true" tabindex="-1"></a>  x123 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">3</span>) <span class="co">#three random numbers 0-1</span></span>
+<span id="cb680-3"><a href="big-entropy-and-the-generalized-linear-model.html#cb680-3" aria-hidden="true" tabindex="-1"></a>  x4 <span class="ot">&lt;-</span> ((G)<span class="sc">*</span><span class="fu">sum</span>(x123)<span class="sc">-</span>x123[<span class="dv">2</span>]<span class="sc">-</span>x123[<span class="dv">3</span>])<span class="sc">/</span>(<span class="dv">2</span><span class="sc">-</span>G) <span class="co">#solves for relative value of 4th,using G</span></span>
+<span id="cb680-4"><a href="big-entropy-and-the-generalized-linear-model.html#cb680-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#crate a probability distribution</span></span>
+<span id="cb680-5"><a href="big-entropy-and-the-generalized-linear-model.html#cb680-5" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">c</span>(x123,x4)) </span>
+<span id="cb680-6"><a href="big-entropy-and-the-generalized-linear-model.html#cb680-6" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">c</span>(x123, x4)<span class="sc">/</span>z</span>
+<span id="cb680-7"><a href="big-entropy-and-the-generalized-linear-model.html#cb680-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">H =</span> <span class="sc">-</span><span class="fu">sum</span>(p<span class="sc">*</span><span class="fu">log</span>(p)), <span class="at">p=</span>p)</span>
+<span id="cb680-8"><a href="big-entropy-and-the-generalized-linear-model.html#cb680-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb681"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb681-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb681-1" aria-hidden="true" tabindex="-1"></a>H <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="fl">1e5</span>, <span class="fu">sim.p</span>(<span class="fl">1.4</span>))</span>
+<span id="cb681-2"><a href="big-entropy-and-the-generalized-linear-model.html#cb681-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dens</span>(<span class="fu">as.numeric</span>(H[<span class="dv">1</span>,]), <span class="at">adj=</span><span class="fl">0.1</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-202-1.png" width="672" /></p>
+<p>Let’s see what the highest entropy distribution looks like</p>
+<div class="sourceCode" id="cb682"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb682-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb682-1" aria-hidden="true" tabindex="-1"></a>entropies <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(H[<span class="dv">1</span>,])</span>
+<span id="cb682-2"><a href="big-entropy-and-the-generalized-linear-model.html#cb682-2" aria-hidden="true" tabindex="-1"></a>distributions <span class="ot">&lt;-</span> H[<span class="dv">2</span>,]</span>
+<span id="cb682-3"><a href="big-entropy-and-the-generalized-linear-model.html#cb682-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb682-4"><a href="big-entropy-and-the-generalized-linear-model.html#cb682-4" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(entropies)</span></code></pre></div>
+<pre><code>## [1] 1.221728</code></pre>
+<div class="sourceCode" id="cb684"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb684-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb684-1" aria-hidden="true" tabindex="-1"></a>distributions[<span class="fu">which.max</span>(entropies)]</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 0.09014834 0.20993332 0.20976999 0.49014834</code></pre>
+<p>Nearly identical to our binomial before.</p>
+</div>
+</div>
+<div id="generalized-linear-models" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> Generalized linear models<a href="big-entropy-and-the-generalized-linear-model.html#generalized-linear-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Before we assumed Gaussian distribution and placed the linear model in the mean (<span class="math inline">\(\mu\)</span>) of that distribution. For discrete or bounded outcomes, this normal distribution won’t work. For example, if you were counting blue marbles, you can’t have a negative count. So we need to use something other than Gaussian.</p>
+<p><span class="math display">\[y_{i} \sim \text{Binomial}(n,p_{i})\\
+f(p_{i}) = \alpha + \beta(x_{i} - \overline{x})\]</span></p>
+<p>here the count of blue marbles is of the number of draws <span class="math inline">\(n\)</span> and expected value <span class="math inline">\(np\)</span>. In the second line <span class="math inline">\(f\)</span> represents the <em>link function</em> that bounds the probability between 0 and 1.</p>
+<div id="meet-the-family" class="section level3 hasAnchor" number="10.2.1">
+<h3><span class="header-section-number">10.2.1</span> Meet the family<a href="big-entropy-and-the-generalized-linear-model.html#meet-the-family" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <strong>Exponential Family</strong> is a group of maximum entropy distributions (with constraints)</p>
+<p>PLOT distributions here**</p>
+<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb686-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb686-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">length.out =</span> <span class="dv">100</span>)</span>
+<span id="cb686-2"><a href="big-entropy-and-the-generalized-linear-model.html#cb686-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">5</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">length.out =</span> <span class="dv">100</span>)</span>
+<span id="cb686-3"><a href="big-entropy-and-the-generalized-linear-model.html#cb686-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb686-4"><a href="big-entropy-and-the-generalized-linear-model.html#cb686-4" aria-hidden="true" tabindex="-1"></a>Gamma <span class="ot">&lt;-</span> <span class="fu">dgamma</span>(x, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb686-5"><a href="big-entropy-and-the-generalized-linear-model.html#cb686-5" aria-hidden="true" tabindex="-1"></a>Exponential <span class="ot">&lt;-</span> <span class="fu">dexp</span>(x)</span>
+<span id="cb686-6"><a href="big-entropy-and-the-generalized-linear-model.html#cb686-6" aria-hidden="true" tabindex="-1"></a>G_density <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">5</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">length.out =</span> <span class="dv">100</span>))</span>
+<span id="cb686-7"><a href="big-entropy-and-the-generalized-linear-model.html#cb686-7" aria-hidden="true" tabindex="-1"></a>P_density <span class="ot">&lt;-</span> <span class="fu">dpois</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">lambda =</span> <span class="fl">2.5</span>)</span>
+<span id="cb686-8"><a href="big-entropy-and-the-generalized-linear-model.html#cb686-8" aria-hidden="true" tabindex="-1"></a>B_density <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.85</span>)</span>
+<span id="cb686-9"><a href="big-entropy-and-the-generalized-linear-model.html#cb686-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb686-10"><a href="big-entropy-and-the-generalized-linear-model.html#cb686-10" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>))</span>
+<span id="cb686-11"><a href="big-entropy-and-the-generalized-linear-model.html#cb686-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> x, <span class="at">y =</span> Gamma , <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb686-12"><a href="big-entropy-and-the-generalized-linear-model.html#cb686-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> x, <span class="at">y =</span> Exponential , <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb686-13"><a href="big-entropy-and-the-generalized-linear-model.html#cb686-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> g, <span class="at">y =</span> G_density , <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb686-14"><a href="big-entropy-and-the-generalized-linear-model.html#cb686-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">y =</span> P_density , <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb686-15"><a href="big-entropy-and-the-generalized-linear-model.html#cb686-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">y =</span> B_density , <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-204-1.png" width="672" /></p>
+</div>
+<div id="linking-linear-models-to-distributions" class="section level3 hasAnchor" number="10.2.2">
+<h3><span class="header-section-number">10.2.2</span> Linking linear models to distributions<a href="big-entropy-and-the-generalized-linear-model.html#linking-linear-models-to-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Lets get back to the <strong>Link functions</strong>. Link functions work to avoid mathematicla mistakes like negative counts or probabilities greater than 1. There are two common types of link functions.<br />
+</p>
+<p><strong>The Logit Link</strong>
+Made for probability masses that have to be between 0 and 1. Here is what it could look like:
+<span class="math display">\[y_{i} \sim \text{Binomial}(n, p_{i})\\
+\text{logit}(p_{i}) = \alpha + \beta x_{i}\]</span></p>
+<p>Where the logit is the <em>log-odds</em></p>
+<p><span class="math display">\[\text{logit}(p_{i}) = \text{log}\frac{p_{i}}{1 - p_{i}}\]</span></p>
+<p>so we can write</p>
+<p><span class="math display">\[\text{log}\frac{p_{i}}{1 - p_{i}} = \alpha + \beta x_{i}\]</span></p>
+<p>and solve for <span class="math inline">\(p_{i}\)</span></p>
+<p><span class="math display">\[p_{i} = \frac{\text{exp}(\alpha + \beta x_{i})}{1 + \text{exp}(\alpha + \beta x_{i})}\]</span></p>
+<p>This allows you to transform a linear model to a non-linear probability density.</p>
+<div class="sourceCode" id="cb687"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb687-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.25</span>)</span>
+<span id="cb687-2"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb687-3"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-3" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb687-4"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb687-5"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-5" aria-hidden="true" tabindex="-1"></a>log_odds <span class="ot">&lt;-</span> alpha <span class="sc">+</span> x<span class="sc">*</span>beta</span>
+<span id="cb687-6"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-6" aria-hidden="true" tabindex="-1"></a>probability <span class="ot">&lt;-</span> <span class="fu">exp</span>(alpha <span class="sc">+</span> x<span class="sc">*</span>beta)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(alpha <span class="sc">+</span> x<span class="sc">*</span>beta))</span>
+<span id="cb687-7"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb687-8"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-8" aria-hidden="true" tabindex="-1"></a>lines <span class="ot">&lt;-</span> <span class="fu">cbind</span>(x, log_odds, probability)</span>
+<span id="cb687-9"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb687-10"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-10" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb687-11"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-11" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">to =</span> <span class="fl">1.5</span>, <span class="at">length.out =</span> <span class="dv">50</span>)</span>
+<span id="cb687-12"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-12" aria-hidden="true" tabindex="-1"></a>log_odds <span class="ot">&lt;-</span> alpha <span class="sc">+</span> x<span class="sc">*</span>beta</span>
+<span id="cb687-13"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-13" aria-hidden="true" tabindex="-1"></a>probability <span class="ot">&lt;-</span> <span class="fu">exp</span>(alpha <span class="sc">+</span> x<span class="sc">*</span>beta)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(alpha <span class="sc">+</span> x<span class="sc">*</span>beta))</span>
+<span id="cb687-14"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb687-15"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-15" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">cbind</span>(x, log_odds, probability)</span>
+<span id="cb687-16"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb687-17"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-17" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb687-18"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb687-19"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-19" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> df[,<span class="dv">1</span>], <span class="at">y =</span> df[,<span class="dv">2</span>], <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>,<span class="dv">4</span>), <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">xlab =</span> <span class="st">&quot;x&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;log-odds&quot;</span>, <span class="at">col =</span> rangi2, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb687-20"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-20" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> lines[,<span class="dv">2</span>], <span class="at">col =</span> <span class="fu">col.alpha</span>(<span class="st">&#39;grey50&#39;</span>, <span class="fl">0.5</span>))</span>
+<span id="cb687-21"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb687-22"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-22" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> df[,<span class="dv">1</span>], <span class="at">y =</span> df[,<span class="dv">3</span>], <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">xlab =</span> <span class="st">&quot;x&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;probability&quot;</span>, <span class="at">col =</span> rangi2, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb687-23"><a href="big-entropy-and-the-generalized-linear-model.html#cb687-23" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> lines[,<span class="dv">3</span>], <span class="at">col =</span> <span class="fu">col.alpha</span>(<span class="st">&#39;grey50&#39;</span>, <span class="fl">0.5</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-205-1.png" width="672" /></p>
+<p>Here the two ends of the linear line of the log-odds gets compressed in the logit link. You can imagine that steeper lines would have a sharper ‘S’ shape to them. Just remember that here the <span class="math inline">\(\beta\)</span> term no longer creates a constant rate of change in the outcome. Events at the extremes (-1,1) have very little affect on the change in probability mass.</p>
+<p><strong>Log Link</strong></p>
+<p>This function is for positive real numbers in a linear model. Suppose instead of modeling <span class="math inline">\(\mu\)</span> in a gaussian distribution, we wanted to model <span class="math inline">\(\sigma\)</span> such that:</p>
+<p><span class="math display">\[y_{i} \sim \text{Normal}(\mu, \sigma_{i})\\
+\text{log}(\sigma_{i}) = \alpha + \beta x_{i}\]</span></p>
+<p>This is helpful to avoid something impossible like negative <span class="math inline">\(\sigma\)</span>. So we can change our <span class="math inline">\(\sigma\)</span> to:</p>
+<p><span class="math display">\[\sigma_{i} = \text{exp}(\alpha + \beta x_{i})\]</span></p>
+<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb688-1"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb688-2"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-2" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb688-3"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb688-4"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-4" aria-hidden="true" tabindex="-1"></a>log_measurement <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb688-5"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-5" aria-hidden="true" tabindex="-1"></a>measurement <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="sc">-</span><span class="dv">3</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb688-6"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb688-7"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-7" aria-hidden="true" tabindex="-1"></a>lines <span class="ot">&lt;-</span> <span class="fu">cbind</span>(log_measurement, measurement)</span>
+<span id="cb688-8"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb688-9"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-9" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">to =</span> <span class="fl">1.5</span>, <span class="at">length.out =</span> <span class="dv">50</span>)</span>
+<span id="cb688-10"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-10" aria-hidden="true" tabindex="-1"></a>log_measurement <span class="ot">&lt;-</span> alpha <span class="sc">+</span> x<span class="sc">*</span>beta</span>
+<span id="cb688-11"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-11" aria-hidden="true" tabindex="-1"></a>measurement <span class="ot">&lt;-</span> <span class="fu">exp</span>(alpha <span class="sc">+</span> x<span class="sc">*</span>beta)</span>
+<span id="cb688-12"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb688-13"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-13" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">cbind</span>(x, log_measurement, measurement)</span>
+<span id="cb688-14"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb688-15"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-15" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb688-16"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb688-17"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> df[,<span class="dv">1</span>], <span class="at">y =</span> df[,<span class="dv">2</span>], <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>,<span class="dv">4</span>), <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">xlab =</span> <span class="st">&quot;x&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;log-measurement&quot;</span>, <span class="at">col =</span> rangi2, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb688-18"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-18" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> lines[,<span class="dv">1</span>], <span class="at">col =</span> <span class="fu">col.alpha</span>(<span class="st">&#39;grey50&#39;</span>, <span class="fl">0.5</span>))</span>
+<span id="cb688-19"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb688-20"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-20" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> df[,<span class="dv">1</span>], <span class="at">y =</span> df[,<span class="dv">3</span>], <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">xlab =</span> <span class="st">&quot;x&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;original measurement&quot;</span>, <span class="at">col =</span> rangi2, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb688-21"><a href="big-entropy-and-the-generalized-linear-model.html#cb688-21" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> lines[,<span class="dv">2</span>], <span class="at">col =</span> <span class="fu">col.alpha</span>(<span class="st">&#39;grey50&#39;</span>, <span class="fl">0.5</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-206-1.png" width="672" /></p>
+</div>
+<div id="omitted-variable-bias-again" class="section level3 hasAnchor" number="10.2.3">
+<h3><span class="header-section-number">10.2.3</span> Omitted variable bias (again)<a href="big-entropy-and-the-generalized-linear-model.html#omitted-variable-bias-again" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>link functions can create more trouble for properly inferring what your model is telling you as even variables that aren’t confounders can bias the inference.</p>
+</div>
+<div id="absolute-relative-differences" class="section level3 hasAnchor" number="10.2.4">
+<h3><span class="header-section-number">10.2.4</span> Absolute relative differences<a href="big-entropy-and-the-generalized-linear-model.html#absolute-relative-differences" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When a link function is in your model , remember that big-beta coefficients don’t mean big effects on the outcome.</p>
+</div>
+<div id="glms-and-information-criteria" class="section level3 hasAnchor" number="10.2.5">
+<h3><span class="header-section-number">10.2.5</span> GLMs and information criteria<a href="big-entropy-and-the-generalized-linear-model.html#glms-and-information-criteria" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Remember to only compare models of the same outcome distribution with information criteria. comparing a Gaussian outcome model to a Gamma model won’t tell you anything about their differences.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="markov-chain-monte-carlo.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="god-spiked-the-integers.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/11-GLM.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

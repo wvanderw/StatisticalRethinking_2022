@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 Ulysses’ compass | Rethinking Companion</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 Ulysses’ compass | Rethinking Companion" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 Ulysses’ compass | Rethinking Companion" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Wade VanderWright" />
+
+
+<meta name="date" content="2022-09-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="the-haunted-dag-the-casual-terror.html"/>
+<link rel="next" href="conditional-manatees.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Rethinking Companion</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> The Golem of Prague</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#statistical-golems"><i class="fa fa-check"></i><b>1.1</b> Statistical golems</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#statistical-rethinking"><i class="fa fa-check"></i><b>1.2</b> Statistical Rethinking</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#what-are-we-trying-to-do-with-the-golems"><i class="fa fa-check"></i><b>1.2.1</b> What are we trying to do with the golems?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#tools-for-golem-engineering"><i class="fa fa-check"></i><b>1.3</b> Tools for golem engineering</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#bayesian-data-analysis"><i class="fa fa-check"></i><b>1.3.1</b> Bayesian data analysis</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#model-comparison-and-predictions"><i class="fa fa-check"></i><b>1.3.2</b> Model comparison and predictions</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#multilevel-models"><i class="fa fa-check"></i><b>1.3.3</b> Multilevel models</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#graphical-causal-models"><i class="fa fa-check"></i><b>1.3.4</b> Graphical causal models</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#summary"><i class="fa fa-check"></i><b>1.4</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#session-info"><i class="fa fa-check"></i>Session Info</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html"><i class="fa fa-check"></i><b>2</b> Small worlds and large worlds</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#the-garden-of-forking-data"><i class="fa fa-check"></i><b>2.1</b> The garden of forking data</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#counting-possibilities"><i class="fa fa-check"></i><b>2.1.1</b> Counting possibilities</a></li>
+<li class="chapter" data-level="2.1.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#combining-other-information"><i class="fa fa-check"></i><b>2.1.2</b> Combining other information</a></li>
+<li class="chapter" data-level="2.1.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#from-counts-to-probability"><i class="fa fa-check"></i><b>2.1.3</b> From counts to probability</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#building-a-model"><i class="fa fa-check"></i><b>2.2</b> Building a model</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#a-data-story"><i class="fa fa-check"></i><b>2.2.1</b> A data story</a></li>
+<li class="chapter" data-level="2.2.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#bayesian-updating"><i class="fa fa-check"></i><b>2.2.2</b> Bayesian updating</a></li>
+<li class="chapter" data-level="2.2.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#evaluate"><i class="fa fa-check"></i><b>2.2.3</b> Evaluate</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#components-of-the-model"><i class="fa fa-check"></i><b>2.3</b> Components of the model</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#variables"><i class="fa fa-check"></i><b>2.3.1</b> Variables</a></li>
+<li class="chapter" data-level="2.3.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#definitions"><i class="fa fa-check"></i><b>2.3.2</b> Definitions</a></li>
+<li class="chapter" data-level="2.3.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#a-model-is-born"><i class="fa fa-check"></i><b>2.3.3</b> A model is born</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#maiking-the-model-go"><i class="fa fa-check"></i><b>2.4</b> Maiking the model go</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#quadratic"><i class="fa fa-check"></i><b>2.4.1</b> Quadratic</a></li>
+<li class="chapter" data-level="2.4.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#mcmc"><i class="fa fa-check"></i><b>2.4.2</b> MCMC</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html"><i class="fa fa-check"></i><b>3</b> Sampling the imaginary</a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#probabilities-vs.-frequency-counts"><i class="fa fa-check"></i><b>3.0.1</b> Probabilities vs. Frequency counts</a></li>
+<li class="chapter" data-level="3.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-from-a-grid-approximate-posterior"><i class="fa fa-check"></i><b>3.1</b> Sampling from a grid-approximate posterior</a></li>
+<li class="chapter" data-level="3.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-to-summarize"><i class="fa fa-check"></i><b>3.2</b> Sampling to summarize</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#intervals-of-defined-boundaries"><i class="fa fa-check"></i><b>3.2.1</b> Intervals of defined boundaries</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#intervals-of-defined-mass"><i class="fa fa-check"></i><b>3.2.2</b> intervals of defined mass</a></li>
+<li class="chapter" data-level="3.2.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#point-estimates"><i class="fa fa-check"></i><b>3.2.3</b> Point estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-to-simulate-prediction"><i class="fa fa-check"></i><b>3.3</b> Sampling to simulate prediction</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#dummy-data"><i class="fa fa-check"></i><b>3.3.1</b> Dummy data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#model-checking"><i class="fa fa-check"></i><b>3.3.2</b> Model checking</a></li>
+<li class="chapter" data-level="3.3.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#practice-with-brms"><i class="fa fa-check"></i><b>3.3.3</b> Practice with brms</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="geocentric-models.html"><a href="geocentric-models.html"><i class="fa fa-check"></i><b>4</b> Geocentric models</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="geocentric-models.html"><a href="geocentric-models.html#why-normal-distributions-are-normal"><i class="fa fa-check"></i><b>4.1</b> Why normal distributions are normal</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-addition"><i class="fa fa-check"></i><b>4.1.1</b> Normal by addition</a></li>
+<li class="chapter" data-level="4.1.2" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-multiplication"><i class="fa fa-check"></i><b>4.1.2</b> Normal by multiplication</a></li>
+<li class="chapter" data-level="4.1.3" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-log-multiplication"><i class="fa fa-check"></i><b>4.1.3</b> Normal by log-multiplication</a></li>
+<li class="chapter" data-level="4.1.4" data-path="geocentric-models.html"><a href="geocentric-models.html#using-gaussian-distributions"><i class="fa fa-check"></i><b>4.1.4</b> Using Gaussian distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="geocentric-models.html"><a href="geocentric-models.html#a-language-for-describing-models"><i class="fa fa-check"></i><b>4.2</b> A language for describing models</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="geocentric-models.html"><a href="geocentric-models.html#re-describing-the-globe-tossing-model."><i class="fa fa-check"></i><b>4.2.1</b> Re-describing the globe tossing model.</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="geocentric-models.html"><a href="geocentric-models.html#gaussian-model-of-height"><i class="fa fa-check"></i><b>4.3</b> Gaussian model of height</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="geocentric-models.html"><a href="geocentric-models.html#the-data"><i class="fa fa-check"></i><b>4.3.1</b> The data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="geocentric-models.html"><a href="geocentric-models.html#the-model"><i class="fa fa-check"></i><b>4.3.2</b> The Model</a></li>
+<li class="chapter" data-level="4.3.3" data-path="geocentric-models.html"><a href="geocentric-models.html#grid-approximation-of-the-posterior-distribution"><i class="fa fa-check"></i><b>4.3.3</b> Grid approximation of the posterior distribution</a></li>
+<li class="chapter" data-level="4.3.4" data-path="geocentric-models.html"><a href="geocentric-models.html#sampling-from-the-posterior"><i class="fa fa-check"></i><b>4.3.4</b> Sampling from the posterior</a></li>
+<li class="chapter" data-level="4.3.5" data-path="geocentric-models.html"><a href="geocentric-models.html#finding-the-posterior-distribution-with-quap"><i class="fa fa-check"></i><b>4.3.5</b> Finding the posterior distribution with <code>quap</code></a></li>
+<li class="chapter" data-level="4.3.6" data-path="geocentric-models.html"><a href="geocentric-models.html#sampling-with-quap"><i class="fa fa-check"></i><b>4.3.6</b> Sampling with <code>quap</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="geocentric-models.html"><a href="geocentric-models.html#linear-prediction"><i class="fa fa-check"></i><b>4.4</b> Linear Prediction</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="geocentric-models.html"><a href="geocentric-models.html#finding-the-posterior-distribtuion"><i class="fa fa-check"></i><b>4.4.1</b> Finding the posterior distribtuion</a></li>
+<li class="chapter" data-level="4.4.2" data-path="geocentric-models.html"><a href="geocentric-models.html#interpreting-the-posterior-distribution"><i class="fa fa-check"></i><b>4.4.2</b> Interpreting the posterior distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="geocentric-models.html"><a href="geocentric-models.html#curves-from-lines"><i class="fa fa-check"></i><b>4.5</b> Curves from lines</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="geocentric-models.html"><a href="geocentric-models.html#polynomial-regression"><i class="fa fa-check"></i><b>4.5.1</b> Polynomial regression</a></li>
+<li class="chapter" data-level="4.5.2" data-path="geocentric-models.html"><a href="geocentric-models.html#splines"><i class="fa fa-check"></i><b>4.5.2</b> Splines</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html"><i class="fa fa-check"></i><b>5</b> The many variables &amp; the spurious waffles</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#spurious-assoiciation"><i class="fa fa-check"></i><b>5.1</b> Spurious assoiciation</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#think-before-to-regress"><i class="fa fa-check"></i><b>5.1.1</b> Think before to regress</a></li>
+<li class="chapter" data-level="5.1.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#testable-implications"><i class="fa fa-check"></i><b>5.1.2</b> Testable implications</a></li>
+<li class="chapter" data-level="5.1.3" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#multiple-regression-notation"><i class="fa fa-check"></i><b>5.1.3</b> Multiple regression notation</a></li>
+<li class="chapter" data-level="5.1.4" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#approximating-the-posterior"><i class="fa fa-check"></i><b>5.1.4</b> Approximating the posterior</a></li>
+<li class="chapter" data-level="5.1.5" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#plotting-multivariate-posteriors"><i class="fa fa-check"></i><b>5.1.5</b> Plotting multivariate posteriors</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#masked-relationship"><i class="fa fa-check"></i><b>5.2</b> Masked relationship</a></li>
+<li class="chapter" data-level="5.3" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Categorical variables</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#binary-categories"><i class="fa fa-check"></i><b>5.3.1</b> Binary categories</a></li>
+<li class="chapter" data-level="5.3.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#many-categories"><i class="fa fa-check"></i><b>5.3.2</b> Many categories</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html"><i class="fa fa-check"></i><b>6</b> The haunted dag &amp; the casual terror</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#multicollinearity"><i class="fa fa-check"></i><b>6.1</b> Multicollinearity</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#example-try-to-predict-height-from-length-of-a-persons-legs."><i class="fa fa-check"></i><b>6.1.1</b> Example: Try to predict height from length of a person’s legs.</a></li>
+<li class="chapter" data-level="6.1.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#multicollinear-milk"><i class="fa fa-check"></i><b>6.1.2</b> Multicollinear milk</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#post-treatrment-bias"><i class="fa fa-check"></i><b>6.2</b> Post-treatrment bias</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#a-prior-is-born"><i class="fa fa-check"></i><b>6.2.1</b> A prior is born</a></li>
+<li class="chapter" data-level="6.2.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#blocked-by-consequence"><i class="fa fa-check"></i><b>6.2.2</b> Blocked by consequence</a></li>
+<li class="chapter" data-level="6.2.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#fungus-and-d-separation"><i class="fa fa-check"></i><b>6.2.3</b> Fungus and d-separation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#collider-bias"><i class="fa fa-check"></i><b>6.3</b> Collider bias</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#collider-for-false-sorrow"><i class="fa fa-check"></i><b>6.3.1</b> Collider for false sorrow</a></li>
+<li class="chapter" data-level="6.3.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#the-haunted-dag"><i class="fa fa-check"></i><b>6.3.2</b> The haunted DAG</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#confronting-confounding"><i class="fa fa-check"></i><b>6.4</b> Confronting confounding</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#shutting-the-backdoor"><i class="fa fa-check"></i><b>6.4.1</b> Shutting the backdoor</a></li>
+<li class="chapter" data-level="6.4.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#two-roads"><i class="fa fa-check"></i><b>6.4.2</b> Two roads</a></li>
+<li class="chapter" data-level="6.4.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#backdoor-waffles"><i class="fa fa-check"></i><b>6.4.3</b> Backdoor waffles</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ulysses-compass.html"><a href="ulysses-compass.html"><i class="fa fa-check"></i><b>7</b> Ulysses’ compass</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#the-problem-with-parameters"><i class="fa fa-check"></i><b>7.1</b> The problem with parameters</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#more-parameters-almost-always-improve-fit"><i class="fa fa-check"></i><b>7.1.1</b> More parameters (almost) always improve fit</a></li>
+<li class="chapter" data-level="7.1.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#too-few-parameters-hurts-too"><i class="fa fa-check"></i><b>7.1.2</b> Too few parameters hurts, too</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#entropy-and-accuracy"><i class="fa fa-check"></i><b>7.2</b> Entropy and accuracy</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#firing-the-weatherperson"><i class="fa fa-check"></i><b>7.2.1</b> Firing the weatherperson</a></li>
+<li class="chapter" data-level="7.2.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#information-and-uncertainty"><i class="fa fa-check"></i><b>7.2.2</b> Information and uncertainty</a></li>
+<li class="chapter" data-level="7.2.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#from-entropy-to-accuracy"><i class="fa fa-check"></i><b>7.2.3</b> From entropy to accuracy</a></li>
+<li class="chapter" data-level="7.2.4" data-path="ulysses-compass.html"><a href="ulysses-compass.html#estimating-divergence"><i class="fa fa-check"></i><b>7.2.4</b> Estimating divergence</a></li>
+<li class="chapter" data-level="7.2.5" data-path="ulysses-compass.html"><a href="ulysses-compass.html#scoring-the-right-data"><i class="fa fa-check"></i><b>7.2.5</b> Scoring the right data</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#golem-taming-regularization"><i class="fa fa-check"></i><b>7.3</b> Golem taming: regularization</a></li>
+<li class="chapter" data-level="7.4" data-path="ulysses-compass.html"><a href="ulysses-compass.html#predicting-predictive-accuracy"><i class="fa fa-check"></i><b>7.4</b> Predicting predictive accuracy</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#cross-validation"><i class="fa fa-check"></i><b>7.4.1</b> Cross-validation</a></li>
+<li class="chapter" data-level="7.4.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#information-criteria"><i class="fa fa-check"></i><b>7.4.2</b> Information criteria</a></li>
+<li class="chapter" data-level="7.4.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#comparing-cv-psis-and-waic"><i class="fa fa-check"></i><b>7.4.3</b> Comparing CV, PSIS, and WAIC</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="ulysses-compass.html"><a href="ulysses-compass.html#model-comparison"><i class="fa fa-check"></i><b>7.5</b> Model comparison</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#model-mis-selection"><i class="fa fa-check"></i><b>7.5.1</b> Model mis-selection</a></li>
+<li class="chapter" data-level="7.5.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#outliers-and-other-illustions"><i class="fa fa-check"></i><b>7.5.2</b> Outliers and other illustions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="conditional-manatees.html"><a href="conditional-manatees.html"><i class="fa fa-check"></i><b>8</b> Conditional manatees</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#building-an-interaction"><i class="fa fa-check"></i><b>8.1</b> Building an interaction</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#making-a-rugged-model"><i class="fa fa-check"></i><b>8.1.1</b> Making a rugged model</a></li>
+<li class="chapter" data-level="8.1.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#adding-an-indicator-isnt-enough"><i class="fa fa-check"></i><b>8.1.2</b> Adding an indicator isn’t enough</a></li>
+<li class="chapter" data-level="8.1.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#adding-an-interaction-does-work"><i class="fa fa-check"></i><b>8.1.3</b> Adding an interaction does work</a></li>
+<li class="chapter" data-level="8.1.4" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-the-interaction"><i class="fa fa-check"></i><b>8.1.4</b> Plotting the interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#symmetry-of-interactions"><i class="fa fa-check"></i><b>8.2</b> Symmetry of interactions</a></li>
+<li class="chapter" data-level="8.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#continuous-interactions"><i class="fa fa-check"></i><b>8.3</b> Continuous interactions</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#a-winter-flower"><i class="fa fa-check"></i><b>8.3.1</b> A winter flower</a></li>
+<li class="chapter" data-level="8.3.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#the-models"><i class="fa fa-check"></i><b>8.3.2</b> the models</a></li>
+<li class="chapter" data-level="8.3.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-posterior-predictions"><i class="fa fa-check"></i><b>8.3.3</b> Plotting posterior predictions</a></li>
+<li class="chapter" data-level="8.3.4" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-prior-predictions"><i class="fa fa-check"></i><b>8.3.4</b> Plotting prior predictions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html"><i class="fa fa-check"></i><b>9</b> Markov Chain Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#good-king-markov-and-his-island-kingdom"><i class="fa fa-check"></i><b>9.1</b> Good King Markov and his island kingdom</a></li>
+<li class="chapter" data-level="9.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#metropolis-algorithims"><i class="fa fa-check"></i><b>9.2</b> Metropolis algorithims</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#gibbs-sampling"><i class="fa fa-check"></i><b>9.2.1</b> Gibbs sampling</a></li>
+<li class="chapter" data-level="9.2.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#high-dimensional-problems"><i class="fa fa-check"></i><b>9.2.2</b> High-dimensional problems</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#hamiltonian-monte-carlo"><i class="fa fa-check"></i><b>9.3</b> Hamiltonian Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#another-parable"><i class="fa fa-check"></i><b>9.3.1</b> Another parable</a></li>
+<li class="chapter" data-level="9.3.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#particles-in-space"><i class="fa fa-check"></i><b>9.3.2</b> Particles in space</a></li>
+<li class="chapter" data-level="9.3.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#limitations"><i class="fa fa-check"></i><b>9.3.3</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#easy-hmc-ulam-brm"><i class="fa fa-check"></i><b>9.4</b> Easy HMC: <code>ulam</code> (<code>brm</code>)</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#preperation"><i class="fa fa-check"></i><b>9.4.1</b> Preperation</a></li>
+<li class="chapter" data-level="9.4.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#sampling-from-the-posterior-1"><i class="fa fa-check"></i><b>9.4.2</b> Sampling from the posterior</a></li>
+<li class="chapter" data-level="9.4.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#sampling-again-in-parallel"><i class="fa fa-check"></i><b>9.4.3</b> Sampling again, in parallel</a></li>
+<li class="chapter" data-level="9.4.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#visualization"><i class="fa fa-check"></i><b>9.4.4</b> Visualization</a></li>
+<li class="chapter" data-level="9.4.5" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#checking-the-chain"><i class="fa fa-check"></i><b>9.4.5</b> Checking the chain</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#care-and-feeding-of-your-markov-chain"><i class="fa fa-check"></i><b>9.5</b> Care and feeding of your Markov chain</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#how-many-samples-do-you-need"><i class="fa fa-check"></i><b>9.5.1</b> How many samples do you need?</a></li>
+<li class="chapter" data-level="9.5.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#how-many-chains-do-you-need"><i class="fa fa-check"></i><b>9.5.2</b> How many chains do you need?</a></li>
+<li class="chapter" data-level="9.5.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#taming-a-wild-chain"><i class="fa fa-check"></i><b>9.5.3</b> Taming a wild chain</a></li>
+<li class="chapter" data-level="9.5.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#non-identifiable-parameters"><i class="fa fa-check"></i><b>9.5.4</b> Non-identifiable parameters</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html"><i class="fa fa-check"></i><b>10</b> Big entropy and the generalized linear model</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#maximum-entropy"><i class="fa fa-check"></i><b>10.1</b> Maximum entropy</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#gaussian"><i class="fa fa-check"></i><b>10.1.1</b> Gaussian</a></li>
+<li class="chapter" data-level="10.1.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#binomial"><i class="fa fa-check"></i><b>10.1.2</b> Binomial</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#generalized-linear-models"><i class="fa fa-check"></i><b>10.2</b> Generalized linear models</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#meet-the-family"><i class="fa fa-check"></i><b>10.2.1</b> Meet the family</a></li>
+<li class="chapter" data-level="10.2.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#linking-linear-models-to-distributions"><i class="fa fa-check"></i><b>10.2.2</b> Linking linear models to distributions</a></li>
+<li class="chapter" data-level="10.2.3" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#omitted-variable-bias-again"><i class="fa fa-check"></i><b>10.2.3</b> Omitted variable bias (again)</a></li>
+<li class="chapter" data-level="10.2.4" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#absolute-relative-differences"><i class="fa fa-check"></i><b>10.2.4</b> Absolute relative differences</a></li>
+<li class="chapter" data-level="10.2.5" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#glms-and-information-criteria"><i class="fa fa-check"></i><b>10.2.5</b> GLMs and information criteria</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html"><i class="fa fa-check"></i><b>11</b> God spiked the integers</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#binomial-regression"><i class="fa fa-check"></i><b>11.1</b> Binomial regression</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#logistic-regression-prosocial-chimpanzees"><i class="fa fa-check"></i><b>11.1.1</b> Logistic regression : Prosocial chimpanzees</a></li>
+<li class="chapter" data-level="11.1.2" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#relative-shark-and-absolute-deer"><i class="fa fa-check"></i><b>11.1.2</b> Relative shark and absolute deer</a></li>
+<li class="chapter" data-level="11.1.3" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#aggregated-binomial-chimps-condensed"><i class="fa fa-check"></i><b>11.1.3</b> Aggregated binomial: Chimps condensed</a></li>
+<li class="chapter" data-level="11.1.4" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#aggregated-admissions"><i class="fa fa-check"></i><b>11.1.4</b> Aggregated admissions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="monsters-and-mixtures.html"><a href="monsters-and-mixtures.html"><i class="fa fa-check"></i><b>12</b> Monsters and mixtures</a></li>
+<li class="chapter" data-level="13" data-path="models-with-memory.html"><a href="models-with-memory.html"><i class="fa fa-check"></i><b>13</b> Models with memory</a></li>
+<li class="chapter" data-level="14" data-path="adventures-in-covariance.html"><a href="adventures-in-covariance.html"><i class="fa fa-check"></i><b>14</b> Adventures in covariance</a></li>
+<li class="chapter" data-level="15" data-path="missing-data-and-other-opportunities.html"><a href="missing-data-and-other-opportunities.html"><i class="fa fa-check"></i><b>15</b> Missing data and other opportunities</a></li>
+<li class="chapter" data-level="16" data-path="generalized-linear-madness.html"><a href="generalized-linear-madness.html"><i class="fa fa-check"></i><b>16</b> Generalized linear madness</a></li>
+<li class="chapter" data-level="17" data-path="horoscopes.html"><a href="horoscopes.html"><i class="fa fa-check"></i><b>17</b> Horoscopes</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Rethinking Companion</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ulysses-compass" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Ulysses’ compass<a href="ulysses-compass.html#ulysses-compass" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The hero of Homer’s <em>Odyssey</em>, Ulysses, had two navigate between two dire consequences to complete his voyage. On one side, a beast with many heads and a taste for men, on the other side, a sea monster that sank boats. In statistical modelling, we are navigating equally treacherous waters while trying to avoid two things<br />
+</p>
+<ol style="list-style-type: decimal">
+<li>Overfitting</li>
+<li>Underfitting</li>
+</ol>
+<p>Both dangers provide the same result, poor predictions. All this while also avoiding confounds as we’ve seen.</p>
+<div id="the-problem-with-parameters" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> The problem with parameters<a href="ulysses-compass.html#the-problem-with-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Most people will describe the performance of a model by the <span class="math inline">\(R^2\)</span> term or <em>amount of variance explained</em><br />
+</p>
+<p><span class="math display">\[R^{2} = \frac{\text{var(outcome)} - \text{var(residuals)}} {\text{var(outcome)}} = 1 - \frac{\text{var(residuals)}}{\text{var(outcome)}}\]</span></p>
+<p>But <span class="math inline">\(R^2\)</span> is misleading because adding in more predictor variables almost always improves model fit, even if they are a bunch of random numbers that aren’t related to the outcome.<br />
+</p>
+<div id="more-parameters-almost-always-improve-fit" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> More parameters (almost) always improve fit<a href="ulysses-compass.html#more-parameters-almost-always-improve-fit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Unfortunately overfitting happens automatically. To see this in action, we will look at seven hominin species’ average body mass and brain volume.</p>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="ulysses-compass.html#cb449-1" aria-hidden="true" tabindex="-1"></a>sppnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;afarensis&quot;</span>, <span class="st">&quot;aricanus&quot;</span>, <span class="st">&quot;habilis&quot;</span>,<span class="st">&quot;boisei&quot;</span>,<span class="st">&quot;rudolfensis&quot;</span>, <span class="st">&quot;ergaster&quot;</span>,<span class="st">&quot;sapiens&quot;</span>)</span>
+<span id="cb449-2"><a href="ulysses-compass.html#cb449-2" aria-hidden="true" tabindex="-1"></a>brainvolcc <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">438</span>, <span class="dv">452</span>, <span class="dv">612</span>, <span class="dv">521</span>, <span class="dv">752</span>, <span class="dv">871</span>, <span class="dv">1350</span>)</span>
+<span id="cb449-3"><a href="ulysses-compass.html#cb449-3" aria-hidden="true" tabindex="-1"></a>masskg <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">37.0</span>, <span class="fl">35.5</span>, <span class="fl">34.5</span>, <span class="fl">41.5</span>, <span class="fl">55.5</span>, <span class="dv">61</span>, <span class="fl">53.5</span>)</span>
+<span id="cb449-4"><a href="ulysses-compass.html#cb449-4" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">species=</span>sppnames, <span class="at">brain=</span>brainvolcc, <span class="at">mass=</span>masskg)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-117-1.png" width="672" /></p>
+<p>If we were interested in brain volume as a function of body mass, we could fit a polynomial regression (see ch. 4). But first we would have to standardize the parameters. Here we do the same as we normally do with the predictor, body mass. The outcome, brain volume, we have in proportion of the largest brain. This will avoid negative brain values.</p>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="ulysses-compass.html#cb450-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>mass_std <span class="ot">&lt;-</span> (d<span class="sc">$</span>mass <span class="sc">-</span> <span class="fu">mean</span>(d<span class="sc">$</span>mass))<span class="sc">/</span><span class="fu">sd</span>(d<span class="sc">$</span>mass)</span>
+<span id="cb450-2"><a href="ulysses-compass.html#cb450-2" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>brain_std <span class="ot">&lt;-</span> d<span class="sc">$</span>brain <span class="sc">/</span> <span class="fu">max</span>(d<span class="sc">$</span>brain)</span></code></pre></div>
+<p>Let’s build the linear model first. We will consider <span class="math inline">\(\sigma\)</span> to be log-normal to keep it positive. We will also include rather vague priors for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>.<br />
+</p>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="ulysses-compass.html#cb451-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinking)</span>
+<span id="cb451-2"><a href="ulysses-compass.html#cb451-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb451-3"><a href="ulysses-compass.html#cb451-3" aria-hidden="true" tabindex="-1"></a>m7<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb451-4"><a href="ulysses-compass.html#cb451-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb451-5"><a href="ulysses-compass.html#cb451-5" aria-hidden="true" tabindex="-1"></a>    brain_std <span class="sc">~</span> <span class="fu">dnorm</span>(mu, <span class="fu">exp</span>(log_sigma)),</span>
+<span id="cb451-6"><a href="ulysses-compass.html#cb451-6" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> b<span class="sc">*</span>mass_std,</span>
+<span id="cb451-7"><a href="ulysses-compass.html#cb451-7" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb451-8"><a href="ulysses-compass.html#cb451-8" aria-hidden="true" tabindex="-1"></a>    b <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">10</span>),</span>
+<span id="cb451-9"><a href="ulysses-compass.html#cb451-9" aria-hidden="true" tabindex="-1"></a>    log_sigma <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb451-10"><a href="ulysses-compass.html#cb451-10" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb451-11"><a href="ulysses-compass.html#cb451-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><strong><em>Rethinking OLS and Bayesian</em></strong></p>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="ulysses-compass.html#cb452-1" aria-hidden="true" tabindex="-1"></a>m7<span class="fl">.1</span>_OLS <span class="ot">&lt;-</span> <span class="fu">lm</span>(brain_std <span class="sc">~</span> mass_std, <span class="at">data =</span> d)</span>
+<span id="cb452-2"><a href="ulysses-compass.html#cb452-2" aria-hidden="true" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">extract.samples</span>(m7<span class="fl">.1</span>_OLS)</span></code></pre></div>
+<p>Now let’s calculate the <span class="math inline">\(R^{2}\)</span> value for our linear model</p>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="ulysses-compass.html#cb453-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb453-2"><a href="ulysses-compass.html#cb453-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sim</span>(m7<span class="fl">.1</span>)</span>
+<span id="cb453-3"><a href="ulysses-compass.html#cb453-3" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">apply</span>(s, <span class="dv">2</span>, mean) <span class="sc">-</span> d<span class="sc">$</span>brain_std</span>
+<span id="cb453-4"><a href="ulysses-compass.html#cb453-4" aria-hidden="true" tabindex="-1"></a>resid_var <span class="ot">&lt;-</span> <span class="fu">var2</span>(r)</span>
+<span id="cb453-5"><a href="ulysses-compass.html#cb453-5" aria-hidden="true" tabindex="-1"></a>outcome_var <span class="ot">&lt;-</span> <span class="fu">var2</span>(d<span class="sc">$</span>brain_std)</span>
+<span id="cb453-6"><a href="ulysses-compass.html#cb453-6" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> resid_var<span class="sc">/</span>outcome_var</span></code></pre></div>
+<pre><code>## [1] 0.4731086</code></pre>
+<p>And let’s write a function that we can quickly apply to other models</p>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="ulysses-compass.html#cb455-1" aria-hidden="true" tabindex="-1"></a>R2_is_bad <span class="ot">&lt;-</span> <span class="cf">function</span>(quap_fit){</span>
+<span id="cb455-2"><a href="ulysses-compass.html#cb455-2" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="fu">sim</span>(quap_fit, <span class="at">refresh =</span> <span class="dv">0</span>)</span>
+<span id="cb455-3"><a href="ulysses-compass.html#cb455-3" aria-hidden="true" tabindex="-1"></a>  r <span class="ot">&lt;-</span> <span class="fu">apply</span>(s, <span class="dv">2</span>, mean) <span class="sc">-</span> d<span class="sc">$</span>brain_std</span>
+<span id="cb455-4"><a href="ulysses-compass.html#cb455-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span> <span class="sc">-</span> <span class="fu">var2</span>(r)<span class="sc">/</span><span class="fu">var2</span>(d<span class="sc">$</span>brain_std)</span>
+<span id="cb455-5"><a href="ulysses-compass.html#cb455-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>This is our second degree polynomial. It is just adding a secondary predictor that is based on the same data as <code>m7.1</code>.</p>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="ulysses-compass.html#cb456-1" aria-hidden="true" tabindex="-1"></a>m7<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb456-2"><a href="ulysses-compass.html#cb456-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb456-3"><a href="ulysses-compass.html#cb456-3" aria-hidden="true" tabindex="-1"></a>    brain_std <span class="sc">~</span> <span class="fu">dnorm</span>(mu, <span class="fu">exp</span>(log_sigma)),</span>
+<span id="cb456-4"><a href="ulysses-compass.html#cb456-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> b[<span class="dv">1</span>]<span class="sc">*</span>mass_std <span class="sc">+</span> b[<span class="dv">2</span>]<span class="sc">*</span>mass_std<span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb456-5"><a href="ulysses-compass.html#cb456-5" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="fl">0.5</span>,<span class="dv">1</span>),</span>
+<span id="cb456-6"><a href="ulysses-compass.html#cb456-6" aria-hidden="true" tabindex="-1"></a>    b <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">10</span>),</span>
+<span id="cb456-7"><a href="ulysses-compass.html#cb456-7" aria-hidden="true" tabindex="-1"></a>    log_sigma <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb456-8"><a href="ulysses-compass.html#cb456-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d, <span class="at">start =</span> <span class="fu">list</span>(<span class="at">b=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">2</span>))</span>
+<span id="cb456-9"><a href="ulysses-compass.html#cb456-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><em>Note: <code>quap()</code> needs to know how many <span class="math inline">\(\beta\)</span> values you have so we set this with a start list</em><br />
+</p>
+<p>Now we will write additinal higher order polynomials, each increasing in degree</p>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="ulysses-compass.html#cb457-1" aria-hidden="true" tabindex="-1"></a>m7<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb457-2"><a href="ulysses-compass.html#cb457-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb457-3"><a href="ulysses-compass.html#cb457-3" aria-hidden="true" tabindex="-1"></a>    brain_std <span class="sc">~</span> <span class="fu">dnorm</span>(mu, <span class="fu">exp</span>(log_sigma)),</span>
+<span id="cb457-4"><a href="ulysses-compass.html#cb457-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> b[<span class="dv">1</span>]<span class="sc">*</span>mass_std <span class="sc">+</span> b[<span class="dv">2</span>]<span class="sc">*</span>mass_std<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span></span>
+<span id="cb457-5"><a href="ulysses-compass.html#cb457-5" aria-hidden="true" tabindex="-1"></a>      b[<span class="dv">3</span>]<span class="sc">*</span>mass_std<span class="sc">^</span><span class="dv">3</span>,</span>
+<span id="cb457-6"><a href="ulysses-compass.html#cb457-6" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="fl">0.5</span>,<span class="dv">1</span>),</span>
+<span id="cb457-7"><a href="ulysses-compass.html#cb457-7" aria-hidden="true" tabindex="-1"></a>    b <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">10</span>),</span>
+<span id="cb457-8"><a href="ulysses-compass.html#cb457-8" aria-hidden="true" tabindex="-1"></a>    log_sigma <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb457-9"><a href="ulysses-compass.html#cb457-9" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d, <span class="at">start =</span> <span class="fu">list</span>(<span class="at">b =</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">3</span>))</span>
+<span id="cb457-10"><a href="ulysses-compass.html#cb457-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb457-11"><a href="ulysses-compass.html#cb457-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb457-12"><a href="ulysses-compass.html#cb457-12" aria-hidden="true" tabindex="-1"></a>m7<span class="fl">.4</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb457-13"><a href="ulysses-compass.html#cb457-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb457-14"><a href="ulysses-compass.html#cb457-14" aria-hidden="true" tabindex="-1"></a>    brain_std <span class="sc">~</span> <span class="fu">dnorm</span>(mu, <span class="fu">exp</span>(log_sigma)),</span>
+<span id="cb457-15"><a href="ulysses-compass.html#cb457-15" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> b[<span class="dv">1</span>]<span class="sc">*</span>mass_std <span class="sc">+</span> b[<span class="dv">2</span>]<span class="sc">*</span>mass_std<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span></span>
+<span id="cb457-16"><a href="ulysses-compass.html#cb457-16" aria-hidden="true" tabindex="-1"></a>      b[<span class="dv">3</span>]<span class="sc">*</span>mass_std<span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> b[<span class="dv">4</span>]<span class="sc">*</span>mass_std<span class="sc">^</span><span class="dv">4</span>,</span>
+<span id="cb457-17"><a href="ulysses-compass.html#cb457-17" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="fl">0.5</span>,<span class="dv">1</span>),</span>
+<span id="cb457-18"><a href="ulysses-compass.html#cb457-18" aria-hidden="true" tabindex="-1"></a>    b <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">10</span>),</span>
+<span id="cb457-19"><a href="ulysses-compass.html#cb457-19" aria-hidden="true" tabindex="-1"></a>    log_sigma <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb457-20"><a href="ulysses-compass.html#cb457-20" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d, <span class="at">start =</span> <span class="fu">list</span>(<span class="at">b =</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">4</span>))</span>
+<span id="cb457-21"><a href="ulysses-compass.html#cb457-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb457-22"><a href="ulysses-compass.html#cb457-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb457-23"><a href="ulysses-compass.html#cb457-23" aria-hidden="true" tabindex="-1"></a>m7<span class="fl">.5</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb457-24"><a href="ulysses-compass.html#cb457-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb457-25"><a href="ulysses-compass.html#cb457-25" aria-hidden="true" tabindex="-1"></a>    brain_std <span class="sc">~</span> <span class="fu">dnorm</span>(mu, <span class="fu">exp</span>(log_sigma)),</span>
+<span id="cb457-26"><a href="ulysses-compass.html#cb457-26" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> b[<span class="dv">1</span>]<span class="sc">*</span>mass_std <span class="sc">+</span> b[<span class="dv">2</span>]<span class="sc">*</span>mass_std<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span></span>
+<span id="cb457-27"><a href="ulysses-compass.html#cb457-27" aria-hidden="true" tabindex="-1"></a>      b[<span class="dv">3</span>]<span class="sc">*</span>mass_std<span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> b[<span class="dv">4</span>]<span class="sc">*</span>mass_std<span class="sc">^</span><span class="dv">4</span> <span class="sc">+</span></span>
+<span id="cb457-28"><a href="ulysses-compass.html#cb457-28" aria-hidden="true" tabindex="-1"></a>      b[<span class="dv">5</span>]<span class="sc">*</span>mass_std<span class="sc">^</span><span class="dv">5</span>,</span>
+<span id="cb457-29"><a href="ulysses-compass.html#cb457-29" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="fl">0.5</span>,<span class="dv">1</span>),</span>
+<span id="cb457-30"><a href="ulysses-compass.html#cb457-30" aria-hidden="true" tabindex="-1"></a>    b <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">10</span>),</span>
+<span id="cb457-31"><a href="ulysses-compass.html#cb457-31" aria-hidden="true" tabindex="-1"></a>    log_sigma <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb457-32"><a href="ulysses-compass.html#cb457-32" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d, <span class="at">start =</span> <span class="fu">list</span>(<span class="at">b =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">5</span>))</span>
+<span id="cb457-33"><a href="ulysses-compass.html#cb457-33" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><span class="math inline">\(\sigma\)</span> here needs to be replaced with a constant to get an output.</p>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="ulysses-compass.html#cb458-1" aria-hidden="true" tabindex="-1"></a>m7<span class="fl">.6</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb458-2"><a href="ulysses-compass.html#cb458-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb458-3"><a href="ulysses-compass.html#cb458-3" aria-hidden="true" tabindex="-1"></a>    brain_std <span class="sc">~</span> <span class="fu">dnorm</span>(mu,<span class="fl">0.001</span>),</span>
+<span id="cb458-4"><a href="ulysses-compass.html#cb458-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> b[<span class="dv">1</span>]<span class="sc">*</span>mass_std <span class="sc">+</span> b[<span class="dv">2</span>]<span class="sc">*</span>mass_std<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span></span>
+<span id="cb458-5"><a href="ulysses-compass.html#cb458-5" aria-hidden="true" tabindex="-1"></a>              b[<span class="dv">3</span>]<span class="sc">*</span>mass_std<span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> b[<span class="dv">4</span>]<span class="sc">*</span>mass_std<span class="sc">^</span><span class="dv">4</span> <span class="sc">+</span></span>
+<span id="cb458-6"><a href="ulysses-compass.html#cb458-6" aria-hidden="true" tabindex="-1"></a>              b[<span class="dv">5</span>]<span class="sc">*</span>mass_std<span class="sc">^</span><span class="dv">5</span> <span class="sc">+</span> b[<span class="dv">6</span>]<span class="sc">*</span>mass_std<span class="sc">^</span><span class="dv">6</span>,</span>
+<span id="cb458-7"><a href="ulysses-compass.html#cb458-7" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="fl">0.5</span>,<span class="dv">1</span>),</span>
+<span id="cb458-8"><a href="ulysses-compass.html#cb458-8" aria-hidden="true" tabindex="-1"></a>    b <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">10</span>)</span>
+<span id="cb458-9"><a href="ulysses-compass.html#cb458-9" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d, <span class="at">start =</span> <span class="fu">list</span>(<span class="at">b =</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">6</span>))</span>
+<span id="cb458-10"><a href="ulysses-compass.html#cb458-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Now we can plot all our models. Below is a sample of plot code for a single model. You can also use <code>brain_plot</code> from the <code>rethinking</code> package.</p>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="ulysses-compass.html#cb459-1" aria-hidden="true" tabindex="-1"></a><span class="co">#7.1</span></span>
+<span id="cb459-2"><a href="ulysses-compass.html#cb459-2" aria-hidden="true" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">extract.samples</span>(m7<span class="fl">.1</span>)</span>
+<span id="cb459-3"><a href="ulysses-compass.html#cb459-3" aria-hidden="true" tabindex="-1"></a>mass_seq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">min</span>(d<span class="sc">$</span>mass_std), <span class="at">to =</span> <span class="fu">max</span>(d<span class="sc">$</span>mass_std), <span class="at">length.out =</span> <span class="dv">100</span>)</span>
+<span id="cb459-4"><a href="ulysses-compass.html#cb459-4" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">link</span>(m7<span class="fl">.1</span>, <span class="at">data =</span> <span class="fu">list</span>(<span class="at">mass_std=</span>mass_seq))</span>
+<span id="cb459-5"><a href="ulysses-compass.html#cb459-5" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">apply</span>(l, <span class="dv">2</span>, mean)</span>
+<span id="cb459-6"><a href="ulysses-compass.html#cb459-6" aria-hidden="true" tabindex="-1"></a>ci <span class="ot">&lt;-</span> <span class="fu">apply</span>(l, <span class="dv">2</span>, PI)</span>
+<span id="cb459-7"><a href="ulysses-compass.html#cb459-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(brain_std <span class="sc">~</span> mass_std, <span class="at">data =</span> d, <span class="at">xlab =</span> <span class="st">&#39;body mass (std)&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;brain volume (cc)&#39;</span>)</span>
+<span id="cb459-8"><a href="ulysses-compass.html#cb459-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(mass_seq, mu)</span>
+<span id="cb459-9"><a href="ulysses-compass.html#cb459-9" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>(ci, mass_seq)</span>
+<span id="cb459-10"><a href="ulysses-compass.html#cb459-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="fu">paste</span>(<span class="st">&quot;m7.1: R^2 = &quot;</span>, <span class="fu">round</span>(<span class="fu">R2_is_bad</span>(m7<span class="fl">.1</span>), <span class="dv">2</span>)))</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%207.10b-1.png" width="672" /></p>
+<p>To get an output for <code>m7.6</code>, sigma had to be a constant small number because the model passes through each point without variance. You can also notice that these high <span class="math inline">\(R^2\)</span> models do very poorly in data gaps. Between 41 and 54 kg, the higher order models go wildly positive, and then steeply dip between 55 and 60 kg.</p>
+</div>
+<div id="too-few-parameters-hurts-too" class="section level3 hasAnchor" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Too few parameters hurts, too<a href="ulysses-compass.html#too-few-parameters-hurts-too" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Underfitting does a poor job at describing existing data and also lacks predictive power. To see if a model is underfit, you could remove data points one at a time and see how sensitive the model is to change. Overfit models will be very sensitive to change.</p>
+<p>Let’s plot the linear model and the 3rd degree polynomial for comparison.</p>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="ulysses-compass.html#cb460-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb460-2"><a href="ulysses-compass.html#cb460-2" aria-hidden="true" tabindex="-1"></a><span class="fu">brain_loo_plot</span>(m7<span class="fl">.1</span>)</span>
+<span id="cb460-3"><a href="ulysses-compass.html#cb460-3" aria-hidden="true" tabindex="-1"></a><span class="fu">brain_loo_plot</span>(m7<span class="fl">.4</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%207.11-1.png" width="672" /></p>
+<p>The (underfit) linear model doesn’t change much compared to the wild lines in model <code>m7.3</code>.</p>
+</div>
+</div>
+<div id="entropy-and-accuracy" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Entropy and accuracy<a href="ulysses-compass.html#entropy-and-accuracy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="firing-the-weatherperson" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Firing the weatherperson<a href="ulysses-compass.html#firing-the-weatherperson" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Accuracy starts with picking the target. We should be worried <a href="about:\" class="uri">about:\</a>
+1. <em>Cost-benefit analysis</em>. What is the cost of being wrong? How much do we win by if we are right?<br />
+2. <em>Accuracy in context</em>. How do we judge accuracy in a way that accounts for how much a model could imrpove prediction.<br />
+</p>
+<p>Suppose in Vancouver, CBC puts out a 10 day forecast that has uncertain predictions of rain. And say CTV says theirs is better and only predicts sunshine for the 10 days.</p>
+CBC forecast
+<table>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Day
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Prediction
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0.6
+</td>
+<td style="text-align:left;">
+0.6
+</td>
+<td style="text-align:left;">
+0.6
+</td>
+<td style="text-align:left;">
+0.6
+</td>
+<td style="text-align:left;">
+0.6
+</td>
+<td style="text-align:left;">
+0.6
+</td>
+<td style="text-align:left;">
+0.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Observed
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+CTV forecast
+<table>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Day
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Prediction
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Observed
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<p>If we are define a metric of accuracy to be <em>hit rate</em> to be the average chance of a correct prediction, CBC would have a score of 5.8 hits (<span class="math inline">\(3 \times 1 + 7 \times 0.4\)</span>) across 10 days (5.8 / 10 = <strong>0.58</strong>) and CTV would have 7 hits (<span class="math inline">\(3 \times 0 + 7 \times 1\)</span>) for a score of <strong>0.7</strong>. CTV wins by this metric.</p>
+<div id="cost-and-benefits" class="section level4 hasAnchor" number="7.2.1.1">
+<h4><span class="header-section-number">7.2.1.1</span> Cost and benefits<a href="ulysses-compass.html#cost-and-benefits" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>As a member of the public you may choose your own happiness as the metric to score these forecasts. If you don’t like getting caught in the rain but also dislike carrying umbrellas, you may have a different scoring system. Say getting caught in the rain is -5 happiness points, and carrying an umbrella is -1 points. The probability of you carrying an umbrella is the same as the probability of rain.</p>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="ulysses-compass.html#cb461-1" aria-hidden="true" tabindex="-1"></a>CBC <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.6</span>), <span class="at">times =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">7</span>))</span>
+<span id="cb461-2"><a href="ulysses-compass.html#cb461-2" aria-hidden="true" tabindex="-1"></a>CTV <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">0</span>), <span class="at">times =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">7</span>))</span>
+<span id="cb461-3"><a href="ulysses-compass.html#cb461-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb461-4"><a href="ulysses-compass.html#cb461-4" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">rbind</span>(Day, Observed, CBC, CTV)</span>
+<span id="cb461-5"><a href="ulysses-compass.html#cb461-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb461-6"><a href="ulysses-compass.html#cb461-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d, <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
+<table>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Day
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Observed
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CBC
+</td>
+<td style="text-align:left;">
+-1
+</td>
+<td style="text-align:left;">
+-1
+</td>
+<td style="text-align:left;">
+-1
+</td>
+<td style="text-align:left;">
+-0.6
+</td>
+<td style="text-align:left;">
+-0.6
+</td>
+<td style="text-align:left;">
+-0.6
+</td>
+<td style="text-align:left;">
+-0.6
+</td>
+<td style="text-align:left;">
+-0.6
+</td>
+<td style="text-align:left;">
+-0.6
+</td>
+<td style="text-align:left;">
+-0.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CTV
+</td>
+<td style="text-align:left;">
+-5
+</td>
+<td style="text-align:left;">
+-5
+</td>
+<td style="text-align:left;">
+-5
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<p>So now the CBC weather forecast is costing you -7.2 happiness points where CTV’s forecast is double that at -15.</p>
+</div>
+<div id="measuring-accuracy" class="section level4 hasAnchor" number="7.2.1.2">
+<h4><span class="header-section-number">7.2.1.2</span> Measuring accuracy<a href="ulysses-compass.html#measuring-accuracy" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The hit rate of the forecasts calculated above are not the only way to determine accuracy. If we instead wanted to compute the probability of correctly predicting the whole sequence of days, this would be similar to the joint likelihood. So if we look at the CBC forecast, <span class="math inline">\(1^{3} \times 0.4^{7} \approx 0.002\)</span> doesn’t seem like a great probability. But when compared to the CTV forecast <span class="math inline">\(0^{3} \times 1^{7} = 0\)</span> there is no way for the forecast to be correct for the whole sequence because the CTV forecast doesn’t allow any prediction for rain.</p>
+</div>
+</div>
+<div id="information-and-uncertainty" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Information and uncertainty<a href="ulysses-compass.html#information-and-uncertainty" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now that we have a way to measure accuracy, we want to use it to compare competing models. To do this we can measure the distance of a model’s prediction from the true value. But how do we measure distance from the <em>true model</em>? The answer comes from <strong>Information Theory</strong>.</p>
+<p><em>Information</em>: The reduction in uncertainty when we learn an outcome</p>
+<p>Now we need a way to measure uncertainty. Our measure should include a few <a href="things:\" class="uri">things:\</a></p>
+<ol style="list-style-type: decimal">
+<li>It should be continuous in scale<br />
+</li>
+<li>It should increase as the number of possible events increases<br />
+</li>
+<li>It should be additive (i.e. combinations of different events should be the sum of their parts; weather and temp, rain/cold, rain/hot, sun/cold, sun/hot)<br />
+</li>
+</ol>
+<p><strong>Information Entropy</strong>: The uncertainty contained in a probability distribution is the average log-probability of an event.<br />
+</p>
+<p><span class="math display">\[H(p) = -E\text{log}(p_{i}) = -\sum_{i = 1}^{n} p_{i}\text{log}(p_{i})\]</span></p>
+<p>Here <span class="math inline">\(n\)</span> is the number of events, <span class="math inline">\(i\)</span> is an individual event with the probability of <span class="math inline">\(p_{i}\)</span>.</p>
+<p>To use in an example, let’s say that the true probability of rain is <span class="math inline">\(p_{1} = 0.3\)</span> and sun is <span class="math inline">\(p_{2} = 0.7\)</span>. Then we can plug into the above equation:</p>
+<p><span class="math display">\[H(p) = -(p_{1}\text{log}(p_{1}) + p_{2}\text{log}(p_{2})) \approx 0.61\]</span></p>
+<p>in R:</p>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="ulysses-compass.html#cb462-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.7</span>)</span>
+<span id="cb462-2"><a href="ulysses-compass.html#cb462-2" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fu">sum</span>(p<span class="sc">*</span><span class="fu">log</span>(p))</span></code></pre></div>
+<pre><code>## [1] 0.6108643</code></pre>
+<p>So if we were in Abu Dhabi, the chance of rain would be about 0.01 and sunshine would be about 0.99 (1 - rain). So the uncertainty drops way down to $$0.06. The uncertainty is low because we know rain is rare.</p>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="ulysses-compass.html#cb464-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.99</span>)</span>
+<span id="cb464-2"><a href="ulysses-compass.html#cb464-2" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fu">sum</span>(p<span class="sc">*</span><span class="fu">log</span>(p))</span></code></pre></div>
+<pre><code>## [1] 0.05600153</code></pre>
+<p>and when sun (0.7), rain (0.15), and snow (0.15) are all in the mix, uncertainty increases.</p>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="ulysses-compass.html#cb466-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="fl">0.15</span>, <span class="fl">0.15</span>)</span>
+<span id="cb466-2"><a href="ulysses-compass.html#cb466-2" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fu">sum</span>(p<span class="sc">*</span><span class="fu">log</span>(p))</span></code></pre></div>
+<pre><code>## [1] 0.8188085</code></pre>
+</div>
+<div id="from-entropy-to-accuracy" class="section level3 hasAnchor" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> From entropy to accuracy<a href="ulysses-compass.html#from-entropy-to-accuracy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><em>Divergence</em>: The additional uncertainty induced by using probabilities from one distribution to describe another distribution.</p>
+<p>Now we can measure how much uncertainty is introduced if our model uncertainty <span class="math inline">\(q\)</span> is different from our true uncertainty <span class="math inline">\(p\)</span></p>
+<p><span class="math display">\[D_{KL}(p, q) = \sum_{i} p_{i}(\text{log}(p_{i}) - \text{log}(q_{i})) = \sum_{i} p_{i} \text{log} \left(\frac{p_{i}}{q_{i}}\right)\]</span></p>
+<p>Say our true distribution is <span class="math inline">\(p = {0.3, 0.7}\)</span>, and we have our model distributions ranging from <span class="math inline">\(q = {0.01,0.99}\)</span> to <span class="math inline">\(q = 0.99, 0.01\)</span>.</p>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="ulysses-compass.html#cb468-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fl">0.3</span> </span>
+<span id="cb468-2"><a href="ulysses-compass.html#cb468-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
+<span id="cb468-3"><a href="ulysses-compass.html#cb468-3" aria-hidden="true" tabindex="-1"></a>q1 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.01</span>, <span class="at">to =</span> <span class="fl">0.99</span>, <span class="at">by =</span> <span class="fl">0.01</span>)</span>
+<span id="cb468-4"><a href="ulysses-compass.html#cb468-4" aria-hidden="true" tabindex="-1"></a>q2 <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">-</span> q1)</span>
+<span id="cb468-5"><a href="ulysses-compass.html#cb468-5" aria-hidden="true" tabindex="-1"></a>d_kl <span class="ot">&lt;-</span> (p1 <span class="sc">*</span> <span class="fu">log</span>(p1<span class="sc">/</span>q1)) <span class="sc">+</span> (p2 <span class="sc">*</span> <span class="fu">log</span>(p2<span class="sc">/</span>q2))</span>
+<span id="cb468-6"><a href="ulysses-compass.html#cb468-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb468-7"><a href="ulysses-compass.html#cb468-7" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(p1, p2, q1, q2, d_kl)</span>
+<span id="cb468-8"><a href="ulysses-compass.html#cb468-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb468-9"><a href="ulysses-compass.html#cb468-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> d<span class="sc">$</span>q1, <span class="at">y =</span> d<span class="sc">$</span>d_kl, <span class="at">type =</span> <span class="st">&#39;n&#39;</span>)</span>
+<span id="cb468-10"><a href="ulysses-compass.html#cb468-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(d<span class="sc">$</span>q1, d<span class="sc">$</span>d_kl, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb468-11"><a href="ulysses-compass.html#cb468-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fl">0.3</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb468-12"><a href="ulysses-compass.html#cb468-12" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fl">0.35</span>, <span class="at">y =</span> <span class="fl">2.2</span>, <span class="at">label =</span> <span class="st">&#39;q = p&#39;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-124-1.png" width="672" /></p>
+<p>In the plot we can see where <span class="math inline">\(q_{1} = p_{1}\)</span> (0.3), the divergence is at its lowest value (0) and only increases as you move away from the true value.</p>
+<p>Now we can use divergence to compare models estimation of events (observations) to the probability of the events themselves.</p>
+</div>
+<div id="estimating-divergence" class="section level3 hasAnchor" number="7.2.4">
+<h3><span class="header-section-number">7.2.4</span> Estimating divergence<a href="ulysses-compass.html#estimating-divergence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Because we don’t know <span class="math inline">\(p\)</span> (especially if we are forecasting weather), we need to estimate our model distance from <span class="math inline">\(p\)</span> by comparing models to each other. This way we can infer which model is closer to <span class="math inline">\(p\)</span> without knowing it directly. To do this we will utilize the middle of the above Information Entropy equation, <span class="math inline">\(E\text{log}(p_{i})\)</span>. What we can do is sum the likelihoods over all observations for each model by using:<br />
+<span class="math display">\[S(q) = \sum_{i} \text{log}(q_{i})\]</span><br />
+</p>
+<p>for model <span class="math inline">\(q\)</span> and :</p>
+<p><span class="math display">\[S(r) = \sum_{i} \text{log}(r_{i})\]</span><br />
+</p>
+<p>for model <span class="math inline">\(r\)</span>.<br />
+</p>
+<p>We use all observations so that we don’t throw away information that is hidden in the distributions of each log-likelihood. For Bayesian models, we use <strong>Log-Pointwise-Predictive-Densities</strong> (lppd) to score model accuracy.</p>
+<p>There is a function inside the <code>rethinking</code> package that will compute this for models, but we will do it by hand below as well.</p>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="ulysses-compass.html#cb469-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb469-2"><a href="ulysses-compass.html#cb469-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lppd</span>(m7<span class="fl">.1</span>, <span class="at">n =</span> <span class="fl">1e4</span>)</span></code></pre></div>
+<pre><code>## [1]  0.6232812  0.6540091  0.5198331  0.6381867  0.4796153  0.4417278 -0.9146812</code></pre>
+<p>The equation for lppd consists of data <span class="math inline">\(y\)</span> and a distribution <span class="math inline">\(\Theta\)</span> such that:<br />
+<span class="math display">\[\text{lppd}(y, \Theta) = \sum_{i}\text{log}\frac{1}{S}\sum_{s}p(y_{i}|\Theta_{s})\]</span></p>
+<p>and <span class="math inline">\(S\)</span> is the number of samples and <span class="math inline">\(\Theta_{s}\)</span> is the s-th set of sampled parameter values.</p>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="ulysses-compass.html#cb471-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb471-2"><a href="ulysses-compass.html#cb471-2" aria-hidden="true" tabindex="-1"></a>logprob <span class="ot">&lt;-</span> <span class="fu">sim</span>(m7<span class="fl">.1</span>, <span class="at">ll=</span><span class="cn">TRUE</span>, <span class="at">n =</span> <span class="fl">1e4</span>) <span class="co">#sampled LL as rows and observations as columns</span></span>
+<span id="cb471-3"><a href="ulysses-compass.html#cb471-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">ncol</span>(logprob) <span class="co"># seven observations</span></span>
+<span id="cb471-4"><a href="ulysses-compass.html#cb471-4" aria-hidden="true" tabindex="-1"></a>ns <span class="ot">&lt;-</span> <span class="fu">nrow</span>(logprob) <span class="co"># 1e4 samples</span></span>
+<span id="cb471-5"><a href="ulysses-compass.html#cb471-5" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(i){</span>
+<span id="cb471-6"><a href="ulysses-compass.html#cb471-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_sum_exp</span>(logprob[,i]) <span class="sc">-</span> <span class="fu">log</span>(ns) <span class="co"># exp(i) then sums them, then takes log of sum and subtracts the log of sample number </span></span>
+<span id="cb471-7"><a href="ulysses-compass.html#cb471-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb471-8"><a href="ulysses-compass.html#cb471-8" aria-hidden="true" tabindex="-1"></a>(lppd <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>n, f))</span></code></pre></div>
+<pre><code>## [1]  0.6232812  0.6540091  0.5198331  0.6381867  0.4796153  0.4417278 -0.9146812</code></pre>
+<p>They match (yay!)</p>
+</div>
+<div id="scoring-the-right-data" class="section level3 hasAnchor" number="7.2.5">
+<h3><span class="header-section-number">7.2.5</span> Scoring the right data<a href="ulysses-compass.html#scoring-the-right-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>One problem still exists. lppd also increases as models get more complex, just like <span class="math inline">\(R^2\)</span>.</p>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="ulysses-compass.html#cb473-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb473-2"><a href="ulysses-compass.html#cb473-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">list</span>(m7<span class="fl">.1</span>,m7<span class="fl">.2</span>,m7<span class="fl">.3</span>,m7<span class="fl">.4</span>,m7<span class="fl">.5</span>,m7<span class="fl">.6</span>), <span class="cf">function</span>(m) <span class="fu">sum</span>(<span class="fu">lppd</span>(m)))</span></code></pre></div>
+<pre><code>## [1]  2.478986  2.584124  3.634849  5.325457 14.052121 39.535568</code></pre>
+<p>Here is the way around this problem:<br />
+1. suppose there is a training sample of size <span class="math inline">\(N\)</span><br />
+2. compute the posterior distribution of a model for the training sample, then compute the score (<span class="math inline">\(D_{train}\)</span>)<br />
+3. Suppose another sample of size <span class="math inline">\(N\)</span>. This is the test sample<br />
+4. compute the score on the test sample using the training posterior. (<span class="math inline">\(D_{test}\)</span>)</p>
+<p>As an example we will train and test models of the form:<br />
+</p>
+<p><span class="math display">\[y_{i} \sim \text{Normal}(\mu_{i}, 1) \\
+\mu_{i} = (0.15)x_{1,i} = (0.4)x_{2,i}\]</span></p>
+<p>Here, <span class="math inline">\(\sigma\)</span> is static, <span class="math inline">\(\alpha = 0\)</span>, and our <span class="math inline">\(\beta\)</span> coefficients are known.</p>
+<p>How it works:</p>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="ulysses-compass.html#cb475-1" aria-hidden="true" tabindex="-1"></a>n_sim <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co">#number of simulations</span></span>
+<span id="cb475-2"><a href="ulysses-compass.html#cb475-2" aria-hidden="true" tabindex="-1"></a>kseq <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> <span class="co">#number of parameters in the model</span></span>
+<span id="cb475-3"><a href="ulysses-compass.html#cb475-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb475-4"><a href="ulysses-compass.html#cb475-4" aria-hidden="true" tabindex="-1"></a><span class="co">#simulation function </span></span>
+<span id="cb475-5"><a href="ulysses-compass.html#cb475-5" aria-hidden="true" tabindex="-1"></a>my_sim <span class="ot">&lt;-</span> <span class="cf">function</span>(k) {</span>
+<span id="cb475-6"><a href="ulysses-compass.html#cb475-6" aria-hidden="true" tabindex="-1"></a>  r <span class="ot">&lt;-</span> <span class="fu">replicate</span>(n_sim, <span class="fu">sim_train_test</span>(<span class="at">N=</span>n, <span class="at">k =</span> k));</span>
+<span id="cb475-7"><a href="ulysses-compass.html#cb475-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fu">mean</span>(r[<span class="dv">1</span>,]), <span class="fu">mean</span>(r[<span class="dv">2</span>,]), <span class="fu">sd</span>(r[<span class="dv">1</span>,]), <span class="fu">sd</span>(r[<span class="dv">2</span>,]))</span>
+<span id="cb475-8"><a href="ulysses-compass.html#cb475-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb475-9"><a href="ulysses-compass.html#cb475-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb475-10"><a href="ulysses-compass.html#cb475-10" aria-hidden="true" tabindex="-1"></a><span class="co"># run for 20 cases</span></span>
+<span id="cb475-11"><a href="ulysses-compass.html#cb475-11" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb475-12"><a href="ulysses-compass.html#cb475-12" aria-hidden="true" tabindex="-1"></a>dev_20 <span class="ot">&lt;-</span> <span class="fu">sapply</span>(kseq, my_sim) <span class="co"># this will take a while</span></span>
+<span id="cb475-13"><a href="ulysses-compass.html#cb475-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb475-14"><a href="ulysses-compass.html#cb475-14" aria-hidden="true" tabindex="-1"></a><span class="co"># run for 100 cases</span></span>
+<span id="cb475-15"><a href="ulysses-compass.html#cb475-15" aria-hidden="true" tabindex="-1"></a><span class="co">#n &lt;- 100</span></span>
+<span id="cb475-16"><a href="ulysses-compass.html#cb475-16" aria-hidden="true" tabindex="-1"></a><span class="co">#dev_100 &lt;- sapply(kseq, my_sim) # run if interested but with more data, adding parameters will not largely affect the deviance </span></span>
+<span id="cb475-17"><a href="ulysses-compass.html#cb475-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb475-18"><a href="ulysses-compass.html#cb475-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb475-19"><a href="ulysses-compass.html#cb475-19" aria-hidden="true" tabindex="-1"></a><span class="co">#plot</span></span>
+<span id="cb475-20"><a href="ulysses-compass.html#cb475-20" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, dev_20[<span class="dv">1</span>,], <span class="at">ylim=</span><span class="fu">c</span>(<span class="fu">min</span>(dev_20[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,])<span class="sc">-</span><span class="dv">5</span>, <span class="fu">max</span>(dev_20[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,])<span class="sc">+</span><span class="dv">10</span>), </span>
+<span id="cb475-21"><a href="ulysses-compass.html#cb475-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">5.1</span>), <span class="at">xlab =</span> <span class="st">&#39;number of parameters&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;deviance&#39;</span>,</span>
+<span id="cb475-22"><a href="ulysses-compass.html#cb475-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> rangi2)</span>
+<span id="cb475-23"><a href="ulysses-compass.html#cb475-23" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&#39;N = 20&#39;</span>)</span>
+<span id="cb475-24"><a href="ulysses-compass.html#cb475-24" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>((<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)<span class="sc">+</span><span class="fl">0.1</span>, dev_20[<span class="dv">2</span>,])</span>
+<span id="cb475-25"><a href="ulysses-compass.html#cb475-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> kseq){</span>
+<span id="cb475-26"><a href="ulysses-compass.html#cb475-26" aria-hidden="true" tabindex="-1"></a>  pts_in <span class="ot">&lt;-</span> dev_20[<span class="dv">1</span>,i] <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span>dev_20[<span class="dv">3</span>,i]</span>
+<span id="cb475-27"><a href="ulysses-compass.html#cb475-27" aria-hidden="true" tabindex="-1"></a>  pts_out <span class="ot">&lt;-</span> dev_20[<span class="dv">2</span>,i] <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span>dev_20[<span class="dv">4</span>,i]</span>
+<span id="cb475-28"><a href="ulysses-compass.html#cb475-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">c</span>(i,i), pts_in, <span class="at">col=</span>rangi2)</span>
+<span id="cb475-29"><a href="ulysses-compass.html#cb475-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">c</span>(i,i)<span class="sc">+</span><span class="fl">0.1</span>, pts_out)</span>
+<span id="cb475-30"><a href="ulysses-compass.html#cb475-30" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-125-1.png" width="672" /></p>
+<p>Notice that deviance always decreases as you add parameters (similar to <span class="math inline">\(R^2\)</span> increases with parameters) but the black out of sample simulations do best at 3 parameters, which is the correct amount of parameters for the data.</p>
+</div>
+</div>
+<div id="golem-taming-regularization" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Golem taming: regularization<a href="ulysses-compass.html#golem-taming-regularization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Tuning the priors to improve model performance</p>
+<p>Standard model:<br />
+<span class="math display">\[y_{i} \sim \text{Normal}(\mu_{i}, \sigma)\\
+\mu_{i} = \alpha + \beta x_{i}\\
+\alpha \sim \text{Normal}(0,100)\\
+\beta \sim \text{Normal}(0,1)\\
+\sigma \sim \text{Exponential}(1)\]</span><br />
+</p>
+<p>So here we have the prior of <span class="math inline">\(\alpha\)</span> quite flat providing no real effect on the inference. The <span class="math inline">\(\beta\)</span> prior though is rather narrow and doesn’t expect any increase of 1 unit of <span class="math inline">\(x\)</span> to create any change outside of 2 units in <span class="math inline">\(y\)</span>.</p>
+</div>
+<div id="predicting-predictive-accuracy" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Predicting predictive accuracy<a href="ulysses-compass.html#predicting-predictive-accuracy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="cross-validation" class="section level3 hasAnchor" number="7.4.1">
+<h3><span class="header-section-number">7.4.1</span> Cross-validation<a href="ulysses-compass.html#cross-validation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>LOO and PSIS are common tools for cross-validatiting your models.</p>
+<p>LOO can be computationally expensive for large datasets so PSIS (Pareto-smoothed Importance Sampling Cross-validation) is used as a shortcut by using observational importance of each data point.</p>
+</div>
+<div id="information-criteria" class="section level3 hasAnchor" number="7.4.2">
+<h3><span class="header-section-number">7.4.2</span> Information criteria<a href="ulysses-compass.html#information-criteria" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>AIC</strong> (Akaike Information Criteria) provides a simple estimate for out-of-sample deviance:<br />
+</p>
+<p><span class="math display">\[\text{AIC} = D_{train} + 2p = -2\text{lppd} +2p\]</span></p>
+<p>with <span class="math inline">\(p\)</span> representing free parameters in the posterior distribution. Unfortunately, <strong>AIC</strong> is not great with skeptical priors or multilevel models, so instead we will use the <strong>Widely Applicable Information Criterion</strong> (WAIC). It is a bit more complicated:<br />
+</p>
+<p><span class="math display">\[\text{WAIC}(y, \Theta) = -2\left(\text{lppd} - \sum_{i}\text{var}_{\theta}\text{log}p(y_{i}|\theta)\right)\]</span></p>
+<p>Where the lppd equation is written above in section 7.2 and the term to the right of lppd is a penalty term proportional to the variance in the posterior predictions.</p>
+<p>Here is how you can do it in R in case it will help understand the process:</p>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="ulysses-compass.html#cb476-1" aria-hidden="true" tabindex="-1"></a><span class="co">#standard linear model </span></span>
+<span id="cb476-2"><a href="ulysses-compass.html#cb476-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(cars)</span>
+<span id="cb476-3"><a href="ulysses-compass.html#cb476-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb476-4"><a href="ulysses-compass.html#cb476-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb476-5"><a href="ulysses-compass.html#cb476-5" aria-hidden="true" tabindex="-1"></a>    dist <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb476-6"><a href="ulysses-compass.html#cb476-6" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> b<span class="sc">*</span>speed,</span>
+<span id="cb476-7"><a href="ulysses-compass.html#cb476-7" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">100</span>),</span>
+<span id="cb476-8"><a href="ulysses-compass.html#cb476-8" aria-hidden="true" tabindex="-1"></a>    b <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">10</span>),</span>
+<span id="cb476-9"><a href="ulysses-compass.html#cb476-9" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb476-10"><a href="ulysses-compass.html#cb476-10" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> cars</span>
+<span id="cb476-11"><a href="ulysses-compass.html#cb476-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb476-12"><a href="ulysses-compass.html#cb476-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb476-13"><a href="ulysses-compass.html#cb476-13" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb476-14"><a href="ulysses-compass.html#cb476-14" aria-hidden="true" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">extract.samples</span>(m, <span class="at">n =</span> <span class="dv">1000</span>) <span class="co">#pull samples from posterior</span></span></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="ulysses-compass.html#cb477-1" aria-hidden="true" tabindex="-1"></a><span class="co"># need to calculate likelihood for each observation</span></span>
+<span id="cb477-2"><a href="ulysses-compass.html#cb477-2" aria-hidden="true" tabindex="-1"></a>n_samples <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb477-3"><a href="ulysses-compass.html#cb477-3" aria-hidden="true" tabindex="-1"></a>logprob <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>n_samples,</span>
+<span id="cb477-4"><a href="ulysses-compass.html#cb477-4" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">function</span>(s){</span>
+<span id="cb477-5"><a href="ulysses-compass.html#cb477-5" aria-hidden="true" tabindex="-1"></a>                    mu <span class="ot">&lt;-</span> post<span class="sc">$</span>a[s] <span class="sc">+</span> post<span class="sc">$</span>b[s]<span class="sc">*</span>cars<span class="sc">$</span>speed</span>
+<span id="cb477-6"><a href="ulysses-compass.html#cb477-6" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">dnorm</span>(cars<span class="sc">$</span>dist, mu, post<span class="sc">$</span>sigma[s], <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb477-7"><a href="ulysses-compass.html#cb477-7" aria-hidden="true" tabindex="-1"></a>                  })</span></code></pre></div>
+<p>The output of the above will be 1000 samples in columns for the 50 observations in rows</p>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="ulysses-compass.html#cb478-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate the lppd</span></span>
+<span id="cb478-2"><a href="ulysses-compass.html#cb478-2" aria-hidden="true" tabindex="-1"></a>n_cases <span class="ot">&lt;-</span> <span class="fu">nrow</span>(cars) <span class="co">#number of observations</span></span>
+<span id="cb478-3"><a href="ulysses-compass.html#cb478-3" aria-hidden="true" tabindex="-1"></a>lppd <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>n_cases, <span class="cf">function</span>(i) <span class="fu">log_sum_exp</span>(logprob[i,]) <span class="sc">-</span> <span class="fu">log</span>(n_samples))</span></code></pre></div>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="ulysses-compass.html#cb479-1" aria-hidden="true" tabindex="-1"></a><span class="co">#penalty term in WAIC</span></span>
+<span id="cb479-2"><a href="ulysses-compass.html#cb479-2" aria-hidden="true" tabindex="-1"></a>pWAIC <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>n_cases, <span class="cf">function</span>(i) <span class="fu">var</span>(logprob[i,]))</span></code></pre></div>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="ulysses-compass.html#cb480-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="dv">2</span><span class="sc">*</span>(<span class="fu">sum</span>(lppd) <span class="sc">-</span> <span class="fu">sum</span>(pWAIC))</span></code></pre></div>
+<pre><code>## [1] 423.0532</code></pre>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="ulysses-compass.html#cb482-1" aria-hidden="true" tabindex="-1"></a><span class="co">#compare to automatic function</span></span>
+<span id="cb482-2"><a href="ulysses-compass.html#cb482-2" aria-hidden="true" tabindex="-1"></a>rethinking<span class="sc">::</span><span class="fu">WAIC</span>(m)</span></code></pre></div>
+<pre><code>##       WAIC      lppd penalty  std_err
+## 1 422.4586 -206.8399 4.38937 17.32067</code></pre>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="ulysses-compass.html#cb484-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate the standard error of the WAIC for yourself</span></span>
+<span id="cb484-2"><a href="ulysses-compass.html#cb484-2" aria-hidden="true" tabindex="-1"></a>waic_vec <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span><span class="sc">*</span>(lppd <span class="sc">-</span> pWAIC)</span>
+<span id="cb484-3"><a href="ulysses-compass.html#cb484-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(n_cases<span class="sc">*</span><span class="fu">var</span>(waic_vec))</span></code></pre></div>
+<pre><code>## [1] 17.83286</code></pre>
+</div>
+<div id="comparing-cv-psis-and-waic" class="section level3 hasAnchor" number="7.4.3">
+<h3><span class="header-section-number">7.4.3</span> Comparing CV, PSIS, and WAIC<a href="ulysses-compass.html#comparing-cv-psis-and-waic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Regularizing priors have lower deviance<br />
+</li>
+<li>WAIC tends to be a bit better than CV and PSIS<br />
+</li>
+</ol>
+</div>
+</div>
+<div id="model-comparison" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Model comparison<a href="ulysses-compass.html#model-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You may see people select the best model and discard the others, but this is a mistake.</p>
+<div id="model-mis-selection" class="section level3 hasAnchor" number="7.5.1">
+<h3><span class="header-section-number">7.5.1</span> Model mis-selection<a href="ulysses-compass.html#model-mis-selection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s start looking at some models. Recall the plant growth models from section 6.2.</p>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="ulysses-compass.html#cb486-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb486-2"><a href="ulysses-compass.html#cb486-2" aria-hidden="true" tabindex="-1"></a><span class="fu">compare</span>(m6<span class="fl">.6</span>, m6<span class="fl">.7</span>, m6<span class="fl">.8</span>, <span class="at">func=</span>WAIC)</span></code></pre></div>
+<pre><code>##          WAIC       SE    dWAIC      dSE    pWAIC       weight
+## m6.7 330.9678 16.15098  0.00000       NA 4.054545 1.000000e+00
+## m6.8 395.6257 11.23436 64.65787 14.23936 2.901013 9.114282e-15
+## m6.6 402.7142 11.05810 71.74634 16.16689 1.697835 2.633180e-16</code></pre>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="ulysses-compass.html#cb488-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb488-2"><a href="ulysses-compass.html#cb488-2" aria-hidden="true" tabindex="-1"></a><span class="co">#compute dSE pointwise</span></span>
+<span id="cb488-3"><a href="ulysses-compass.html#cb488-3" aria-hidden="true" tabindex="-1"></a>waic_m6<span class="fl">.7</span> <span class="ot">&lt;-</span> <span class="fu">WAIC</span>(m6<span class="fl">.7</span>, <span class="at">pointwise =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>WAIC</span>
+<span id="cb488-4"><a href="ulysses-compass.html#cb488-4" aria-hidden="true" tabindex="-1"></a>waic_m6<span class="fl">.8</span> <span class="ot">&lt;-</span> <span class="fu">WAIC</span>(m6<span class="fl">.8</span>, <span class="at">pointwise =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>WAIC</span>
+<span id="cb488-5"><a href="ulysses-compass.html#cb488-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(waic_m6<span class="fl">.7</span>)</span>
+<span id="cb488-6"><a href="ulysses-compass.html#cb488-6" aria-hidden="true" tabindex="-1"></a>diff_m6<span class="fl">.7</span>_6<span class="fl">.8</span> <span class="ot">&lt;-</span> waic_m6<span class="fl">.7</span> <span class="sc">-</span> waic_m6<span class="fl">.8</span></span>
+<span id="cb488-7"><a href="ulysses-compass.html#cb488-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(n<span class="sc">*</span><span class="fu">var</span>(diff_m6<span class="fl">.7</span>_6<span class="fl">.8</span>))</span></code></pre></div>
+<pre><code>## [1] 14.19359</code></pre>
+<p>99% interval between models (dWAIC ; m6.7 - m6.8)</p>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="ulysses-compass.html#cb490-1" aria-hidden="true" tabindex="-1"></a><span class="dv">65</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">14.2</span><span class="sc">*</span><span class="fl">2.9</span> <span class="co">#dWAIC (+ or -) dSE * pWAIC</span></span></code></pre></div>
+<pre><code>## [1]  23.82 106.18</code></pre>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="ulysses-compass.html#cb492-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> <span class="fu">compare</span>(m6<span class="fl">.6</span>, m6<span class="fl">.7</span>, m6<span class="fl">.8</span>)[,<span class="dv">1</span>], <span class="at">y=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) ) <span class="co">#Fix this</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%207.29-1.png" width="672" /></p>
+<p>m6.6 (intercept only) and m6.8 pointwise dSE</p>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="ulysses-compass.html#cb493-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb493-2"><a href="ulysses-compass.html#cb493-2" aria-hidden="true" tabindex="-1"></a>waic_m6<span class="fl">.6</span> <span class="ot">&lt;-</span> <span class="fu">WAIC</span>(m6<span class="fl">.6</span>, <span class="at">pointwise=</span><span class="cn">TRUE</span>)<span class="sc">$</span>WAIC</span>
+<span id="cb493-3"><a href="ulysses-compass.html#cb493-3" aria-hidden="true" tabindex="-1"></a>diff_m6<span class="fl">.6</span>_m6<span class="fl">.8</span> <span class="ot">&lt;-</span> waic_m6<span class="fl">.6</span> <span class="sc">-</span> waic_m6<span class="fl">.8</span></span>
+<span id="cb493-4"><a href="ulysses-compass.html#cb493-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(n<span class="sc">*</span><span class="fu">var</span>(diff_m6<span class="fl">.6</span>_m6<span class="fl">.8</span>))</span></code></pre></div>
+<pre><code>## [1] 6.790192</code></pre>
+<p>only 7 points of deviance apart</p>
+<p>looking at dSE for all three</p>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="ulysses-compass.html#cb495-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb495-2"><a href="ulysses-compass.html#cb495-2" aria-hidden="true" tabindex="-1"></a><span class="fu">compare</span>(m6<span class="fl">.6</span>, m6<span class="fl">.7</span>, m6<span class="fl">.8</span>)<span class="sc">@</span>dSE</span></code></pre></div>
+<pre><code>##           m6.6     m6.7      m6.8
+## m6.6        NA 16.16689  6.807944
+## m6.7 16.166887       NA 14.239356
+## m6.8  6.807944 14.23936        NA</code></pre>
+<p>Notice the dSE for m6.6-m6.8 isn’t in the above table. above only has comparisons to best model (m6.7)</p>
+</div>
+<div id="outliers-and-other-illustions" class="section level3 hasAnchor" number="7.5.2">
+<h3><span class="header-section-number">7.5.2</span> Outliers and other illustions<a href="ulysses-compass.html#outliers-and-other-illustions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Lets refit the waffle - divroce models</p>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="ulysses-compass.html#cb497-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(WaffleDivorce)</span>
+<span id="cb497-2"><a href="ulysses-compass.html#cb497-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> WaffleDivorce</span>
+<span id="cb497-3"><a href="ulysses-compass.html#cb497-3" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>A <span class="ot">&lt;-</span> <span class="fu">standardize</span>(d<span class="sc">$</span>MedianAgeMarriage) </span>
+<span id="cb497-4"><a href="ulysses-compass.html#cb497-4" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>D <span class="ot">&lt;-</span> <span class="fu">standardize</span>(d<span class="sc">$</span>Divorce)</span>
+<span id="cb497-5"><a href="ulysses-compass.html#cb497-5" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>M <span class="ot">&lt;-</span> <span class="fu">standardize</span>(d<span class="sc">$</span>Marriage) </span>
+<span id="cb497-6"><a href="ulysses-compass.html#cb497-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb497-7"><a href="ulysses-compass.html#cb497-7" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb497-8"><a href="ulysses-compass.html#cb497-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb497-9"><a href="ulysses-compass.html#cb497-9" aria-hidden="true" tabindex="-1"></a>    D <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb497-10"><a href="ulysses-compass.html#cb497-10" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bA<span class="sc">*</span>A,</span>
+<span id="cb497-11"><a href="ulysses-compass.html#cb497-11" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb497-12"><a href="ulysses-compass.html#cb497-12" aria-hidden="true" tabindex="-1"></a>    bA <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb497-13"><a href="ulysses-compass.html#cb497-13" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb497-14"><a href="ulysses-compass.html#cb497-14" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb497-15"><a href="ulysses-compass.html#cb497-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb497-16"><a href="ulysses-compass.html#cb497-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb497-17"><a href="ulysses-compass.html#cb497-17" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb497-18"><a href="ulysses-compass.html#cb497-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb497-19"><a href="ulysses-compass.html#cb497-19" aria-hidden="true" tabindex="-1"></a>    D <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb497-20"><a href="ulysses-compass.html#cb497-20" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bM<span class="sc">*</span>M,</span>
+<span id="cb497-21"><a href="ulysses-compass.html#cb497-21" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb497-22"><a href="ulysses-compass.html#cb497-22" aria-hidden="true" tabindex="-1"></a>    bM <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb497-23"><a href="ulysses-compass.html#cb497-23" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb497-24"><a href="ulysses-compass.html#cb497-24" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb497-25"><a href="ulysses-compass.html#cb497-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb497-26"><a href="ulysses-compass.html#cb497-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb497-27"><a href="ulysses-compass.html#cb497-27" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb497-28"><a href="ulysses-compass.html#cb497-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb497-29"><a href="ulysses-compass.html#cb497-29" aria-hidden="true" tabindex="-1"></a>       D <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb497-30"><a href="ulysses-compass.html#cb497-30" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bM<span class="sc">*</span>M <span class="sc">+</span> bA<span class="sc">*</span>A,</span>
+<span id="cb497-31"><a href="ulysses-compass.html#cb497-31" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb497-32"><a href="ulysses-compass.html#cb497-32" aria-hidden="true" tabindex="-1"></a>    bM <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>,<span class="fl">0.5</span>),</span>
+<span id="cb497-33"><a href="ulysses-compass.html#cb497-33" aria-hidden="true" tabindex="-1"></a>    bA <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb497-34"><a href="ulysses-compass.html#cb497-34" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb497-35"><a href="ulysses-compass.html#cb497-35" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb497-36"><a href="ulysses-compass.html#cb497-36" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb497-37"><a href="ulysses-compass.html#cb497-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb497-38"><a href="ulysses-compass.html#cb497-38" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m5<span class="fl">.3</span>) <span class="co">#remember marriage rate not useful with age</span></span></code></pre></div>
+<pre><code>##                mean         sd       5.5%      94.5%
+## a     -3.141054e-05 0.09707997 -0.1551840  0.1551211
+## bM    -6.536477e-02 0.15078018 -0.3063406  0.1756111
+## bA    -6.135209e-01 0.15099044 -0.8548328 -0.3722090
+## sigma  7.851597e-01 0.07785368  0.6607345  0.9095849</code></pre>
+<p>Look at PSIS function comparison</p>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="ulysses-compass.html#cb499-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb499-2"><a href="ulysses-compass.html#cb499-2" aria-hidden="true" tabindex="-1"></a><span class="fu">compare</span>(m5<span class="fl">.1</span>, m5<span class="fl">.2</span>, m5<span class="fl">.3</span>, <span class="at">func=</span>PSIS)</span></code></pre></div>
+<pre><code>## Some Pareto k values are very high (&gt;1). Set pointwise=TRUE to inspect individual points.
+## Some Pareto k values are very high (&gt;1). Set pointwise=TRUE to inspect individual points.</code></pre>
+<pre><code>##          PSIS       SE     dPSIS       dSE    pPSIS      weight
+## m5.1 127.6505 15.03249  0.000000        NA 4.767972 0.880458424
+## m5.3 131.6777 16.57977  4.027213  1.903536 7.038831 0.117546749
+## m5.2 139.8303 10.84369 12.179770 11.146999 3.352505 0.001994827</code></pre>
+<p>When we get the high Pareto <span class="math inline">\(k\)</span> warning, we may want to inspect the data</p>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="ulysses-compass.html#cb502-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb502-2"><a href="ulysses-compass.html#cb502-2" aria-hidden="true" tabindex="-1"></a>PSIS_m5<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">PSIS</span>(m5<span class="fl">.3</span>, <span class="at">pointwise =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## Some Pareto k values are high (&gt;0.5). Set pointwise=TRUE to inspect individual points.</code></pre>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="ulysses-compass.html#cb504-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb504-2"><a href="ulysses-compass.html#cb504-2" aria-hidden="true" tabindex="-1"></a>WAIC_m5<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">WAIC</span>(m5<span class="fl">.3</span>, <span class="at">pointwise =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb504-3"><a href="ulysses-compass.html#cb504-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb504-4"><a href="ulysses-compass.html#cb504-4" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> PSIS_m5<span class="fl">.3</span>[PSIS_m5<span class="fl">.3</span><span class="sc">$</span>k <span class="sc">&gt;</span> <span class="fl">0.4</span>,<span class="dv">5</span>], <span class="at">labels =</span> d<span class="sc">$</span>Loc[<span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">13</span>, <span class="dv">20</span>)], <span class="at">y =</span> WAIC_m5<span class="fl">.3</span>[<span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">13</span>,<span class="dv">20</span>),<span class="dv">3</span>])</span>
+<span id="cb504-5"><a href="ulysses-compass.html#cb504-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb504-6"><a href="ulysses-compass.html#cb504-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(PSIS_m5<span class="fl">.3</span><span class="sc">$</span>k, WAIC_m5<span class="fl">.3</span><span class="sc">$</span>penalty, <span class="at">xlab =</span> <span class="st">&quot;PSIS Pareto k&quot;</span>, </span>
+<span id="cb504-7"><a href="ulysses-compass.html#cb504-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;WAIC penalty&quot;</span>, <span class="at">col=</span>rangi2, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb504-8"><a href="ulysses-compass.html#cb504-8" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> labels<span class="sc">$</span>x<span class="fl">-0.05</span>, <span class="at">y =</span> labels<span class="sc">$</span>y, <span class="at">labels =</span> labels<span class="sc">$</span>labels)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%207.34-1.png" width="672" /></p>
+<p>Robust regressing to deal with outliers</p>
+<p>Change the distribution from Gaussian (normal) to Student-T and add a <span class="math inline">\(\nu\)</span> term to adjust the frequency of rare events.</p>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="ulysses-compass.html#cb505-1" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.3</span>t <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb505-2"><a href="ulysses-compass.html#cb505-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb505-3"><a href="ulysses-compass.html#cb505-3" aria-hidden="true" tabindex="-1"></a>    D <span class="sc">~</span> <span class="fu">dstudent</span>(<span class="dv">2</span>, mu, sigma),</span>
+<span id="cb505-4"><a href="ulysses-compass.html#cb505-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bM<span class="sc">*</span>M <span class="sc">+</span> bA<span class="sc">*</span>A,</span>
+<span id="cb505-5"><a href="ulysses-compass.html#cb505-5" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
+<span id="cb505-6"><a href="ulysses-compass.html#cb505-6" aria-hidden="true" tabindex="-1"></a>    bM <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>,<span class="fl">0.5</span>),</span>
+<span id="cb505-7"><a href="ulysses-compass.html#cb505-7" aria-hidden="true" tabindex="-1"></a>    bA <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>,<span class="fl">0.5</span>),</span>
+<span id="cb505-8"><a href="ulysses-compass.html#cb505-8" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb505-9"><a href="ulysses-compass.html#cb505-9" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb505-10"><a href="ulysses-compass.html#cb505-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="ulysses-compass.html#cb506-1" aria-hidden="true" tabindex="-1"></a><span class="fu">PSIS</span>(m5<span class="fl">.3</span>t) <span class="co">#no error for high k</span></span></code></pre></div>
+<pre><code>##       PSIS      lppd  penalty  std_err
+## 1 134.1568 -67.07842 7.138106 11.87741</code></pre>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="ulysses-compass.html#cb508-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m5<span class="fl">.3</span>)</span></code></pre></div>
+<pre><code>##                mean         sd       5.5%      94.5%
+## a     -3.141054e-05 0.09707997 -0.1551840  0.1551211
+## bM    -6.536477e-02 0.15078018 -0.3063406  0.1756111
+## bA    -6.135209e-01 0.15099044 -0.8548328 -0.3722090
+## sigma  7.851597e-01 0.07785368  0.6607345  0.9095849</code></pre>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="ulysses-compass.html#cb510-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m5<span class="fl">.3</span>t)</span></code></pre></div>
+<pre><code>##               mean         sd       5.5%      94.5%
+## a      0.015066723 0.09943806 -0.1438545  0.1739880
+## bM     0.003731365 0.21184966 -0.3348453  0.3423080
+## bA    -0.701153916 0.13045818 -0.9096513 -0.4926565
+## sigma  0.552696770 0.08005500  0.4247534  0.6806401</code></pre>
+<p>The age of marriage effect has been increased (farther from zero) slightly and the marriage rate has gotten closer to zero with a wider sd.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="the-haunted-dag-the-casual-terror.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conditional-manatees.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/06-share.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

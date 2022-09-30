@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 Conditional manatees | Rethinking Companion</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 Conditional manatees | Rethinking Companion" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 Conditional manatees | Rethinking Companion" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Wade VanderWright" />
+
+
+<meta name="date" content="2022-09-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ulysses-compass.html"/>
+<link rel="next" href="markov-chain-monte-carlo.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Rethinking Companion</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> The Golem of Prague</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#statistical-golems"><i class="fa fa-check"></i><b>1.1</b> Statistical golems</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#statistical-rethinking"><i class="fa fa-check"></i><b>1.2</b> Statistical Rethinking</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#what-are-we-trying-to-do-with-the-golems"><i class="fa fa-check"></i><b>1.2.1</b> What are we trying to do with the golems?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#tools-for-golem-engineering"><i class="fa fa-check"></i><b>1.3</b> Tools for golem engineering</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#bayesian-data-analysis"><i class="fa fa-check"></i><b>1.3.1</b> Bayesian data analysis</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#model-comparison-and-predictions"><i class="fa fa-check"></i><b>1.3.2</b> Model comparison and predictions</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#multilevel-models"><i class="fa fa-check"></i><b>1.3.3</b> Multilevel models</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#graphical-causal-models"><i class="fa fa-check"></i><b>1.3.4</b> Graphical causal models</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#summary"><i class="fa fa-check"></i><b>1.4</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#session-info"><i class="fa fa-check"></i>Session Info</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html"><i class="fa fa-check"></i><b>2</b> Small worlds and large worlds</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#the-garden-of-forking-data"><i class="fa fa-check"></i><b>2.1</b> The garden of forking data</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#counting-possibilities"><i class="fa fa-check"></i><b>2.1.1</b> Counting possibilities</a></li>
+<li class="chapter" data-level="2.1.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#combining-other-information"><i class="fa fa-check"></i><b>2.1.2</b> Combining other information</a></li>
+<li class="chapter" data-level="2.1.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#from-counts-to-probability"><i class="fa fa-check"></i><b>2.1.3</b> From counts to probability</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#building-a-model"><i class="fa fa-check"></i><b>2.2</b> Building a model</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#a-data-story"><i class="fa fa-check"></i><b>2.2.1</b> A data story</a></li>
+<li class="chapter" data-level="2.2.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#bayesian-updating"><i class="fa fa-check"></i><b>2.2.2</b> Bayesian updating</a></li>
+<li class="chapter" data-level="2.2.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#evaluate"><i class="fa fa-check"></i><b>2.2.3</b> Evaluate</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#components-of-the-model"><i class="fa fa-check"></i><b>2.3</b> Components of the model</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#variables"><i class="fa fa-check"></i><b>2.3.1</b> Variables</a></li>
+<li class="chapter" data-level="2.3.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#definitions"><i class="fa fa-check"></i><b>2.3.2</b> Definitions</a></li>
+<li class="chapter" data-level="2.3.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#a-model-is-born"><i class="fa fa-check"></i><b>2.3.3</b> A model is born</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#maiking-the-model-go"><i class="fa fa-check"></i><b>2.4</b> Maiking the model go</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#quadratic"><i class="fa fa-check"></i><b>2.4.1</b> Quadratic</a></li>
+<li class="chapter" data-level="2.4.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#mcmc"><i class="fa fa-check"></i><b>2.4.2</b> MCMC</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html"><i class="fa fa-check"></i><b>3</b> Sampling the imaginary</a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#probabilities-vs.-frequency-counts"><i class="fa fa-check"></i><b>3.0.1</b> Probabilities vs. Frequency counts</a></li>
+<li class="chapter" data-level="3.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-from-a-grid-approximate-posterior"><i class="fa fa-check"></i><b>3.1</b> Sampling from a grid-approximate posterior</a></li>
+<li class="chapter" data-level="3.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-to-summarize"><i class="fa fa-check"></i><b>3.2</b> Sampling to summarize</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#intervals-of-defined-boundaries"><i class="fa fa-check"></i><b>3.2.1</b> Intervals of defined boundaries</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#intervals-of-defined-mass"><i class="fa fa-check"></i><b>3.2.2</b> intervals of defined mass</a></li>
+<li class="chapter" data-level="3.2.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#point-estimates"><i class="fa fa-check"></i><b>3.2.3</b> Point estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-to-simulate-prediction"><i class="fa fa-check"></i><b>3.3</b> Sampling to simulate prediction</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#dummy-data"><i class="fa fa-check"></i><b>3.3.1</b> Dummy data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#model-checking"><i class="fa fa-check"></i><b>3.3.2</b> Model checking</a></li>
+<li class="chapter" data-level="3.3.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#practice-with-brms"><i class="fa fa-check"></i><b>3.3.3</b> Practice with brms</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="geocentric-models.html"><a href="geocentric-models.html"><i class="fa fa-check"></i><b>4</b> Geocentric models</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="geocentric-models.html"><a href="geocentric-models.html#why-normal-distributions-are-normal"><i class="fa fa-check"></i><b>4.1</b> Why normal distributions are normal</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-addition"><i class="fa fa-check"></i><b>4.1.1</b> Normal by addition</a></li>
+<li class="chapter" data-level="4.1.2" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-multiplication"><i class="fa fa-check"></i><b>4.1.2</b> Normal by multiplication</a></li>
+<li class="chapter" data-level="4.1.3" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-log-multiplication"><i class="fa fa-check"></i><b>4.1.3</b> Normal by log-multiplication</a></li>
+<li class="chapter" data-level="4.1.4" data-path="geocentric-models.html"><a href="geocentric-models.html#using-gaussian-distributions"><i class="fa fa-check"></i><b>4.1.4</b> Using Gaussian distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="geocentric-models.html"><a href="geocentric-models.html#a-language-for-describing-models"><i class="fa fa-check"></i><b>4.2</b> A language for describing models</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="geocentric-models.html"><a href="geocentric-models.html#re-describing-the-globe-tossing-model."><i class="fa fa-check"></i><b>4.2.1</b> Re-describing the globe tossing model.</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="geocentric-models.html"><a href="geocentric-models.html#gaussian-model-of-height"><i class="fa fa-check"></i><b>4.3</b> Gaussian model of height</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="geocentric-models.html"><a href="geocentric-models.html#the-data"><i class="fa fa-check"></i><b>4.3.1</b> The data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="geocentric-models.html"><a href="geocentric-models.html#the-model"><i class="fa fa-check"></i><b>4.3.2</b> The Model</a></li>
+<li class="chapter" data-level="4.3.3" data-path="geocentric-models.html"><a href="geocentric-models.html#grid-approximation-of-the-posterior-distribution"><i class="fa fa-check"></i><b>4.3.3</b> Grid approximation of the posterior distribution</a></li>
+<li class="chapter" data-level="4.3.4" data-path="geocentric-models.html"><a href="geocentric-models.html#sampling-from-the-posterior"><i class="fa fa-check"></i><b>4.3.4</b> Sampling from the posterior</a></li>
+<li class="chapter" data-level="4.3.5" data-path="geocentric-models.html"><a href="geocentric-models.html#finding-the-posterior-distribution-with-quap"><i class="fa fa-check"></i><b>4.3.5</b> Finding the posterior distribution with <code>quap</code></a></li>
+<li class="chapter" data-level="4.3.6" data-path="geocentric-models.html"><a href="geocentric-models.html#sampling-with-quap"><i class="fa fa-check"></i><b>4.3.6</b> Sampling with <code>quap</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="geocentric-models.html"><a href="geocentric-models.html#linear-prediction"><i class="fa fa-check"></i><b>4.4</b> Linear Prediction</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="geocentric-models.html"><a href="geocentric-models.html#finding-the-posterior-distribtuion"><i class="fa fa-check"></i><b>4.4.1</b> Finding the posterior distribtuion</a></li>
+<li class="chapter" data-level="4.4.2" data-path="geocentric-models.html"><a href="geocentric-models.html#interpreting-the-posterior-distribution"><i class="fa fa-check"></i><b>4.4.2</b> Interpreting the posterior distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="geocentric-models.html"><a href="geocentric-models.html#curves-from-lines"><i class="fa fa-check"></i><b>4.5</b> Curves from lines</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="geocentric-models.html"><a href="geocentric-models.html#polynomial-regression"><i class="fa fa-check"></i><b>4.5.1</b> Polynomial regression</a></li>
+<li class="chapter" data-level="4.5.2" data-path="geocentric-models.html"><a href="geocentric-models.html#splines"><i class="fa fa-check"></i><b>4.5.2</b> Splines</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html"><i class="fa fa-check"></i><b>5</b> The many variables &amp; the spurious waffles</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#spurious-assoiciation"><i class="fa fa-check"></i><b>5.1</b> Spurious assoiciation</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#think-before-to-regress"><i class="fa fa-check"></i><b>5.1.1</b> Think before to regress</a></li>
+<li class="chapter" data-level="5.1.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#testable-implications"><i class="fa fa-check"></i><b>5.1.2</b> Testable implications</a></li>
+<li class="chapter" data-level="5.1.3" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#multiple-regression-notation"><i class="fa fa-check"></i><b>5.1.3</b> Multiple regression notation</a></li>
+<li class="chapter" data-level="5.1.4" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#approximating-the-posterior"><i class="fa fa-check"></i><b>5.1.4</b> Approximating the posterior</a></li>
+<li class="chapter" data-level="5.1.5" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#plotting-multivariate-posteriors"><i class="fa fa-check"></i><b>5.1.5</b> Plotting multivariate posteriors</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#masked-relationship"><i class="fa fa-check"></i><b>5.2</b> Masked relationship</a></li>
+<li class="chapter" data-level="5.3" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Categorical variables</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#binary-categories"><i class="fa fa-check"></i><b>5.3.1</b> Binary categories</a></li>
+<li class="chapter" data-level="5.3.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#many-categories"><i class="fa fa-check"></i><b>5.3.2</b> Many categories</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html"><i class="fa fa-check"></i><b>6</b> The haunted dag &amp; the casual terror</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#multicollinearity"><i class="fa fa-check"></i><b>6.1</b> Multicollinearity</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#example-try-to-predict-height-from-length-of-a-persons-legs."><i class="fa fa-check"></i><b>6.1.1</b> Example: Try to predict height from length of a person’s legs.</a></li>
+<li class="chapter" data-level="6.1.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#multicollinear-milk"><i class="fa fa-check"></i><b>6.1.2</b> Multicollinear milk</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#post-treatrment-bias"><i class="fa fa-check"></i><b>6.2</b> Post-treatrment bias</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#a-prior-is-born"><i class="fa fa-check"></i><b>6.2.1</b> A prior is born</a></li>
+<li class="chapter" data-level="6.2.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#blocked-by-consequence"><i class="fa fa-check"></i><b>6.2.2</b> Blocked by consequence</a></li>
+<li class="chapter" data-level="6.2.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#fungus-and-d-separation"><i class="fa fa-check"></i><b>6.2.3</b> Fungus and d-separation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#collider-bias"><i class="fa fa-check"></i><b>6.3</b> Collider bias</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#collider-for-false-sorrow"><i class="fa fa-check"></i><b>6.3.1</b> Collider for false sorrow</a></li>
+<li class="chapter" data-level="6.3.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#the-haunted-dag"><i class="fa fa-check"></i><b>6.3.2</b> The haunted DAG</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#confronting-confounding"><i class="fa fa-check"></i><b>6.4</b> Confronting confounding</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#shutting-the-backdoor"><i class="fa fa-check"></i><b>6.4.1</b> Shutting the backdoor</a></li>
+<li class="chapter" data-level="6.4.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#two-roads"><i class="fa fa-check"></i><b>6.4.2</b> Two roads</a></li>
+<li class="chapter" data-level="6.4.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#backdoor-waffles"><i class="fa fa-check"></i><b>6.4.3</b> Backdoor waffles</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ulysses-compass.html"><a href="ulysses-compass.html"><i class="fa fa-check"></i><b>7</b> Ulysses’ compass</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#the-problem-with-parameters"><i class="fa fa-check"></i><b>7.1</b> The problem with parameters</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#more-parameters-almost-always-improve-fit"><i class="fa fa-check"></i><b>7.1.1</b> More parameters (almost) always improve fit</a></li>
+<li class="chapter" data-level="7.1.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#too-few-parameters-hurts-too"><i class="fa fa-check"></i><b>7.1.2</b> Too few parameters hurts, too</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#entropy-and-accuracy"><i class="fa fa-check"></i><b>7.2</b> Entropy and accuracy</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#firing-the-weatherperson"><i class="fa fa-check"></i><b>7.2.1</b> Firing the weatherperson</a></li>
+<li class="chapter" data-level="7.2.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#information-and-uncertainty"><i class="fa fa-check"></i><b>7.2.2</b> Information and uncertainty</a></li>
+<li class="chapter" data-level="7.2.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#from-entropy-to-accuracy"><i class="fa fa-check"></i><b>7.2.3</b> From entropy to accuracy</a></li>
+<li class="chapter" data-level="7.2.4" data-path="ulysses-compass.html"><a href="ulysses-compass.html#estimating-divergence"><i class="fa fa-check"></i><b>7.2.4</b> Estimating divergence</a></li>
+<li class="chapter" data-level="7.2.5" data-path="ulysses-compass.html"><a href="ulysses-compass.html#scoring-the-right-data"><i class="fa fa-check"></i><b>7.2.5</b> Scoring the right data</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#golem-taming-regularization"><i class="fa fa-check"></i><b>7.3</b> Golem taming: regularization</a></li>
+<li class="chapter" data-level="7.4" data-path="ulysses-compass.html"><a href="ulysses-compass.html#predicting-predictive-accuracy"><i class="fa fa-check"></i><b>7.4</b> Predicting predictive accuracy</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#cross-validation"><i class="fa fa-check"></i><b>7.4.1</b> Cross-validation</a></li>
+<li class="chapter" data-level="7.4.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#information-criteria"><i class="fa fa-check"></i><b>7.4.2</b> Information criteria</a></li>
+<li class="chapter" data-level="7.4.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#comparing-cv-psis-and-waic"><i class="fa fa-check"></i><b>7.4.3</b> Comparing CV, PSIS, and WAIC</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="ulysses-compass.html"><a href="ulysses-compass.html#model-comparison"><i class="fa fa-check"></i><b>7.5</b> Model comparison</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#model-mis-selection"><i class="fa fa-check"></i><b>7.5.1</b> Model mis-selection</a></li>
+<li class="chapter" data-level="7.5.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#outliers-and-other-illustions"><i class="fa fa-check"></i><b>7.5.2</b> Outliers and other illustions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="conditional-manatees.html"><a href="conditional-manatees.html"><i class="fa fa-check"></i><b>8</b> Conditional manatees</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#building-an-interaction"><i class="fa fa-check"></i><b>8.1</b> Building an interaction</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#making-a-rugged-model"><i class="fa fa-check"></i><b>8.1.1</b> Making a rugged model</a></li>
+<li class="chapter" data-level="8.1.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#adding-an-indicator-isnt-enough"><i class="fa fa-check"></i><b>8.1.2</b> Adding an indicator isn’t enough</a></li>
+<li class="chapter" data-level="8.1.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#adding-an-interaction-does-work"><i class="fa fa-check"></i><b>8.1.3</b> Adding an interaction does work</a></li>
+<li class="chapter" data-level="8.1.4" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-the-interaction"><i class="fa fa-check"></i><b>8.1.4</b> Plotting the interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#symmetry-of-interactions"><i class="fa fa-check"></i><b>8.2</b> Symmetry of interactions</a></li>
+<li class="chapter" data-level="8.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#continuous-interactions"><i class="fa fa-check"></i><b>8.3</b> Continuous interactions</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#a-winter-flower"><i class="fa fa-check"></i><b>8.3.1</b> A winter flower</a></li>
+<li class="chapter" data-level="8.3.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#the-models"><i class="fa fa-check"></i><b>8.3.2</b> the models</a></li>
+<li class="chapter" data-level="8.3.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-posterior-predictions"><i class="fa fa-check"></i><b>8.3.3</b> Plotting posterior predictions</a></li>
+<li class="chapter" data-level="8.3.4" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-prior-predictions"><i class="fa fa-check"></i><b>8.3.4</b> Plotting prior predictions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html"><i class="fa fa-check"></i><b>9</b> Markov Chain Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#good-king-markov-and-his-island-kingdom"><i class="fa fa-check"></i><b>9.1</b> Good King Markov and his island kingdom</a></li>
+<li class="chapter" data-level="9.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#metropolis-algorithims"><i class="fa fa-check"></i><b>9.2</b> Metropolis algorithims</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#gibbs-sampling"><i class="fa fa-check"></i><b>9.2.1</b> Gibbs sampling</a></li>
+<li class="chapter" data-level="9.2.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#high-dimensional-problems"><i class="fa fa-check"></i><b>9.2.2</b> High-dimensional problems</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#hamiltonian-monte-carlo"><i class="fa fa-check"></i><b>9.3</b> Hamiltonian Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#another-parable"><i class="fa fa-check"></i><b>9.3.1</b> Another parable</a></li>
+<li class="chapter" data-level="9.3.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#particles-in-space"><i class="fa fa-check"></i><b>9.3.2</b> Particles in space</a></li>
+<li class="chapter" data-level="9.3.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#limitations"><i class="fa fa-check"></i><b>9.3.3</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#easy-hmc-ulam-brm"><i class="fa fa-check"></i><b>9.4</b> Easy HMC: <code>ulam</code> (<code>brm</code>)</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#preperation"><i class="fa fa-check"></i><b>9.4.1</b> Preperation</a></li>
+<li class="chapter" data-level="9.4.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#sampling-from-the-posterior-1"><i class="fa fa-check"></i><b>9.4.2</b> Sampling from the posterior</a></li>
+<li class="chapter" data-level="9.4.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#sampling-again-in-parallel"><i class="fa fa-check"></i><b>9.4.3</b> Sampling again, in parallel</a></li>
+<li class="chapter" data-level="9.4.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#visualization"><i class="fa fa-check"></i><b>9.4.4</b> Visualization</a></li>
+<li class="chapter" data-level="9.4.5" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#checking-the-chain"><i class="fa fa-check"></i><b>9.4.5</b> Checking the chain</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#care-and-feeding-of-your-markov-chain"><i class="fa fa-check"></i><b>9.5</b> Care and feeding of your Markov chain</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#how-many-samples-do-you-need"><i class="fa fa-check"></i><b>9.5.1</b> How many samples do you need?</a></li>
+<li class="chapter" data-level="9.5.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#how-many-chains-do-you-need"><i class="fa fa-check"></i><b>9.5.2</b> How many chains do you need?</a></li>
+<li class="chapter" data-level="9.5.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#taming-a-wild-chain"><i class="fa fa-check"></i><b>9.5.3</b> Taming a wild chain</a></li>
+<li class="chapter" data-level="9.5.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#non-identifiable-parameters"><i class="fa fa-check"></i><b>9.5.4</b> Non-identifiable parameters</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html"><i class="fa fa-check"></i><b>10</b> Big entropy and the generalized linear model</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#maximum-entropy"><i class="fa fa-check"></i><b>10.1</b> Maximum entropy</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#gaussian"><i class="fa fa-check"></i><b>10.1.1</b> Gaussian</a></li>
+<li class="chapter" data-level="10.1.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#binomial"><i class="fa fa-check"></i><b>10.1.2</b> Binomial</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#generalized-linear-models"><i class="fa fa-check"></i><b>10.2</b> Generalized linear models</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#meet-the-family"><i class="fa fa-check"></i><b>10.2.1</b> Meet the family</a></li>
+<li class="chapter" data-level="10.2.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#linking-linear-models-to-distributions"><i class="fa fa-check"></i><b>10.2.2</b> Linking linear models to distributions</a></li>
+<li class="chapter" data-level="10.2.3" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#omitted-variable-bias-again"><i class="fa fa-check"></i><b>10.2.3</b> Omitted variable bias (again)</a></li>
+<li class="chapter" data-level="10.2.4" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#absolute-relative-differences"><i class="fa fa-check"></i><b>10.2.4</b> Absolute relative differences</a></li>
+<li class="chapter" data-level="10.2.5" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#glms-and-information-criteria"><i class="fa fa-check"></i><b>10.2.5</b> GLMs and information criteria</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html"><i class="fa fa-check"></i><b>11</b> God spiked the integers</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#binomial-regression"><i class="fa fa-check"></i><b>11.1</b> Binomial regression</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#logistic-regression-prosocial-chimpanzees"><i class="fa fa-check"></i><b>11.1.1</b> Logistic regression : Prosocial chimpanzees</a></li>
+<li class="chapter" data-level="11.1.2" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#relative-shark-and-absolute-deer"><i class="fa fa-check"></i><b>11.1.2</b> Relative shark and absolute deer</a></li>
+<li class="chapter" data-level="11.1.3" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#aggregated-binomial-chimps-condensed"><i class="fa fa-check"></i><b>11.1.3</b> Aggregated binomial: Chimps condensed</a></li>
+<li class="chapter" data-level="11.1.4" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#aggregated-admissions"><i class="fa fa-check"></i><b>11.1.4</b> Aggregated admissions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="monsters-and-mixtures.html"><a href="monsters-and-mixtures.html"><i class="fa fa-check"></i><b>12</b> Monsters and mixtures</a></li>
+<li class="chapter" data-level="13" data-path="models-with-memory.html"><a href="models-with-memory.html"><i class="fa fa-check"></i><b>13</b> Models with memory</a></li>
+<li class="chapter" data-level="14" data-path="adventures-in-covariance.html"><a href="adventures-in-covariance.html"><i class="fa fa-check"></i><b>14</b> Adventures in covariance</a></li>
+<li class="chapter" data-level="15" data-path="missing-data-and-other-opportunities.html"><a href="missing-data-and-other-opportunities.html"><i class="fa fa-check"></i><b>15</b> Missing data and other opportunities</a></li>
+<li class="chapter" data-level="16" data-path="generalized-linear-madness.html"><a href="generalized-linear-madness.html"><i class="fa fa-check"></i><b>16</b> Generalized linear madness</a></li>
+<li class="chapter" data-level="17" data-path="horoscopes.html"><a href="horoscopes.html"><i class="fa fa-check"></i><b>17</b> Horoscopes</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Rethinking Companion</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="conditional-manatees" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Conditional manatees<a href="conditional-manatees.html#conditional-manatees" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="building-an-interaction" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Building an interaction<a href="conditional-manatees.html#building-an-interaction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span class="math inline">\(R\)</span> = ruggedness, <span class="math inline">\(G\)</span> = GDP, <span class="math inline">\(C\)</span> = continent, <span class="math inline">\(U\)</span> = unobserved variables.</p>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="conditional-manatees.html#cb512-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dagitty)</span>
+<span id="cb512-2"><a href="conditional-manatees.html#cb512-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinking)</span>
+<span id="cb512-3"><a href="conditional-manatees.html#cb512-3" aria-hidden="true" tabindex="-1"></a>dag_8<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">dagitty</span>(<span class="st">&quot;dag{</span></span>
+<span id="cb512-4"><a href="conditional-manatees.html#cb512-4" aria-hidden="true" tabindex="-1"></a><span class="st">                   R -&gt; G</span></span>
+<span id="cb512-5"><a href="conditional-manatees.html#cb512-5" aria-hidden="true" tabindex="-1"></a><span class="st">                   C -&gt; G</span></span>
+<span id="cb512-6"><a href="conditional-manatees.html#cb512-6" aria-hidden="true" tabindex="-1"></a><span class="st">                   U -&gt; G</span></span>
+<span id="cb512-7"><a href="conditional-manatees.html#cb512-7" aria-hidden="true" tabindex="-1"></a><span class="st">                   U -&gt; R</span></span>
+<span id="cb512-8"><a href="conditional-manatees.html#cb512-8" aria-hidden="true" tabindex="-1"></a><span class="st">                   }&quot;</span>)</span>
+<span id="cb512-9"><a href="conditional-manatees.html#cb512-9" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(dag_8<span class="fl">.1</span>) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">y =</span> <span class="fu">c</span>(<span class="at">R =</span> <span class="dv">0</span>, <span class="at">G =</span> <span class="dv">0</span>, <span class="at">C =</span> <span class="dv">0</span>, <span class="at">U =</span> <span class="dv">1</span>),</span>
+<span id="cb512-10"><a href="conditional-manatees.html#cb512-10" aria-hidden="true" tabindex="-1"></a>                             <span class="at">x =</span> <span class="fu">c</span>(<span class="at">R =</span> <span class="dv">0</span>, <span class="at">G =</span> <span class="dv">1</span>, <span class="at">U =</span> <span class="dv">1</span>, <span class="at">C =</span> <span class="dv">2</span>))</span>
+<span id="cb512-11"><a href="conditional-manatees.html#cb512-11" aria-hidden="true" tabindex="-1"></a><span class="fu">drawdag</span>(dag_8<span class="fl">.1</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
+<p><span class="math inline">\(G = f(R,C)\)</span></p>
+<div id="making-a-rugged-model" class="section level3 hasAnchor" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> Making a rugged model<a href="conditional-manatees.html#making-a-rugged-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="conditional-manatees.html#cb513-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinking)</span>
+<span id="cb513-2"><a href="conditional-manatees.html#cb513-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(rugged)</span>
+<span id="cb513-3"><a href="conditional-manatees.html#cb513-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> rugged</span>
+<span id="cb513-4"><a href="conditional-manatees.html#cb513-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb513-5"><a href="conditional-manatees.html#cb513-5" aria-hidden="true" tabindex="-1"></a><span class="co">#log transform GDP</span></span>
+<span id="cb513-6"><a href="conditional-manatees.html#cb513-6" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>log_gdp <span class="ot">&lt;-</span> <span class="fu">log</span>(d<span class="sc">$</span>rgdppc_2000)</span>
+<span id="cb513-7"><a href="conditional-manatees.html#cb513-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb513-8"><a href="conditional-manatees.html#cb513-8" aria-hidden="true" tabindex="-1"></a><span class="co">#only include countries with GDP data</span></span>
+<span id="cb513-9"><a href="conditional-manatees.html#cb513-9" aria-hidden="true" tabindex="-1"></a>dd <span class="ot">&lt;-</span> d[<span class="fu">complete.cases</span>(d<span class="sc">$</span>rgdppc_2000),]</span>
+<span id="cb513-10"><a href="conditional-manatees.html#cb513-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb513-11"><a href="conditional-manatees.html#cb513-11" aria-hidden="true" tabindex="-1"></a><span class="co">#rescale variables</span></span>
+<span id="cb513-12"><a href="conditional-manatees.html#cb513-12" aria-hidden="true" tabindex="-1"></a>dd<span class="sc">$</span>log_gdp_std <span class="ot">&lt;-</span> (dd<span class="sc">$</span>log_gdp) <span class="sc">/</span> <span class="fu">mean</span>(dd<span class="sc">$</span>log_gdp) <span class="co"># values of 1 is average</span></span>
+<span id="cb513-13"><a href="conditional-manatees.html#cb513-13" aria-hidden="true" tabindex="-1"></a>dd<span class="sc">$</span>rugged_std <span class="ot">&lt;-</span> (dd<span class="sc">$</span>rugged) <span class="sc">/</span> <span class="fu">max</span>(dd<span class="sc">$</span>rugged) <span class="co"># values range from 0 to max ruggedness (1)</span></span></code></pre></div>
+<p>Basic model
+<span class="math display">\[\text{log}(y_{i}) \sim \text{Normal}(\mu_{i}, \sigma)\\
+\mu_{i} = \alpha + \beta(r_{i} - \overline{r})\\
+\alpha \sim \text{Normal}|(1,1)\\
+\beta \sim \text{Normal}(0, 1)\\
+\sigma \sim \text{Exponential}(1)\]</span></p>
+<p>In R:</p>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="conditional-manatees.html#cb514-1" aria-hidden="true" tabindex="-1"></a>m8<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb514-2"><a href="conditional-manatees.html#cb514-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb514-3"><a href="conditional-manatees.html#cb514-3" aria-hidden="true" tabindex="-1"></a>    log_gdp_std <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb514-4"><a href="conditional-manatees.html#cb514-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> b<span class="sc">*</span>(rugged_std <span class="sc">-</span> <span class="fl">0.215</span>),</span>
+<span id="cb514-5"><a href="conditional-manatees.html#cb514-5" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb514-6"><a href="conditional-manatees.html#cb514-6" aria-hidden="true" tabindex="-1"></a>    b <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb514-7"><a href="conditional-manatees.html#cb514-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb514-8"><a href="conditional-manatees.html#cb514-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> dd</span>
+<span id="cb514-9"><a href="conditional-manatees.html#cb514-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Sample priors:</p>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="conditional-manatees.html#cb515-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb515-2"><a href="conditional-manatees.html#cb515-2" aria-hidden="true" tabindex="-1"></a>prior <span class="ot">&lt;-</span> <span class="fu">extract.prior</span>(m8<span class="fl">.1</span>)</span>
+<span id="cb515-3"><a href="conditional-manatees.html#cb515-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb515-4"><a href="conditional-manatees.html#cb515-4" aria-hidden="true" tabindex="-1"></a><span class="co">#set plot</span></span>
+<span id="cb515-5"><a href="conditional-manatees.html#cb515-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="cn">NULL</span>, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>), <span class="at">xlab =</span> <span class="st">&quot;ruggedness&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;log GDP&quot;</span>)</span>
+<span id="cb515-6"><a href="conditional-manatees.html#cb515-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">min</span>(dd<span class="sc">$</span>log_gdp_std), <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb515-7"><a href="conditional-manatees.html#cb515-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">max</span>(dd<span class="sc">$</span>log_gdp_std), <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb515-8"><a href="conditional-manatees.html#cb515-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb515-9"><a href="conditional-manatees.html#cb515-9" aria-hidden="true" tabindex="-1"></a><span class="co">#draw lines from prior</span></span>
+<span id="cb515-10"><a href="conditional-manatees.html#cb515-10" aria-hidden="true" tabindex="-1"></a>rugged_seq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">length.out=</span><span class="dv">30</span>)</span>
+<span id="cb515-11"><a href="conditional-manatees.html#cb515-11" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m8<span class="fl">.1</span>, <span class="at">post =</span> prior, <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">rugged_std=</span>rugged_seq))</span>
+<span id="cb515-12"><a href="conditional-manatees.html#cb515-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>){</span>
+<span id="cb515-13"><a href="conditional-manatees.html#cb515-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(rugged_seq, mu[i,], <span class="at">col=</span><span class="fu">col.alpha</span>(<span class="st">&#39;black&#39;</span>,<span class="fl">0.3</span>))</span>
+<span id="cb515-14"><a href="conditional-manatees.html#cb515-14" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%208.3-1.png" width="672" /></p>
+<p><span class="math inline">\(\alpha\)</span> is too wild. intercept should be somewhere around where the mean of ruggedness hits 1 on the log GDP scale so adjust to Normal(1, 0.1).</p>
+<p><span class="math inline">\(\beta\)</span> is also out of control. we need something (positive or negative) that spans the difference between the dashed lines</p>
+<p>Slope should be <span class="math inline">\(\pm 0.6\)</span> which is the differece between the maximum and minimum values of GDP</p>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="conditional-manatees.html#cb516-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(dd<span class="sc">$</span>log_gdp_std) <span class="sc">-</span> <span class="fu">min</span>(dd<span class="sc">$</span>log_gdp_std)</span></code></pre></div>
+<pre><code>## [1] 0.5658058</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="conditional-manatees.html#cb518-1" aria-hidden="true" tabindex="-1"></a><span class="co">#proportion of slopes greater than 0.6</span></span>
+<span id="cb518-2"><a href="conditional-manatees.html#cb518-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">abs</span>(prior<span class="sc">$</span>b) <span class="sc">&gt;</span> <span class="fl">0.6</span>) <span class="sc">/</span> <span class="fu">length</span>(prior<span class="sc">$</span>b)</span></code></pre></div>
+<pre><code>## [1] 0.54</code></pre>
+<p>Let’s fix the model</p>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="conditional-manatees.html#cb520-1" aria-hidden="true" tabindex="-1"></a>m8<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb520-2"><a href="conditional-manatees.html#cb520-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb520-3"><a href="conditional-manatees.html#cb520-3" aria-hidden="true" tabindex="-1"></a>    log_gdp_std <span class="sc">~</span><span class="fu">dnorm</span>(mu,sigma),</span>
+<span id="cb520-4"><a href="conditional-manatees.html#cb520-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span>a<span class="sc">+</span>b<span class="sc">*</span>(rugged_std<span class="fl">-0.215</span>),</span>
+<span id="cb520-5"><a href="conditional-manatees.html#cb520-5" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span><span class="fu">dnorm</span>(<span class="dv">1</span>,<span class="fl">0.1</span>),</span>
+<span id="cb520-6"><a href="conditional-manatees.html#cb520-6" aria-hidden="true" tabindex="-1"></a>    b <span class="sc">~</span><span class="fu">dnorm</span>(<span class="dv">0</span>,<span class="fl">0.3</span>),</span>
+<span id="cb520-7"><a href="conditional-manatees.html#cb520-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span><span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb520-8"><a href="conditional-manatees.html#cb520-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> dd</span>
+<span id="cb520-9"><a href="conditional-manatees.html#cb520-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-136-1.png" width="672" /></p>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="conditional-manatees.html#cb521-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m8<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>##              mean          sd        5.5%      94.5%
+## a     0.999998578 0.010412457  0.98335746 1.01663970
+## b     0.001994904 0.054795958 -0.08557962 0.08956943
+## sigma 0.136503830 0.007397023  0.12468196 0.14832570</code></pre>
+<p>No association seen yet</p>
+</div>
+<div id="adding-an-indicator-isnt-enough" class="section level3 hasAnchor" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> Adding an indicator isn’t enough<a href="conditional-manatees.html#adding-an-indicator-isnt-enough" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Update <span class="math inline">\(\mu\)</span></p>
+<p><span class="math display">\[\mu_{i} = \alpha_{CID[i]} + \beta(r_{i} - \overline{r})\]</span></p>
+<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="conditional-manatees.html#cb523-1" aria-hidden="true" tabindex="-1"></a><span class="co">#make an index variable for Africa (1) and other continents (2)</span></span>
+<span id="cb523-2"><a href="conditional-manatees.html#cb523-2" aria-hidden="true" tabindex="-1"></a>dd<span class="sc">$</span>cid <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dd<span class="sc">$</span>cont_africa <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
+<p>Now update the model</p>
+<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb524-1"><a href="conditional-manatees.html#cb524-1" aria-hidden="true" tabindex="-1"></a>m8<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb524-2"><a href="conditional-manatees.html#cb524-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb524-3"><a href="conditional-manatees.html#cb524-3" aria-hidden="true" tabindex="-1"></a>    log_gdp_std <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb524-4"><a href="conditional-manatees.html#cb524-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span>a[cid] <span class="sc">+</span> b <span class="sc">*</span> (rugged_std <span class="sc">-</span> <span class="fl">0.215</span>),</span>
+<span id="cb524-5"><a href="conditional-manatees.html#cb524-5" aria-hidden="true" tabindex="-1"></a>    a[cid] <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">1</span>, <span class="fl">0.1</span>),</span>
+<span id="cb524-6"><a href="conditional-manatees.html#cb524-6" aria-hidden="true" tabindex="-1"></a>    b <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.3</span>),</span>
+<span id="cb524-7"><a href="conditional-manatees.html#cb524-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span><span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb524-8"><a href="conditional-manatees.html#cb524-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> dd</span>
+<span id="cb524-9"><a href="conditional-manatees.html#cb524-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="conditional-manatees.html#cb525-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compare</span>(m8<span class="fl">.1</span>, m8<span class="fl">.2</span>)</span></code></pre></div>
+<pre><code>##           WAIC       SE    dWAIC      dSE    pWAIC       weight
+## m8.2 -252.1508 15.25508  0.00000       NA 4.291725 1.000000e+00
+## m8.1 -188.9664 13.28913 63.18439 15.11018 2.574284 1.904075e-14</code></pre>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="conditional-manatees.html#cb527-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m8<span class="fl">.2</span>, <span class="at">depth =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##              mean          sd       5.5%      94.5%
+## a[1]   0.88040848 0.015938408  0.8549358 0.90588113
+## a[2]   1.04916209 0.010186473  1.0328821 1.06544204
+## b     -0.04651791 0.045690786 -0.1195406 0.02650479
+## sigma  0.11239762 0.006092464  0.1026607 0.12213455</code></pre>
+<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="conditional-manatees.html#cb529-1" aria-hidden="true" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">extract.samples</span>(m8<span class="fl">.2</span>)</span>
+<span id="cb529-2"><a href="conditional-manatees.html#cb529-2" aria-hidden="true" tabindex="-1"></a>diff_a1_a2 <span class="ot">&lt;-</span> post<span class="sc">$</span>a[,<span class="dv">1</span>] <span class="sc">-</span> post<span class="sc">$</span>a[,<span class="dv">2</span>]</span>
+<span id="cb529-3"><a href="conditional-manatees.html#cb529-3" aria-hidden="true" tabindex="-1"></a><span class="fu">PI</span>(diff_a1_a2)</span></code></pre></div>
+<pre><code>##         5%        94% 
+## -0.1988472 -0.1384092</code></pre>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="conditional-manatees.html#cb531-1" aria-hidden="true" tabindex="-1"></a>rugged.seq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">length.out =</span> <span class="dv">30</span>)</span>
+<span id="cb531-2"><a href="conditional-manatees.html#cb531-2" aria-hidden="true" tabindex="-1"></a>mu.NotAfrica <span class="ot">&lt;-</span> <span class="fu">link</span>(m8<span class="fl">.2</span>, <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">cid=</span><span class="dv">2</span>, <span class="at">rugged_std=</span>rugged.seq))</span>
+<span id="cb531-3"><a href="conditional-manatees.html#cb531-3" aria-hidden="true" tabindex="-1"></a>mu.Africa <span class="ot">&lt;-</span> <span class="fu">link</span>(m8<span class="fl">.2</span>, <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">cid =</span> <span class="dv">1</span>, <span class="at">rugged_std =</span> rugged.seq))</span>
+<span id="cb531-4"><a href="conditional-manatees.html#cb531-4" aria-hidden="true" tabindex="-1"></a>mu.NotAfrica_mu <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu.NotAfrica, <span class="dv">2</span>, mean)</span>
+<span id="cb531-5"><a href="conditional-manatees.html#cb531-5" aria-hidden="true" tabindex="-1"></a>mu.NotAfrica_ci <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu.NotAfrica, <span class="dv">2</span>, PI, <span class="at">prob =</span> <span class="fl">0.97</span>)</span>
+<span id="cb531-6"><a href="conditional-manatees.html#cb531-6" aria-hidden="true" tabindex="-1"></a>mu.Africa_mu <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu.Africa, <span class="dv">2</span>, mean)</span>
+<span id="cb531-7"><a href="conditional-manatees.html#cb531-7" aria-hidden="true" tabindex="-1"></a>mu.Africa_ci <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu.Africa, <span class="dv">2</span>, PI)</span>
+<span id="cb531-8"><a href="conditional-manatees.html#cb531-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb531-9"><a href="conditional-manatees.html#cb531-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="cn">NULL</span>, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>), <span class="at">xlab =</span> <span class="st">&quot;ruggedness&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;log GDP&quot;</span>)</span>
+<span id="cb531-10"><a href="conditional-manatees.html#cb531-10" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(dd<span class="sc">$</span>rugged_std, dd<span class="sc">$</span>log_gdp_std, <span class="at">col =</span> dd<span class="sc">$</span>cid, <span class="at">pch =</span> <span class="dv">16</span>)</span>
+<span id="cb531-11"><a href="conditional-manatees.html#cb531-11" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(rugged.seq, mu.Africa_mu, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="dv">1</span>)</span>
+<span id="cb531-12"><a href="conditional-manatees.html#cb531-12" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>(mu.Africa_ci, rugged.seq)</span>
+<span id="cb531-13"><a href="conditional-manatees.html#cb531-13" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(rugged.seq, mu.NotAfrica_mu, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="dv">2</span>)</span>
+<span id="cb531-14"><a href="conditional-manatees.html#cb531-14" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>(mu.NotAfrica_ci, rugged.seq, <span class="at">col =</span> <span class="fu">col.alpha</span>(<span class="dv">2</span>, <span class="fl">0.3</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-143-1.png" width="672" /></p>
+</div>
+<div id="adding-an-interaction-does-work" class="section level3 hasAnchor" number="8.1.3">
+<h3><span class="header-section-number">8.1.3</span> Adding an interaction does work<a href="conditional-manatees.html#adding-an-interaction-does-work" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display">\[\mu_{i} = \alpha_{CID[i]} + \beta_{CID[i]}(r_{i} - \overline{r})\]</span></p>
+<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="conditional-manatees.html#cb532-1" aria-hidden="true" tabindex="-1"></a>m8<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb532-2"><a href="conditional-manatees.html#cb532-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb532-3"><a href="conditional-manatees.html#cb532-3" aria-hidden="true" tabindex="-1"></a>     log_gdp_std <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb532-4"><a href="conditional-manatees.html#cb532-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span>a[cid] <span class="sc">+</span> b[cid] <span class="sc">*</span> (rugged_std <span class="sc">-</span> <span class="fl">0.215</span>),</span>
+<span id="cb532-5"><a href="conditional-manatees.html#cb532-5" aria-hidden="true" tabindex="-1"></a>    a[cid] <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">1</span>, <span class="fl">0.1</span>),</span>
+<span id="cb532-6"><a href="conditional-manatees.html#cb532-6" aria-hidden="true" tabindex="-1"></a>    b[cid] <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.3</span>),</span>
+<span id="cb532-7"><a href="conditional-manatees.html#cb532-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span><span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb532-8"><a href="conditional-manatees.html#cb532-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> dd</span>
+<span id="cb532-9"><a href="conditional-manatees.html#cb532-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb532-10"><a href="conditional-manatees.html#cb532-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb532-11"><a href="conditional-manatees.html#cb532-11" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m8<span class="fl">.3</span>, <span class="at">depth =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##             mean          sd        5.5%       94.5%
+## a[1]   0.8865632 0.015675727  0.86151037  0.91161605
+## a[2]   1.0505709 0.009936627  1.03469025  1.06645155
+## b[1]   0.1325019 0.074204597  0.01390861  0.25109517
+## b[2]  -0.1425818 0.054749512 -0.23008206 -0.05508147
+## sigma  0.1094944 0.005935331  0.10000855  0.11898016</code></pre>
+<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb534-1"><a href="conditional-manatees.html#cb534-1" aria-hidden="true" tabindex="-1"></a><span class="fu">compare</span>(m8<span class="fl">.1</span>, m8<span class="fl">.2</span>, m8<span class="fl">.3</span>, <span class="at">func=</span>PSIS)</span></code></pre></div>
+<pre><code>## Some Pareto k values are high (&gt;0.5). Set pointwise=TRUE to inspect individual points.</code></pre>
+<pre><code>##           PSIS       SE     dPSIS       dSE    pPSIS       weight
+## m8.3 -258.8749 15.35435  0.000000        NA 5.314384 9.688047e-01
+## m8.2 -252.0033 15.30167  6.871589  6.936621 4.354277 3.119533e-02
+## m8.1 -188.4136 13.40307 70.461243 15.674795 2.856543 4.850334e-16</code></pre>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb537-1"><a href="conditional-manatees.html#cb537-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">PSIS</span>(m8<span class="fl">.3</span>, <span class="at">pointwise =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>k)</span></code></pre></div>
+<pre><code>## Some Pareto k values are high (&gt;0.5). Set pointwise=TRUE to inspect individual points.</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-146-1.png" width="672" /></p>
+</div>
+<div id="plotting-the-interaction" class="section level3 hasAnchor" number="8.1.4">
+<h3><span class="header-section-number">8.1.4</span> Plotting the interaction<a href="conditional-manatees.html#plotting-the-interaction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb539-1"><a href="conditional-manatees.html#cb539-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb539-2"><a href="conditional-manatees.html#cb539-2" aria-hidden="true" tabindex="-1"></a><span class="co"># plot Africa - cid = 1</span></span>
+<span id="cb539-3"><a href="conditional-manatees.html#cb539-3" aria-hidden="true" tabindex="-1"></a>d.A1 <span class="ot">&lt;-</span>dd[dd<span class="sc">$</span>cid <span class="sc">==</span> <span class="dv">1</span>,]</span>
+<span id="cb539-4"><a href="conditional-manatees.html#cb539-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d.A1<span class="sc">$</span>rugged_std, d.A1<span class="sc">$</span>log_gdp_std, <span class="at">pch=</span><span class="dv">16</span>, <span class="at">col=</span>rangi2,</span>
+<span id="cb539-5"><a href="conditional-manatees.html#cb539-5" aria-hidden="true" tabindex="-1"></a><span class="at">xlab=</span><span class="st">&quot;ruggedness (standardized)&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;log GDP (as proportion of mean)&quot;</span>,</span>
+<span id="cb539-6"><a href="conditional-manatees.html#cb539-6" aria-hidden="true" tabindex="-1"></a><span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>) )</span>
+<span id="cb539-7"><a href="conditional-manatees.html#cb539-7" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span><span class="fu">link</span>(m8<span class="fl">.3</span>,<span class="at">data=</span><span class="fu">data.frame</span>(<span class="at">cid=</span><span class="dv">1</span>,<span class="at">rugged_std=</span>rugged_seq))</span>
+<span id="cb539-8"><a href="conditional-manatees.html#cb539-8" aria-hidden="true" tabindex="-1"></a>mu_mean <span class="ot">&lt;-</span><span class="fu">apply</span>(mu,<span class="dv">2</span>,mean)</span>
+<span id="cb539-9"><a href="conditional-manatees.html#cb539-9" aria-hidden="true" tabindex="-1"></a>mu_ci <span class="ot">&lt;-</span><span class="fu">apply</span>(mu,<span class="dv">2</span>,PI,<span class="at">prob=</span><span class="fl">0.97</span>)</span>
+<span id="cb539-10"><a href="conditional-manatees.html#cb539-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>( rugged_seq,mu_mean,<span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb539-11"><a href="conditional-manatees.html#cb539-11" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>( mu_ci,rugged_seq,<span class="at">col=</span><span class="fu">col.alpha</span>(rangi2,<span class="fl">0.3</span>))</span>
+<span id="cb539-12"><a href="conditional-manatees.html#cb539-12" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;African nations&quot;</span>)</span>
+<span id="cb539-13"><a href="conditional-manatees.html#cb539-13" aria-hidden="true" tabindex="-1"></a><span class="co"># plotnon-Africa-cid=2</span></span>
+<span id="cb539-14"><a href="conditional-manatees.html#cb539-14" aria-hidden="true" tabindex="-1"></a>d.A0 <span class="ot">&lt;-</span>dd[dd<span class="sc">$</span>cid<span class="sc">==</span><span class="dv">2</span>,]</span>
+<span id="cb539-15"><a href="conditional-manatees.html#cb539-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>( d.A0<span class="sc">$</span>rugged_std,d.A0<span class="sc">$</span>log_gdp_std,<span class="at">pch=</span><span class="dv">1</span>,<span class="at">col=</span><span class="st">&quot;black&quot;</span>,</span>
+<span id="cb539-16"><a href="conditional-manatees.html#cb539-16" aria-hidden="true" tabindex="-1"></a><span class="at">xlab=</span><span class="st">&quot;ruggedness (standardized)&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;logGDP(asproportionofmean)&quot;</span>,</span>
+<span id="cb539-17"><a href="conditional-manatees.html#cb539-17" aria-hidden="true" tabindex="-1"></a><span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>) )</span>
+<span id="cb539-18"><a href="conditional-manatees.html#cb539-18" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span><span class="fu">link</span>(m8<span class="fl">.3</span>,<span class="at">data=</span><span class="fu">data.frame</span>(<span class="at">cid=</span><span class="dv">2</span>,<span class="at">rugged_std=</span>rugged_seq))</span>
+<span id="cb539-19"><a href="conditional-manatees.html#cb539-19" aria-hidden="true" tabindex="-1"></a>mu_mean <span class="ot">&lt;-</span><span class="fu">apply</span>(mu,<span class="dv">2</span>,mean)</span>
+<span id="cb539-20"><a href="conditional-manatees.html#cb539-20" aria-hidden="true" tabindex="-1"></a>mu_ci <span class="ot">&lt;-</span><span class="fu">apply</span>(mu,<span class="dv">2</span>,PI,<span class="at">prob=</span><span class="fl">0.97</span>)</span>
+<span id="cb539-21"><a href="conditional-manatees.html#cb539-21" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>( rugged_seq,mu_mean,<span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb539-22"><a href="conditional-manatees.html#cb539-22" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>( mu_ci,rugged_seq)</span>
+<span id="cb539-23"><a href="conditional-manatees.html#cb539-23" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;Non-African nations&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-147-1.png" width="672" /></p>
+</div>
+</div>
+<div id="symmetry-of-interactions" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Symmetry of interactions<a href="conditional-manatees.html#symmetry-of-interactions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You can break an interaction into 2 identical phrasings<br />
+1. GDP ~ ruggedness depending on Africa<br />
+2. Africa ~ GDP depending on rugedness<br />
+</p>
+<p><span class="math display">\[\mu_{i} = (2 - CID_{i})(\alpha_{1} + \beta_{1}(r_{i} - \overline{r})) + (CID_{i} - 1)(\alpha_{2} + \beta_{2}(r_{i} - \overline{r}))\]</span></p>
+<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="conditional-manatees.html#cb540-1" aria-hidden="true" tabindex="-1"></a>rugged_seq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="fl">0.2</span>, <span class="at">to =</span> <span class="fl">1.2</span>, <span class="at">length.out =</span> <span class="dv">30</span>)</span>
+<span id="cb540-2"><a href="conditional-manatees.html#cb540-2" aria-hidden="true" tabindex="-1"></a>muA <span class="ot">&lt;-</span> <span class="fu">link</span>(m8<span class="fl">.3</span>, <span class="at">data=</span><span class="fu">data.frame</span>(<span class="at">cid=</span><span class="dv">1</span>, <span class="at">rugged_std=</span>rugged_seq))</span>
+<span id="cb540-3"><a href="conditional-manatees.html#cb540-3" aria-hidden="true" tabindex="-1"></a>muN <span class="ot">&lt;-</span> <span class="fu">link</span>(m8<span class="fl">.3</span>, <span class="at">data=</span><span class="fu">data.frame</span>(<span class="at">cid=</span><span class="dv">2</span>, <span class="at">rugged_std=</span>rugged_seq))</span>
+<span id="cb540-4"><a href="conditional-manatees.html#cb540-4" aria-hidden="true" tabindex="-1"></a>delta <span class="ot">&lt;-</span> muA <span class="sc">-</span> muN</span>
+<span id="cb540-5"><a href="conditional-manatees.html#cb540-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb540-6"><a href="conditional-manatees.html#cb540-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb540-7"><a href="conditional-manatees.html#cb540-7" aria-hidden="true" tabindex="-1"></a>mu.delta <span class="ot">&lt;-</span> <span class="fu">apply</span>(delta, <span class="dv">2</span>, mean)</span>
+<span id="cb540-8"><a href="conditional-manatees.html#cb540-8" aria-hidden="true" tabindex="-1"></a>PI.delta <span class="ot">&lt;-</span> <span class="fu">apply</span>(delta, <span class="dv">2</span>, PI)</span>
+<span id="cb540-9"><a href="conditional-manatees.html#cb540-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb540-10"><a href="conditional-manatees.html#cb540-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>rugged_seq, <span class="at">type =</span> <span class="st">&#39;n&#39;</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.3</span>, <span class="fl">0.2</span>),</span>
+<span id="cb540-11"><a href="conditional-manatees.html#cb540-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&#39;ruggedness (std)&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;expected difference log GDP&#39;</span>)</span>
+<span id="cb540-12"><a href="conditional-manatees.html#cb540-12" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>(PI.delta, rugged_seq, <span class="at">col=</span><span class="st">&#39;grey&#39;</span>)</span>
+<span id="cb540-13"><a href="conditional-manatees.html#cb540-13" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb540-14"><a href="conditional-manatees.html#cb540-14" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fl">0.2</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">label =</span> <span class="st">&quot;Africa higher GDP</span><span class="sc">\n</span><span class="st">Africa lower GDP&quot;</span>)</span>
+<span id="cb540-15"><a href="conditional-manatees.html#cb540-15" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(rugged_seq, mu.delta)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-148-1.png" width="672" /></p>
+<p>At high ruggedness, being in Africa gives higher than expected GDP.</p>
+</div>
+<div id="continuous-interactions" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Continuous interactions<a href="conditional-manatees.html#continuous-interactions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="a-winter-flower" class="section level3 hasAnchor" number="8.3.1">
+<h3><span class="header-section-number">8.3.1</span> A winter flower<a href="conditional-manatees.html#a-winter-flower" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="conditional-manatees.html#cb541-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(tulips)</span>
+<span id="cb541-2"><a href="conditional-manatees.html#cb541-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> tulips</span>
+<span id="cb541-3"><a href="conditional-manatees.html#cb541-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(d)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    27 obs. of  4 variables:
+##  $ bed   : Factor w/ 3 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;: 1 1 1 1 1 1 1 1 1 2 ...
+##  $ water : int  1 1 1 2 2 2 3 3 3 1 ...
+##  $ shade : int  1 2 3 1 2 3 1 2 3 1 ...
+##  $ blooms: num  0 0 111 183.5 59.2 ...</code></pre>
+</div>
+<div id="the-models" class="section level3 hasAnchor" number="8.3.2">
+<h3><span class="header-section-number">8.3.2</span> the models<a href="conditional-manatees.html#the-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Water and Shade work together to create Blooms; <span class="math inline">\(W \rightarrow B \leftarrow S ; B = f(W,S)\)</span></p>
+<ol style="list-style-type: decimal">
+<li>water<br />
+<span class="math display">\[\beta_{i} \sim \text{Normal}(\mu_{i}, \sigma)\\
+\mu_{i} = \alpha + \beta_{W}(W_{i} - \overline{W})\\
+\alpha \sim \text{Normal}(0.5,1)\\
+\beta_{W} \sim \text{Normal}(0,1)\\
+\sigma \sim \text{Exponential}(1)\]</span></li>
+<li>shade<br />
+<span class="math display">\[\beta_{i} \sim \text{Normal}(\mu_{i}, \sigma)\\
+\mu_{i} = \alpha + \beta_{S}(S_{i} - \overline{S})\\
+\alpha \sim \text{Normal}(0.5,1)\\
+\beta_{S} \sim \text{Normal}(0,1)\\
+\sigma \sim \text{Exponential}(1)\]</span></li>
+<li>water + shade<br />
+<span class="math display">\[\beta_{i} \sim \text{Normal}(\mu_{i}, \sigma)\\
+\mu_{i} = \alpha + \beta_{W}(W_{i} - \overline{W}) + \beta_{S}(S_{i} - \overline{S})\\
+\alpha \sim \text{Normal}(0.5,1)\\
+\beta_{W} \sim \text{Normal}(0,1)\\
+\beta_{S} \sim \text{Normal}(0,1)\\
+\sigma \sim \text{Exponential}(1)\]</span></li>
+<li>water * shade<br />
+$$$$</li>
+</ol>
+<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="conditional-manatees.html#cb543-1" aria-hidden="true" tabindex="-1"></a><span class="co">#center predictors and scale outcome</span></span>
+<span id="cb543-2"><a href="conditional-manatees.html#cb543-2" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>blooms_std <span class="ot">&lt;-</span> d<span class="sc">$</span>blooms <span class="sc">/</span> <span class="fu">max</span>(d<span class="sc">$</span>blooms)</span>
+<span id="cb543-3"><a href="conditional-manatees.html#cb543-3" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>water_cent <span class="ot">&lt;-</span> d<span class="sc">$</span>water <span class="sc">-</span> <span class="fu">mean</span>(d<span class="sc">$</span>water)</span>
+<span id="cb543-4"><a href="conditional-manatees.html#cb543-4" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>shade_cent <span class="ot">&lt;-</span> d<span class="sc">$</span>shade <span class="sc">-</span> <span class="fu">mean</span>(d<span class="sc">$</span>shade)</span></code></pre></div>
+<p>The <span class="math inline">\(\alpha\)</span> prior is likely too broad. We need it to be between 0 and 1. How much is outside that?</p>
+<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="conditional-manatees.html#cb544-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e4</span>, <span class="fl">0.5</span>, <span class="dv">1</span>); <span class="fu">sum</span>(a <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">|</span> a <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">/</span> <span class="fu">length</span>(a)</span></code></pre></div>
+<pre><code>## [1] 0.623</code></pre>
+<p>Let’s tighten it</p>
+<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb546-1"><a href="conditional-manatees.html#cb546-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e4</span>, <span class="fl">0.5</span>, <span class="fl">0.25</span>); <span class="fu">sum</span>(a <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">|</span> a <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">/</span> <span class="fu">length</span>(a)</span></code></pre></div>
+<pre><code>## [1] 0.047</code></pre>
+<p>range of water and shade are each 2 units. range of blooms is one unit. max slopes = 2/1 (0.5) so we can set the prior to 0 with 0.25 sd to get values ranging from -0.5 to 0.5.</p>
+<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="conditional-manatees.html#cb548-1" aria-hidden="true" tabindex="-1"></a><span class="co">#water</span></span>
+<span id="cb548-2"><a href="conditional-manatees.html#cb548-2" aria-hidden="true" tabindex="-1"></a>m8<span class="fl">.4</span>a <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb548-3"><a href="conditional-manatees.html#cb548-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb548-4"><a href="conditional-manatees.html#cb548-4" aria-hidden="true" tabindex="-1"></a>    blooms_std <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb548-5"><a href="conditional-manatees.html#cb548-5" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bw<span class="sc">*</span>water_cent,</span>
+<span id="cb548-6"><a href="conditional-manatees.html#cb548-6" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="fl">0.5</span>,<span class="fl">0.25</span>),</span>
+<span id="cb548-7"><a href="conditional-manatees.html#cb548-7" aria-hidden="true" tabindex="-1"></a>    bw <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.25</span>),</span>
+<span id="cb548-8"><a href="conditional-manatees.html#cb548-8" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb548-9"><a href="conditional-manatees.html#cb548-9" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb548-10"><a href="conditional-manatees.html#cb548-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb548-11"><a href="conditional-manatees.html#cb548-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb548-12"><a href="conditional-manatees.html#cb548-12" aria-hidden="true" tabindex="-1"></a><span class="co">#shade</span></span>
+<span id="cb548-13"><a href="conditional-manatees.html#cb548-13" aria-hidden="true" tabindex="-1"></a>m8<span class="fl">.4</span>b <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb548-14"><a href="conditional-manatees.html#cb548-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb548-15"><a href="conditional-manatees.html#cb548-15" aria-hidden="true" tabindex="-1"></a>    blooms_std <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb548-16"><a href="conditional-manatees.html#cb548-16" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bs<span class="sc">*</span>shade_cent,</span>
+<span id="cb548-17"><a href="conditional-manatees.html#cb548-17" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="fl">0.5</span>,<span class="fl">0.25</span>),</span>
+<span id="cb548-18"><a href="conditional-manatees.html#cb548-18" aria-hidden="true" tabindex="-1"></a>    bs <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.25</span>),</span>
+<span id="cb548-19"><a href="conditional-manatees.html#cb548-19" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb548-20"><a href="conditional-manatees.html#cb548-20" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb548-21"><a href="conditional-manatees.html#cb548-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb548-22"><a href="conditional-manatees.html#cb548-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb548-23"><a href="conditional-manatees.html#cb548-23" aria-hidden="true" tabindex="-1"></a><span class="co"># water + shade</span></span>
+<span id="cb548-24"><a href="conditional-manatees.html#cb548-24" aria-hidden="true" tabindex="-1"></a>m8<span class="fl">.4</span>c <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb548-25"><a href="conditional-manatees.html#cb548-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb548-26"><a href="conditional-manatees.html#cb548-26" aria-hidden="true" tabindex="-1"></a>    blooms_std <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb548-27"><a href="conditional-manatees.html#cb548-27" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bw<span class="sc">*</span>water_cent <span class="sc">+</span> bs<span class="sc">*</span>shade_cent,</span>
+<span id="cb548-28"><a href="conditional-manatees.html#cb548-28" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="fl">0.5</span>,<span class="fl">0.25</span>),</span>
+<span id="cb548-29"><a href="conditional-manatees.html#cb548-29" aria-hidden="true" tabindex="-1"></a>    bw <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.25</span>),</span>
+<span id="cb548-30"><a href="conditional-manatees.html#cb548-30" aria-hidden="true" tabindex="-1"></a>    bs <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.25</span>),</span>
+<span id="cb548-31"><a href="conditional-manatees.html#cb548-31" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb548-32"><a href="conditional-manatees.html#cb548-32" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb548-33"><a href="conditional-manatees.html#cb548-33" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb548-34"><a href="conditional-manatees.html#cb548-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb548-35"><a href="conditional-manatees.html#cb548-35" aria-hidden="true" tabindex="-1"></a><span class="co">#water * shade</span></span>
+<span id="cb548-36"><a href="conditional-manatees.html#cb548-36" aria-hidden="true" tabindex="-1"></a>m8<span class="fl">.4</span>d <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb548-37"><a href="conditional-manatees.html#cb548-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb548-38"><a href="conditional-manatees.html#cb548-38" aria-hidden="true" tabindex="-1"></a>    blooms_std <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb548-39"><a href="conditional-manatees.html#cb548-39" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bw<span class="sc">*</span>water_cent <span class="sc">+</span> bs<span class="sc">*</span>shade_cent <span class="sc">+</span> bws<span class="sc">*</span>water_cent<span class="sc">*</span>shade_cent,</span>
+<span id="cb548-40"><a href="conditional-manatees.html#cb548-40" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="fl">0.5</span>,<span class="fl">0.25</span>),</span>
+<span id="cb548-41"><a href="conditional-manatees.html#cb548-41" aria-hidden="true" tabindex="-1"></a>    bw <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.25</span>),</span>
+<span id="cb548-42"><a href="conditional-manatees.html#cb548-42" aria-hidden="true" tabindex="-1"></a>    bs <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.25</span>),</span>
+<span id="cb548-43"><a href="conditional-manatees.html#cb548-43" aria-hidden="true" tabindex="-1"></a>    bws <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.25</span>),</span>
+<span id="cb548-44"><a href="conditional-manatees.html#cb548-44" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb548-45"><a href="conditional-manatees.html#cb548-45" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb548-46"><a href="conditional-manatees.html#cb548-46" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>prior simulations</p>
+<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="conditional-manatees.html#cb549-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb549-2"><a href="conditional-manatees.html#cb549-2" aria-hidden="true" tabindex="-1"></a>prior_a <span class="ot">&lt;-</span> <span class="fu">extract.prior</span>(m8<span class="fl">.4</span>a) <span class="co">#water</span></span>
+<span id="cb549-3"><a href="conditional-manatees.html#cb549-3" aria-hidden="true" tabindex="-1"></a>prior_b <span class="ot">&lt;-</span> <span class="fu">extract.prior</span>(m8<span class="fl">.4</span>b) <span class="co">#shade</span></span>
+<span id="cb549-4"><a href="conditional-manatees.html#cb549-4" aria-hidden="true" tabindex="-1"></a>prior_c <span class="ot">&lt;-</span> <span class="fu">extract.prior</span>(m8<span class="fl">.4</span>c) <span class="co">#water + shade</span></span>
+<span id="cb549-5"><a href="conditional-manatees.html#cb549-5" aria-hidden="true" tabindex="-1"></a>prior_d <span class="ot">&lt;-</span> <span class="fu">extract.prior</span>(m8<span class="fl">.4</span>d) <span class="co">#water * shade</span></span>
+<span id="cb549-6"><a href="conditional-manatees.html#cb549-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb549-7"><a href="conditional-manatees.html#cb549-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb549-8"><a href="conditional-manatees.html#cb549-8" aria-hidden="true" tabindex="-1"></a><span class="co">#set plot</span></span>
+<span id="cb549-9"><a href="conditional-manatees.html#cb549-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="cn">NULL</span>, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">1.25</span>), <span class="at">xlab =</span> <span class="st">&quot;Water / shade&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;blooms&quot;</span>)</span>
+<span id="cb549-10"><a href="conditional-manatees.html#cb549-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">min</span>(d<span class="sc">$</span>blooms_std), <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb549-11"><a href="conditional-manatees.html#cb549-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">max</span>(d<span class="sc">$</span>blooms_std), <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-154-1.png" width="672" /></p>
+<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="conditional-manatees.html#cb550-1" aria-hidden="true" tabindex="-1"></a><span class="co">#draw lines from prior</span></span>
+<span id="cb550-2"><a href="conditional-manatees.html#cb550-2" aria-hidden="true" tabindex="-1"></a>water_seq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="fl">1.1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">length.out=</span><span class="dv">30</span>)</span>
+<span id="cb550-3"><a href="conditional-manatees.html#cb550-3" aria-hidden="true" tabindex="-1"></a>shade_seq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="fl">1.1</span>, <span class="at">to =</span> <span class="fl">1.1</span>, <span class="at">length.out=</span><span class="dv">30</span>)</span>
+<span id="cb550-4"><a href="conditional-manatees.html#cb550-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb550-5"><a href="conditional-manatees.html#cb550-5" aria-hidden="true" tabindex="-1"></a>mu_a <span class="ot">&lt;-</span> <span class="fu">link</span>(m8<span class="fl">.4</span>a, <span class="at">post =</span> prior_a, <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">water_cent=</span>water_seq))</span>
+<span id="cb550-6"><a href="conditional-manatees.html#cb550-6" aria-hidden="true" tabindex="-1"></a>mu_b <span class="ot">&lt;-</span> <span class="fu">link</span>(m8<span class="fl">.4</span>b, <span class="at">post =</span> prior_b, <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">shade_cent=</span>shade_seq))</span>
+<span id="cb550-7"><a href="conditional-manatees.html#cb550-7" aria-hidden="true" tabindex="-1"></a>mu_c <span class="ot">&lt;-</span> <span class="fu">link</span>(m8<span class="fl">.4</span>c, <span class="at">post =</span> prior_c, <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">water_cent=</span>water_seq, <span class="at">shade_cent=</span>shade_seq))</span>
+<span id="cb550-8"><a href="conditional-manatees.html#cb550-8" aria-hidden="true" tabindex="-1"></a>mu_d <span class="ot">&lt;-</span> <span class="fu">link</span>(m8<span class="fl">.4</span>d, <span class="at">post =</span> prior_d, <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">water_cent=</span>water_seq, <span class="at">shade_cent=</span>shade_seq))</span>
+<span id="cb550-9"><a href="conditional-manatees.html#cb550-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb550-10"><a href="conditional-manatees.html#cb550-10" aria-hidden="true" tabindex="-1"></a><span class="co">#set plot</span></span>
+<span id="cb550-11"><a href="conditional-manatees.html#cb550-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="cn">NULL</span>, <span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">1.25</span>), <span class="at">xlab =</span> <span class="st">&quot;Water / shade (centered)&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;blooms (std)&quot;</span>)</span>
+<span id="cb550-12"><a href="conditional-manatees.html#cb550-12" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">min</span>(d<span class="sc">$</span>blooms_std), <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb550-13"><a href="conditional-manatees.html#cb550-13" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">max</span>(d<span class="sc">$</span>blooms_std), <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb550-14"><a href="conditional-manatees.html#cb550-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb550-15"><a href="conditional-manatees.html#cb550-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb550-16"><a href="conditional-manatees.html#cb550-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>){</span>
+<span id="cb550-17"><a href="conditional-manatees.html#cb550-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(water_seq, mu_a[i,], <span class="at">col=</span><span class="fu">col.alpha</span>(<span class="st">&#39;blue&#39;</span>,<span class="fl">0.3</span>))</span>
+<span id="cb550-18"><a href="conditional-manatees.html#cb550-18" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb550-19"><a href="conditional-manatees.html#cb550-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb550-20"><a href="conditional-manatees.html#cb550-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>){</span>
+<span id="cb550-21"><a href="conditional-manatees.html#cb550-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(water_seq, mu_b[i,], <span class="at">col=</span><span class="fu">col.alpha</span>(<span class="st">&#39;black&#39;</span>,<span class="fl">0.3</span>))</span>
+<span id="cb550-22"><a href="conditional-manatees.html#cb550-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb550-23"><a href="conditional-manatees.html#cb550-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>){</span>
+<span id="cb550-24"><a href="conditional-manatees.html#cb550-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(water_seq, mu_c[i,], <span class="at">col=</span><span class="fu">col.alpha</span>(<span class="st">&#39;green&#39;</span>,<span class="fl">0.3</span>))</span>
+<span id="cb550-25"><a href="conditional-manatees.html#cb550-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb550-26"><a href="conditional-manatees.html#cb550-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb550-27"><a href="conditional-manatees.html#cb550-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>){</span>
+<span id="cb550-28"><a href="conditional-manatees.html#cb550-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(water_seq, mu_d[i,], <span class="at">col=</span><span class="fu">col.alpha</span>(<span class="st">&#39;red&#39;</span>,<span class="fl">0.3</span>))</span>
+<span id="cb550-29"><a href="conditional-manatees.html#cb550-29" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb550-30"><a href="conditional-manatees.html#cb550-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb550-31"><a href="conditional-manatees.html#cb550-31" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="sc">-</span><span class="fl">0.75</span>, <span class="at">y =</span> <span class="fl">1.2</span>, <span class="at">label =</span> <span class="st">&quot;Water&quot;</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb550-32"><a href="conditional-manatees.html#cb550-32" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="sc">-</span><span class="fl">0.45</span>, <span class="at">y =</span> <span class="fl">1.2</span>, <span class="at">label =</span> <span class="st">&quot;Shade&quot;</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb550-33"><a href="conditional-manatees.html#cb550-33" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="fl">1.2</span>, <span class="at">label =</span> <span class="st">&quot;Water + Shade&quot;</span>, <span class="at">col =</span> <span class="st">&quot;green&quot;</span>)</span>
+<span id="cb550-34"><a href="conditional-manatees.html#cb550-34" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fl">1.2</span>, <span class="at">label =</span> <span class="st">&quot;Water * Shade&quot;</span>, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-154-2.png" width="672" /></p>
+<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="conditional-manatees.html#cb551-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m8<span class="fl">.4</span>a)</span></code></pre></div>
+<pre><code>##            mean         sd      5.5%     94.5%
+## a     0.3594883 0.03502089 0.3035181 0.4154584
+## bw    0.2034854 0.04270338 0.1352371 0.2717336
+## sigma 0.1837433 0.02489828 0.1439510 0.2235355</code></pre>
+<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="conditional-manatees.html#cb553-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m8<span class="fl">.4</span>b)</span></code></pre></div>
+<pre><code>##             mean         sd       5.5%       94.5%
+## a      0.3611171 0.04403635  0.2907385  0.43149566
+## bs    -0.1097643 0.05351857 -0.1952973 -0.02423127
+## sigma  0.2323701 0.03143809  0.1821260  0.28261427</code></pre>
+<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="conditional-manatees.html#cb555-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m8<span class="fl">.4</span>c)</span></code></pre></div>
+<pre><code>##             mean         sd       5.5%       94.5%
+## a      0.3587452 0.03022116  0.3104459  0.40704441
+## bw     0.2050352 0.03689240  0.1460741  0.26399641
+## bs    -0.1125324 0.03687853 -0.1714714 -0.05359337
+## sigma  0.1581668 0.02144796  0.1238888  0.19244481</code></pre>
+<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="conditional-manatees.html#cb557-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m8<span class="fl">.4</span>d)</span></code></pre></div>
+<pre><code>##             mean         sd        5.5%       94.5%
+## a      0.3579980 0.02391747  0.31977332  0.39622278
+## bw     0.2067288 0.02923282  0.16000910  0.25344849
+## bs    -0.1134595 0.02922579 -0.16016795 -0.06675103
+## bws   -0.1431791 0.03567746 -0.20019860 -0.08615967
+## sigma  0.1248375 0.01693790  0.09776742  0.15190750</code></pre>
+</div>
+<div id="plotting-posterior-predictions" class="section level3 hasAnchor" number="8.3.3">
+<h3><span class="header-section-number">8.3.3</span> Plotting posterior predictions<a href="conditional-manatees.html#plotting-posterior-predictions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="conditional-manatees.html#cb559-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb559-2"><a href="conditional-manatees.html#cb559-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (s <span class="cf">in</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>){</span>
+<span id="cb559-3"><a href="conditional-manatees.html#cb559-3" aria-hidden="true" tabindex="-1"></a>  idx <span class="ot">&lt;-</span> d[d<span class="sc">$</span>shade_cent <span class="sc">==</span> s,]</span>
+<span id="cb559-4"><a href="conditional-manatees.html#cb559-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">x =</span> idx<span class="sc">$</span>water_cent, <span class="at">y =</span> idx<span class="sc">$</span>blooms_std, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb559-5"><a href="conditional-manatees.html#cb559-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&quot;water&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;blooms&quot;</span>, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> rangi2)</span>
+<span id="cb559-6"><a href="conditional-manatees.html#cb559-6" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m8<span class="fl">.4</span>c, <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">shade_cent=</span>s, <span class="at">water_cent =</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>))</span>
+<span id="cb559-7"><a href="conditional-manatees.html#cb559-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>){</span>
+<span id="cb559-8"><a href="conditional-manatees.html#cb559-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>, mu[i,], <span class="at">col =</span> <span class="fu">col.alpha</span>(<span class="st">&#39;black&#39;</span>,<span class="fl">0.3</span>))</span>
+<span id="cb559-9"><a href="conditional-manatees.html#cb559-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb559-10"><a href="conditional-manatees.html#cb559-10" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mtext</span>(<span class="fu">concat</span>(<span class="st">&quot;m8.4c post: shade = &quot;</span>, s))</span>
+<span id="cb559-11"><a href="conditional-manatees.html#cb559-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-156-1.png" width="672" /></p>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="conditional-manatees.html#cb560-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb560-2"><a href="conditional-manatees.html#cb560-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (s <span class="cf">in</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>){</span>
+<span id="cb560-3"><a href="conditional-manatees.html#cb560-3" aria-hidden="true" tabindex="-1"></a>  idx <span class="ot">&lt;-</span> d[d<span class="sc">$</span>shade_cent <span class="sc">==</span> s,]</span>
+<span id="cb560-4"><a href="conditional-manatees.html#cb560-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">x =</span> idx<span class="sc">$</span>water_cent, <span class="at">y =</span> idx<span class="sc">$</span>blooms_std, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb560-5"><a href="conditional-manatees.html#cb560-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&quot;water&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;blooms&quot;</span>, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> rangi2)</span>
+<span id="cb560-6"><a href="conditional-manatees.html#cb560-6" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m8<span class="fl">.4</span>d, <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">shade_cent=</span>s, <span class="at">water_cent =</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>))</span>
+<span id="cb560-7"><a href="conditional-manatees.html#cb560-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>){</span>
+<span id="cb560-8"><a href="conditional-manatees.html#cb560-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>, mu[i,], <span class="at">col =</span> <span class="fu">col.alpha</span>(<span class="st">&#39;black&#39;</span>,<span class="fl">0.3</span>))</span>
+<span id="cb560-9"><a href="conditional-manatees.html#cb560-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb560-10"><a href="conditional-manatees.html#cb560-10" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mtext</span>(<span class="fu">concat</span>(<span class="st">&quot;m8.4d post: shade = &quot;</span>, s))</span>
+<span id="cb560-11"><a href="conditional-manatees.html#cb560-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-157-1.png" width="672" /></p>
+<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb561-1"><a href="conditional-manatees.html#cb561-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb561-2"><a href="conditional-manatees.html#cb561-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (s <span class="cf">in</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>){</span>
+<span id="cb561-3"><a href="conditional-manatees.html#cb561-3" aria-hidden="true" tabindex="-1"></a>  idx <span class="ot">&lt;-</span> d[d<span class="sc">$</span>water_cent <span class="sc">==</span> s,]</span>
+<span id="cb561-4"><a href="conditional-manatees.html#cb561-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">x =</span> idx<span class="sc">$</span>shade_cent, <span class="at">y =</span> idx<span class="sc">$</span>blooms_std, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb561-5"><a href="conditional-manatees.html#cb561-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&quot;shade&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;blooms&quot;</span>, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> rangi2)</span>
+<span id="cb561-6"><a href="conditional-manatees.html#cb561-6" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m8<span class="fl">.4</span>c, <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">water_cent=</span>s, <span class="at">shade_cent =</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>))</span>
+<span id="cb561-7"><a href="conditional-manatees.html#cb561-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>){</span>
+<span id="cb561-8"><a href="conditional-manatees.html#cb561-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>, mu[i,], <span class="at">col =</span> <span class="fu">col.alpha</span>(<span class="st">&#39;black&#39;</span>,<span class="fl">0.3</span>))</span>
+<span id="cb561-9"><a href="conditional-manatees.html#cb561-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb561-10"><a href="conditional-manatees.html#cb561-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mtext</span>(<span class="fu">concat</span>(<span class="st">&quot;m8.4c post: water = &quot;</span>, s))</span>
+<span id="cb561-11"><a href="conditional-manatees.html#cb561-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-158-1.png" width="672" /></p>
+<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb562-1"><a href="conditional-manatees.html#cb562-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb562-2"><a href="conditional-manatees.html#cb562-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (s <span class="cf">in</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>){</span>
+<span id="cb562-3"><a href="conditional-manatees.html#cb562-3" aria-hidden="true" tabindex="-1"></a>  idx <span class="ot">&lt;-</span> d[d<span class="sc">$</span>water_cent <span class="sc">==</span> s,]</span>
+<span id="cb562-4"><a href="conditional-manatees.html#cb562-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">x =</span> idx<span class="sc">$</span>shade_cent, <span class="at">y =</span> idx<span class="sc">$</span>blooms_std, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb562-5"><a href="conditional-manatees.html#cb562-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&quot;shade&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;blooms&quot;</span>, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> rangi2)</span>
+<span id="cb562-6"><a href="conditional-manatees.html#cb562-6" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m8<span class="fl">.4</span>d, <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">water_cent=</span>s, <span class="at">shade_cent =</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>))</span>
+<span id="cb562-7"><a href="conditional-manatees.html#cb562-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>){</span>
+<span id="cb562-8"><a href="conditional-manatees.html#cb562-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>, mu[i,], <span class="at">col =</span> <span class="fu">col.alpha</span>(<span class="st">&#39;black&#39;</span>,<span class="fl">0.3</span>))</span>
+<span id="cb562-9"><a href="conditional-manatees.html#cb562-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb562-10"><a href="conditional-manatees.html#cb562-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mtext</span>(<span class="fu">concat</span>(<span class="st">&quot;m8.4c post: water = &quot;</span>, s))</span>
+<span id="cb562-11"><a href="conditional-manatees.html#cb562-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-159-1.png" width="672" /></p>
+</div>
+<div id="plotting-prior-predictions" class="section level3 hasAnchor" number="8.3.4">
+<h3><span class="header-section-number">8.3.4</span> Plotting prior predictions<a href="conditional-manatees.html#plotting-prior-predictions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb563-1"><a href="conditional-manatees.html#cb563-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb563-2"><a href="conditional-manatees.html#cb563-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (s <span class="cf">in</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>){</span>
+<span id="cb563-3"><a href="conditional-manatees.html#cb563-3" aria-hidden="true" tabindex="-1"></a>  idx <span class="ot">&lt;-</span> d[d<span class="sc">$</span>shade_cent <span class="sc">==</span> s,]</span>
+<span id="cb563-4"><a href="conditional-manatees.html#cb563-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">x =</span> idx<span class="sc">$</span>water_cent, <span class="at">y =</span> idx<span class="sc">$</span>blooms_std, <span class="at">type =</span> <span class="st">&#39;n&#39;</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">1.5</span>),</span>
+<span id="cb563-5"><a href="conditional-manatees.html#cb563-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&quot;water&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;blooms&quot;</span>)</span>
+<span id="cb563-6"><a href="conditional-manatees.html#cb563-6" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m8<span class="fl">.4</span>c, <span class="at">post =</span> prior_c, <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">shade_cent=</span>s, <span class="at">water_cent =</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>))</span>
+<span id="cb563-7"><a href="conditional-manatees.html#cb563-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>){</span>
+<span id="cb563-8"><a href="conditional-manatees.html#cb563-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>, mu[i,], <span class="at">col =</span> <span class="fu">col.alpha</span>(<span class="st">&#39;black&#39;</span>,<span class="fl">0.3</span>))</span>
+<span id="cb563-9"><a href="conditional-manatees.html#cb563-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb563-10"><a href="conditional-manatees.html#cb563-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>, mu[<span class="dv">11</span>,], <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> rangi2)</span>
+<span id="cb563-11"><a href="conditional-manatees.html#cb563-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb563-12"><a href="conditional-manatees.html#cb563-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">1</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb563-13"><a href="conditional-manatees.html#cb563-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mtext</span>(<span class="fu">concat</span>(<span class="st">&quot;m8.4c post: shade = &quot;</span>, s))</span>
+<span id="cb563-14"><a href="conditional-manatees.html#cb563-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-160-1.png" width="672" /></p>
+<div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb564-1"><a href="conditional-manatees.html#cb564-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb564-2"><a href="conditional-manatees.html#cb564-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (s <span class="cf">in</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>){</span>
+<span id="cb564-3"><a href="conditional-manatees.html#cb564-3" aria-hidden="true" tabindex="-1"></a>  idx <span class="ot">&lt;-</span> d[d<span class="sc">$</span>shade_cent <span class="sc">==</span> s,]</span>
+<span id="cb564-4"><a href="conditional-manatees.html#cb564-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">x =</span> idx<span class="sc">$</span>water_cent, <span class="at">y =</span> idx<span class="sc">$</span>blooms_std, <span class="at">type =</span> <span class="st">&#39;n&#39;</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">1.5</span>),</span>
+<span id="cb564-5"><a href="conditional-manatees.html#cb564-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&quot;water&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;blooms&quot;</span>)</span>
+<span id="cb564-6"><a href="conditional-manatees.html#cb564-6" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m8<span class="fl">.4</span>d, <span class="at">post =</span> prior_d, <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">shade_cent=</span>s, <span class="at">water_cent =</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>))</span>
+<span id="cb564-7"><a href="conditional-manatees.html#cb564-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>){</span>
+<span id="cb564-8"><a href="conditional-manatees.html#cb564-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>, mu[i,], <span class="at">col =</span> <span class="fu">col.alpha</span>(<span class="st">&#39;black&#39;</span>,<span class="fl">0.3</span>))</span>
+<span id="cb564-9"><a href="conditional-manatees.html#cb564-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb564-10"><a href="conditional-manatees.html#cb564-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>, mu[<span class="dv">11</span>,], <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> rangi2)</span>
+<span id="cb564-11"><a href="conditional-manatees.html#cb564-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb564-12"><a href="conditional-manatees.html#cb564-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">1</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb564-13"><a href="conditional-manatees.html#cb564-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mtext</span>(<span class="fu">concat</span>(<span class="st">&quot;m8.4c post: shade = &quot;</span>, s))</span>
+<span id="cb564-14"><a href="conditional-manatees.html#cb564-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-161-1.png" width="672" /></p>
+<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb565-1"><a href="conditional-manatees.html#cb565-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb565-2"><a href="conditional-manatees.html#cb565-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (s <span class="cf">in</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>){</span>
+<span id="cb565-3"><a href="conditional-manatees.html#cb565-3" aria-hidden="true" tabindex="-1"></a>  idx <span class="ot">&lt;-</span> d[d<span class="sc">$</span>water_cent <span class="sc">==</span> s,]</span>
+<span id="cb565-4"><a href="conditional-manatees.html#cb565-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">x =</span> idx<span class="sc">$</span>shade_cent, <span class="at">y =</span> idx<span class="sc">$</span>blooms_std, <span class="at">type =</span> <span class="st">&#39;n&#39;</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">1.5</span>),</span>
+<span id="cb565-5"><a href="conditional-manatees.html#cb565-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&quot;shade&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;blooms&quot;</span>)</span>
+<span id="cb565-6"><a href="conditional-manatees.html#cb565-6" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m8<span class="fl">.4</span>c, <span class="at">post =</span> prior_c, <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">water_cent=</span>s, <span class="at">shade_cent =</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>))</span>
+<span id="cb565-7"><a href="conditional-manatees.html#cb565-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>){</span>
+<span id="cb565-8"><a href="conditional-manatees.html#cb565-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>, mu[i,], <span class="at">col =</span> <span class="fu">col.alpha</span>(<span class="st">&#39;black&#39;</span>,<span class="fl">0.3</span>))</span>
+<span id="cb565-9"><a href="conditional-manatees.html#cb565-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb565-10"><a href="conditional-manatees.html#cb565-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>, mu[<span class="dv">11</span>,], <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> rangi2)</span>
+<span id="cb565-11"><a href="conditional-manatees.html#cb565-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb565-12"><a href="conditional-manatees.html#cb565-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">1</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb565-13"><a href="conditional-manatees.html#cb565-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mtext</span>(<span class="fu">concat</span>(<span class="st">&quot;m8.4c post: water = &quot;</span>, s))</span>
+<span id="cb565-14"><a href="conditional-manatees.html#cb565-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-162-1.png" width="672" /></p>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="conditional-manatees.html#cb566-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb566-2"><a href="conditional-manatees.html#cb566-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (s <span class="cf">in</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>){</span>
+<span id="cb566-3"><a href="conditional-manatees.html#cb566-3" aria-hidden="true" tabindex="-1"></a>  idx <span class="ot">&lt;-</span> d[d<span class="sc">$</span>water_cent <span class="sc">==</span> s,]</span>
+<span id="cb566-4"><a href="conditional-manatees.html#cb566-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">x =</span> idx<span class="sc">$</span>shade_cent, <span class="at">y =</span> idx<span class="sc">$</span>blooms_std, <span class="at">type =</span> <span class="st">&#39;n&#39;</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">1.5</span>),</span>
+<span id="cb566-5"><a href="conditional-manatees.html#cb566-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&quot;shade&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;blooms&quot;</span>)</span>
+<span id="cb566-6"><a href="conditional-manatees.html#cb566-6" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m8<span class="fl">.4</span>d, <span class="at">post =</span> prior_d, <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">water_cent=</span>s, <span class="at">shade_cent =</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>))</span>
+<span id="cb566-7"><a href="conditional-manatees.html#cb566-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>){</span>
+<span id="cb566-8"><a href="conditional-manatees.html#cb566-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>, mu[i,], <span class="at">col =</span> <span class="fu">col.alpha</span>(<span class="st">&#39;black&#39;</span>,<span class="fl">0.3</span>))</span>
+<span id="cb566-9"><a href="conditional-manatees.html#cb566-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb566-10"><a href="conditional-manatees.html#cb566-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>, mu[<span class="dv">11</span>,], <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> rangi2)</span>
+<span id="cb566-11"><a href="conditional-manatees.html#cb566-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb566-12"><a href="conditional-manatees.html#cb566-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">1</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb566-13"><a href="conditional-manatees.html#cb566-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mtext</span>(<span class="fu">concat</span>(<span class="st">&quot;m8.4c post: water = &quot;</span>, s))</span>
+<span id="cb566-14"><a href="conditional-manatees.html#cb566-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-163-1.png" width="672" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ulysses-compass.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="markov-chain-monte-carlo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/09-manatees.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

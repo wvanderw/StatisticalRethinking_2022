@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Sampling the imaginary | Rethinking Companion</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Sampling the imaginary | Rethinking Companion" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Sampling the imaginary | Rethinking Companion" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Wade VanderWright" />
+
+
+<meta name="date" content="2022-09-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="small-worlds-and-large-worlds.html"/>
+<link rel="next" href="geocentric-models.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Rethinking Companion</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> The Golem of Prague</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#statistical-golems"><i class="fa fa-check"></i><b>1.1</b> Statistical golems</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#statistical-rethinking"><i class="fa fa-check"></i><b>1.2</b> Statistical Rethinking</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#what-are-we-trying-to-do-with-the-golems"><i class="fa fa-check"></i><b>1.2.1</b> What are we trying to do with the golems?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#tools-for-golem-engineering"><i class="fa fa-check"></i><b>1.3</b> Tools for golem engineering</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#bayesian-data-analysis"><i class="fa fa-check"></i><b>1.3.1</b> Bayesian data analysis</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#model-comparison-and-predictions"><i class="fa fa-check"></i><b>1.3.2</b> Model comparison and predictions</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#multilevel-models"><i class="fa fa-check"></i><b>1.3.3</b> Multilevel models</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#graphical-causal-models"><i class="fa fa-check"></i><b>1.3.4</b> Graphical causal models</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#summary"><i class="fa fa-check"></i><b>1.4</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#session-info"><i class="fa fa-check"></i>Session Info</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html"><i class="fa fa-check"></i><b>2</b> Small worlds and large worlds</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#the-garden-of-forking-data"><i class="fa fa-check"></i><b>2.1</b> The garden of forking data</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#counting-possibilities"><i class="fa fa-check"></i><b>2.1.1</b> Counting possibilities</a></li>
+<li class="chapter" data-level="2.1.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#combining-other-information"><i class="fa fa-check"></i><b>2.1.2</b> Combining other information</a></li>
+<li class="chapter" data-level="2.1.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#from-counts-to-probability"><i class="fa fa-check"></i><b>2.1.3</b> From counts to probability</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#building-a-model"><i class="fa fa-check"></i><b>2.2</b> Building a model</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#a-data-story"><i class="fa fa-check"></i><b>2.2.1</b> A data story</a></li>
+<li class="chapter" data-level="2.2.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#bayesian-updating"><i class="fa fa-check"></i><b>2.2.2</b> Bayesian updating</a></li>
+<li class="chapter" data-level="2.2.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#evaluate"><i class="fa fa-check"></i><b>2.2.3</b> Evaluate</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#components-of-the-model"><i class="fa fa-check"></i><b>2.3</b> Components of the model</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#variables"><i class="fa fa-check"></i><b>2.3.1</b> Variables</a></li>
+<li class="chapter" data-level="2.3.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#definitions"><i class="fa fa-check"></i><b>2.3.2</b> Definitions</a></li>
+<li class="chapter" data-level="2.3.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#a-model-is-born"><i class="fa fa-check"></i><b>2.3.3</b> A model is born</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#maiking-the-model-go"><i class="fa fa-check"></i><b>2.4</b> Maiking the model go</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#quadratic"><i class="fa fa-check"></i><b>2.4.1</b> Quadratic</a></li>
+<li class="chapter" data-level="2.4.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#mcmc"><i class="fa fa-check"></i><b>2.4.2</b> MCMC</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html"><i class="fa fa-check"></i><b>3</b> Sampling the imaginary</a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#probabilities-vs.-frequency-counts"><i class="fa fa-check"></i><b>3.0.1</b> Probabilities vs. Frequency counts</a></li>
+<li class="chapter" data-level="3.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-from-a-grid-approximate-posterior"><i class="fa fa-check"></i><b>3.1</b> Sampling from a grid-approximate posterior</a></li>
+<li class="chapter" data-level="3.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-to-summarize"><i class="fa fa-check"></i><b>3.2</b> Sampling to summarize</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#intervals-of-defined-boundaries"><i class="fa fa-check"></i><b>3.2.1</b> Intervals of defined boundaries</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#intervals-of-defined-mass"><i class="fa fa-check"></i><b>3.2.2</b> intervals of defined mass</a></li>
+<li class="chapter" data-level="3.2.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#point-estimates"><i class="fa fa-check"></i><b>3.2.3</b> Point estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-to-simulate-prediction"><i class="fa fa-check"></i><b>3.3</b> Sampling to simulate prediction</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#dummy-data"><i class="fa fa-check"></i><b>3.3.1</b> Dummy data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#model-checking"><i class="fa fa-check"></i><b>3.3.2</b> Model checking</a></li>
+<li class="chapter" data-level="3.3.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#practice-with-brms"><i class="fa fa-check"></i><b>3.3.3</b> Practice with brms</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="geocentric-models.html"><a href="geocentric-models.html"><i class="fa fa-check"></i><b>4</b> Geocentric models</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="geocentric-models.html"><a href="geocentric-models.html#why-normal-distributions-are-normal"><i class="fa fa-check"></i><b>4.1</b> Why normal distributions are normal</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-addition"><i class="fa fa-check"></i><b>4.1.1</b> Normal by addition</a></li>
+<li class="chapter" data-level="4.1.2" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-multiplication"><i class="fa fa-check"></i><b>4.1.2</b> Normal by multiplication</a></li>
+<li class="chapter" data-level="4.1.3" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-log-multiplication"><i class="fa fa-check"></i><b>4.1.3</b> Normal by log-multiplication</a></li>
+<li class="chapter" data-level="4.1.4" data-path="geocentric-models.html"><a href="geocentric-models.html#using-gaussian-distributions"><i class="fa fa-check"></i><b>4.1.4</b> Using Gaussian distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="geocentric-models.html"><a href="geocentric-models.html#a-language-for-describing-models"><i class="fa fa-check"></i><b>4.2</b> A language for describing models</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="geocentric-models.html"><a href="geocentric-models.html#re-describing-the-globe-tossing-model."><i class="fa fa-check"></i><b>4.2.1</b> Re-describing the globe tossing model.</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="geocentric-models.html"><a href="geocentric-models.html#gaussian-model-of-height"><i class="fa fa-check"></i><b>4.3</b> Gaussian model of height</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="geocentric-models.html"><a href="geocentric-models.html#the-data"><i class="fa fa-check"></i><b>4.3.1</b> The data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="geocentric-models.html"><a href="geocentric-models.html#the-model"><i class="fa fa-check"></i><b>4.3.2</b> The Model</a></li>
+<li class="chapter" data-level="4.3.3" data-path="geocentric-models.html"><a href="geocentric-models.html#grid-approximation-of-the-posterior-distribution"><i class="fa fa-check"></i><b>4.3.3</b> Grid approximation of the posterior distribution</a></li>
+<li class="chapter" data-level="4.3.4" data-path="geocentric-models.html"><a href="geocentric-models.html#sampling-from-the-posterior"><i class="fa fa-check"></i><b>4.3.4</b> Sampling from the posterior</a></li>
+<li class="chapter" data-level="4.3.5" data-path="geocentric-models.html"><a href="geocentric-models.html#finding-the-posterior-distribution-with-quap"><i class="fa fa-check"></i><b>4.3.5</b> Finding the posterior distribution with <code>quap</code></a></li>
+<li class="chapter" data-level="4.3.6" data-path="geocentric-models.html"><a href="geocentric-models.html#sampling-with-quap"><i class="fa fa-check"></i><b>4.3.6</b> Sampling with <code>quap</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="geocentric-models.html"><a href="geocentric-models.html#linear-prediction"><i class="fa fa-check"></i><b>4.4</b> Linear Prediction</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="geocentric-models.html"><a href="geocentric-models.html#finding-the-posterior-distribtuion"><i class="fa fa-check"></i><b>4.4.1</b> Finding the posterior distribtuion</a></li>
+<li class="chapter" data-level="4.4.2" data-path="geocentric-models.html"><a href="geocentric-models.html#interpreting-the-posterior-distribution"><i class="fa fa-check"></i><b>4.4.2</b> Interpreting the posterior distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="geocentric-models.html"><a href="geocentric-models.html#curves-from-lines"><i class="fa fa-check"></i><b>4.5</b> Curves from lines</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="geocentric-models.html"><a href="geocentric-models.html#polynomial-regression"><i class="fa fa-check"></i><b>4.5.1</b> Polynomial regression</a></li>
+<li class="chapter" data-level="4.5.2" data-path="geocentric-models.html"><a href="geocentric-models.html#splines"><i class="fa fa-check"></i><b>4.5.2</b> Splines</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html"><i class="fa fa-check"></i><b>5</b> The many variables &amp; the spurious waffles</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#spurious-assoiciation"><i class="fa fa-check"></i><b>5.1</b> Spurious assoiciation</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#think-before-to-regress"><i class="fa fa-check"></i><b>5.1.1</b> Think before to regress</a></li>
+<li class="chapter" data-level="5.1.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#testable-implications"><i class="fa fa-check"></i><b>5.1.2</b> Testable implications</a></li>
+<li class="chapter" data-level="5.1.3" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#multiple-regression-notation"><i class="fa fa-check"></i><b>5.1.3</b> Multiple regression notation</a></li>
+<li class="chapter" data-level="5.1.4" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#approximating-the-posterior"><i class="fa fa-check"></i><b>5.1.4</b> Approximating the posterior</a></li>
+<li class="chapter" data-level="5.1.5" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#plotting-multivariate-posteriors"><i class="fa fa-check"></i><b>5.1.5</b> Plotting multivariate posteriors</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#masked-relationship"><i class="fa fa-check"></i><b>5.2</b> Masked relationship</a></li>
+<li class="chapter" data-level="5.3" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Categorical variables</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#binary-categories"><i class="fa fa-check"></i><b>5.3.1</b> Binary categories</a></li>
+<li class="chapter" data-level="5.3.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#many-categories"><i class="fa fa-check"></i><b>5.3.2</b> Many categories</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html"><i class="fa fa-check"></i><b>6</b> The haunted dag &amp; the casual terror</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#multicollinearity"><i class="fa fa-check"></i><b>6.1</b> Multicollinearity</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#example-try-to-predict-height-from-length-of-a-persons-legs."><i class="fa fa-check"></i><b>6.1.1</b> Example: Try to predict height from length of a person’s legs.</a></li>
+<li class="chapter" data-level="6.1.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#multicollinear-milk"><i class="fa fa-check"></i><b>6.1.2</b> Multicollinear milk</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#post-treatrment-bias"><i class="fa fa-check"></i><b>6.2</b> Post-treatrment bias</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#a-prior-is-born"><i class="fa fa-check"></i><b>6.2.1</b> A prior is born</a></li>
+<li class="chapter" data-level="6.2.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#blocked-by-consequence"><i class="fa fa-check"></i><b>6.2.2</b> Blocked by consequence</a></li>
+<li class="chapter" data-level="6.2.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#fungus-and-d-separation"><i class="fa fa-check"></i><b>6.2.3</b> Fungus and d-separation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#collider-bias"><i class="fa fa-check"></i><b>6.3</b> Collider bias</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#collider-for-false-sorrow"><i class="fa fa-check"></i><b>6.3.1</b> Collider for false sorrow</a></li>
+<li class="chapter" data-level="6.3.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#the-haunted-dag"><i class="fa fa-check"></i><b>6.3.2</b> The haunted DAG</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#confronting-confounding"><i class="fa fa-check"></i><b>6.4</b> Confronting confounding</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#shutting-the-backdoor"><i class="fa fa-check"></i><b>6.4.1</b> Shutting the backdoor</a></li>
+<li class="chapter" data-level="6.4.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#two-roads"><i class="fa fa-check"></i><b>6.4.2</b> Two roads</a></li>
+<li class="chapter" data-level="6.4.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#backdoor-waffles"><i class="fa fa-check"></i><b>6.4.3</b> Backdoor waffles</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ulysses-compass.html"><a href="ulysses-compass.html"><i class="fa fa-check"></i><b>7</b> Ulysses’ compass</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#the-problem-with-parameters"><i class="fa fa-check"></i><b>7.1</b> The problem with parameters</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#more-parameters-almost-always-improve-fit"><i class="fa fa-check"></i><b>7.1.1</b> More parameters (almost) always improve fit</a></li>
+<li class="chapter" data-level="7.1.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#too-few-parameters-hurts-too"><i class="fa fa-check"></i><b>7.1.2</b> Too few parameters hurts, too</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#entropy-and-accuracy"><i class="fa fa-check"></i><b>7.2</b> Entropy and accuracy</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#firing-the-weatherperson"><i class="fa fa-check"></i><b>7.2.1</b> Firing the weatherperson</a></li>
+<li class="chapter" data-level="7.2.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#information-and-uncertainty"><i class="fa fa-check"></i><b>7.2.2</b> Information and uncertainty</a></li>
+<li class="chapter" data-level="7.2.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#from-entropy-to-accuracy"><i class="fa fa-check"></i><b>7.2.3</b> From entropy to accuracy</a></li>
+<li class="chapter" data-level="7.2.4" data-path="ulysses-compass.html"><a href="ulysses-compass.html#estimating-divergence"><i class="fa fa-check"></i><b>7.2.4</b> Estimating divergence</a></li>
+<li class="chapter" data-level="7.2.5" data-path="ulysses-compass.html"><a href="ulysses-compass.html#scoring-the-right-data"><i class="fa fa-check"></i><b>7.2.5</b> Scoring the right data</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#golem-taming-regularization"><i class="fa fa-check"></i><b>7.3</b> Golem taming: regularization</a></li>
+<li class="chapter" data-level="7.4" data-path="ulysses-compass.html"><a href="ulysses-compass.html#predicting-predictive-accuracy"><i class="fa fa-check"></i><b>7.4</b> Predicting predictive accuracy</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#cross-validation"><i class="fa fa-check"></i><b>7.4.1</b> Cross-validation</a></li>
+<li class="chapter" data-level="7.4.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#information-criteria"><i class="fa fa-check"></i><b>7.4.2</b> Information criteria</a></li>
+<li class="chapter" data-level="7.4.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#comparing-cv-psis-and-waic"><i class="fa fa-check"></i><b>7.4.3</b> Comparing CV, PSIS, and WAIC</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="ulysses-compass.html"><a href="ulysses-compass.html#model-comparison"><i class="fa fa-check"></i><b>7.5</b> Model comparison</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#model-mis-selection"><i class="fa fa-check"></i><b>7.5.1</b> Model mis-selection</a></li>
+<li class="chapter" data-level="7.5.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#outliers-and-other-illustions"><i class="fa fa-check"></i><b>7.5.2</b> Outliers and other illustions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="conditional-manatees.html"><a href="conditional-manatees.html"><i class="fa fa-check"></i><b>8</b> Conditional manatees</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#building-an-interaction"><i class="fa fa-check"></i><b>8.1</b> Building an interaction</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#making-a-rugged-model"><i class="fa fa-check"></i><b>8.1.1</b> Making a rugged model</a></li>
+<li class="chapter" data-level="8.1.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#adding-an-indicator-isnt-enough"><i class="fa fa-check"></i><b>8.1.2</b> Adding an indicator isn’t enough</a></li>
+<li class="chapter" data-level="8.1.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#adding-an-interaction-does-work"><i class="fa fa-check"></i><b>8.1.3</b> Adding an interaction does work</a></li>
+<li class="chapter" data-level="8.1.4" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-the-interaction"><i class="fa fa-check"></i><b>8.1.4</b> Plotting the interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#symmetry-of-interactions"><i class="fa fa-check"></i><b>8.2</b> Symmetry of interactions</a></li>
+<li class="chapter" data-level="8.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#continuous-interactions"><i class="fa fa-check"></i><b>8.3</b> Continuous interactions</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#a-winter-flower"><i class="fa fa-check"></i><b>8.3.1</b> A winter flower</a></li>
+<li class="chapter" data-level="8.3.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#the-models"><i class="fa fa-check"></i><b>8.3.2</b> the models</a></li>
+<li class="chapter" data-level="8.3.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-posterior-predictions"><i class="fa fa-check"></i><b>8.3.3</b> Plotting posterior predictions</a></li>
+<li class="chapter" data-level="8.3.4" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-prior-predictions"><i class="fa fa-check"></i><b>8.3.4</b> Plotting prior predictions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html"><i class="fa fa-check"></i><b>9</b> Markov Chain Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#good-king-markov-and-his-island-kingdom"><i class="fa fa-check"></i><b>9.1</b> Good King Markov and his island kingdom</a></li>
+<li class="chapter" data-level="9.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#metropolis-algorithims"><i class="fa fa-check"></i><b>9.2</b> Metropolis algorithims</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#gibbs-sampling"><i class="fa fa-check"></i><b>9.2.1</b> Gibbs sampling</a></li>
+<li class="chapter" data-level="9.2.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#high-dimensional-problems"><i class="fa fa-check"></i><b>9.2.2</b> High-dimensional problems</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#hamiltonian-monte-carlo"><i class="fa fa-check"></i><b>9.3</b> Hamiltonian Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#another-parable"><i class="fa fa-check"></i><b>9.3.1</b> Another parable</a></li>
+<li class="chapter" data-level="9.3.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#particles-in-space"><i class="fa fa-check"></i><b>9.3.2</b> Particles in space</a></li>
+<li class="chapter" data-level="9.3.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#limitations"><i class="fa fa-check"></i><b>9.3.3</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#easy-hmc-ulam-brm"><i class="fa fa-check"></i><b>9.4</b> Easy HMC: <code>ulam</code> (<code>brm</code>)</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#preperation"><i class="fa fa-check"></i><b>9.4.1</b> Preperation</a></li>
+<li class="chapter" data-level="9.4.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#sampling-from-the-posterior-1"><i class="fa fa-check"></i><b>9.4.2</b> Sampling from the posterior</a></li>
+<li class="chapter" data-level="9.4.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#sampling-again-in-parallel"><i class="fa fa-check"></i><b>9.4.3</b> Sampling again, in parallel</a></li>
+<li class="chapter" data-level="9.4.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#visualization"><i class="fa fa-check"></i><b>9.4.4</b> Visualization</a></li>
+<li class="chapter" data-level="9.4.5" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#checking-the-chain"><i class="fa fa-check"></i><b>9.4.5</b> Checking the chain</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#care-and-feeding-of-your-markov-chain"><i class="fa fa-check"></i><b>9.5</b> Care and feeding of your Markov chain</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#how-many-samples-do-you-need"><i class="fa fa-check"></i><b>9.5.1</b> How many samples do you need?</a></li>
+<li class="chapter" data-level="9.5.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#how-many-chains-do-you-need"><i class="fa fa-check"></i><b>9.5.2</b> How many chains do you need?</a></li>
+<li class="chapter" data-level="9.5.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#taming-a-wild-chain"><i class="fa fa-check"></i><b>9.5.3</b> Taming a wild chain</a></li>
+<li class="chapter" data-level="9.5.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#non-identifiable-parameters"><i class="fa fa-check"></i><b>9.5.4</b> Non-identifiable parameters</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html"><i class="fa fa-check"></i><b>10</b> Big entropy and the generalized linear model</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#maximum-entropy"><i class="fa fa-check"></i><b>10.1</b> Maximum entropy</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#gaussian"><i class="fa fa-check"></i><b>10.1.1</b> Gaussian</a></li>
+<li class="chapter" data-level="10.1.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#binomial"><i class="fa fa-check"></i><b>10.1.2</b> Binomial</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#generalized-linear-models"><i class="fa fa-check"></i><b>10.2</b> Generalized linear models</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#meet-the-family"><i class="fa fa-check"></i><b>10.2.1</b> Meet the family</a></li>
+<li class="chapter" data-level="10.2.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#linking-linear-models-to-distributions"><i class="fa fa-check"></i><b>10.2.2</b> Linking linear models to distributions</a></li>
+<li class="chapter" data-level="10.2.3" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#omitted-variable-bias-again"><i class="fa fa-check"></i><b>10.2.3</b> Omitted variable bias (again)</a></li>
+<li class="chapter" data-level="10.2.4" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#absolute-relative-differences"><i class="fa fa-check"></i><b>10.2.4</b> Absolute relative differences</a></li>
+<li class="chapter" data-level="10.2.5" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#glms-and-information-criteria"><i class="fa fa-check"></i><b>10.2.5</b> GLMs and information criteria</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html"><i class="fa fa-check"></i><b>11</b> God spiked the integers</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#binomial-regression"><i class="fa fa-check"></i><b>11.1</b> Binomial regression</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#logistic-regression-prosocial-chimpanzees"><i class="fa fa-check"></i><b>11.1.1</b> Logistic regression : Prosocial chimpanzees</a></li>
+<li class="chapter" data-level="11.1.2" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#relative-shark-and-absolute-deer"><i class="fa fa-check"></i><b>11.1.2</b> Relative shark and absolute deer</a></li>
+<li class="chapter" data-level="11.1.3" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#aggregated-binomial-chimps-condensed"><i class="fa fa-check"></i><b>11.1.3</b> Aggregated binomial: Chimps condensed</a></li>
+<li class="chapter" data-level="11.1.4" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#aggregated-admissions"><i class="fa fa-check"></i><b>11.1.4</b> Aggregated admissions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="monsters-and-mixtures.html"><a href="monsters-and-mixtures.html"><i class="fa fa-check"></i><b>12</b> Monsters and mixtures</a></li>
+<li class="chapter" data-level="13" data-path="models-with-memory.html"><a href="models-with-memory.html"><i class="fa fa-check"></i><b>13</b> Models with memory</a></li>
+<li class="chapter" data-level="14" data-path="adventures-in-covariance.html"><a href="adventures-in-covariance.html"><i class="fa fa-check"></i><b>14</b> Adventures in covariance</a></li>
+<li class="chapter" data-level="15" data-path="missing-data-and-other-opportunities.html"><a href="missing-data-and-other-opportunities.html"><i class="fa fa-check"></i><b>15</b> Missing data and other opportunities</a></li>
+<li class="chapter" data-level="16" data-path="generalized-linear-madness.html"><a href="generalized-linear-madness.html"><i class="fa fa-check"></i><b>16</b> Generalized linear madness</a></li>
+<li class="chapter" data-level="17" data-path="horoscopes.html"><a href="horoscopes.html"><i class="fa fa-check"></i><b>17</b> Horoscopes</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Rethinking Companion</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sampling-the-imaginary" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Sampling the imaginary<a href="sampling-the-imaginary.html#sampling-the-imaginary" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="probabilities-vs.-frequency-counts" class="section level3 hasAnchor" number="3.0.1">
+<h3><span class="header-section-number">3.0.1</span> Probabilities vs. Frequency counts<a href="sampling-the-imaginary.html#probabilities-vs.-frequency-counts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><em>Vampires in the population</em>
+<em>Probabilities</em>
+There is a blood test that can correctly identify a vampire 95% of the time. Or mathematically, Pr(positive|vampire) = 0.95. 1% of the time the test gives a false positive or Pr(positive|mortal) = 0.01. Also, vampires are rare in the population only making up 0.1% of the population so, Pr(vampire) = 0.001<br />
+If someone tests poisitve, what is the probability that they are actually a vampire?<br />
+</p>
+<p>Using Bayes’ theorem, Pr(vampire|positive) can be inverted as:</p>
+<p><span class="math display">\[\begin{equation} 
+  \text{Pr(vampire|positive)} = \frac{\text{Pr(positive|vampire)} \times \text{Pr(vampire)} {\text{Pr(positive)}}
+\end{equation}\]</span></p>
+<p>Here, Pr(positive) is the average probability of a positive test result or:</p>
+<p>\begin{eqaution}
+ =   +  (1 - )
+\end{equation}</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="sampling-the-imaginary.html#cb81-1" aria-hidden="true" tabindex="-1"></a>Pr_Positive_Vampire <span class="ot">&lt;-</span> <span class="fl">0.95</span></span>
+<span id="cb81-2"><a href="sampling-the-imaginary.html#cb81-2" aria-hidden="true" tabindex="-1"></a>Pr_Positive_Mortal <span class="ot">&lt;-</span> <span class="fl">0.01</span></span>
+<span id="cb81-3"><a href="sampling-the-imaginary.html#cb81-3" aria-hidden="true" tabindex="-1"></a>Pr_Vampire <span class="ot">&lt;-</span> <span class="fl">0.001</span></span>
+<span id="cb81-4"><a href="sampling-the-imaginary.html#cb81-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-5"><a href="sampling-the-imaginary.html#cb81-5" aria-hidden="true" tabindex="-1"></a>Pr_Positive <span class="ot">&lt;-</span> Pr_Positive_Vampire <span class="sc">*</span> Pr_Vampire <span class="sc">+</span> Pr_Positive_Mortal <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> Pr_Vampire)</span>
+<span id="cb81-6"><a href="sampling-the-imaginary.html#cb81-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-7"><a href="sampling-the-imaginary.html#cb81-7" aria-hidden="true" tabindex="-1"></a>(Pr_Vampire_Positive <span class="ot">&lt;-</span> Pr_Positive_Vampire <span class="sc">*</span> Pr_Vampire <span class="sc">/</span> Pr_Positive)</span></code></pre></div>
+<pre><code>## [1] 0.08683729</code></pre>
+<p>There is an 8.7% chance that a positive test result is actually a vampire.<br />
+</p>
+<p><em>Frequency counts</em></p>
+<ol style="list-style-type: decimal">
+<li>In 100,000 people, 100 are vampires</li>
+<li>of the 100 vampires, 95 will test positive</li>
+<li>of the 99,900 mortals, 999 will test positive</li>
+</ol>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="sampling-the-imaginary.html#cb83-1" aria-hidden="true" tabindex="-1"></a>Pr_Positive_Vampire <span class="ot">&lt;-</span> <span class="dv">95</span> <span class="sc">/</span> <span class="dv">100</span></span>
+<span id="cb83-2"><a href="sampling-the-imaginary.html#cb83-2" aria-hidden="true" tabindex="-1"></a>Pr_Positive_Mortal <span class="ot">&lt;-</span> <span class="dv">999</span> <span class="sc">/</span> <span class="dv">99900</span></span>
+<span id="cb83-3"><a href="sampling-the-imaginary.html#cb83-3" aria-hidden="true" tabindex="-1"></a>Pr_Vampire <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">/</span> <span class="dv">100000</span></span>
+<span id="cb83-4"><a href="sampling-the-imaginary.html#cb83-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-5"><a href="sampling-the-imaginary.html#cb83-5" aria-hidden="true" tabindex="-1"></a>Pr_Positive <span class="ot">&lt;-</span> <span class="dv">95</span> <span class="sc">+</span> <span class="dv">999</span></span>
+<span id="cb83-6"><a href="sampling-the-imaginary.html#cb83-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-7"><a href="sampling-the-imaginary.html#cb83-7" aria-hidden="true" tabindex="-1"></a>(Pr_Vampire_Positive <span class="ot">&lt;-</span> Pr_Positive_Vampire <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> Pr_Positive)</span></code></pre></div>
+<pre><code>## [1] 0.08683729</code></pre>
+<p>OR:</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="sampling-the-imaginary.html#cb85-1" aria-hidden="true" tabindex="-1"></a>Pr_Positive_Vampire <span class="ot">&lt;-</span> <span class="dv">95</span> <span class="co">#positive results from vampires</span></span>
+<span id="cb85-2"><a href="sampling-the-imaginary.html#cb85-2" aria-hidden="true" tabindex="-1"></a>Pr_Positive <span class="ot">&lt;-</span> <span class="dv">95</span> <span class="sc">+</span> <span class="dv">999</span> <span class="co">#all positive results</span></span>
+<span id="cb85-3"><a href="sampling-the-imaginary.html#cb85-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-4"><a href="sampling-the-imaginary.html#cb85-4" aria-hidden="true" tabindex="-1"></a>(Pr_Vampire_Positive <span class="ot">&lt;-</span> Pr_Positive_Vampire <span class="sc">/</span> Pr_Positive)</span></code></pre></div>
+<pre><code>## [1] 0.08683729</code></pre>
+</div>
+<div id="sampling-from-a-grid-approximate-posterior" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Sampling from a grid-approximate posterior<a href="sampling-the-imaginary.html#sampling-from-a-grid-approximate-posterior" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s recreate the grid approximation for the globe tossing example:</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="sampling-the-imaginary.html#cb87-1" aria-hidden="true" tabindex="-1"></a>p_grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">1000</span>) <span class="co">#create 1000 values between 0 and 1</span></span>
+<span id="cb87-2"><a href="sampling-the-imaginary.html#cb87-2" aria-hidden="true" tabindex="-1"></a>prob_p <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">1000</span>) <span class="co">#the uniform prior of 1</span></span>
+<span id="cb87-3"><a href="sampling-the-imaginary.html#cb87-3" aria-hidden="true" tabindex="-1"></a>prob_data <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(<span class="dv">6</span>, <span class="at">size =</span> <span class="dv">9</span>, <span class="at">prob =</span> p_grid) <span class="co">#The observed tosses (data)</span></span>
+<span id="cb87-4"><a href="sampling-the-imaginary.html#cb87-4" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">&lt;-</span>prob_data<span class="sc">*</span>prob_p <span class="co">#calculate the posterior</span></span>
+<span id="cb87-5"><a href="sampling-the-imaginary.html#cb87-5" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">&lt;-</span>posterior<span class="sc">/</span><span class="fu">sum</span>(posterior) <span class="co">#standardize by dividing by the sum</span></span></code></pre></div>
+<p>Let’s pull some samples from our posterior (n = 10000)</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="sampling-the-imaginary.html#cb88-1" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">sample</span>(p_grid, <span class="at">prob =</span> posterior, <span class="at">size =</span> <span class="fl">1e4</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="co">#notice replace set to true as there are only 1000 values in p_grid</span></span>
+<span id="cb88-2"><a href="sampling-the-imaginary.html#cb88-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-3"><a href="sampling-the-imaginary.html#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="co">#find the mode of your samples</span></span>
+<span id="cb88-4"><a href="sampling-the-imaginary.html#cb88-4" aria-hidden="true" tabindex="-1"></a>getmode <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb88-5"><a href="sampling-the-imaginary.html#cb88-5" aria-hidden="true" tabindex="-1"></a>   uniqv <span class="ot">&lt;-</span> <span class="fu">unique</span>(x)</span>
+<span id="cb88-6"><a href="sampling-the-imaginary.html#cb88-6" aria-hidden="true" tabindex="-1"></a>   uniqv[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(x, uniqv)))]</span>
+<span id="cb88-7"><a href="sampling-the-imaginary.html#cb88-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb88-8"><a href="sampling-the-imaginary.html#cb88-8" aria-hidden="true" tabindex="-1"></a>samples_mode <span class="ot">&lt;-</span> <span class="fu">getmode</span>(samples)</span></code></pre></div>
+<p>And plot them</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="sampling-the-imaginary.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(samples) <span class="co">#left panel of figure 3.1</span></span>
+<span id="cb89-2"><a href="sampling-the-imaginary.html#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> samples_mode, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%203.4-1.png" width="672" /></p>
+<p>View the samples as a density</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="sampling-the-imaginary.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(samples), <span class="at">main =</span> <span class="st">&quot;Density of samples from posterior&quot;</span>)</span>
+<span id="cb90-2"><a href="sampling-the-imaginary.html#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">density</span>(samples), <span class="at">col =</span> <span class="st">&#39;black&#39;</span>, <span class="at">border =</span> <span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb90-3"><a href="sampling-the-imaginary.html#cb90-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> samples_mode, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%203.5-1.png" width="672" /></p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="sampling-the-imaginary.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(rethinking)</span></span>
+<span id="cb91-2"><a href="sampling-the-imaginary.html#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dens(samples)</span></span></code></pre></div>
+</div>
+<div id="sampling-to-summarize" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Sampling to summarize<a href="sampling-the-imaginary.html#sampling-to-summarize" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Common questions about your posterior:
+1. intervals of <em>defined boundaries</em>
+2. intervals of <em>defined probability mass</em>
+3. <em>point estimates</em></p>
+<div id="intervals-of-defined-boundaries" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Intervals of defined boundaries<a href="sampling-the-imaginary.html#intervals-of-defined-boundaries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>What is the posterior probability that the proportion of water is &gt;0.5?</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="sampling-the-imaginary.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(posterior[p_grid <span class="sc">&lt;</span> <span class="fl">0.5</span>])</span></code></pre></div>
+<pre><code>## [1] 0.1718746</code></pre>
+<p>about 17%</p>
+<p>Doing the same using the samples from the posterior</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="sampling-the-imaginary.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(samples <span class="sc">&lt;</span> <span class="fl">0.5</span>) <span class="sc">/</span> <span class="fl">1e4</span> <span class="co">#divide by the number of samples you gathered</span></span></code></pre></div>
+<pre><code>## [1] 0.1729</code></pre>
+<p>what about between 0.5 and 0.75?</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="sampling-the-imaginary.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(samples <span class="sc">&gt;</span> <span class="fl">0.5</span> <span class="sc">&amp;</span> samples <span class="sc">&lt;</span> <span class="fl">0.75</span>) <span class="sc">/</span> <span class="fl">1e4</span></span></code></pre></div>
+<pre><code>## [1] 0.6065</code></pre>
+<p>Recreating figure 3.2 (upper left panel)</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="sampling-the-imaginary.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb98-2"><a href="sampling-the-imaginary.html#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb98-3"><a href="sampling-the-imaginary.html#cb98-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-4"><a href="sampling-the-imaginary.html#cb98-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(p_grid, posterior)</span>
+<span id="cb98-5"><a href="sampling-the-imaginary.html#cb98-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-6"><a href="sampling-the-imaginary.html#cb98-6" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> p_grid)) <span class="sc">+</span></span>
+<span id="cb98-7"><a href="sampling-the-imaginary.html#cb98-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> posterior)) <span class="sc">+</span></span>
+<span id="cb98-8"><a href="sampling-the-imaginary.html#cb98-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(p_grid <span class="sc">&lt;</span> <span class="fl">0.5</span>),</span>
+<span id="cb98-9"><a href="sampling-the-imaginary.html#cb98-9" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> posterior)) <span class="sc">+</span></span>
+<span id="cb98-10"><a href="sampling-the-imaginary.html#cb98-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;proportion of water (p)&quot;</span>,</span>
+<span id="cb98-11"><a href="sampling-the-imaginary.html#cb98-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;density&quot;</span>) <span class="sc">+</span></span>
+<span id="cb98-12"><a href="sampling-the-imaginary.html#cb98-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-46-1.png" width="672" />
+upper right panel</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="sampling-the-imaginary.html#cb99-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> p_grid)) <span class="sc">+</span></span>
+<span id="cb99-2"><a href="sampling-the-imaginary.html#cb99-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> posterior)) <span class="sc">+</span></span>
+<span id="cb99-3"><a href="sampling-the-imaginary.html#cb99-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(p_grid <span class="sc">&lt;</span> <span class="fl">0.75</span> <span class="sc">&amp;</span> p_grid <span class="sc">&gt;</span> <span class="fl">0.5</span>),</span>
+<span id="cb99-4"><a href="sampling-the-imaginary.html#cb99-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> posterior)) <span class="sc">+</span></span>
+<span id="cb99-5"><a href="sampling-the-imaginary.html#cb99-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;proportion of water (p)&quot;</span>,</span>
+<span id="cb99-6"><a href="sampling-the-imaginary.html#cb99-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;density&quot;</span>) <span class="sc">+</span></span>
+<span id="cb99-7"><a href="sampling-the-imaginary.html#cb99-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+</div>
+<div id="intervals-of-defined-mass" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> intervals of defined mass<a href="sampling-the-imaginary.html#intervals-of-defined-mass" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>finding the lower 80% of the probability mass using samples</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="sampling-the-imaginary.html#cb100-1" aria-hidden="true" tabindex="-1"></a>(q_80 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(samples, <span class="fl">0.8</span>))</span></code></pre></div>
+<pre><code>##       80% 
+## 0.7607608</code></pre>
+<p>finding the middle 80% (10-90%)</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="sampling-the-imaginary.html#cb102-1" aria-hidden="true" tabindex="-1"></a>(q_10_90 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(samples, <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)))</span></code></pre></div>
+<pre><code>##       10%       90% 
+## 0.4474474 0.8108108</code></pre>
+<p>Bottom panels to figure 3.2
+lower left:</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="sampling-the-imaginary.html#cb104-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> p_grid)) <span class="sc">+</span></span>
+<span id="cb104-2"><a href="sampling-the-imaginary.html#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> posterior)) <span class="sc">+</span></span>
+<span id="cb104-3"><a href="sampling-the-imaginary.html#cb104-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(p_grid <span class="sc">&lt;</span> q_80),</span>
+<span id="cb104-4"><a href="sampling-the-imaginary.html#cb104-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> posterior)) <span class="sc">+</span></span>
+<span id="cb104-5"><a href="sampling-the-imaginary.html#cb104-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">&#39;text&#39;</span>, <span class="at">x =</span> <span class="fl">0.25</span>, <span class="at">y =</span> <span class="fl">0.0025</span>,</span>
+<span id="cb104-6"><a href="sampling-the-imaginary.html#cb104-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">&#39;lower 80%&#39;</span>) <span class="sc">+</span></span>
+<span id="cb104-7"><a href="sampling-the-imaginary.html#cb104-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;proportion of water (p)&quot;</span>,</span>
+<span id="cb104-8"><a href="sampling-the-imaginary.html#cb104-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;density&quot;</span>) <span class="sc">+</span></span>
+<span id="cb104-9"><a href="sampling-the-imaginary.html#cb104-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="sampling-the-imaginary.html#cb105-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> p_grid)) <span class="sc">+</span></span>
+<span id="cb105-2"><a href="sampling-the-imaginary.html#cb105-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> posterior)) <span class="sc">+</span></span>
+<span id="cb105-3"><a href="sampling-the-imaginary.html#cb105-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(p_grid <span class="sc">&gt;</span> q_10_90[<span class="dv">1</span>] <span class="sc">&amp;</span> p_grid <span class="sc">&lt;</span> q_10_90[<span class="dv">2</span>]),</span>
+<span id="cb105-4"><a href="sampling-the-imaginary.html#cb105-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> posterior)) <span class="sc">+</span></span>
+<span id="cb105-5"><a href="sampling-the-imaginary.html#cb105-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">&#39;text&#39;</span>, <span class="at">x =</span> <span class="fl">0.25</span>, <span class="at">y =</span> <span class="fl">0.0025</span>,</span>
+<span id="cb105-6"><a href="sampling-the-imaginary.html#cb105-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">&#39;middle 80%&#39;</span>) <span class="sc">+</span></span>
+<span id="cb105-7"><a href="sampling-the-imaginary.html#cb105-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;proportion of water (p)&quot;</span>,</span>
+<span id="cb105-8"><a href="sampling-the-imaginary.html#cb105-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;density&quot;</span>) <span class="sc">+</span></span>
+<span id="cb105-9"><a href="sampling-the-imaginary.html#cb105-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p>example of three tosses and three water observations:</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="sampling-the-imaginary.html#cb106-1" aria-hidden="true" tabindex="-1"></a>p_grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">1000</span>)</span>
+<span id="cb106-2"><a href="sampling-the-imaginary.html#cb106-2" aria-hidden="true" tabindex="-1"></a>prior <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">1000</span>)</span>
+<span id="cb106-3"><a href="sampling-the-imaginary.html#cb106-3" aria-hidden="true" tabindex="-1"></a>likelihood <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">prob =</span> p_grid)</span>
+<span id="cb106-4"><a href="sampling-the-imaginary.html#cb106-4" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">&lt;-</span> likelihood <span class="sc">*</span> prior</span>
+<span id="cb106-5"><a href="sampling-the-imaginary.html#cb106-5" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">&lt;-</span> posterior <span class="sc">/</span> <span class="fu">sum</span>(posterior)</span>
+<span id="cb106-6"><a href="sampling-the-imaginary.html#cb106-6" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">sample</span>(p_grid, <span class="at">size =</span> <span class="fl">1e4</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> posterior)</span></code></pre></div>
+<p>Getting the 50% interval</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="sampling-the-imaginary.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(samples, <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>))</span></code></pre></div>
+<pre><code>##       25%       75% 
+## 0.7057057 0.9299299</code></pre>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="sampling-the-imaginary.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co">#PI(samples, prob = 0.5) #rethinking package</span></span></code></pre></div>
+<p>Tidybayes package:</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="sampling-the-imaginary.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidybayes)</span></code></pre></div>
+<pre><code>## Warning: package &#39;tidybayes&#39; was built under R version 4.1.2</code></pre>
+<pre><code>## 
+## Attaching package: &#39;tidybayes&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:brms&#39;:
+## 
+##     dstudent_t, pstudent_t, qstudent_t, rstudent_t</code></pre>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="sampling-the-imaginary.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median_qi</span>(samples, <span class="at">.width =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<pre><code>##           y      ymin      ymax .width .point .interval
+## 1 0.8418418 0.7057057 0.9299299    0.5 median        qi</code></pre>
+<p>Notice that all methods above give us the same interval from ~70 - ~93
+With tidybayes, you can also look for multiple intervals at once:</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="sampling-the-imaginary.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median_qi</span>(samples, <span class="at">.width =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.8</span>, <span class="fl">0.99</span>))</span></code></pre></div>
+<pre><code>##           y      ymin      ymax .width .point .interval
+## 1 0.8418418 0.7057057 0.9299299   0.50 median        qi
+## 2 0.8418418 0.5685686 0.9749750   0.80 median        qi
+## 3 0.8418418 0.2792743 0.9989990   0.99 median        qi</code></pre>
+<p>Finding the <em>Highest Posterior Density Interval</em> (HPDI)</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="sampling-the-imaginary.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="co">#HPDI(samples, prob = 0.5) #rethinking</span></span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="sampling-the-imaginary.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mode_hdi</span>(samples, <span class="at">.width =</span> <span class="fl">0.5</span>) <span class="co">#tidybayes</span></span></code></pre></div>
+<pre><code>##           y      ymin ymax .width .point .interval
+## 1 0.9565123 0.8418418    1    0.5   mode       hdi</code></pre>
+<p><strong>Note: you can get just the points of refernce by using qi() for quantiles and hdi() for highest density intervals. Useful for plotting</strong></p>
+<p>recreate figure 3.3
+left panel</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="sampling-the-imaginary.html#cb121-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(p_grid, posterior)</span>
+<span id="cb121-2"><a href="sampling-the-imaginary.html#cb121-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-3"><a href="sampling-the-imaginary.html#cb121-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb121-4"><a href="sampling-the-imaginary.html#cb121-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> p_grid)) <span class="sc">+</span></span>
+<span id="cb121-5"><a href="sampling-the-imaginary.html#cb121-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(p_grid <span class="sc">&gt;</span> <span class="fu">qi</span>(samples, <span class="at">.width =</span> <span class="fl">0.5</span>)[<span class="dv">1</span>] <span class="sc">&amp;</span> </span>
+<span id="cb121-6"><a href="sampling-the-imaginary.html#cb121-6" aria-hidden="true" tabindex="-1"></a>                                     p_grid <span class="sc">&lt;</span> <span class="fu">qi</span>(samples, <span class="at">.width =</span> <span class="fl">0.5</span>)[<span class="dv">2</span>]),</span>
+<span id="cb121-7"><a href="sampling-the-imaginary.html#cb121-7" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> posterior)) <span class="sc">+</span></span>
+<span id="cb121-8"><a href="sampling-the-imaginary.html#cb121-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> posterior)) <span class="sc">+</span></span>
+<span id="cb121-9"><a href="sampling-the-imaginary.html#cb121-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&#39;50% Percentile interval&#39;</span>,</span>
+<span id="cb121-10"><a href="sampling-the-imaginary.html#cb121-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&#39;proportion of water (p)&#39;</span>,</span>
+<span id="cb121-11"><a href="sampling-the-imaginary.html#cb121-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&#39;density&#39;</span>)<span class="sc">+</span></span>
+<span id="cb121-12"><a href="sampling-the-imaginary.html#cb121-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-1.png" width="672" />
+right panel</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="sampling-the-imaginary.html#cb122-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb122-2"><a href="sampling-the-imaginary.html#cb122-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> p_grid)) <span class="sc">+</span></span>
+<span id="cb122-3"><a href="sampling-the-imaginary.html#cb122-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(p_grid <span class="sc">&gt;</span> <span class="fu">hdi</span>(samples, <span class="at">.width =</span> <span class="fl">0.5</span>)[<span class="dv">1</span>] <span class="sc">&amp;</span> </span>
+<span id="cb122-4"><a href="sampling-the-imaginary.html#cb122-4" aria-hidden="true" tabindex="-1"></a>                                     p_grid <span class="sc">&lt;</span> <span class="fu">hdi</span>(samples, <span class="at">.width =</span> <span class="fl">0.5</span>)[<span class="dv">2</span>]),</span>
+<span id="cb122-5"><a href="sampling-the-imaginary.html#cb122-5" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> posterior)) <span class="sc">+</span></span>
+<span id="cb122-6"><a href="sampling-the-imaginary.html#cb122-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> posterior)) <span class="sc">+</span></span>
+<span id="cb122-7"><a href="sampling-the-imaginary.html#cb122-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&#39;50% HPDI&#39;</span>,</span>
+<span id="cb122-8"><a href="sampling-the-imaginary.html#cb122-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&#39;proportion of water (p)&#39;</span>,</span>
+<span id="cb122-9"><a href="sampling-the-imaginary.html#cb122-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&#39;density&#39;</span>)<span class="sc">+</span></span>
+<span id="cb122-10"><a href="sampling-the-imaginary.html#cb122-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+</div>
+<div id="point-estimates" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Point estimates<a href="sampling-the-imaginary.html#point-estimates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>How to get a single useful (?) point estimate for your parameter. First option is the <em>maximum a posteriori</em> (MAP).</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="sampling-the-imaginary.html#cb123-1" aria-hidden="true" tabindex="-1"></a>p_grid[<span class="fu">which.max</span>(posterior)] </span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>With samples:</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="sampling-the-imaginary.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Mode</span>(samples) <span class="co">#tidybayes</span></span></code></pre></div>
+<pre><code>## [1] 0.9565123</code></pre>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="sampling-the-imaginary.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="co">#chainmode(samples, adj = 0.01) #rethinking</span></span></code></pre></div>
+<p>what about mean or median?</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="sampling-the-imaginary.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(samples)</span></code></pre></div>
+<pre><code>## [1] 0.801547</code></pre>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="sampling-the-imaginary.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(samples)</span></code></pre></div>
+<pre><code>## [1] 0.8418418</code></pre>
+<p>Visualize the mean, median, and mode (figure 3.4)</p>
+<ol style="list-style-type: decimal">
+<li>create a small data frame</li>
+</ol>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="sampling-the-imaginary.html#cb132-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb132-2"><a href="sampling-the-imaginary.html#cb132-2" aria-hidden="true" tabindex="-1"></a>point_estimates <span class="ot">&lt;-</span> </span>
+<span id="cb132-3"><a href="sampling-the-imaginary.html#cb132-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(</span>
+<span id="cb132-4"><a href="sampling-the-imaginary.html#cb132-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean_qi</span>(samples),</span>
+<span id="cb132-5"><a href="sampling-the-imaginary.html#cb132-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">median_qi</span>(samples),</span>
+<span id="cb132-6"><a href="sampling-the-imaginary.html#cb132-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mode_qi</span>(samples)</span>
+<span id="cb132-7"><a href="sampling-the-imaginary.html#cb132-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb132-8"><a href="sampling-the-imaginary.html#cb132-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(y, .point) <span class="sc">%&gt;%</span> </span>
+<span id="cb132-9"><a href="sampling-the-imaginary.html#cb132-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">x =</span> y <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.03</span>, <span class="fl">0.03</span>, <span class="sc">-</span><span class="fl">0.03</span>),</span>
+<span id="cb132-10"><a href="sampling-the-imaginary.html#cb132-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">z =</span> <span class="fu">c</span>(<span class="fl">0.001</span>, <span class="fl">0.0015</span>, <span class="fl">0.0025</span>))</span>
+<span id="cb132-11"><a href="sampling-the-imaginary.html#cb132-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>##           y .point         x      z
+## 1 0.8015470   mean 0.7715470 0.0010
+## 2 0.8418418 median 0.8718418 0.0015
+## 3 0.9565123   mode 0.9265123 0.0025</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>plot</li>
+</ol>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="sampling-the-imaginary.html#cb134-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb134-2"><a href="sampling-the-imaginary.html#cb134-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> p_grid)) <span class="sc">+</span></span>
+<span id="cb134-3"><a href="sampling-the-imaginary.html#cb134-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> posterior),</span>
+<span id="cb134-4"><a href="sampling-the-imaginary.html#cb134-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill =</span> <span class="st">&quot;grey75&quot;</span>) <span class="sc">+</span></span>
+<span id="cb134-5"><a href="sampling-the-imaginary.html#cb134-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> point_estimates<span class="sc">$</span>y) <span class="sc">+</span></span>
+<span id="cb134-6"><a href="sampling-the-imaginary.html#cb134-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> point_estimates, </span>
+<span id="cb134-7"><a href="sampling-the-imaginary.html#cb134-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> z, <span class="at">label =</span> .point),</span>
+<span id="cb134-8"><a href="sampling-the-imaginary.html#cb134-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">angle =</span> <span class="dv">90</span>) <span class="sc">+</span></span>
+<span id="cb134-9"><a href="sampling-the-imaginary.html#cb134-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;proportion of water (p)&quot;</span>,</span>
+<span id="cb134-10"><a href="sampling-the-imaginary.html#cb134-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;density&quot;</span>) <span class="sc">+</span></span>
+<span id="cb134-11"><a href="sampling-the-imaginary.html#cb134-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+<p>How do we choose between the point estimates? <em>Loss functions</em></p>
+<p>If we assume that p = 0.5 then the expected loss would be:</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="sampling-the-imaginary.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(posterior <span class="sc">*</span> <span class="fu">abs</span>(<span class="fl">0.5</span> <span class="sc">-</span> p_grid))</span></code></pre></div>
+<pre><code>## [1] 0.3128752</code></pre>
+<p>applying this method to all values of p_grid:</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="sampling-the-imaginary.html#cb137-1" aria-hidden="true" tabindex="-1"></a>loss <span class="ot">&lt;-</span> <span class="fu">sapply</span>(p_grid, <span class="cf">function</span>(d) <span class="fu">sum</span>(posterior <span class="sc">*</span> <span class="fu">abs</span>(d <span class="sc">-</span> p_grid)))</span></code></pre></div>
+<p>Now find the p value with the lowest loss</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="sampling-the-imaginary.html#cb138-1" aria-hidden="true" tabindex="-1"></a>p_grid[<span class="fu">which.min</span>(loss)]</span></code></pre></div>
+<pre><code>## [1] 0.8408408</code></pre>
+<p>Visualize the loss function</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="sampling-the-imaginary.html#cb140-1" aria-hidden="true" tabindex="-1"></a>min_loss_x <span class="ot">&lt;-</span> p_grid[<span class="fu">which.min</span>(loss)]</span>
+<span id="cb140-2"><a href="sampling-the-imaginary.html#cb140-2" aria-hidden="true" tabindex="-1"></a>min_loss_y <span class="ot">&lt;-</span> loss[<span class="fu">which.min</span>(loss)]</span>
+<span id="cb140-3"><a href="sampling-the-imaginary.html#cb140-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb140-4"><a href="sampling-the-imaginary.html#cb140-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(p_grid, loss)</span>
+<span id="cb140-5"><a href="sampling-the-imaginary.html#cb140-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb140-6"><a href="sampling-the-imaginary.html#cb140-6" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb140-7"><a href="sampling-the-imaginary.html#cb140-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> p_grid)) <span class="sc">+</span></span>
+<span id="cb140-8"><a href="sampling-the-imaginary.html#cb140-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> loss), <span class="at">fill =</span> <span class="st">&#39;grey75&#39;</span>) <span class="sc">+</span></span>
+<span id="cb140-9"><a href="sampling-the-imaginary.html#cb140-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> min_loss_x, <span class="at">y =</span> min_loss_y), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">&#39;blue&#39;</span>) <span class="sc">+</span></span>
+<span id="cb140-10"><a href="sampling-the-imaginary.html#cb140-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;decision&#39;</span>,</span>
+<span id="cb140-11"><a href="sampling-the-imaginary.html#cb140-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&#39;expected proportional loss&#39;</span>) <span class="sc">+</span></span>
+<span id="cb140-12"><a href="sampling-the-imaginary.html#cb140-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+</div>
+</div>
+<div id="sampling-to-simulate-prediction" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Sampling to simulate prediction<a href="sampling-the-imaginary.html#sampling-to-simulate-prediction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>McElreath’s 5 reasons for posterior simulation:
+1. Model design - We can sample from both the posterior and the priors to see how the model behaves<br />
+2. Model checking - simulating implied observations to check the model fit<br />
+3. Software validation - To double check that the software is running as expected, it helps to simulate observations for a known model and try to recover the parameter values<br />
+4. Research design - you can test observations from your hypothesis to test your design. similar to power analysis<br />
+5. Forecasting - Estimates can be used to simulate new predictions, for new cases and future observations</p>
+<div id="dummy-data" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Dummy data<a href="sampling-the-imaginary.html#dummy-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>From the globe tossing example we can use the likelihood function to create dummy data</p>
+<p><span class="math display">\[\begin{equation}
+\text{Pr}(W|N,p) = \frac{N!}{ W!(N-W)!}p^W\left(1-p\right)^{N-W}
+\end{equation}\]</span></p>
+<p>If we had two tosses (N = 2), there are 3 possibilities: 0 W, 1W, 2W. So we can compute the probabilities of each with the p value set to 0.7</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="sampling-the-imaginary.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">prob =</span> <span class="fl">0.7</span>)</span></code></pre></div>
+<pre><code>## [1] 0.09 0.42 0.49</code></pre>
+<p>So we see a 9% chance for 0 W, 42% chance of 1 W, and 49% 2 W. So we can sample from the binomial distribution. For example:</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="sampling-the-imaginary.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbinom</span>(<span class="dv">1</span> , <span class="at">size =</span> <span class="dv">2</span>, <span class="at">prob =</span> <span class="fl">0.7</span>)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>This is a single random draw from the described distribution. You can also sample multiples:</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="sampling-the-imaginary.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbinom</span>(<span class="dv">10</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">prob =</span> <span class="fl">0.7</span>)</span></code></pre></div>
+<pre><code>##  [1] 1 1 2 2 1 2 2 2 2 0</code></pre>
+<p>So we can create a large selection of random draws as dummy data and see if the 0s, 1s, and 2s appear in the same proportions as the probabilities above (9%, 42%, and 49%)</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="sampling-the-imaginary.html#cb147-1" aria-hidden="true" tabindex="-1"></a>dummy_w <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="fl">1e5</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">prob =</span> <span class="fl">0.7</span>)</span>
+<span id="cb147-2"><a href="sampling-the-imaginary.html#cb147-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dummy_w) <span class="sc">/</span> <span class="fl">1e5</span></span></code></pre></div>
+<pre><code>## dummy_w
+##       0       1       2 
+## 0.08972 0.41847 0.49181</code></pre>
+<p>Now, let’s update the tosses to match all the previous examples (N = 9).</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="sampling-the-imaginary.html#cb149-1" aria-hidden="true" tabindex="-1"></a>dummy_w <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="fl">1e5</span>, <span class="at">size =</span> <span class="dv">9</span>, <span class="at">prob =</span> <span class="fl">0.7</span>)</span>
+<span id="cb149-2"><a href="sampling-the-imaginary.html#cb149-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fl">1e5</span>)</span>
+<span id="cb149-3"><a href="sampling-the-imaginary.html#cb149-3" aria-hidden="true" tabindex="-1"></a>df_w <span class="ot">&lt;-</span> <span class="fu">tibble</span>(n, dummy_w) </span>
+<span id="cb149-4"><a href="sampling-the-imaginary.html#cb149-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb149-5"><a href="sampling-the-imaginary.html#cb149-5" aria-hidden="true" tabindex="-1"></a>df_w <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dummy_w)) <span class="sc">+</span></span>
+<span id="cb149-6"><a href="sampling-the-imaginary.html#cb149-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb149-7"><a href="sampling-the-imaginary.html#cb149-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">&quot;dummy water count&quot;</span>, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">9</span>, <span class="at">by =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb149-8"><a href="sampling-the-imaginary.html#cb149-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;frequency&quot;</span>) <span class="sc">+</span></span>
+<span id="cb149-9"><a href="sampling-the-imaginary.html#cb149-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%203.24-1.png" width="672" /></p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="sampling-the-imaginary.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="co">#simplehist(dummy_w, xlab = &#39;dummy water count&#39;) #rethinking</span></span></code></pre></div>
+</div>
+<div id="model-checking" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Model checking<a href="sampling-the-imaginary.html#model-checking" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="did-the-software-work" class="section level4 hasAnchor" number="3.3.2.1">
+<h4><span class="header-section-number">3.3.2.1</span> Did the software work?<a href="sampling-the-imaginary.html#did-the-software-work" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>There actually is no way to check if the software is working correctly. You just have to set yourself an acceptable amount of correspondence between the observations (data) and implied predictions.</p>
+</div>
+<div id="is-the-model-adequate" class="section level4 hasAnchor" number="3.3.2.2">
+<h4><span class="header-section-number">3.3.2.2</span> Is the model adequate?<a href="sampling-the-imaginary.html#is-the-model-adequate" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We need to incorporate the model’s posterior distribution (and its uncertainty) with the implied predictions (and their uncertainty) to create a <em>Posterior Predictive Distribution</em>. To visulize this, we can recreate McElreath’s figure 3.6 below.</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="sampling-the-imaginary.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number of grid point in p_grid</span></span>
+<span id="cb151-2"><a href="sampling-the-imaginary.html#cb151-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1001</span></span>
+<span id="cb151-3"><a href="sampling-the-imaginary.html#cb151-3" aria-hidden="true" tabindex="-1"></a><span class="co"># number of W in 9 tosses</span></span>
+<span id="cb151-4"><a href="sampling-the-imaginary.html#cb151-4" aria-hidden="true" tabindex="-1"></a>n_w <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb151-5"><a href="sampling-the-imaginary.html#cb151-5" aria-hidden="true" tabindex="-1"></a><span class="co"># number of tosses</span></span>
+<span id="cb151-6"><a href="sampling-the-imaginary.html#cb151-6" aria-hidden="true" tabindex="-1"></a>n_t <span class="ot">&lt;-</span> <span class="dv">9</span></span>
+<span id="cb151-7"><a href="sampling-the-imaginary.html#cb151-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb151-8"><a href="sampling-the-imaginary.html#cb151-8" aria-hidden="true" tabindex="-1"></a><span class="co"># make a table that contains the p_grid, prior, and posterior</span></span>
+<span id="cb151-9"><a href="sampling-the-imaginary.html#cb151-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb151-10"><a href="sampling-the-imaginary.html#cb151-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">p_grid =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">length.out =</span> n),</span>
+<span id="cb151-11"><a href="sampling-the-imaginary.html#cb151-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#prior is still flat</span></span>
+<span id="cb151-12"><a href="sampling-the-imaginary.html#cb151-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">prior =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb151-13"><a href="sampling-the-imaginary.html#cb151-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">likelihood =</span> <span class="fu">dbinom</span>(n_w, <span class="at">size =</span> n_t, <span class="at">prob =</span> p_grid)) <span class="sc">%&gt;%</span> </span>
+<span id="cb151-14"><a href="sampling-the-imaginary.html#cb151-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">posterior =</span> (likelihood <span class="sc">*</span> prior)<span class="sc">/</span><span class="fu">sum</span>(likelihood<span class="sc">*</span>prior))</span>
+<span id="cb151-15"><a href="sampling-the-imaginary.html#cb151-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb151-16"><a href="sampling-the-imaginary.html#cb151-16" aria-hidden="true" tabindex="-1"></a><span class="co">#visualize the posterior distribution with 9 p values to sample from</span></span>
+<span id="cb151-17"><a href="sampling-the-imaginary.html#cb151-17" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb151-18"><a href="sampling-the-imaginary.html#cb151-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> p_grid)) <span class="sc">+</span></span>
+<span id="cb151-19"><a href="sampling-the-imaginary.html#cb151-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> <span class="dv">0</span>, <span class="at">ymax =</span> posterior),</span>
+<span id="cb151-20"><a href="sampling-the-imaginary.html#cb151-20" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">&#39;grey70&#39;</span>, <span class="at">fill =</span> <span class="st">&#39;grey70&#39;</span>) <span class="sc">+</span></span>
+<span id="cb151-21"><a href="sampling-the-imaginary.html#cb151-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> </span>
+<span id="cb151-22"><a href="sampling-the-imaginary.html#cb151-22" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">filter</span>(p_grid <span class="sc">%in%</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">0.9</span>, <span class="at">by =</span> <span class="fl">0.1</span>), <span class="dv">3</span> <span class="sc">/</span> <span class="dv">10</span>)),</span>
+<span id="cb151-23"><a href="sampling-the-imaginary.html#cb151-23" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">xend =</span> p_grid, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">yend =</span> posterior, <span class="at">size =</span> posterior),</span>
+<span id="cb151-24"><a href="sampling-the-imaginary.html#cb151-24" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">&#39;grey35&#39;</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb151-25"><a href="sampling-the-imaginary.html#cb151-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> </span>
+<span id="cb151-26"><a href="sampling-the-imaginary.html#cb151-26" aria-hidden="true" tabindex="-1"></a>               <span class="fu">filter</span>(p_grid <span class="sc">%in%</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">0.9</span>, <span class="at">by =</span> <span class="fl">0.1</span>), <span class="dv">3</span> <span class="sc">/</span> <span class="dv">10</span>)),</span>
+<span id="cb151-27"><a href="sampling-the-imaginary.html#cb151-27" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">y =</span> posterior)) <span class="sc">+</span></span>
+<span id="cb151-28"><a href="sampling-the-imaginary.html#cb151-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">&#39;text&#39;</span>, <span class="at">x =</span> <span class="fl">0.08</span>, <span class="at">y =</span> <span class="fl">0.0025</span>, <span class="at">label =</span> <span class="st">&#39;Posterior probability&#39;</span>) <span class="sc">+</span></span>
+<span id="cb151-29"><a href="sampling-the-imaginary.html#cb151-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb151-30"><a href="sampling-the-imaginary.html#cb151-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">&#39;probability of water&#39;</span>, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">/</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb151-31"><a href="sampling-the-imaginary.html#cb151-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="cn">NULL</span>, <span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb151-32"><a href="sampling-the-imaginary.html#cb151-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="sampling-the-imaginary.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="co">#show the sampling distributions for each p value above</span></span>
+<span id="cb152-2"><a href="sampling-the-imaginary.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;tidyr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:rstan&#39;:
+## 
+##     extract</code></pre>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="sampling-the-imaginary.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="co">#number of simulated draws</span></span>
+<span id="cb155-2"><a href="sampling-the-imaginary.html#cb155-2" aria-hidden="true" tabindex="-1"></a>n_draws <span class="ot">&lt;-</span> <span class="fl">1e5</span></span>
+<span id="cb155-3"><a href="sampling-the-imaginary.html#cb155-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-4"><a href="sampling-the-imaginary.html#cb155-4" aria-hidden="true" tabindex="-1"></a><span class="co">#simulation function</span></span>
+<span id="cb155-5"><a href="sampling-the-imaginary.html#cb155-5" aria-hidden="true" tabindex="-1"></a>simulate_binom <span class="ot">&lt;-</span> <span class="cf">function</span>(probability){</span>
+<span id="cb155-6"><a href="sampling-the-imaginary.html#cb155-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">11</span>) <span class="co">#reproducible</span></span>
+<span id="cb155-7"><a href="sampling-the-imaginary.html#cb155-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbinom</span>(n_draws, <span class="at">size =</span> <span class="dv">9</span>, <span class="at">prob =</span> probability)</span>
+<span id="cb155-8"><a href="sampling-the-imaginary.html#cb155-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb155-9"><a href="sampling-the-imaginary.html#cb155-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-10"><a href="sampling-the-imaginary.html#cb155-10" aria-hidden="true" tabindex="-1"></a><span class="co"># make a table of simulated draws for each probability</span></span>
+<span id="cb155-11"><a href="sampling-the-imaginary.html#cb155-11" aria-hidden="true" tabindex="-1"></a>df_small <span class="ot">&lt;-</span> </span>
+<span id="cb155-12"><a href="sampling-the-imaginary.html#cb155-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">probability =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">0.9</span>, <span class="at">by =</span> <span class="fl">0.1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb155-13"><a href="sampling-the-imaginary.html#cb155-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">draws =</span> purrr<span class="sc">::</span><span class="fu">map</span>(probability, simulate_binom)) <span class="sc">%&gt;%</span> </span>
+<span id="cb155-14"><a href="sampling-the-imaginary.html#cb155-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(draws) <span class="sc">%&gt;%</span> </span>
+<span id="cb155-15"><a href="sampling-the-imaginary.html#cb155-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">label =</span> <span class="fu">str_c</span>(<span class="st">&quot;p = &quot;</span>, probability))</span>
+<span id="cb155-16"><a href="sampling-the-imaginary.html#cb155-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-17"><a href="sampling-the-imaginary.html#cb155-17" aria-hidden="true" tabindex="-1"></a><span class="co">#create a histogram for each simulated p value</span></span>
+<span id="cb155-18"><a href="sampling-the-imaginary.html#cb155-18" aria-hidden="true" tabindex="-1"></a>df_small <span class="sc">%&gt;%</span> </span>
+<span id="cb155-19"><a href="sampling-the-imaginary.html#cb155-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> draws)) <span class="sc">+</span></span>
+<span id="cb155-20"><a href="sampling-the-imaginary.html#cb155-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">center =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&#39;grey90&#39;</span>, <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb155-21"><a href="sampling-the-imaginary.html#cb155-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="cn">NULL</span>, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">9</span>, <span class="at">by =</span> <span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb155-22"><a href="sampling-the-imaginary.html#cb155-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="cn">NULL</span>, <span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb155-23"><a href="sampling-the-imaginary.html#cb155-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">&#39;Sampling distributions&#39;</span>) <span class="sc">+</span></span>
+<span id="cb155-24"><a href="sampling-the-imaginary.html#cb155-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">#coord_cartesian(xlim = 0:9) +</span></span>
+<span id="cb155-25"><a href="sampling-the-imaginary.html#cb155-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb155-26"><a href="sampling-the-imaginary.html#cb155-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> label, <span class="at">ncol =</span> <span class="dv">9</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="sampling-the-imaginary.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="co">#show the newly calculated PPD</span></span>
+<span id="cb156-2"><a href="sampling-the-imaginary.html#cb156-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb156-3"><a href="sampling-the-imaginary.html#cb156-3" aria-hidden="true" tabindex="-1"></a><span class="co">#number of samples</span></span>
+<span id="cb156-4"><a href="sampling-the-imaginary.html#cb156-4" aria-hidden="true" tabindex="-1"></a>n_samples <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
+<span id="cb156-5"><a href="sampling-the-imaginary.html#cb156-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb156-6"><a href="sampling-the-imaginary.html#cb156-6" aria-hidden="true" tabindex="-1"></a><span class="co">#make sure it can be replicated</span></span>
+<span id="cb156-7"><a href="sampling-the-imaginary.html#cb156-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb156-8"><a href="sampling-the-imaginary.html#cb156-8" aria-hidden="true" tabindex="-1"></a><span class="co"># sample rows of the original dataframe and calculate a W value for each p_grid value</span></span>
+<span id="cb156-9"><a href="sampling-the-imaginary.html#cb156-9" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb156-10"><a href="sampling-the-imaginary.html#cb156-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size =</span> n_samples, <span class="at">weight =</span> posterior, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb156-11"><a href="sampling-the-imaginary.html#cb156-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">w =</span> purrr<span class="sc">::</span><span class="fu">map_dbl</span>(p_grid, rbinom, <span class="at">n =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">9</span>))</span>
+<span id="cb156-12"><a href="sampling-the-imaginary.html#cb156-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb156-13"><a href="sampling-the-imaginary.html#cb156-13" aria-hidden="true" tabindex="-1"></a><span class="co">#plot the newly created PPD</span></span>
+<span id="cb156-14"><a href="sampling-the-imaginary.html#cb156-14" aria-hidden="true" tabindex="-1"></a>samples <span class="sc">%&gt;%</span> </span>
+<span id="cb156-15"><a href="sampling-the-imaginary.html#cb156-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> w)) <span class="sc">+</span></span>
+<span id="cb156-16"><a href="sampling-the-imaginary.html#cb156-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">center =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&#39;grey90&#39;</span>, <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb156-17"><a href="sampling-the-imaginary.html#cb156-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">&#39;number of water samples&#39;</span>, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">9</span>, <span class="at">by =</span> <span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb156-18"><a href="sampling-the-imaginary.html#cb156-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="cn">NULL</span>, <span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb156-19"><a href="sampling-the-imaginary.html#cb156-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&#39;Posterior predictive distribution&#39;</span>) <span class="sc">+</span></span>
+<span id="cb156-20"><a href="sampling-the-imaginary.html#cb156-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">#coord_cartesian(xlim = 0:9, ylim = 0:3000) +</span></span>
+<span id="cb156-21"><a href="sampling-the-imaginary.html#cb156-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<p>The advantage here is that the predictive distribution is still quite spread out compared to the observed data (w = 6). This is much more informative than if we were to just pick out the mode of the posterior and make implied predictions from that value. This would look like the sampling distribution of p = 0.6 above which would be overconfident.</p>
+</div>
+</div>
+<div id="practice-with-brms" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Practice with brms<a href="sampling-the-imaginary.html#practice-with-brms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s create a PPD with brms</p>
+<p>Load the package</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="sampling-the-imaginary.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="sampling-the-imaginary.html#cb158-1" aria-hidden="true" tabindex="-1"></a>brms_3 <span class="ot">&lt;-</span> <span class="fu">brm</span>(<span class="at">data =</span> <span class="fu">list</span>(<span class="at">w =</span> <span class="dv">6</span>),</span>
+<span id="cb158-2"><a href="sampling-the-imaginary.html#cb158-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&#39;identity&#39;</span>),</span>
+<span id="cb158-3"><a href="sampling-the-imaginary.html#cb158-3" aria-hidden="true" tabindex="-1"></a>              w <span class="sc">|</span> <span class="fu">trials</span>(<span class="dv">9</span>) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb158-4"><a href="sampling-the-imaginary.html#cb158-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">prior</span>(<span class="fu">beta</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb158-5"><a href="sampling-the-imaginary.html#cb158-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">seed =</span> <span class="dv">11</span>,</span>
+<span id="cb158-6"><a href="sampling-the-imaginary.html#cb158-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">control =</span> <span class="fu">list</span>(<span class="at">adapt_delta =</span> <span class="fl">0.999</span>))</span></code></pre></div>
+<pre><code>## Compiling Stan program...</code></pre>
+<pre><code>## recompiling to avoid crashing R session</code></pre>
+<pre><code>## Start sampling</code></pre>
+<pre><code>## 
+## SAMPLING FOR MODEL &#39;32a7f51a2d1717ef80875b648bc79f41&#39; NOW (CHAIN 1).
+## Chain 1: Rejecting initial value:
+## Chain 1:   Error evaluating the log probability at the initial value.
+## Chain 1: Exception: binomial_lpmf: Probability parameter[1] is -0.232403, but must be in the interval [0, 1]  (in &#39;modeld712023842a_32a7f51a2d1717ef80875b648bc79f41&#39; at line 22)
+## 
+## Chain 1: 
+## Chain 1: Gradient evaluation took 2.1e-05 seconds
+## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.21 seconds.
+## Chain 1: Adjust your expectations accordingly!
+## Chain 1: 
+## Chain 1: 
+## Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
+## Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
+## Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
+## Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
+## Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
+## Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+## Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+## Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+## Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+## Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+## Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+## Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
+## Chain 1: 
+## Chain 1:  Elapsed Time: 0.037163 seconds (Warm-up)
+## Chain 1:                0.048304 seconds (Sampling)
+## Chain 1:                0.085467 seconds (Total)
+## Chain 1: 
+## 
+## SAMPLING FOR MODEL &#39;32a7f51a2d1717ef80875b648bc79f41&#39; NOW (CHAIN 2).
+## Chain 2: 
+## Chain 2: Gradient evaluation took 1.8e-05 seconds
+## Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.18 seconds.
+## Chain 2: Adjust your expectations accordingly!
+## Chain 2: 
+## Chain 2: 
+## Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
+## Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
+## Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
+## Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
+## Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
+## Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+## Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+## Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+## Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+## Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+## Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+## Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
+## Chain 2: 
+## Chain 2:  Elapsed Time: 0.039711 seconds (Warm-up)
+## Chain 2:                0.061793 seconds (Sampling)
+## Chain 2:                0.101504 seconds (Total)
+## Chain 2: 
+## 
+## SAMPLING FOR MODEL &#39;32a7f51a2d1717ef80875b648bc79f41&#39; NOW (CHAIN 3).
+## Chain 3: Rejecting initial value:
+## Chain 3:   Error evaluating the log probability at the initial value.
+## Chain 3: Exception: binomial_lpmf: Probability parameter[1] is -0.794659, but must be in the interval [0, 1]  (in &#39;modeld712023842a_32a7f51a2d1717ef80875b648bc79f41&#39; at line 22)
+## 
+## Chain 3: 
+## Chain 3: Gradient evaluation took 1e-05 seconds
+## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.1 seconds.
+## Chain 3: Adjust your expectations accordingly!
+## Chain 3: 
+## Chain 3: 
+## Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
+## Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
+## Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
+## Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
+## Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
+## Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+## Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+## Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+## Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+## Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+## Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+## Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
+## Chain 3: 
+## Chain 3:  Elapsed Time: 0.039656 seconds (Warm-up)
+## Chain 3:                0.035382 seconds (Sampling)
+## Chain 3:                0.075038 seconds (Total)
+## Chain 3: 
+## 
+## SAMPLING FOR MODEL &#39;32a7f51a2d1717ef80875b648bc79f41&#39; NOW (CHAIN 4).
+## Chain 4: Rejecting initial value:
+## Chain 4:   Error evaluating the log probability at the initial value.
+## Chain 4: Exception: binomial_lpmf: Probability parameter[1] is -0.0368002, but must be in the interval [0, 1]  (in &#39;modeld712023842a_32a7f51a2d1717ef80875b648bc79f41&#39; at line 22)
+## 
+## Chain 4: Rejecting initial value:
+## Chain 4:   Error evaluating the log probability at the initial value.
+## Chain 4: Exception: binomial_lpmf: Probability parameter[1] is 1.49284, but must be in the interval [0, 1]  (in &#39;modeld712023842a_32a7f51a2d1717ef80875b648bc79f41&#39; at line 22)
+## 
+## Chain 4: 
+## Chain 4: Gradient evaluation took 1.2e-05 seconds
+## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.12 seconds.
+## Chain 4: Adjust your expectations accordingly!
+## Chain 4: 
+## Chain 4: 
+## Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
+## Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
+## Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
+## Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
+## Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
+## Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+## Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+## Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+## Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+## Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+## Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+## Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
+## Chain 4: 
+## Chain 4:  Elapsed Time: 0.039805 seconds (Warm-up)
+## Chain 4:                0.027747 seconds (Sampling)
+## Chain 4:                0.067552 seconds (Total)
+## Chain 4:</code></pre>
+<p>Posterior summary of the probability of w</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="sampling-the-imaginary.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior_summary</span>(brms_3)[<span class="st">&#39;b_Intercept&#39;</span>, ] <span class="sc">%&gt;%</span> </span>
+<span id="cb163-2"><a href="sampling-the-imaginary.html#cb163-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##  Estimate Est.Error      Q2.5     Q97.5 
+##      0.63      0.14      0.34      0.88</code></pre>
+<p>Now we can sample draws with <code>fitted()</code> in the brms package from the posterior</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="sampling-the-imaginary.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;purrr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:rethinking&#39;:
+## 
+##     map</code></pre>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="sampling-the-imaginary.html#cb168-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">fitted</span>(brms_3, <span class="at">summary =</span> <span class="cn">FALSE</span>, <span class="at">scale =</span> <span class="st">&#39;linear&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb168-2"><a href="sampling-the-imaginary.html#cb168-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb168-3"><a href="sampling-the-imaginary.html#cb168-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_names</span>(<span class="st">&#39;p&#39;</span>)</span></code></pre></div>
+<pre><code>## Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0.
+## Using compatibility `.name_repair`.</code></pre>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="sampling-the-imaginary.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(f)</span></code></pre></div>
+<pre><code>## Rows: 4,000
+## Columns: 1
+## $ p &lt;dbl&gt; 0.6109911, 0.5994330, 0.6465488, 0.6851288, 0.5909901, 0.6042266, 0.…</code></pre>
+<p>As a density:</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="sampling-the-imaginary.html#cb172-1" aria-hidden="true" tabindex="-1"></a>f <span class="sc">%&gt;%</span> </span>
+<span id="cb172-2"><a href="sampling-the-imaginary.html#cb172-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> p)) <span class="sc">+</span></span>
+<span id="cb172-3"><a href="sampling-the-imaginary.html#cb172-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">&#39;grey50&#39;</span>, <span class="at">color =</span> <span class="st">&#39;grey50&#39;</span>) <span class="sc">+</span></span>
+<span id="cb172-4"><a href="sampling-the-imaginary.html#cb172-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">&#39;text&#39;</span>, <span class="at">x =</span> <span class="fl">0.08</span>, <span class="at">y =</span> <span class="fl">2.5</span>, <span class="at">label =</span> <span class="st">&#39;Posterior probability&#39;</span>) <span class="sc">+</span></span>
+<span id="cb172-5"><a href="sampling-the-imaginary.html#cb172-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">&#39;probability of water&#39;</span>, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>), <span class="at">limits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb172-6"><a href="sampling-the-imaginary.html#cb172-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="cn">NULL</span>, <span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb172-7"><a href="sampling-the-imaginary.html#cb172-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-65-1.png" width="672" />
+Now we can use this distribution to simulate samples</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="sampling-the-imaginary.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="co">#make reproducible</span></span>
+<span id="cb173-2"><a href="sampling-the-imaginary.html#cb173-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb173-3"><a href="sampling-the-imaginary.html#cb173-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb173-4"><a href="sampling-the-imaginary.html#cb173-4" aria-hidden="true" tabindex="-1"></a><span class="co">#simulate samples</span></span>
+<span id="cb173-5"><a href="sampling-the-imaginary.html#cb173-5" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> f <span class="sc">%&gt;%</span> </span>
+<span id="cb173-6"><a href="sampling-the-imaginary.html#cb173-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">w =</span> <span class="fu">rbinom</span>(<span class="fu">n</span>(), <span class="at">size =</span> n_t, <span class="at">prob =</span> p))</span>
+<span id="cb173-7"><a href="sampling-the-imaginary.html#cb173-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb173-8"><a href="sampling-the-imaginary.html#cb173-8" aria-hidden="true" tabindex="-1"></a><span class="co">#plot PPD</span></span>
+<span id="cb173-9"><a href="sampling-the-imaginary.html#cb173-9" aria-hidden="true" tabindex="-1"></a>f <span class="sc">%&gt;%</span> </span>
+<span id="cb173-10"><a href="sampling-the-imaginary.html#cb173-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> w)) <span class="sc">+</span></span>
+<span id="cb173-11"><a href="sampling-the-imaginary.html#cb173-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">center =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&#39;grey90&#39;</span>,</span>
+<span id="cb173-12"><a href="sampling-the-imaginary.html#cb173-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb173-13"><a href="sampling-the-imaginary.html#cb173-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">&#39;number of water samples&#39;</span>, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">9</span>, <span class="at">by =</span><span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb173-14"><a href="sampling-the-imaginary.html#cb173-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="cn">NULL</span>, <span class="at">breaks =</span> <span class="cn">NULL</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1200</span>)) <span class="sc">+</span></span>
+<span id="cb173-15"><a href="sampling-the-imaginary.html#cb173-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&#39;Posterior predictive distribution&#39;</span>) <span class="sc">+</span></span>
+<span id="cb173-16"><a href="sampling-the-imaginary.html#cb173-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="small-worlds-and-large-worlds.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="geocentric-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-cross-refs.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 The many variables &amp; the spurious waffles | Rethinking Companion</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 The many variables &amp; the spurious waffles | Rethinking Companion" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 The many variables &amp; the spurious waffles | Rethinking Companion" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Wade VanderWright" />
+
+
+<meta name="date" content="2022-09-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="geocentric-models.html"/>
+<link rel="next" href="the-haunted-dag-the-casual-terror.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Rethinking Companion</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> The Golem of Prague</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#statistical-golems"><i class="fa fa-check"></i><b>1.1</b> Statistical golems</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#statistical-rethinking"><i class="fa fa-check"></i><b>1.2</b> Statistical Rethinking</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#what-are-we-trying-to-do-with-the-golems"><i class="fa fa-check"></i><b>1.2.1</b> What are we trying to do with the golems?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#tools-for-golem-engineering"><i class="fa fa-check"></i><b>1.3</b> Tools for golem engineering</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#bayesian-data-analysis"><i class="fa fa-check"></i><b>1.3.1</b> Bayesian data analysis</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#model-comparison-and-predictions"><i class="fa fa-check"></i><b>1.3.2</b> Model comparison and predictions</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#multilevel-models"><i class="fa fa-check"></i><b>1.3.3</b> Multilevel models</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#graphical-causal-models"><i class="fa fa-check"></i><b>1.3.4</b> Graphical causal models</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#summary"><i class="fa fa-check"></i><b>1.4</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#session-info"><i class="fa fa-check"></i>Session Info</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html"><i class="fa fa-check"></i><b>2</b> Small worlds and large worlds</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#the-garden-of-forking-data"><i class="fa fa-check"></i><b>2.1</b> The garden of forking data</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#counting-possibilities"><i class="fa fa-check"></i><b>2.1.1</b> Counting possibilities</a></li>
+<li class="chapter" data-level="2.1.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#combining-other-information"><i class="fa fa-check"></i><b>2.1.2</b> Combining other information</a></li>
+<li class="chapter" data-level="2.1.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#from-counts-to-probability"><i class="fa fa-check"></i><b>2.1.3</b> From counts to probability</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#building-a-model"><i class="fa fa-check"></i><b>2.2</b> Building a model</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#a-data-story"><i class="fa fa-check"></i><b>2.2.1</b> A data story</a></li>
+<li class="chapter" data-level="2.2.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#bayesian-updating"><i class="fa fa-check"></i><b>2.2.2</b> Bayesian updating</a></li>
+<li class="chapter" data-level="2.2.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#evaluate"><i class="fa fa-check"></i><b>2.2.3</b> Evaluate</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#components-of-the-model"><i class="fa fa-check"></i><b>2.3</b> Components of the model</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#variables"><i class="fa fa-check"></i><b>2.3.1</b> Variables</a></li>
+<li class="chapter" data-level="2.3.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#definitions"><i class="fa fa-check"></i><b>2.3.2</b> Definitions</a></li>
+<li class="chapter" data-level="2.3.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#a-model-is-born"><i class="fa fa-check"></i><b>2.3.3</b> A model is born</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#maiking-the-model-go"><i class="fa fa-check"></i><b>2.4</b> Maiking the model go</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#quadratic"><i class="fa fa-check"></i><b>2.4.1</b> Quadratic</a></li>
+<li class="chapter" data-level="2.4.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#mcmc"><i class="fa fa-check"></i><b>2.4.2</b> MCMC</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html"><i class="fa fa-check"></i><b>3</b> Sampling the imaginary</a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#probabilities-vs.-frequency-counts"><i class="fa fa-check"></i><b>3.0.1</b> Probabilities vs. Frequency counts</a></li>
+<li class="chapter" data-level="3.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-from-a-grid-approximate-posterior"><i class="fa fa-check"></i><b>3.1</b> Sampling from a grid-approximate posterior</a></li>
+<li class="chapter" data-level="3.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-to-summarize"><i class="fa fa-check"></i><b>3.2</b> Sampling to summarize</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#intervals-of-defined-boundaries"><i class="fa fa-check"></i><b>3.2.1</b> Intervals of defined boundaries</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#intervals-of-defined-mass"><i class="fa fa-check"></i><b>3.2.2</b> intervals of defined mass</a></li>
+<li class="chapter" data-level="3.2.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#point-estimates"><i class="fa fa-check"></i><b>3.2.3</b> Point estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-to-simulate-prediction"><i class="fa fa-check"></i><b>3.3</b> Sampling to simulate prediction</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#dummy-data"><i class="fa fa-check"></i><b>3.3.1</b> Dummy data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#model-checking"><i class="fa fa-check"></i><b>3.3.2</b> Model checking</a></li>
+<li class="chapter" data-level="3.3.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#practice-with-brms"><i class="fa fa-check"></i><b>3.3.3</b> Practice with brms</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="geocentric-models.html"><a href="geocentric-models.html"><i class="fa fa-check"></i><b>4</b> Geocentric models</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="geocentric-models.html"><a href="geocentric-models.html#why-normal-distributions-are-normal"><i class="fa fa-check"></i><b>4.1</b> Why normal distributions are normal</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-addition"><i class="fa fa-check"></i><b>4.1.1</b> Normal by addition</a></li>
+<li class="chapter" data-level="4.1.2" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-multiplication"><i class="fa fa-check"></i><b>4.1.2</b> Normal by multiplication</a></li>
+<li class="chapter" data-level="4.1.3" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-log-multiplication"><i class="fa fa-check"></i><b>4.1.3</b> Normal by log-multiplication</a></li>
+<li class="chapter" data-level="4.1.4" data-path="geocentric-models.html"><a href="geocentric-models.html#using-gaussian-distributions"><i class="fa fa-check"></i><b>4.1.4</b> Using Gaussian distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="geocentric-models.html"><a href="geocentric-models.html#a-language-for-describing-models"><i class="fa fa-check"></i><b>4.2</b> A language for describing models</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="geocentric-models.html"><a href="geocentric-models.html#re-describing-the-globe-tossing-model."><i class="fa fa-check"></i><b>4.2.1</b> Re-describing the globe tossing model.</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="geocentric-models.html"><a href="geocentric-models.html#gaussian-model-of-height"><i class="fa fa-check"></i><b>4.3</b> Gaussian model of height</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="geocentric-models.html"><a href="geocentric-models.html#the-data"><i class="fa fa-check"></i><b>4.3.1</b> The data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="geocentric-models.html"><a href="geocentric-models.html#the-model"><i class="fa fa-check"></i><b>4.3.2</b> The Model</a></li>
+<li class="chapter" data-level="4.3.3" data-path="geocentric-models.html"><a href="geocentric-models.html#grid-approximation-of-the-posterior-distribution"><i class="fa fa-check"></i><b>4.3.3</b> Grid approximation of the posterior distribution</a></li>
+<li class="chapter" data-level="4.3.4" data-path="geocentric-models.html"><a href="geocentric-models.html#sampling-from-the-posterior"><i class="fa fa-check"></i><b>4.3.4</b> Sampling from the posterior</a></li>
+<li class="chapter" data-level="4.3.5" data-path="geocentric-models.html"><a href="geocentric-models.html#finding-the-posterior-distribution-with-quap"><i class="fa fa-check"></i><b>4.3.5</b> Finding the posterior distribution with <code>quap</code></a></li>
+<li class="chapter" data-level="4.3.6" data-path="geocentric-models.html"><a href="geocentric-models.html#sampling-with-quap"><i class="fa fa-check"></i><b>4.3.6</b> Sampling with <code>quap</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="geocentric-models.html"><a href="geocentric-models.html#linear-prediction"><i class="fa fa-check"></i><b>4.4</b> Linear Prediction</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="geocentric-models.html"><a href="geocentric-models.html#finding-the-posterior-distribtuion"><i class="fa fa-check"></i><b>4.4.1</b> Finding the posterior distribtuion</a></li>
+<li class="chapter" data-level="4.4.2" data-path="geocentric-models.html"><a href="geocentric-models.html#interpreting-the-posterior-distribution"><i class="fa fa-check"></i><b>4.4.2</b> Interpreting the posterior distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="geocentric-models.html"><a href="geocentric-models.html#curves-from-lines"><i class="fa fa-check"></i><b>4.5</b> Curves from lines</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="geocentric-models.html"><a href="geocentric-models.html#polynomial-regression"><i class="fa fa-check"></i><b>4.5.1</b> Polynomial regression</a></li>
+<li class="chapter" data-level="4.5.2" data-path="geocentric-models.html"><a href="geocentric-models.html#splines"><i class="fa fa-check"></i><b>4.5.2</b> Splines</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html"><i class="fa fa-check"></i><b>5</b> The many variables &amp; the spurious waffles</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#spurious-assoiciation"><i class="fa fa-check"></i><b>5.1</b> Spurious assoiciation</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#think-before-to-regress"><i class="fa fa-check"></i><b>5.1.1</b> Think before to regress</a></li>
+<li class="chapter" data-level="5.1.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#testable-implications"><i class="fa fa-check"></i><b>5.1.2</b> Testable implications</a></li>
+<li class="chapter" data-level="5.1.3" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#multiple-regression-notation"><i class="fa fa-check"></i><b>5.1.3</b> Multiple regression notation</a></li>
+<li class="chapter" data-level="5.1.4" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#approximating-the-posterior"><i class="fa fa-check"></i><b>5.1.4</b> Approximating the posterior</a></li>
+<li class="chapter" data-level="5.1.5" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#plotting-multivariate-posteriors"><i class="fa fa-check"></i><b>5.1.5</b> Plotting multivariate posteriors</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#masked-relationship"><i class="fa fa-check"></i><b>5.2</b> Masked relationship</a></li>
+<li class="chapter" data-level="5.3" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Categorical variables</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#binary-categories"><i class="fa fa-check"></i><b>5.3.1</b> Binary categories</a></li>
+<li class="chapter" data-level="5.3.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#many-categories"><i class="fa fa-check"></i><b>5.3.2</b> Many categories</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html"><i class="fa fa-check"></i><b>6</b> The haunted dag &amp; the casual terror</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#multicollinearity"><i class="fa fa-check"></i><b>6.1</b> Multicollinearity</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#example-try-to-predict-height-from-length-of-a-persons-legs."><i class="fa fa-check"></i><b>6.1.1</b> Example: Try to predict height from length of a person’s legs.</a></li>
+<li class="chapter" data-level="6.1.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#multicollinear-milk"><i class="fa fa-check"></i><b>6.1.2</b> Multicollinear milk</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#post-treatrment-bias"><i class="fa fa-check"></i><b>6.2</b> Post-treatrment bias</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#a-prior-is-born"><i class="fa fa-check"></i><b>6.2.1</b> A prior is born</a></li>
+<li class="chapter" data-level="6.2.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#blocked-by-consequence"><i class="fa fa-check"></i><b>6.2.2</b> Blocked by consequence</a></li>
+<li class="chapter" data-level="6.2.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#fungus-and-d-separation"><i class="fa fa-check"></i><b>6.2.3</b> Fungus and d-separation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#collider-bias"><i class="fa fa-check"></i><b>6.3</b> Collider bias</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#collider-for-false-sorrow"><i class="fa fa-check"></i><b>6.3.1</b> Collider for false sorrow</a></li>
+<li class="chapter" data-level="6.3.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#the-haunted-dag"><i class="fa fa-check"></i><b>6.3.2</b> The haunted DAG</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#confronting-confounding"><i class="fa fa-check"></i><b>6.4</b> Confronting confounding</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#shutting-the-backdoor"><i class="fa fa-check"></i><b>6.4.1</b> Shutting the backdoor</a></li>
+<li class="chapter" data-level="6.4.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#two-roads"><i class="fa fa-check"></i><b>6.4.2</b> Two roads</a></li>
+<li class="chapter" data-level="6.4.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#backdoor-waffles"><i class="fa fa-check"></i><b>6.4.3</b> Backdoor waffles</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ulysses-compass.html"><a href="ulysses-compass.html"><i class="fa fa-check"></i><b>7</b> Ulysses’ compass</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#the-problem-with-parameters"><i class="fa fa-check"></i><b>7.1</b> The problem with parameters</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#more-parameters-almost-always-improve-fit"><i class="fa fa-check"></i><b>7.1.1</b> More parameters (almost) always improve fit</a></li>
+<li class="chapter" data-level="7.1.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#too-few-parameters-hurts-too"><i class="fa fa-check"></i><b>7.1.2</b> Too few parameters hurts, too</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#entropy-and-accuracy"><i class="fa fa-check"></i><b>7.2</b> Entropy and accuracy</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#firing-the-weatherperson"><i class="fa fa-check"></i><b>7.2.1</b> Firing the weatherperson</a></li>
+<li class="chapter" data-level="7.2.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#information-and-uncertainty"><i class="fa fa-check"></i><b>7.2.2</b> Information and uncertainty</a></li>
+<li class="chapter" data-level="7.2.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#from-entropy-to-accuracy"><i class="fa fa-check"></i><b>7.2.3</b> From entropy to accuracy</a></li>
+<li class="chapter" data-level="7.2.4" data-path="ulysses-compass.html"><a href="ulysses-compass.html#estimating-divergence"><i class="fa fa-check"></i><b>7.2.4</b> Estimating divergence</a></li>
+<li class="chapter" data-level="7.2.5" data-path="ulysses-compass.html"><a href="ulysses-compass.html#scoring-the-right-data"><i class="fa fa-check"></i><b>7.2.5</b> Scoring the right data</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#golem-taming-regularization"><i class="fa fa-check"></i><b>7.3</b> Golem taming: regularization</a></li>
+<li class="chapter" data-level="7.4" data-path="ulysses-compass.html"><a href="ulysses-compass.html#predicting-predictive-accuracy"><i class="fa fa-check"></i><b>7.4</b> Predicting predictive accuracy</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#cross-validation"><i class="fa fa-check"></i><b>7.4.1</b> Cross-validation</a></li>
+<li class="chapter" data-level="7.4.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#information-criteria"><i class="fa fa-check"></i><b>7.4.2</b> Information criteria</a></li>
+<li class="chapter" data-level="7.4.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#comparing-cv-psis-and-waic"><i class="fa fa-check"></i><b>7.4.3</b> Comparing CV, PSIS, and WAIC</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="ulysses-compass.html"><a href="ulysses-compass.html#model-comparison"><i class="fa fa-check"></i><b>7.5</b> Model comparison</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#model-mis-selection"><i class="fa fa-check"></i><b>7.5.1</b> Model mis-selection</a></li>
+<li class="chapter" data-level="7.5.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#outliers-and-other-illustions"><i class="fa fa-check"></i><b>7.5.2</b> Outliers and other illustions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="conditional-manatees.html"><a href="conditional-manatees.html"><i class="fa fa-check"></i><b>8</b> Conditional manatees</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#building-an-interaction"><i class="fa fa-check"></i><b>8.1</b> Building an interaction</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#making-a-rugged-model"><i class="fa fa-check"></i><b>8.1.1</b> Making a rugged model</a></li>
+<li class="chapter" data-level="8.1.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#adding-an-indicator-isnt-enough"><i class="fa fa-check"></i><b>8.1.2</b> Adding an indicator isn’t enough</a></li>
+<li class="chapter" data-level="8.1.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#adding-an-interaction-does-work"><i class="fa fa-check"></i><b>8.1.3</b> Adding an interaction does work</a></li>
+<li class="chapter" data-level="8.1.4" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-the-interaction"><i class="fa fa-check"></i><b>8.1.4</b> Plotting the interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#symmetry-of-interactions"><i class="fa fa-check"></i><b>8.2</b> Symmetry of interactions</a></li>
+<li class="chapter" data-level="8.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#continuous-interactions"><i class="fa fa-check"></i><b>8.3</b> Continuous interactions</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#a-winter-flower"><i class="fa fa-check"></i><b>8.3.1</b> A winter flower</a></li>
+<li class="chapter" data-level="8.3.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#the-models"><i class="fa fa-check"></i><b>8.3.2</b> the models</a></li>
+<li class="chapter" data-level="8.3.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-posterior-predictions"><i class="fa fa-check"></i><b>8.3.3</b> Plotting posterior predictions</a></li>
+<li class="chapter" data-level="8.3.4" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-prior-predictions"><i class="fa fa-check"></i><b>8.3.4</b> Plotting prior predictions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html"><i class="fa fa-check"></i><b>9</b> Markov Chain Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#good-king-markov-and-his-island-kingdom"><i class="fa fa-check"></i><b>9.1</b> Good King Markov and his island kingdom</a></li>
+<li class="chapter" data-level="9.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#metropolis-algorithims"><i class="fa fa-check"></i><b>9.2</b> Metropolis algorithims</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#gibbs-sampling"><i class="fa fa-check"></i><b>9.2.1</b> Gibbs sampling</a></li>
+<li class="chapter" data-level="9.2.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#high-dimensional-problems"><i class="fa fa-check"></i><b>9.2.2</b> High-dimensional problems</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#hamiltonian-monte-carlo"><i class="fa fa-check"></i><b>9.3</b> Hamiltonian Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#another-parable"><i class="fa fa-check"></i><b>9.3.1</b> Another parable</a></li>
+<li class="chapter" data-level="9.3.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#particles-in-space"><i class="fa fa-check"></i><b>9.3.2</b> Particles in space</a></li>
+<li class="chapter" data-level="9.3.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#limitations"><i class="fa fa-check"></i><b>9.3.3</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#easy-hmc-ulam-brm"><i class="fa fa-check"></i><b>9.4</b> Easy HMC: <code>ulam</code> (<code>brm</code>)</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#preperation"><i class="fa fa-check"></i><b>9.4.1</b> Preperation</a></li>
+<li class="chapter" data-level="9.4.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#sampling-from-the-posterior-1"><i class="fa fa-check"></i><b>9.4.2</b> Sampling from the posterior</a></li>
+<li class="chapter" data-level="9.4.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#sampling-again-in-parallel"><i class="fa fa-check"></i><b>9.4.3</b> Sampling again, in parallel</a></li>
+<li class="chapter" data-level="9.4.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#visualization"><i class="fa fa-check"></i><b>9.4.4</b> Visualization</a></li>
+<li class="chapter" data-level="9.4.5" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#checking-the-chain"><i class="fa fa-check"></i><b>9.4.5</b> Checking the chain</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#care-and-feeding-of-your-markov-chain"><i class="fa fa-check"></i><b>9.5</b> Care and feeding of your Markov chain</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#how-many-samples-do-you-need"><i class="fa fa-check"></i><b>9.5.1</b> How many samples do you need?</a></li>
+<li class="chapter" data-level="9.5.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#how-many-chains-do-you-need"><i class="fa fa-check"></i><b>9.5.2</b> How many chains do you need?</a></li>
+<li class="chapter" data-level="9.5.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#taming-a-wild-chain"><i class="fa fa-check"></i><b>9.5.3</b> Taming a wild chain</a></li>
+<li class="chapter" data-level="9.5.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#non-identifiable-parameters"><i class="fa fa-check"></i><b>9.5.4</b> Non-identifiable parameters</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html"><i class="fa fa-check"></i><b>10</b> Big entropy and the generalized linear model</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#maximum-entropy"><i class="fa fa-check"></i><b>10.1</b> Maximum entropy</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#gaussian"><i class="fa fa-check"></i><b>10.1.1</b> Gaussian</a></li>
+<li class="chapter" data-level="10.1.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#binomial"><i class="fa fa-check"></i><b>10.1.2</b> Binomial</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#generalized-linear-models"><i class="fa fa-check"></i><b>10.2</b> Generalized linear models</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#meet-the-family"><i class="fa fa-check"></i><b>10.2.1</b> Meet the family</a></li>
+<li class="chapter" data-level="10.2.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#linking-linear-models-to-distributions"><i class="fa fa-check"></i><b>10.2.2</b> Linking linear models to distributions</a></li>
+<li class="chapter" data-level="10.2.3" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#omitted-variable-bias-again"><i class="fa fa-check"></i><b>10.2.3</b> Omitted variable bias (again)</a></li>
+<li class="chapter" data-level="10.2.4" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#absolute-relative-differences"><i class="fa fa-check"></i><b>10.2.4</b> Absolute relative differences</a></li>
+<li class="chapter" data-level="10.2.5" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#glms-and-information-criteria"><i class="fa fa-check"></i><b>10.2.5</b> GLMs and information criteria</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html"><i class="fa fa-check"></i><b>11</b> God spiked the integers</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#binomial-regression"><i class="fa fa-check"></i><b>11.1</b> Binomial regression</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#logistic-regression-prosocial-chimpanzees"><i class="fa fa-check"></i><b>11.1.1</b> Logistic regression : Prosocial chimpanzees</a></li>
+<li class="chapter" data-level="11.1.2" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#relative-shark-and-absolute-deer"><i class="fa fa-check"></i><b>11.1.2</b> Relative shark and absolute deer</a></li>
+<li class="chapter" data-level="11.1.3" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#aggregated-binomial-chimps-condensed"><i class="fa fa-check"></i><b>11.1.3</b> Aggregated binomial: Chimps condensed</a></li>
+<li class="chapter" data-level="11.1.4" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#aggregated-admissions"><i class="fa fa-check"></i><b>11.1.4</b> Aggregated admissions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="monsters-and-mixtures.html"><a href="monsters-and-mixtures.html"><i class="fa fa-check"></i><b>12</b> Monsters and mixtures</a></li>
+<li class="chapter" data-level="13" data-path="models-with-memory.html"><a href="models-with-memory.html"><i class="fa fa-check"></i><b>13</b> Models with memory</a></li>
+<li class="chapter" data-level="14" data-path="adventures-in-covariance.html"><a href="adventures-in-covariance.html"><i class="fa fa-check"></i><b>14</b> Adventures in covariance</a></li>
+<li class="chapter" data-level="15" data-path="missing-data-and-other-opportunities.html"><a href="missing-data-and-other-opportunities.html"><i class="fa fa-check"></i><b>15</b> Missing data and other opportunities</a></li>
+<li class="chapter" data-level="16" data-path="generalized-linear-madness.html"><a href="generalized-linear-madness.html"><i class="fa fa-check"></i><b>16</b> Generalized linear madness</a></li>
+<li class="chapter" data-level="17" data-path="horoscopes.html"><a href="horoscopes.html"><i class="fa fa-check"></i><b>17</b> Horoscopes</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Rethinking Companion</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="the-many-variables-the-spurious-waffles" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> The many variables &amp; the spurious waffles<a href="the-many-variables-the-spurious-waffles.html#the-many-variables-the-spurious-waffles" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Here is why we need <em>Multiple Regression</em> to model outcomes.<br />
+</p>
+<ol style="list-style-type: decimal">
+<li>Statistical control for confounds<br />
+</li>
+<li>Multiple and complex causation<br />
+</li>
+<li>Interactions<br />
+</li>
+</ol>
+<div id="spurious-assoiciation" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Spurious assoiciation<a href="the-many-variables-the-spurious-waffles.html#spurious-assoiciation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Divorce rate seems to be positively correlated with marriage rate. But does higher marriage rate cause a higher divorce rate?</p>
+<p>Divorce rate is also negatively correlated with median age at marriage meaning higher divorce rates for younger couples. But does young marriage are cause more divorce? Let’s find out</p>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="the-many-variables-the-spurious-waffles.html#cb305-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinking)</span>
+<span id="cb305-2"><a href="the-many-variables-the-spurious-waffles.html#cb305-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(WaffleDivorce)</span>
+<span id="cb305-3"><a href="the-many-variables-the-spurious-waffles.html#cb305-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> WaffleDivorce</span>
+<span id="cb305-4"><a href="the-many-variables-the-spurious-waffles.html#cb305-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb305-5"><a href="the-many-variables-the-spurious-waffles.html#cb305-5" aria-hidden="true" tabindex="-1"></a><span class="co">#standardize variables</span></span>
+<span id="cb305-6"><a href="the-many-variables-the-spurious-waffles.html#cb305-6" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>D <span class="ot">&lt;-</span> <span class="fu">standardize</span>(d<span class="sc">$</span>Divorce)</span>
+<span id="cb305-7"><a href="the-many-variables-the-spurious-waffles.html#cb305-7" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>M <span class="ot">&lt;-</span> <span class="fu">standardize</span>(d<span class="sc">$</span>Marriage)</span>
+<span id="cb305-8"><a href="the-many-variables-the-spurious-waffles.html#cb305-8" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>A <span class="ot">&lt;-</span> <span class="fu">standardize</span>(d<span class="sc">$</span>MedianAgeMarriage)</span></code></pre></div>
+<p>Now we can use some linear modeling skills to see how median age of marriage is related to divorce rates<br />
+</p>
+<p><span class="math display">\[\begin{equation}
+D_{i} \sim \text{Normal}(\mu_{i}, \sigma)\
+\mu_{i} = \alpha + \beta_{A}A_{i}\
+\alpha \sim \text{Normal}(0, 0.2)\
+\beta_{A} \sim \text{Normal}(0, 0.5)\
+\sigma \sim \text{Exponential}(1)\
+\end{equation}\]</span></p>
+<p>Here <span class="math inline">\(D_{i}\)</span> is the divorce rate in state <span class="math inline">\({i}\)</span> and <span class="math inline">\(A_{i}\)</span> is the median age of marriage in state <span class="math inline">\(i\)</span>. Since both the outcome and predictor are standardized in the above code, the intercept estimate (<span class="math inline">\(\alpha\)</span>) should be somewhere near 0. But how do we interpret the slope <span class="math inline">\(\beta_{A}\)</span>? Well if it were to be estimated as 1, then one sd increase in median age of marriage would be a 1 sd increase in divorce rate. To know the magnitude of a 1 sd change, you would have to calculate it</p>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="the-many-variables-the-spurious-waffles.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(d<span class="sc">$</span>MedianAgeMarriage)</span></code></pre></div>
+<pre><code>## [1] 1.24363</code></pre>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="the-many-variables-the-spurious-waffles.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(d<span class="sc">$</span>Divorce)</span></code></pre></div>
+<pre><code>## [1] 1.820814</code></pre>
+<p>So if <span class="math inline">\(\beta_{A}\)</span> was estimated to be 1, an increase of 1.2 years in median age would increase divorce by 1.82 (units?)</p>
+<p>Let’s get the posterior of this model</p>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="the-many-variables-the-spurious-waffles.html#cb310-1" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb310-2"><a href="the-many-variables-the-spurious-waffles.html#cb310-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb310-3"><a href="the-many-variables-the-spurious-waffles.html#cb310-3" aria-hidden="true" tabindex="-1"></a>    D <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb310-4"><a href="the-many-variables-the-spurious-waffles.html#cb310-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bA <span class="sc">*</span> A, </span>
+<span id="cb310-5"><a href="the-many-variables-the-spurious-waffles.html#cb310-5" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb310-6"><a href="the-many-variables-the-spurious-waffles.html#cb310-6" aria-hidden="true" tabindex="-1"></a>    bA <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb310-7"><a href="the-many-variables-the-spurious-waffles.html#cb310-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb310-8"><a href="the-many-variables-the-spurious-waffles.html#cb310-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb310-9"><a href="the-many-variables-the-spurious-waffles.html#cb310-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Here is the simulated priors over 2 standard deviations</p>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="the-many-variables-the-spurious-waffles.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb311-2"><a href="the-many-variables-the-spurious-waffles.html#cb311-2" aria-hidden="true" tabindex="-1"></a>prior <span class="ot">&lt;-</span> <span class="fu">extract.prior</span>(m5<span class="fl">.1</span>)</span>
+<span id="cb311-3"><a href="the-many-variables-the-spurious-waffles.html#cb311-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m5<span class="fl">.1</span>, <span class="at">post =</span> prior, <span class="at">data =</span> <span class="fu">list</span>(<span class="at">A =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>)))</span>
+<span id="cb311-4"><a href="the-many-variables-the-spurious-waffles.html#cb311-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="cn">NULL</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>), <span class="at">xlab =</span> <span class="st">&#39;Median age Marriage (std)&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Divorce rate (std)&#39;</span>)</span>
+<span id="cb311-5"><a href="the-many-variables-the-spurious-waffles.html#cb311-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>){</span>
+<span id="cb311-6"><a href="the-many-variables-the-spurious-waffles.html#cb311-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>), mu[i,], <span class="at">col =</span> <span class="fu">col.alpha</span>(<span class="st">&#39;black&#39;</span>,<span class="fl">0.4</span>))</span>
+<span id="cb311-7"><a href="the-many-variables-the-spurious-waffles.html#cb311-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%205.4-1.png" width="672" /></p>
+<p>Now the posterior</p>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="the-many-variables-the-spurious-waffles.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate percentiles</span></span>
+<span id="cb312-2"><a href="the-many-variables-the-spurious-waffles.html#cb312-2" aria-hidden="true" tabindex="-1"></a>A_seq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">3</span>, <span class="at">to =</span> <span class="fl">3.2</span>, <span class="at">length.out =</span> <span class="dv">30</span>)</span>
+<span id="cb312-3"><a href="the-many-variables-the-spurious-waffles.html#cb312-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m5<span class="fl">.1</span>, <span class="at">data =</span> <span class="fu">list</span>(<span class="at">A =</span> A_seq))</span>
+<span id="cb312-4"><a href="the-many-variables-the-spurious-waffles.html#cb312-4" aria-hidden="true" tabindex="-1"></a>mu.mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, mean)</span>
+<span id="cb312-5"><a href="the-many-variables-the-spurious-waffles.html#cb312-5" aria-hidden="true" tabindex="-1"></a>mu.PI <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, PI)</span>
+<span id="cb312-6"><a href="the-many-variables-the-spurious-waffles.html#cb312-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb312-7"><a href="the-many-variables-the-spurious-waffles.html#cb312-7" aria-hidden="true" tabindex="-1"></a><span class="co">#plot</span></span>
+<span id="cb312-8"><a href="the-many-variables-the-spurious-waffles.html#cb312-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(D <span class="sc">~</span> A, <span class="at">data =</span> d, <span class="at">col =</span> rangi2, <span class="at">xlab =</span> <span class="st">&#39;Median age Marriage (std)&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Divorce rate (std)&#39;</span>)</span>
+<span id="cb312-9"><a href="the-many-variables-the-spurious-waffles.html#cb312-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(A_seq, mu.mean, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb312-10"><a href="the-many-variables-the-spurious-waffles.html#cb312-10" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>(mu.PI, A_seq)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%205.5-1.png" width="672" /></p>
+<p>And now the Marriage rate model</p>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="the-many-variables-the-spurious-waffles.html#cb313-1" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb313-2"><a href="the-many-variables-the-spurious-waffles.html#cb313-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb313-3"><a href="the-many-variables-the-spurious-waffles.html#cb313-3" aria-hidden="true" tabindex="-1"></a>    D <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb313-4"><a href="the-many-variables-the-spurious-waffles.html#cb313-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bM <span class="sc">*</span> M,</span>
+<span id="cb313-5"><a href="the-many-variables-the-spurious-waffles.html#cb313-5" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb313-6"><a href="the-many-variables-the-spurious-waffles.html#cb313-6" aria-hidden="true" tabindex="-1"></a>    bM <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb313-7"><a href="the-many-variables-the-spurious-waffles.html#cb313-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb313-8"><a href="the-many-variables-the-spurious-waffles.html#cb313-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb313-9"><a href="the-many-variables-the-spurious-waffles.html#cb313-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb313-10"><a href="the-many-variables-the-spurious-waffles.html#cb313-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb313-11"><a href="the-many-variables-the-spurious-waffles.html#cb313-11" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate percentiles</span></span>
+<span id="cb313-12"><a href="the-many-variables-the-spurious-waffles.html#cb313-12" aria-hidden="true" tabindex="-1"></a>M_seq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">to =</span> <span class="fl">2.8</span>, <span class="at">length.out =</span> <span class="dv">30</span>)</span>
+<span id="cb313-13"><a href="the-many-variables-the-spurious-waffles.html#cb313-13" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m5<span class="fl">.2</span>, <span class="at">data =</span> <span class="fu">list</span>(<span class="at">M =</span> M_seq))</span>
+<span id="cb313-14"><a href="the-many-variables-the-spurious-waffles.html#cb313-14" aria-hidden="true" tabindex="-1"></a>mu.mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, mean)</span>
+<span id="cb313-15"><a href="the-many-variables-the-spurious-waffles.html#cb313-15" aria-hidden="true" tabindex="-1"></a>mu.PI <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, PI)</span>
+<span id="cb313-16"><a href="the-many-variables-the-spurious-waffles.html#cb313-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb313-17"><a href="the-many-variables-the-spurious-waffles.html#cb313-17" aria-hidden="true" tabindex="-1"></a><span class="co">#plot</span></span>
+<span id="cb313-18"><a href="the-many-variables-the-spurious-waffles.html#cb313-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(D <span class="sc">~</span> M, <span class="at">data =</span> d, <span class="at">col =</span> rangi2, <span class="at">xlab =</span> <span class="st">&#39;Marriage rate (std)&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Divorce rate (std)&#39;</span>)</span>
+<span id="cb313-19"><a href="the-many-variables-the-spurious-waffles.html#cb313-19" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(M_seq, mu.mean, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb313-20"><a href="the-many-variables-the-spurious-waffles.html#cb313-20" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>(mu.PI, M_seq)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%205.6-1.png" width="672" /></p>
+<p>Comparing these two models won’t yield much useful information. We need to think about how they may interact together on Divorce rates</p>
+<div id="think-before-to-regress" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Think before to regress<a href="the-many-variables-the-spurious-waffles.html#think-before-to-regress" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We have to try and think about causal inference before we start fitting models. The best way is to create a <strong>DAG</strong> or <em>Directed Acyclic Graph</em>. In these graphs we can add direction of influence between variables of interest. From the graphs above, we know that both <span class="math inline">\(A\)</span> and <span class="math inline">\(M\)</span> influence our outcome variable <span class="math inline">\(D\)</span>. But, is there any relationship between <span class="math inline">\(A\)</span> and <span class="math inline">\(M\)</span>? Also note that to make these graphs, assumptions have to be made in order to make inference.</p>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="the-many-variables-the-spurious-waffles.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dagitty)</span>
+<span id="cb314-2"><a href="the-many-variables-the-spurious-waffles.html#cb314-2" aria-hidden="true" tabindex="-1"></a>dag5<span class="fl">.1</span> <span class="ot">&lt;-</span><span class="fu">dagitty</span>(<span class="st">&quot;dag{A-&gt;D;A-&gt;M;M-&gt;D}&quot;</span>)</span>
+<span id="cb314-3"><a href="the-many-variables-the-spurious-waffles.html#cb314-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(dag5<span class="fl">.1</span>) <span class="ot">&lt;-</span><span class="fu">list</span>(<span class="at">x=</span><span class="fu">c</span>(<span class="at">A=</span><span class="dv">0</span>,<span class="at">D=</span><span class="dv">1</span>,<span class="at">M=</span><span class="dv">2</span>),<span class="at">y=</span><span class="fu">c</span>(<span class="at">A=</span><span class="dv">0</span>,<span class="at">D=</span><span class="dv">1</span>,<span class="at">M=</span><span class="dv">0</span>))</span>
+<span id="cb314-4"><a href="the-many-variables-the-spurious-waffles.html#cb314-4" aria-hidden="true" tabindex="-1"></a><span class="fu">drawdag</span>( dag5<span class="fl">.1</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%205.7-1.png" width="672" /></p>
+<p>What this <em>DAG</em> says is:<br />
+1. <span class="math inline">\(A\)</span> directly influences <span class="math inline">\(D\)</span><br />
+2. <span class="math inline">\(M\)</span> directly influences <span class="math inline">\(D\)</span><br />
+3. <span class="math inline">\(A\)</span> directly influences <span class="math inline">\(M\)</span><br />
+</p>
+<p>So there are two pathways from <span class="math inline">\(A\)</span> to <span class="math inline">\(D\)</span>. One is the direct effect of <span class="math inline">\(A\)</span> on <span class="math inline">\(D\)</span>, and the other is an indirect effect of <span class="math inline">\(A\)</span> <span class="math inline">\(\rightarrow\)</span> <span class="math inline">\(M\)</span> <span class="math inline">\(\rightarrow\)</span> <span class="math inline">\(D\)</span>. We saw that there is a strong negative association of <span class="math inline">\(A\)</span> and <span class="math inline">\(D\)</span> above in model <code>m5.1</code> but we don’t know if that association is direct or entirely working through an indirect pathway. Alternatively, the effect of <span class="math inline">\(M\)</span> on <span class="math inline">\(D\)</span> could be entirely from <span class="math inline">\(A\)</span>’s effect on <span class="math inline">\(M\)</span> like this:</p>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="the-many-variables-the-spurious-waffles.html#cb315-1" aria-hidden="true" tabindex="-1"></a>dag5<span class="fl">.2</span> <span class="ot">&lt;-</span><span class="fu">dagitty</span>(<span class="st">&quot;dag{A-&gt;D;A-&gt;M}&quot;</span>)</span>
+<span id="cb315-2"><a href="the-many-variables-the-spurious-waffles.html#cb315-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(dag5<span class="fl">.2</span>) <span class="ot">&lt;-</span><span class="fu">list</span>(<span class="at">x=</span><span class="fu">c</span>(<span class="at">A=</span><span class="dv">0</span>,<span class="at">D=</span><span class="dv">1</span>,<span class="at">M=</span><span class="dv">2</span>),<span class="at">y=</span><span class="fu">c</span>(<span class="at">A=</span><span class="dv">0</span>,<span class="at">D=</span><span class="dv">1</span>,<span class="at">M=</span><span class="dv">0</span>))</span>
+<span id="cb315-3"><a href="the-many-variables-the-spurious-waffles.html#cb315-3" aria-hidden="true" tabindex="-1"></a><span class="fu">drawdag</span>( dag5<span class="fl">.2</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-91-1.png" width="672" /></p>
+</div>
+<div id="testable-implications" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Testable implications<a href="the-many-variables-the-spurious-waffles.html#testable-implications" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now we have two different <strong>DAGs</strong> that we can consider their testable implications or conditional independencies. The first <strong>DAG</strong> with three arrows has every pair of variables connected by arrows. We can test this by checking their correlations with each other.</p>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="the-many-variables-the-spurious-waffles.html#cb316-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(d<span class="sc">$</span>D, d<span class="sc">$</span>A)</span></code></pre></div>
+<pre><code>## [1] -0.5972392</code></pre>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="the-many-variables-the-spurious-waffles.html#cb318-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(d<span class="sc">$</span>D, d<span class="sc">$</span>M)</span></code></pre></div>
+<pre><code>## [1] 0.3737314</code></pre>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="the-many-variables-the-spurious-waffles.html#cb320-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(d<span class="sc">$</span>A, d<span class="sc">$</span>M)</span></code></pre></div>
+<pre><code>## [1] -0.721096</code></pre>
+<p>Pretty strong associations all around. In the second <strong>DAG</strong> the implication is that <span class="math inline">\(D\)</span> could be independent of <span class="math inline">\(M\)</span> without <span class="math inline">\(A\)</span>. Or written in mathy language <span class="math inline">\(D \perp\!\!\!\perp M|A\)</span> which means that <span class="math inline">\(D\)</span> is independent of <span class="math inline">\(M\)</span> conditioned on <span class="math inline">\(A\)</span>. We can look for conditional independencies with the <code>dagitty</code> package.</p>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="the-many-variables-the-spurious-waffles.html#cb322-1" aria-hidden="true" tabindex="-1"></a>DMA_dag2 <span class="ot">&lt;-</span> <span class="fu">dagitty</span>(<span class="st">&#39;dag{D &lt;- A -&gt; M}&#39;</span>)</span>
+<span id="cb322-2"><a href="the-many-variables-the-spurious-waffles.html#cb322-2" aria-hidden="true" tabindex="-1"></a><span class="fu">impliedConditionalIndependencies</span>(DMA_dag2)</span></code></pre></div>
+<pre><code>## D _||_ M | A</code></pre>
+<p>If we run this on the first three arrow <strong>DAG</strong> we won’t see an output because there are no conditional independencies in that particular model.</p>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="the-many-variables-the-spurious-waffles.html#cb324-1" aria-hidden="true" tabindex="-1"></a>DMA_dag1 <span class="ot">&lt;-</span> <span class="fu">dagitty</span>(<span class="st">&#39;dag{D &lt;- A -&gt; M -&gt; D}&#39;</span>)</span>
+<span id="cb324-2"><a href="the-many-variables-the-spurious-waffles.html#cb324-2" aria-hidden="true" tabindex="-1"></a><span class="fu">impliedConditionalIndependencies</span>(DMA_dag1)</span></code></pre></div>
+<p>Because <span class="math inline">\(D \perp\!\!\!\perp M|A\)</span> is the only implication that differs between the models, we need a model that will condition on <span class="math inline">\(A\)</span>. In other words, once we have conditioned for <span class="math inline">\(A\)</span> (accounted for <span class="math inline">\(A\)</span>), does knowing <span class="math inline">\(M\)</span> add any additional information about <span class="math inline">\(D\)</span>? The expectation from the <strong>DAG</strong> is that <em>no there shouldn’t be</em>.</p>
+<p>Once we fit a mutiple regression using all 3 variables we will be able to address how much knowing <span class="math inline">\(M\)</span> influences <span class="math inline">\(D\)</span> and also how much knowing <span class="math inline">\(A\)</span> influences <span class="math inline">\(D\)</span>.</p>
+</div>
+<div id="multiple-regression-notation" class="section level3 hasAnchor" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> Multiple regression notation<a href="the-many-variables-the-spurious-waffles.html#multiple-regression-notation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>These will look a lot like the polynomial regressions of the last chapter.<br />
+</p>
+<p><span class="math display">\[\begin{equation}
+D_{i} \sim \text{Normal}(\mu_{i}, \sigma)\
+\mu_{i} = \alpha + \beta_{M}M_{i} + \beta_{A}A_{i}\
+\alpha \sim \text{Normal}(0, 0.2)\
+\beta_{M} \sim \text{Normal}(0, 0.5)\
+\beta_{A} \sim \text{Normal}(0, 0.5)\
+\sigma \sim \text{Exponential}(1)\
+\end{equation}\]</span></p>
+</div>
+<div id="approximating-the-posterior" class="section level3 hasAnchor" number="5.1.4">
+<h3><span class="header-section-number">5.1.4</span> Approximating the posterior<a href="the-many-variables-the-spurious-waffles.html#approximating-the-posterior" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Like models before now, we will use the <code>quap</code> function to approximate the posterior</p>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="the-many-variables-the-spurious-waffles.html#cb325-1" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb325-2"><a href="the-many-variables-the-spurious-waffles.html#cb325-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb325-3"><a href="the-many-variables-the-spurious-waffles.html#cb325-3" aria-hidden="true" tabindex="-1"></a>    D <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb325-4"><a href="the-many-variables-the-spurious-waffles.html#cb325-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bM <span class="sc">*</span> M <span class="sc">+</span> bA <span class="sc">*</span> A,</span>
+<span id="cb325-5"><a href="the-many-variables-the-spurious-waffles.html#cb325-5" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb325-6"><a href="the-many-variables-the-spurious-waffles.html#cb325-6" aria-hidden="true" tabindex="-1"></a>    bM <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb325-7"><a href="the-many-variables-the-spurious-waffles.html#cb325-7" aria-hidden="true" tabindex="-1"></a>    bA <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb325-8"><a href="the-many-variables-the-spurious-waffles.html#cb325-8" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb325-9"><a href="the-many-variables-the-spurious-waffles.html#cb325-9" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb325-10"><a href="the-many-variables-the-spurious-waffles.html#cb325-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb325-11"><a href="the-many-variables-the-spurious-waffles.html#cb325-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb325-12"><a href="the-many-variables-the-spurious-waffles.html#cb325-12" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m5<span class="fl">.3</span>)</span></code></pre></div>
+<pre><code>##                mean         sd       5.5%      94.5%
+## a     -9.233966e-08 0.09707600 -0.1551463  0.1551461
+## bM    -6.538071e-02 0.15077301 -0.3063451  0.1755837
+## bA    -6.135136e-01 0.15098354 -0.8548145 -0.3722128
+## sigma  7.851177e-01 0.07784332  0.6607090  0.9095263</code></pre>
+<p>Let’s see how the slopes have changed in each model</p>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="the-many-variables-the-spurious-waffles.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftab_plot</span>(<span class="fu">coeftab</span>(m5<span class="fl">.1</span>, m5<span class="fl">.2</span>, m5<span class="fl">.3</span>), <span class="at">par =</span> <span class="fu">c</span>(<span class="st">&#39;bA&#39;</span>,<span class="st">&#39;bM&#39;</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%205.11-1.png" width="672" /></p>
+<p>Here we see that the estimate for <span class="math inline">\(\beta_{A}\)</span> is relatively the same between models where the estimate for <span class="math inline">\(\beta_{M}\)</span> is much closer to 0 when considered with <span class="math inline">\(\beta_{A}\)</span>. This suggests that once <span class="math inline">\(A\)</span> is in the model, adding <span class="math inline">\(M\)</span> doesn’t add much more information. This is congruent with our second <strong>DAG</strong> and tells us that the first <strong>DAG</strong> is not causally correct because <span class="math inline">\(M\)</span> no longer has a direct effect on <span class="math inline">\(D\)</span> once <span class="math inline">\(A\)</span> is in the model.</p>
+<p>In case you are curious how <span class="math inline">\(A\)</span> and <span class="math inline">\(M\)</span> are related:</p>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="the-many-variables-the-spurious-waffles.html#cb328-1" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.4</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb328-2"><a href="the-many-variables-the-spurious-waffles.html#cb328-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb328-3"><a href="the-many-variables-the-spurious-waffles.html#cb328-3" aria-hidden="true" tabindex="-1"></a>    M <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb328-4"><a href="the-many-variables-the-spurious-waffles.html#cb328-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bAM <span class="sc">*</span> A,</span>
+<span id="cb328-5"><a href="the-many-variables-the-spurious-waffles.html#cb328-5" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb328-6"><a href="the-many-variables-the-spurious-waffles.html#cb328-6" aria-hidden="true" tabindex="-1"></a>    bAM <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb328-7"><a href="the-many-variables-the-spurious-waffles.html#cb328-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb328-8"><a href="the-many-variables-the-spurious-waffles.html#cb328-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb328-9"><a href="the-many-variables-the-spurious-waffles.html#cb328-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb328-10"><a href="the-many-variables-the-spurious-waffles.html#cb328-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb328-11"><a href="the-many-variables-the-spurious-waffles.html#cb328-11" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate percentiles</span></span>
+<span id="cb328-12"><a href="the-many-variables-the-spurious-waffles.html#cb328-12" aria-hidden="true" tabindex="-1"></a>A_seq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="fl">2.5</span>, <span class="at">to =</span> <span class="fl">3.2</span>, <span class="at">length.out =</span> <span class="dv">30</span>)</span>
+<span id="cb328-13"><a href="the-many-variables-the-spurious-waffles.html#cb328-13" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m5<span class="fl">.4</span>, <span class="at">data =</span> <span class="fu">list</span>(<span class="at">A =</span> A_seq))</span>
+<span id="cb328-14"><a href="the-many-variables-the-spurious-waffles.html#cb328-14" aria-hidden="true" tabindex="-1"></a>mu.mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, mean)</span>
+<span id="cb328-15"><a href="the-many-variables-the-spurious-waffles.html#cb328-15" aria-hidden="true" tabindex="-1"></a>mu.PI <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, PI)</span>
+<span id="cb328-16"><a href="the-many-variables-the-spurious-waffles.html#cb328-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb328-17"><a href="the-many-variables-the-spurious-waffles.html#cb328-17" aria-hidden="true" tabindex="-1"></a><span class="co">#plot</span></span>
+<span id="cb328-18"><a href="the-many-variables-the-spurious-waffles.html#cb328-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(M <span class="sc">~</span> A, <span class="at">data =</span> d, <span class="at">col =</span> rangi2, <span class="at">xlab =</span> <span class="st">&#39;Median age of marriage (std)&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Marriage rate (std)&#39;</span>)</span>
+<span id="cb328-19"><a href="the-many-variables-the-spurious-waffles.html#cb328-19" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(A_seq, mu.mean, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb328-20"><a href="the-many-variables-the-spurious-waffles.html#cb328-20" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>(mu.PI, A_seq)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%205.13-1.png" width="672" /></p>
+</div>
+<div id="plotting-multivariate-posteriors" class="section level3 hasAnchor" number="5.1.5">
+<h3><span class="header-section-number">5.1.5</span> Plotting multivariate posteriors<a href="the-many-variables-the-spurious-waffles.html#plotting-multivariate-posteriors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Once there are more than one predictor variable in the model, a simple scatterplot with a regression line and confidence intervals will not convey as much information as you would want. McElreath explains three example plots to convey more information about your multivariate models<br />
+</p>
+<ol style="list-style-type: decimal">
+<li><em>Predictor residual plots.</em> These plots will show the outcome against residual predictor values.<br />
+</li>
+<li><em>Posterior prediction plots.</em> These will show model-based predictions against the observations (data).<br />
+</li>
+<li><em>Counterfactual plots.</em> These show implied predictions from imaginary experiments. They can allow you to explore causal implications of the model by manipulating variables.<br />
+</li>
+</ol>
+<div id="predictor-residual-plots" class="section level4 hasAnchor" number="5.1.5.1">
+<h4><span class="header-section-number">5.1.5.1</span> Predictor residual plots<a href="the-many-variables-the-spurious-waffles.html#predictor-residual-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Looking again at <span class="math inline">\(A \sim M\)</span> (m5.4) above, we can calculate the residual (difference from posterior mean) for each data point</p>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="the-many-variables-the-spurious-waffles.html#cb329-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m5<span class="fl">.4</span>)</span>
+<span id="cb329-2"><a href="the-many-variables-the-spurious-waffles.html#cb329-2" aria-hidden="true" tabindex="-1"></a>mu_mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, mean)</span>
+<span id="cb329-3"><a href="the-many-variables-the-spurious-waffles.html#cb329-3" aria-hidden="true" tabindex="-1"></a>mu_resid <span class="ot">&lt;-</span> d<span class="sc">$</span>M <span class="sc">-</span> mu_mean</span>
+<span id="cb329-4"><a href="the-many-variables-the-spurious-waffles.html#cb329-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb329-5"><a href="the-many-variables-the-spurious-waffles.html#cb329-5" aria-hidden="true" tabindex="-1"></a><span class="co"># rough plot (Not in book)</span></span>
+<span id="cb329-6"><a href="the-many-variables-the-spurious-waffles.html#cb329-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(M <span class="sc">~</span> A, <span class="at">data =</span> d, <span class="at">col =</span> rangi2, <span class="at">xlab =</span> <span class="st">&#39;Median age of marriage (std)&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Marriage rate (std)&#39;</span>)</span>
+<span id="cb329-7"><a href="the-many-variables-the-spurious-waffles.html#cb329-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(A_seq, mu.mean, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb329-8"><a href="the-many-variables-the-spurious-waffles.html#cb329-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(d<span class="sc">$</span>A)){</span>
+<span id="cb329-9"><a href="the-many-variables-the-spurious-waffles.html#cb329-9" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(d<span class="sc">$</span>A[i], d<span class="sc">$</span>M[i], d<span class="sc">$</span>A[i], mu_mean[i] )</span>
+<span id="cb329-10"><a href="the-many-variables-the-spurious-waffles.html#cb329-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%205.14-1.png" width="672" /></p>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="the-many-variables-the-spurious-waffles.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plotted horizontally against Divorce rate</span></span>
+<span id="cb330-2"><a href="the-many-variables-the-spurious-waffles.html#cb330-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb330-3"><a href="the-many-variables-the-spurious-waffles.html#cb330-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">cbind</span>(d, mu_resid)</span>
+<span id="cb330-4"><a href="the-many-variables-the-spurious-waffles.html#cb330-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb330-5"><a href="the-many-variables-the-spurious-waffles.html#cb330-5" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.4</span>b <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb330-6"><a href="the-many-variables-the-spurious-waffles.html#cb330-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb330-7"><a href="the-many-variables-the-spurious-waffles.html#cb330-7" aria-hidden="true" tabindex="-1"></a>    D <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb330-8"><a href="the-many-variables-the-spurious-waffles.html#cb330-8" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bMR <span class="sc">*</span> mu_resid,</span>
+<span id="cb330-9"><a href="the-many-variables-the-spurious-waffles.html#cb330-9" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb330-10"><a href="the-many-variables-the-spurious-waffles.html#cb330-10" aria-hidden="true" tabindex="-1"></a>    bMR <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb330-11"><a href="the-many-variables-the-spurious-waffles.html#cb330-11" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb330-12"><a href="the-many-variables-the-spurious-waffles.html#cb330-12" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb330-13"><a href="the-many-variables-the-spurious-waffles.html#cb330-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb330-14"><a href="the-many-variables-the-spurious-waffles.html#cb330-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb330-15"><a href="the-many-variables-the-spurious-waffles.html#cb330-15" aria-hidden="true" tabindex="-1"></a>reside_seq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="fl">1.55</span>, <span class="at">to =</span> <span class="fl">1.8</span>, <span class="at">length.out =</span> <span class="dv">30</span>)</span>
+<span id="cb330-16"><a href="the-many-variables-the-spurious-waffles.html#cb330-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb330-17"><a href="the-many-variables-the-spurious-waffles.html#cb330-17" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m5<span class="fl">.4</span>b, <span class="at">data =</span> <span class="fu">list</span>(<span class="at">mu_resid =</span> reside_seq))</span>
+<span id="cb330-18"><a href="the-many-variables-the-spurious-waffles.html#cb330-18" aria-hidden="true" tabindex="-1"></a>mu.mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, mean)</span>
+<span id="cb330-19"><a href="the-many-variables-the-spurious-waffles.html#cb330-19" aria-hidden="true" tabindex="-1"></a>mu.PI <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, PI)</span>
+<span id="cb330-20"><a href="the-many-variables-the-spurious-waffles.html#cb330-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb330-21"><a href="the-many-variables-the-spurious-waffles.html#cb330-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb330-22"><a href="the-many-variables-the-spurious-waffles.html#cb330-22" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> mu_resid, <span class="at">y =</span> d<span class="sc">$</span>D, <span class="at">xlab =</span> <span class="st">&#39;Marriage rate residuals&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Divorce rate (std)&#39;</span>,</span>
+<span id="cb330-23"><a href="the-many-variables-the-spurious-waffles.html#cb330-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="fu">col.alpha</span>(rangi2, <span class="fl">0.5</span>))</span>
+<span id="cb330-24"><a href="the-many-variables-the-spurious-waffles.html#cb330-24" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(reside_seq, mu.mean)</span>
+<span id="cb330-25"><a href="the-many-variables-the-spurious-waffles.html#cb330-25" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>(mu.PI, reside_seq)</span>
+<span id="cb330-26"><a href="the-many-variables-the-spurious-waffles.html#cb330-26" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">&#39;grey50&#39;</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb330-27"><a href="the-many-variables-the-spurious-waffles.html#cb330-27" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>( <span class="at">x =</span> <span class="sc">-</span><span class="fl">0.2</span>, <span class="at">y =</span> <span class="dv">2</span>, <span class="at">label =</span> <span class="st">&#39;slower&#39;</span>)</span>
+<span id="cb330-28"><a href="the-many-variables-the-spurious-waffles.html#cb330-28" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fl">0.2</span>, <span class="at">y =</span> <span class="dv">2</span>, <span class="at">label =</span> <span class="st">&#39;faster&#39;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
+<p>As we already found from the model, the marriage rate has little to no effect on the divorce rate, no matter how far the observation is from the expected mean.</p>
+<p>This process can be repeated for the other predictor as well</p>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="the-many-variables-the-spurious-waffles.html#cb331-1" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.4</span>c <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb331-2"><a href="the-many-variables-the-spurious-waffles.html#cb331-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb331-3"><a href="the-many-variables-the-spurious-waffles.html#cb331-3" aria-hidden="true" tabindex="-1"></a>    A <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb331-4"><a href="the-many-variables-the-spurious-waffles.html#cb331-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bMA <span class="sc">*</span> M,</span>
+<span id="cb331-5"><a href="the-many-variables-the-spurious-waffles.html#cb331-5" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb331-6"><a href="the-many-variables-the-spurious-waffles.html#cb331-6" aria-hidden="true" tabindex="-1"></a>    bMA <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb331-7"><a href="the-many-variables-the-spurious-waffles.html#cb331-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb331-8"><a href="the-many-variables-the-spurious-waffles.html#cb331-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb331-9"><a href="the-many-variables-the-spurious-waffles.html#cb331-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb331-10"><a href="the-many-variables-the-spurious-waffles.html#cb331-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-11"><a href="the-many-variables-the-spurious-waffles.html#cb331-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-12"><a href="the-many-variables-the-spurious-waffles.html#cb331-12" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m5<span class="fl">.4</span>c)</span>
+<span id="cb331-13"><a href="the-many-variables-the-spurious-waffles.html#cb331-13" aria-hidden="true" tabindex="-1"></a>mu_mean2 <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, mean)</span>
+<span id="cb331-14"><a href="the-many-variables-the-spurious-waffles.html#cb331-14" aria-hidden="true" tabindex="-1"></a>mu_resid2 <span class="ot">&lt;-</span> d<span class="sc">$</span>A <span class="sc">-</span> mu_mean2</span>
+<span id="cb331-15"><a href="the-many-variables-the-spurious-waffles.html#cb331-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-16"><a href="the-many-variables-the-spurious-waffles.html#cb331-16" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate percentiles</span></span>
+<span id="cb331-17"><a href="the-many-variables-the-spurious-waffles.html#cb331-17" aria-hidden="true" tabindex="-1"></a>M_seq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="fl">1.76</span>, <span class="at">to =</span> <span class="fl">2.85</span>, <span class="at">length.out =</span> <span class="dv">30</span>)</span>
+<span id="cb331-18"><a href="the-many-variables-the-spurious-waffles.html#cb331-18" aria-hidden="true" tabindex="-1"></a>mu2 <span class="ot">&lt;-</span> <span class="fu">link</span>(m5<span class="fl">.4</span>c, <span class="at">data =</span> <span class="fu">list</span>(<span class="at">M =</span> M_seq))</span>
+<span id="cb331-19"><a href="the-many-variables-the-spurious-waffles.html#cb331-19" aria-hidden="true" tabindex="-1"></a>mu.mean2 <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu2, <span class="dv">2</span>, mean)</span>
+<span id="cb331-20"><a href="the-many-variables-the-spurious-waffles.html#cb331-20" aria-hidden="true" tabindex="-1"></a>mu.PI2 <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu2, <span class="dv">2</span>, PI)</span>
+<span id="cb331-21"><a href="the-many-variables-the-spurious-waffles.html#cb331-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb331-22"><a href="the-many-variables-the-spurious-waffles.html#cb331-22" aria-hidden="true" tabindex="-1"></a><span class="co">#plot</span></span>
+<span id="cb331-23"><a href="the-many-variables-the-spurious-waffles.html#cb331-23" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(A <span class="sc">~</span> M, <span class="at">data =</span> d, <span class="at">col =</span> rangi2, <span class="at">xlab =</span> <span class="st">&#39;Marriage rate (std)&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Median age of marriage (std)&#39;</span>)</span>
+<span id="cb331-24"><a href="the-many-variables-the-spurious-waffles.html#cb331-24" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(M_seq, mu.mean2, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb331-25"><a href="the-many-variables-the-spurious-waffles.html#cb331-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(d<span class="sc">$</span>M)){</span>
+<span id="cb331-26"><a href="the-many-variables-the-spurious-waffles.html#cb331-26" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(d<span class="sc">$</span>M[i], d<span class="sc">$</span>A[i], d<span class="sc">$</span>M[i], mu_mean2[i] )</span>
+<span id="cb331-27"><a href="the-many-variables-the-spurious-waffles.html#cb331-27" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="the-many-variables-the-spurious-waffles.html#cb332-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">cbind</span>(d, mu_resid2)</span>
+<span id="cb332-2"><a href="the-many-variables-the-spurious-waffles.html#cb332-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb332-3"><a href="the-many-variables-the-spurious-waffles.html#cb332-3" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.4</span>d <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb332-4"><a href="the-many-variables-the-spurious-waffles.html#cb332-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb332-5"><a href="the-many-variables-the-spurious-waffles.html#cb332-5" aria-hidden="true" tabindex="-1"></a>    D <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb332-6"><a href="the-many-variables-the-spurious-waffles.html#cb332-6" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bMR <span class="sc">*</span> mu_resid2,</span>
+<span id="cb332-7"><a href="the-many-variables-the-spurious-waffles.html#cb332-7" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb332-8"><a href="the-many-variables-the-spurious-waffles.html#cb332-8" aria-hidden="true" tabindex="-1"></a>    bMR <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb332-9"><a href="the-many-variables-the-spurious-waffles.html#cb332-9" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb332-10"><a href="the-many-variables-the-spurious-waffles.html#cb332-10" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb332-11"><a href="the-many-variables-the-spurious-waffles.html#cb332-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb332-12"><a href="the-many-variables-the-spurious-waffles.html#cb332-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb332-13"><a href="the-many-variables-the-spurious-waffles.html#cb332-13" aria-hidden="true" tabindex="-1"></a>reside_seq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="fl">1.3</span>, <span class="at">to =</span> <span class="fl">2.5</span>, <span class="at">length.out =</span> <span class="dv">30</span>)</span>
+<span id="cb332-14"><a href="the-many-variables-the-spurious-waffles.html#cb332-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb332-15"><a href="the-many-variables-the-spurious-waffles.html#cb332-15" aria-hidden="true" tabindex="-1"></a>mu2 <span class="ot">&lt;-</span> <span class="fu">link</span>(m5<span class="fl">.4</span>d, <span class="at">data =</span> <span class="fu">list</span>(<span class="at">mu_resid2 =</span> reside_seq))</span>
+<span id="cb332-16"><a href="the-many-variables-the-spurious-waffles.html#cb332-16" aria-hidden="true" tabindex="-1"></a>mu.mean2 <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu2, <span class="dv">2</span>, mean)</span>
+<span id="cb332-17"><a href="the-many-variables-the-spurious-waffles.html#cb332-17" aria-hidden="true" tabindex="-1"></a>mu.PI2 <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu2, <span class="dv">2</span>, PI)</span>
+<span id="cb332-18"><a href="the-many-variables-the-spurious-waffles.html#cb332-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb332-19"><a href="the-many-variables-the-spurious-waffles.html#cb332-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb332-20"><a href="the-many-variables-the-spurious-waffles.html#cb332-20" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> mu_resid2, <span class="at">y =</span> d<span class="sc">$</span>D, <span class="at">xlab =</span> <span class="st">&#39;Median age residuals&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Divorce rate (std)&#39;</span>,</span>
+<span id="cb332-21"><a href="the-many-variables-the-spurious-waffles.html#cb332-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="fu">col.alpha</span>(rangi2, <span class="fl">0.5</span>))</span>
+<span id="cb332-22"><a href="the-many-variables-the-spurious-waffles.html#cb332-22" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(reside_seq, mu.mean2)</span>
+<span id="cb332-23"><a href="the-many-variables-the-spurious-waffles.html#cb332-23" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>(mu.PI2, reside_seq)</span>
+<span id="cb332-24"><a href="the-many-variables-the-spurious-waffles.html#cb332-24" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">&#39;grey50&#39;</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb332-25"><a href="the-many-variables-the-spurious-waffles.html#cb332-25" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>( <span class="at">x =</span> <span class="sc">-</span><span class="fl">0.25</span>, <span class="at">y =</span> <span class="dv">2</span>, <span class="at">label =</span> <span class="st">&#39;younger&#39;</span>)</span>
+<span id="cb332-26"><a href="the-many-variables-the-spurious-waffles.html#cb332-26" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fl">0.2</span>, <span class="at">y =</span> <span class="dv">2</span>, <span class="at">label =</span> <span class="st">&#39;older&#39;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
+<p>And just as the model tells us, states that have younger than the expected average age of marriage have higher divorce rates than states that have older than expected age of marriage.<br />
+</p>
+</div>
+<div id="posterior-prediction-plots" class="section level4 hasAnchor" number="5.1.5.2">
+<h4><span class="header-section-number">5.1.5.2</span> Posterior prediction plots<a href="the-many-variables-the-spurious-waffles.html#posterior-prediction-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Comparing model predictions against the observations can serve a couple purposes<br />
+</p>
+<ol style="list-style-type: decimal">
+<li>Checking to see that the model correctly approximated the posterior<br />
+</li>
+<li>Checking to see how the model fails and if it should even be retained<br />
+</li>
+</ol>
+<p>Here’s how we could simulate predictions</p>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="the-many-variables-the-spurious-waffles.html#cb333-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m5<span class="fl">.3</span>) <span class="co">#our multivariate model of divorce rate</span></span>
+<span id="cb333-2"><a href="the-many-variables-the-spurious-waffles.html#cb333-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb333-3"><a href="the-many-variables-the-spurious-waffles.html#cb333-3" aria-hidden="true" tabindex="-1"></a><span class="co">#summarize samples</span></span>
+<span id="cb333-4"><a href="the-many-variables-the-spurious-waffles.html#cb333-4" aria-hidden="true" tabindex="-1"></a>mu_mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, mean)</span>
+<span id="cb333-5"><a href="the-many-variables-the-spurious-waffles.html#cb333-5" aria-hidden="true" tabindex="-1"></a>mu_PI <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, PI)</span>
+<span id="cb333-6"><a href="the-many-variables-the-spurious-waffles.html#cb333-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb333-7"><a href="the-many-variables-the-spurious-waffles.html#cb333-7" aria-hidden="true" tabindex="-1"></a><span class="co">#simulate observations</span></span>
+<span id="cb333-8"><a href="the-many-variables-the-spurious-waffles.html#cb333-8" aria-hidden="true" tabindex="-1"></a>D_sim <span class="ot">&lt;-</span> <span class="fu">sim</span>(m5<span class="fl">.3</span>, <span class="at">n =</span> <span class="fl">1e4</span>)</span>
+<span id="cb333-9"><a href="the-many-variables-the-spurious-waffles.html#cb333-9" aria-hidden="true" tabindex="-1"></a>D_PI <span class="ot">&lt;-</span> <span class="fu">apply</span>(D_sim, <span class="dv">2</span>, PI)</span></code></pre></div>
+<p>and then plot the results</p>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="the-many-variables-the-spurious-waffles.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mu_mean <span class="sc">~</span> d<span class="sc">$</span>D, <span class="at">col =</span> rangi2, <span class="at">ylim =</span> <span class="fu">range</span>(mu_PI), </span>
+<span id="cb334-2"><a href="the-many-variables-the-spurious-waffles.html#cb334-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&#39;Observed divorce&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;Predicted divorce&#39;</span>)</span>
+<span id="cb334-3"><a href="the-many-variables-the-spurious-waffles.html#cb334-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">1</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb334-4"><a href="the-many-variables-the-spurious-waffles.html#cb334-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(d)){</span>
+<span id="cb334-5"><a href="the-many-variables-the-spurious-waffles.html#cb334-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="fu">rep</span>(d<span class="sc">$</span>D[i],<span class="dv">2</span>), mu_PI[,i], <span class="at">col =</span> rangi2)</span>
+<span id="cb334-6"><a href="the-many-variables-the-spurious-waffles.html#cb334-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%205.16-1.png" width="672" /></p>
+<p>Somewhat unsurprisingly, the model is bad with extreme values (-2, 2), and does pretty well near the means.</p>
+</div>
+<div id="counterfactual-plots" class="section level4 hasAnchor" number="5.1.5.3">
+<h4><span class="header-section-number">5.1.5.3</span> Counterfactual plots<a href="the-many-variables-the-spurious-waffles.html#counterfactual-plots" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Here McElreath makes use of the term counterfactual in the sense of some computation that that makes use of the casual model. This is done by manipulating variables to see how the outcome would change.</p>
+<p>The general recipe would be<br />
+1. pick a variable to manipulate<br />
+2. define a range of values for the manipulation<br />
+3. for each value of the manipulated variable, and for each sample in the posterior, use the causal model to simulate the other variables and outcome variable.<br />
+</p>
+<p>For this example we will be looking at the first <strong>DAG</strong> we came up with with the three arrows
+<img src="_main_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
+<p>Let’s create the model for this example</p>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="the-many-variables-the-spurious-waffles.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;WaffleDivorce&quot;</span>)</span>
+<span id="cb335-2"><a href="the-many-variables-the-spurious-waffles.html#cb335-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb335-3"><a href="the-many-variables-the-spurious-waffles.html#cb335-3" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>A <span class="ot">&lt;-</span> <span class="fu">standardize</span>(WaffleDivorce<span class="sc">$</span>MedianAgeMarriage)</span>
+<span id="cb335-4"><a href="the-many-variables-the-spurious-waffles.html#cb335-4" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>D <span class="ot">&lt;-</span> <span class="fu">standardize</span>(WaffleDivorce<span class="sc">$</span>Divorce)</span>
+<span id="cb335-5"><a href="the-many-variables-the-spurious-waffles.html#cb335-5" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>M <span class="ot">&lt;-</span> <span class="fu">standardize</span>(WaffleDivorce<span class="sc">$</span>Marriage)</span>
+<span id="cb335-6"><a href="the-many-variables-the-spurious-waffles.html#cb335-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb335-7"><a href="the-many-variables-the-spurious-waffles.html#cb335-7" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.3</span>_A <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb335-8"><a href="the-many-variables-the-spurious-waffles.html#cb335-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb335-9"><a href="the-many-variables-the-spurious-waffles.html#cb335-9" aria-hidden="true" tabindex="-1"></a>    <span class="do">## A -&gt; D &lt;- M</span></span>
+<span id="cb335-10"><a href="the-many-variables-the-spurious-waffles.html#cb335-10" aria-hidden="true" tabindex="-1"></a>    D <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb335-11"><a href="the-many-variables-the-spurious-waffles.html#cb335-11" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bM<span class="sc">*</span>M <span class="sc">+</span> bA<span class="sc">*</span>A,</span>
+<span id="cb335-12"><a href="the-many-variables-the-spurious-waffles.html#cb335-12" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>,<span class="fl">0.2</span>),</span>
+<span id="cb335-13"><a href="the-many-variables-the-spurious-waffles.html#cb335-13" aria-hidden="true" tabindex="-1"></a>    bM <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb335-14"><a href="the-many-variables-the-spurious-waffles.html#cb335-14" aria-hidden="true" tabindex="-1"></a>    bA <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb335-15"><a href="the-many-variables-the-spurious-waffles.html#cb335-15" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>),</span>
+<span id="cb335-16"><a href="the-many-variables-the-spurious-waffles.html#cb335-16" aria-hidden="true" tabindex="-1"></a>    <span class="do">## A -&gt; M</span></span>
+<span id="cb335-17"><a href="the-many-variables-the-spurious-waffles.html#cb335-17" aria-hidden="true" tabindex="-1"></a>    M <span class="sc">~</span> <span class="fu">dnorm</span>(mu_M, sigma_M),</span>
+<span id="cb335-18"><a href="the-many-variables-the-spurious-waffles.html#cb335-18" aria-hidden="true" tabindex="-1"></a>    mu_M <span class="ot">&lt;-</span> aM <span class="sc">+</span> bAM<span class="sc">*</span>A,</span>
+<span id="cb335-19"><a href="the-many-variables-the-spurious-waffles.html#cb335-19" aria-hidden="true" tabindex="-1"></a>    aM <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb335-20"><a href="the-many-variables-the-spurious-waffles.html#cb335-20" aria-hidden="true" tabindex="-1"></a>    bAM <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb335-21"><a href="the-many-variables-the-spurious-waffles.html#cb335-21" aria-hidden="true" tabindex="-1"></a>    sigma_M <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb335-22"><a href="the-many-variables-the-spurious-waffles.html#cb335-22" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb335-23"><a href="the-many-variables-the-spurious-waffles.html#cb335-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb335-24"><a href="the-many-variables-the-spurious-waffles.html#cb335-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb335-25"><a href="the-many-variables-the-spurious-waffles.html#cb335-25" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m5<span class="fl">.3</span>_A)</span></code></pre></div>
+<pre><code>##                  mean         sd       5.5%      94.5%
+## a       -0.0000194729 0.09707615 -0.1551659  0.1551270
+## bM      -0.0655282376 0.15077177 -0.3064906  0.1754342
+## bA      -0.6135574871 0.15098333 -0.8548580 -0.3722570
+## sigma    0.7851193004 0.07784372  0.6607100  0.9095286
+## aM      -0.0000642742 0.08825440 -0.1411119  0.1409833
+## bAM     -0.5783793520 0.09200708 -0.7254244 -0.4313343
+## sigma_M  0.6954216151 0.07116903  0.5816798  0.8091635</code></pre>
+<p>Now we will define our value range</p>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="the-many-variables-the-spurious-waffles.html#cb337-1" aria-hidden="true" tabindex="-1"></a>A_seq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">to =</span> <span class="dv">2</span>, <span class="at">length.out =</span> <span class="dv">30</span>)</span></code></pre></div>
+<p>Now we can simulate observations from this range</p>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="the-many-variables-the-spurious-waffles.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="co">#prep data</span></span>
+<span id="cb338-2"><a href="the-many-variables-the-spurious-waffles.html#cb338-2" aria-hidden="true" tabindex="-1"></a>sim_dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">A =</span> A_seq)</span>
+<span id="cb338-3"><a href="the-many-variables-the-spurious-waffles.html#cb338-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb338-4"><a href="the-many-variables-the-spurious-waffles.html#cb338-4" aria-hidden="true" tabindex="-1"></a><span class="co">#simulate M and then D, using A_seq</span></span>
+<span id="cb338-5"><a href="the-many-variables-the-spurious-waffles.html#cb338-5" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sim</span>(m5<span class="fl">.3</span>_A, <span class="at">data =</span> sim_dat, <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">&#39;M&#39;</span>, <span class="st">&#39;D&#39;</span>))</span></code></pre></div>
+<p>and plot the predictions</p>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="the-many-variables-the-spurious-waffles.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sim_dat<span class="sc">$</span>A, <span class="fu">colMeans</span>(s<span class="sc">$</span>D), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>), <span class="at">type =</span> <span class="st">&#39;l&#39;</span>,</span>
+<span id="cb339-2"><a href="the-many-variables-the-spurious-waffles.html#cb339-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&#39;manipulated A&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;counterfactual D&#39;</span>)</span>
+<span id="cb339-3"><a href="the-many-variables-the-spurious-waffles.html#cb339-3" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>(<span class="fu">apply</span>(s<span class="sc">$</span>D, <span class="dv">2</span>, PI), sim_dat<span class="sc">$</span>A)</span>
+<span id="cb339-4"><a href="the-many-variables-the-spurious-waffles.html#cb339-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;total counterfactual effect of A on D&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%205.22-1.png" width="672" /></p>
+<p>This plot above shows the trend in D following both paths <span class="math inline">\(A \rightarrow D\)</span> and <span class="math inline">\(A \rightarrow M \rightarrow D\)</span></p>
+<p>We can also produce the effect of <span class="math inline">\(A \rightarrow M\)</span></p>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="the-many-variables-the-spurious-waffles.html#cb340-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sim_dat<span class="sc">$</span>A, <span class="fu">colMeans</span>(s<span class="sc">$</span>M), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>), <span class="at">type =</span> <span class="st">&#39;l&#39;</span>,</span>
+<span id="cb340-2"><a href="the-many-variables-the-spurious-waffles.html#cb340-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&#39;manipulated A&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;counterfactual M&#39;</span>)</span>
+<span id="cb340-3"><a href="the-many-variables-the-spurious-waffles.html#cb340-3" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>(<span class="fu">apply</span>(s<span class="sc">$</span>M, <span class="dv">2</span>, PI), sim_dat<span class="sc">$</span>A)</span>
+<span id="cb340-4"><a href="the-many-variables-the-spurious-waffles.html#cb340-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;Counterfactual effect of A on M&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
+<p>Let’s raise the median age of marriage from 20 to 30 and see the change in Divorce rate (in std dev units)</p>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="the-many-variables-the-spurious-waffles.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="co">#new data with mean 26.1 and std dev 1.24</span></span>
+<span id="cb341-2"><a href="the-many-variables-the-spurious-waffles.html#cb341-2" aria-hidden="true" tabindex="-1"></a>sim2_dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">A =</span> (<span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">30</span>)<span class="sc">-</span><span class="fl">26.1</span>)<span class="sc">/</span><span class="fl">1.24</span>)</span>
+<span id="cb341-3"><a href="the-many-variables-the-spurious-waffles.html#cb341-3" aria-hidden="true" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> <span class="fu">sim</span>(m5<span class="fl">.3</span>_A, <span class="at">data =</span> sim2_dat, <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">&#39;M&#39;</span>,<span class="st">&#39;D&#39;</span>))</span>
+<span id="cb341-4"><a href="the-many-variables-the-spurious-waffles.html#cb341-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(s2<span class="sc">$</span>D[,<span class="dv">2</span>] <span class="sc">-</span> s2<span class="sc">$</span>D[,<span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## [1] -4.643447</code></pre>
+<p>Reducing divorce by 4.5 standard deviations is probably unlikely</p>
+<p>If we wanted to manipulate <span class="math inline">\(M\)</span> instead of <span class="math inline">\(A\)</span> we would have to consider a new <strong>DAG</strong> where <span class="math inline">\(A\)</span> can’t influence <span class="math inline">\(M\)</span> because we are controlling it.</p>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="the-many-variables-the-spurious-waffles.html#cb343-1" aria-hidden="true" tabindex="-1"></a>dag5<span class="fl">.3</span> <span class="ot">&lt;-</span><span class="fu">dagitty</span>(<span class="st">&quot;dag{A-&gt;D;M-&gt;D}&quot;</span>)</span>
+<span id="cb343-2"><a href="the-many-variables-the-spurious-waffles.html#cb343-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(dag5<span class="fl">.3</span>) <span class="ot">&lt;-</span><span class="fu">list</span>(<span class="at">x=</span><span class="fu">c</span>(<span class="at">A=</span><span class="dv">0</span>,<span class="at">D=</span><span class="dv">1</span>,<span class="at">M=</span><span class="dv">2</span>),<span class="at">y=</span><span class="fu">c</span>(<span class="at">A=</span><span class="dv">0</span>,<span class="at">D=</span><span class="dv">1</span>,<span class="at">M=</span><span class="dv">0</span>))</span>
+<span id="cb343-3"><a href="the-many-variables-the-spurious-waffles.html#cb343-3" aria-hidden="true" tabindex="-1"></a><span class="fu">drawdag</span>(dag5<span class="fl">.3</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
+<p>Let’s set <span class="math inline">\(A\)</span> to equal 0 and just worry about <span class="math inline">\(M\)</span> changing</p>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="the-many-variables-the-spurious-waffles.html#cb344-1" aria-hidden="true" tabindex="-1"></a>sim_dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">M =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">to =</span> <span class="dv">2</span>, <span class="at">length.out =</span> <span class="dv">30</span>), <span class="at">A =</span> <span class="dv">0</span>)</span>
+<span id="cb344-2"><a href="the-many-variables-the-spurious-waffles.html#cb344-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sim</span>(m5<span class="fl">.3</span>_A, <span class="at">data =</span> sim_dat, <span class="at">vars =</span> <span class="st">&#39;D&#39;</span>)</span>
+<span id="cb344-3"><a href="the-many-variables-the-spurious-waffles.html#cb344-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb344-4"><a href="the-many-variables-the-spurious-waffles.html#cb344-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sim_dat<span class="sc">$</span>M, <span class="fu">colMeans</span>(s), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>), <span class="at">type =</span> <span class="st">&#39;l&#39;</span>,</span>
+<span id="cb344-5"><a href="the-many-variables-the-spurious-waffles.html#cb344-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&#39;manipulated M&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;counterfactual D&#39;</span>)</span>
+<span id="cb344-6"><a href="the-many-variables-the-spurious-waffles.html#cb344-6" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>(<span class="fu">apply</span>(s, <span class="dv">2</span>, PI), sim_dat<span class="sc">$</span>M)</span>
+<span id="cb344-7"><a href="the-many-variables-the-spurious-waffles.html#cb344-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;Total counterfactual effect of M on D&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%205.24-1.png" width="672" /></p>
+<p>You can see from this counterfactual that any value of <span class="math inline">\(M\)</span> has very little effect on <span class="math inline">\(D\)</span>. We already expected this because we knew there was a weak effect in the model (<code>bM</code>)</p>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="the-many-variables-the-spurious-waffles.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftab</span>(m5<span class="fl">.3</span>)</span></code></pre></div>
+<pre><code>##       m5.3   
+## a           0
+## bM      -0.07
+## bA      -0.61
+## sigma    0.79
+## nobs       50</code></pre>
+</div>
+<div id="simulate-counterfactuals-by-hand" class="section level4 hasAnchor" number="5.1.5.4">
+<h4><span class="header-section-number">5.1.5.4</span> Simulate counterfactuals by hand<a href="the-many-variables-the-spurious-waffles.html#simulate-counterfactuals-by-hand" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Let’s manipulate <span class="math inline">\(A\)</span> again but simulate by hand</p>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="the-many-variables-the-spurious-waffles.html#cb347-1" aria-hidden="true" tabindex="-1"></a>A_seq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">to =</span> <span class="dv">2</span>, <span class="at">length.out =</span> <span class="dv">30</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="the-many-variables-the-spurious-waffles.html#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="co">#grab samples from posterior</span></span>
+<span id="cb348-2"><a href="the-many-variables-the-spurious-waffles.html#cb348-2" aria-hidden="true" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">extract.samples</span>(m5<span class="fl">.3</span>_A)</span>
+<span id="cb348-3"><a href="the-many-variables-the-spurious-waffles.html#cb348-3" aria-hidden="true" tabindex="-1"></a><span class="co"># use sapply to estimate M from values in post and A_seq</span></span>
+<span id="cb348-4"><a href="the-many-variables-the-spurious-waffles.html#cb348-4" aria-hidden="true" tabindex="-1"></a>M_sim <span class="ot">&lt;-</span> <span class="fu">with</span>(post, <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="cf">function</span>(i) <span class="fu">rnorm</span>(<span class="fl">1e3</span>, aM <span class="sc">+</span> bAM <span class="sc">*</span> A_seq[i], sigma_M)))</span></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="the-many-variables-the-spurious-waffles.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use sapply to estimate D from values in post, M_sim, and A_seq</span></span>
+<span id="cb349-2"><a href="the-many-variables-the-spurious-waffles.html#cb349-2" aria-hidden="true" tabindex="-1"></a>D_sim <span class="ot">&lt;-</span> <span class="fu">with</span>(post, <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, </span>
+<span id="cb349-3"><a href="the-many-variables-the-spurious-waffles.html#cb349-3" aria-hidden="true" tabindex="-1"></a>                           <span class="cf">function</span>(i) <span class="fu">rnorm</span>(<span class="fl">1e3</span>, a <span class="sc">+</span> bA<span class="sc">*</span>A_seq[i] <span class="sc">+</span> bM<span class="sc">*</span>M_sim[,i] , sigma_M)))</span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="the-many-variables-the-spurious-waffles.html#cb350-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot A_seq against D_sim colMeans</span></span>
+<span id="cb350-2"><a href="the-many-variables-the-spurious-waffles.html#cb350-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(A_seq, <span class="fu">colMeans</span>(D_sim), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>), <span class="at">type =</span> <span class="st">&#39;l&#39;</span>,</span>
+<span id="cb350-3"><a href="the-many-variables-the-spurious-waffles.html#cb350-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&#39;manipulated A&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;counterfactual D&#39;</span>)</span>
+<span id="cb350-4"><a href="the-many-variables-the-spurious-waffles.html#cb350-4" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>(<span class="fu">apply</span>(D_sim, <span class="dv">2</span>, PI), A_seq)</span>
+<span id="cb350-5"><a href="the-many-variables-the-spurious-waffles.html#cb350-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;total counterfactual effect of A on D&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-100-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+<div id="masked-relationship" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Masked relationship<a href="the-many-variables-the-spurious-waffles.html#masked-relationship" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This section is devoted to measuring multiple direct effects from multiple predictors on an outcome. This is particularly useful when the predictors seem to have little effect on the outcome on their own.</p>
+<p>We will load in some new data on milk composition from different primates</p>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="the-many-variables-the-spurious-waffles.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinking)</span>
+<span id="cb351-2"><a href="the-many-variables-the-spurious-waffles.html#cb351-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(milk)</span>
+<span id="cb351-3"><a href="the-many-variables-the-spurious-waffles.html#cb351-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> milk</span>
+<span id="cb351-4"><a href="the-many-variables-the-spurious-waffles.html#cb351-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(d)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    29 obs. of  8 variables:
+##  $ clade         : Factor w/ 4 levels &quot;Ape&quot;,&quot;New World Monkey&quot;,..: 4 4 4 4 4 2 2 2 2 2 ...
+##  $ species       : Factor w/ 29 levels &quot;A palliata&quot;,&quot;Alouatta seniculus&quot;,..: 11 8 9 10 16 2 1 6 28 27 ...
+##  $ kcal.per.g    : num  0.49 0.51 0.46 0.48 0.6 0.47 0.56 0.89 0.91 0.92 ...
+##  $ perc.fat      : num  16.6 19.3 14.1 14.9 27.3 ...
+##  $ perc.protein  : num  15.4 16.9 16.9 13.2 19.5 ...
+##  $ perc.lactose  : num  68 63.8 69 71.9 53.2 ...
+##  $ mass          : num  1.95 2.09 2.51 1.62 2.19 5.25 5.37 2.51 0.71 0.68 ...
+##  $ neocortex.perc: num  55.2 NA NA NA NA ...</code></pre>
+<p>We will focus on the relationship between kilocalories per gram of milk and brain mass (neocortex percent). We will also include mass later on.</p>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="the-many-variables-the-spurious-waffles.html#cb353-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>K <span class="ot">&lt;-</span> <span class="fu">standardize</span>(d<span class="sc">$</span>kcal.per.g)</span>
+<span id="cb353-2"><a href="the-many-variables-the-spurious-waffles.html#cb353-2" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>N <span class="ot">&lt;-</span> <span class="fu">standardize</span>(d<span class="sc">$</span>neocortex.perc)</span>
+<span id="cb353-3"><a href="the-many-variables-the-spurious-waffles.html#cb353-3" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>M <span class="ot">&lt;-</span> <span class="fu">standardize</span>(<span class="fu">log</span>(d<span class="sc">$</span>mass))</span></code></pre></div>
+<p>First lets look at <span class="math inline">\(K \sim N\)</span> directly</p>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="the-many-variables-the-spurious-waffles.html#cb354-1" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.5</span>_draft <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb354-2"><a href="the-many-variables-the-spurious-waffles.html#cb354-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb354-3"><a href="the-many-variables-the-spurious-waffles.html#cb354-3" aria-hidden="true" tabindex="-1"></a>    K <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb354-4"><a href="the-many-variables-the-spurious-waffles.html#cb354-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bN<span class="sc">*</span>N,</span>
+<span id="cb354-5"><a href="the-many-variables-the-spurious-waffles.html#cb354-5" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb354-6"><a href="the-many-variables-the-spurious-waffles.html#cb354-6" aria-hidden="true" tabindex="-1"></a>    bN <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb354-7"><a href="the-many-variables-the-spurious-waffles.html#cb354-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb354-8"><a href="the-many-variables-the-spurious-waffles.html#cb354-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb354-9"><a href="the-many-variables-the-spurious-waffles.html#cb354-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Ooops, too many <code>NA</code> values in the data</p>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="the-many-variables-the-spurious-waffles.html#cb355-1" aria-hidden="true" tabindex="-1"></a>dcc <span class="ot">&lt;-</span> d[<span class="fu">complete.cases</span>(d<span class="sc">$</span>K, d<span class="sc">$</span>N, d<span class="sc">$</span>M),]</span>
+<span id="cb355-2"><a href="the-many-variables-the-spurious-waffles.html#cb355-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb355-3"><a href="the-many-variables-the-spurious-waffles.html#cb355-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 5.33</span></span>
+<span id="cb355-4"><a href="the-many-variables-the-spurious-waffles.html#cb355-4" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.5</span>_draft <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb355-5"><a href="the-many-variables-the-spurious-waffles.html#cb355-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb355-6"><a href="the-many-variables-the-spurious-waffles.html#cb355-6" aria-hidden="true" tabindex="-1"></a>    K <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb355-7"><a href="the-many-variables-the-spurious-waffles.html#cb355-7" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bN<span class="sc">*</span>N,</span>
+<span id="cb355-8"><a href="the-many-variables-the-spurious-waffles.html#cb355-8" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb355-9"><a href="the-many-variables-the-spurious-waffles.html#cb355-9" aria-hidden="true" tabindex="-1"></a>    bN <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb355-10"><a href="the-many-variables-the-spurious-waffles.html#cb355-10" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb355-11"><a href="the-many-variables-the-spurious-waffles.html#cb355-11" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> dcc <span class="co">#update data source</span></span>
+<span id="cb355-12"><a href="the-many-variables-the-spurious-waffles.html#cb355-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Let’s look at the validity of the priors</p>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="the-many-variables-the-spurious-waffles.html#cb356-1" aria-hidden="true" tabindex="-1"></a>prior <span class="ot">&lt;-</span> <span class="fu">extract.prior</span>(m5<span class="fl">.5</span>_draft)</span>
+<span id="cb356-2"><a href="the-many-variables-the-spurious-waffles.html#cb356-2" aria-hidden="true" tabindex="-1"></a>xseq <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb356-3"><a href="the-many-variables-the-spurious-waffles.html#cb356-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m5<span class="fl">.5</span>_draft, <span class="at">post =</span> prior, <span class="at">data =</span> <span class="fu">list</span>(<span class="at">N =</span> xseq))</span>
+<span id="cb356-4"><a href="the-many-variables-the-spurious-waffles.html#cb356-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="cn">NULL</span>, <span class="at">xlim =</span> xseq, <span class="at">ylim =</span> xseq, <span class="at">xlab =</span> <span class="st">&#39;neocortex % (std)&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;kilocal / g (std)&#39;</span>)</span>
+<span id="cb356-5"><a href="the-many-variables-the-spurious-waffles.html#cb356-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&#39;a ~ dnorm(0, 1) \ bN ~ dnorm(0, 1)&#39;</span>)</span>
+<span id="cb356-6"><a href="the-many-variables-the-spurious-waffles.html#cb356-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>){</span>
+<span id="cb356-7"><a href="the-many-variables-the-spurious-waffles.html#cb356-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(xseq, mu[i,], <span class="at">col =</span> <span class="fu">col.alpha</span>(<span class="st">&#39;black&#39;</span>,<span class="fl">0.3</span>))</span>
+<span id="cb356-8"><a href="the-many-variables-the-spurious-waffles.html#cb356-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%205.34-1.png" width="672" /></p>
+<p>Not great…<br />
+</p>
+<p>Because we know that these variables are standardized, we can constrain <span class="math inline">\(\alpha\)</span> to be a bit closer to 0. <span class="math inline">\(\beta_{N}\)</span> can also be tightened to avoid impossibly strong relationships.</p>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="the-many-variables-the-spurious-waffles.html#cb357-1" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.5</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb357-2"><a href="the-many-variables-the-spurious-waffles.html#cb357-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb357-3"><a href="the-many-variables-the-spurious-waffles.html#cb357-3" aria-hidden="true" tabindex="-1"></a>    K <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb357-4"><a href="the-many-variables-the-spurious-waffles.html#cb357-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bN<span class="sc">*</span>N,</span>
+<span id="cb357-5"><a href="the-many-variables-the-spurious-waffles.html#cb357-5" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb357-6"><a href="the-many-variables-the-spurious-waffles.html#cb357-6" aria-hidden="true" tabindex="-1"></a>    bN <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb357-7"><a href="the-many-variables-the-spurious-waffles.html#cb357-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb357-8"><a href="the-many-variables-the-spurious-waffles.html#cb357-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> dcc )</span>
+<span id="cb357-9"><a href="the-many-variables-the-spurious-waffles.html#cb357-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb357-10"><a href="the-many-variables-the-spurious-waffles.html#cb357-10" aria-hidden="true" tabindex="-1"></a>prior <span class="ot">&lt;-</span> <span class="fu">extract.prior</span>(m5<span class="fl">.5</span>)</span>
+<span id="cb357-11"><a href="the-many-variables-the-spurious-waffles.html#cb357-11" aria-hidden="true" tabindex="-1"></a>xseq <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb357-12"><a href="the-many-variables-the-spurious-waffles.html#cb357-12" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m5<span class="fl">.5</span>, <span class="at">post =</span> prior, <span class="at">data =</span> <span class="fu">list</span>(<span class="at">N =</span> xseq))</span>
+<span id="cb357-13"><a href="the-many-variables-the-spurious-waffles.html#cb357-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="cn">NULL</span>, <span class="at">xlim =</span> xseq, <span class="at">ylim =</span> xseq, <span class="at">xlab =</span> <span class="st">&#39;neocortex % (std)&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;kilocal / g (std)&#39;</span>)</span>
+<span id="cb357-14"><a href="the-many-variables-the-spurious-waffles.html#cb357-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&#39;a ~ dnorm(0, 0.2) \ bN ~ dnorm(0, 0.5)&#39;</span>)</span>
+<span id="cb357-15"><a href="the-many-variables-the-spurious-waffles.html#cb357-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>){</span>
+<span id="cb357-16"><a href="the-many-variables-the-spurious-waffles.html#cb357-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(xseq, mu[i,], <span class="at">col =</span> <span class="fu">col.alpha</span>(<span class="st">&#39;black&#39;</span>,<span class="fl">0.3</span>))</span>
+<span id="cb357-17"><a href="the-many-variables-the-spurious-waffles.html#cb357-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%205.35-1.png" width="672" /></p>
+<p>Now we have lines that are still quite vague, but at least they largely fall within the observable data.<br />
+</p>
+<p>Let’s turn to the posterior</p>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="the-many-variables-the-spurious-waffles.html#cb358-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m5<span class="fl">.5</span>)</span></code></pre></div>
+<pre><code>##            mean        sd       5.5%     94.5%
+## a     0.0399399 0.1544908 -0.2069662 0.2868460
+## bN    0.1332349 0.2237470 -0.2243560 0.4908257
+## sigma 0.9998209 0.1647083  0.7365852 1.2630565</code></pre>
+<p>And plotted</p>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="the-many-variables-the-spurious-waffles.html#cb360-1" aria-hidden="true" tabindex="-1"></a>xseq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">min</span>(dcc<span class="sc">$</span>N)<span class="sc">-</span><span class="fl">0.15</span>, <span class="at">to =</span> <span class="fu">max</span>(dcc<span class="sc">$</span>N)<span class="sc">+</span><span class="fl">0.15</span>, <span class="at">length.out =</span> <span class="dv">30</span>)</span>
+<span id="cb360-2"><a href="the-many-variables-the-spurious-waffles.html#cb360-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m5<span class="fl">.5</span>, <span class="at">data =</span> <span class="fu">list</span>(<span class="at">N =</span> xseq))</span>
+<span id="cb360-3"><a href="the-many-variables-the-spurious-waffles.html#cb360-3" aria-hidden="true" tabindex="-1"></a>mu_mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, mean)</span>
+<span id="cb360-4"><a href="the-many-variables-the-spurious-waffles.html#cb360-4" aria-hidden="true" tabindex="-1"></a>mu_PI <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, PI)</span>
+<span id="cb360-5"><a href="the-many-variables-the-spurious-waffles.html#cb360-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(K <span class="sc">~</span> N, <span class="at">data =</span> dcc, <span class="at">col=</span><span class="fu">col.alpha</span>(rangi2, <span class="fl">0.5</span>), </span>
+<span id="cb360-6"><a href="the-many-variables-the-spurious-waffles.html#cb360-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&#39;neocortex % (std)&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;kilocal / g (std)&#39;</span>)</span>
+<span id="cb360-7"><a href="the-many-variables-the-spurious-waffles.html#cb360-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(xseq, mu_mean, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb360-8"><a href="the-many-variables-the-spurious-waffles.html#cb360-8" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>(mu_PI, xseq)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%205.37-1.png" width="672" /></p>
+<p>Not a great relationship given the large residuals around the mean line.</p>
+<p>Let’s see how body mass does at explaining calorie content of milk</p>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="the-many-variables-the-spurious-waffles.html#cb361-1" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.6</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb361-2"><a href="the-many-variables-the-spurious-waffles.html#cb361-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb361-3"><a href="the-many-variables-the-spurious-waffles.html#cb361-3" aria-hidden="true" tabindex="-1"></a>    K <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb361-4"><a href="the-many-variables-the-spurious-waffles.html#cb361-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bM<span class="sc">*</span>M,</span>
+<span id="cb361-5"><a href="the-many-variables-the-spurious-waffles.html#cb361-5" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb361-6"><a href="the-many-variables-the-spurious-waffles.html#cb361-6" aria-hidden="true" tabindex="-1"></a>    bM <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb361-7"><a href="the-many-variables-the-spurious-waffles.html#cb361-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb361-8"><a href="the-many-variables-the-spurious-waffles.html#cb361-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> dcc <span class="co">#update data source</span></span>
+<span id="cb361-9"><a href="the-many-variables-the-spurious-waffles.html#cb361-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb361-10"><a href="the-many-variables-the-spurious-waffles.html#cb361-10" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m5<span class="fl">.6</span>)</span></code></pre></div>
+<pre><code>##              mean        sd       5.5%      94.5%
+## a      0.04654154 0.1512801 -0.1952333 0.28831640
+## bM    -0.28253570 0.1928820 -0.5907984 0.02572704
+## sigma  0.94928078 0.1570621  0.6982652 1.20029633</code></pre>
+<p>Let’s have a look</p>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="the-many-variables-the-spurious-waffles.html#cb363-1" aria-hidden="true" tabindex="-1"></a>xseq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">min</span>(dcc<span class="sc">$</span>M)<span class="sc">-</span><span class="fl">0.15</span>, <span class="at">to =</span> <span class="fu">max</span>(dcc<span class="sc">$</span>M)<span class="sc">+</span><span class="fl">0.15</span>, <span class="at">length.out =</span> <span class="dv">30</span>)</span>
+<span id="cb363-2"><a href="the-many-variables-the-spurious-waffles.html#cb363-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m5<span class="fl">.6</span>, <span class="at">data =</span> <span class="fu">list</span>(<span class="at">M =</span> xseq))</span>
+<span id="cb363-3"><a href="the-many-variables-the-spurious-waffles.html#cb363-3" aria-hidden="true" tabindex="-1"></a>mu_mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, mean)</span>
+<span id="cb363-4"><a href="the-many-variables-the-spurious-waffles.html#cb363-4" aria-hidden="true" tabindex="-1"></a>mu_PI <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, PI)</span>
+<span id="cb363-5"><a href="the-many-variables-the-spurious-waffles.html#cb363-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(K <span class="sc">~</span> M, <span class="at">data =</span> dcc, <span class="at">col=</span><span class="fu">col.alpha</span>(rangi2, <span class="fl">0.5</span>), </span>
+<span id="cb363-6"><a href="the-many-variables-the-spurious-waffles.html#cb363-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&#39;log body mass (std)&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;kilocal / g (std)&#39;</span>)</span>
+<span id="cb363-7"><a href="the-many-variables-the-spurious-waffles.html#cb363-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(xseq, mu_mean, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb363-8"><a href="the-many-variables-the-spurious-waffles.html#cb363-8" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>(mu_PI, xseq)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
+<p>Negative relationship but still not great.<br />
+</p>
+<p>Let’s build a model that incorporates both predictors</p>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="the-many-variables-the-spurious-waffles.html#cb364-1" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.7</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb364-2"><a href="the-many-variables-the-spurious-waffles.html#cb364-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb364-3"><a href="the-many-variables-the-spurious-waffles.html#cb364-3" aria-hidden="true" tabindex="-1"></a>    K <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb364-4"><a href="the-many-variables-the-spurious-waffles.html#cb364-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bN<span class="sc">*</span>N <span class="sc">+</span> bM<span class="sc">*</span>M,</span>
+<span id="cb364-5"><a href="the-many-variables-the-spurious-waffles.html#cb364-5" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb364-6"><a href="the-many-variables-the-spurious-waffles.html#cb364-6" aria-hidden="true" tabindex="-1"></a>    bN <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb364-7"><a href="the-many-variables-the-spurious-waffles.html#cb364-7" aria-hidden="true" tabindex="-1"></a>    bM <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb364-8"><a href="the-many-variables-the-spurious-waffles.html#cb364-8" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb364-9"><a href="the-many-variables-the-spurious-waffles.html#cb364-9" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> dcc</span>
+<span id="cb364-10"><a href="the-many-variables-the-spurious-waffles.html#cb364-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb364-11"><a href="the-many-variables-the-spurious-waffles.html#cb364-11" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m5<span class="fl">.7</span>)</span></code></pre></div>
+<pre><code>##              mean        sd       5.5%      94.5%
+## a      0.06797532 0.1340022 -0.1461861  0.2821367
+## bN     0.67513341 0.2483041  0.2782956  1.0719713
+## bM    -0.70294840 0.2207986 -1.0558272 -0.3500696
+## sigma  0.73804620 0.1324760  0.5263240  0.9497684</code></pre>
+<p>The interesting part here is how <span class="math inline">\(\beta_{M}\)</span> and <span class="math inline">\(\beta_{N}\)</span> have changed when they are considered together (<code>m5.7</code>). A plot can be made to show the comparison.</p>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="the-many-variables-the-spurious-waffles.html#cb366-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftab_plot</span>(<span class="fu">coeftab</span>(m5<span class="fl">.5</span>, m5<span class="fl">.6</span>, m5<span class="fl">.7</span>), <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&#39;bM&#39;</span>, <span class="st">&#39;bN&#39;</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%205.40-1.png" width="672" /></p>
+<p>Let’s see how these variables are related to better understand what happened</p>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="the-many-variables-the-spurious-waffles.html#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(<span class="sc">~</span>K <span class="sc">+</span> M <span class="sc">+</span> N, dcc)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-102-1.png" width="672" /></p>
+<p>You can see where <span class="math inline">\(M\)</span> and <span class="math inline">\(N\)</span> interact there is some strong positive association.<br />
+</p>
+<p>Now we can use our counterfactual skills to visualize the effect each predictor has on the outcome <span class="math inline">\(K\)</span>.</p>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="the-many-variables-the-spurious-waffles.html#cb368-1" aria-hidden="true" tabindex="-1"></a>xseq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">min</span>(dcc<span class="sc">$</span>M)<span class="sc">-</span><span class="fl">0.15</span>, <span class="at">to =</span> <span class="fu">max</span>(dcc<span class="sc">$</span>M)<span class="sc">+</span><span class="fl">0.15</span>, <span class="at">length.out =</span> <span class="dv">30</span>)</span>
+<span id="cb368-2"><a href="the-many-variables-the-spurious-waffles.html#cb368-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m5<span class="fl">.7</span>, <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">M =</span> xseq, <span class="at">N=</span><span class="dv">0</span>))</span>
+<span id="cb368-3"><a href="the-many-variables-the-spurious-waffles.html#cb368-3" aria-hidden="true" tabindex="-1"></a>mu_mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, mean)</span>
+<span id="cb368-4"><a href="the-many-variables-the-spurious-waffles.html#cb368-4" aria-hidden="true" tabindex="-1"></a>mu_PI <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, PI)</span>
+<span id="cb368-5"><a href="the-many-variables-the-spurious-waffles.html#cb368-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="cn">NULL</span>, <span class="at">xlim =</span> <span class="fu">range</span>(dcc<span class="sc">$</span>M), <span class="at">ylim =</span> <span class="fu">range</span>(dcc<span class="sc">$</span>K),</span>
+<span id="cb368-6"><a href="the-many-variables-the-spurious-waffles.html#cb368-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&#39;log body mass (std)&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;kilocal / g (std)&#39;</span>)</span>
+<span id="cb368-7"><a href="the-many-variables-the-spurious-waffles.html#cb368-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&#39;Counterfactual holding N = 0&#39;</span>)</span>
+<span id="cb368-8"><a href="the-many-variables-the-spurious-waffles.html#cb368-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(xseq, mu_mean, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb368-9"><a href="the-many-variables-the-spurious-waffles.html#cb368-9" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>(mu_PI, xseq)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%205.41-1.png" width="672" /></p>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="the-many-variables-the-spurious-waffles.html#cb369-1" aria-hidden="true" tabindex="-1"></a>xseq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">min</span>(dcc<span class="sc">$</span>N)<span class="sc">-</span><span class="fl">0.15</span>, <span class="at">to =</span> <span class="fu">max</span>(dcc<span class="sc">$</span>N)<span class="sc">+</span><span class="fl">0.15</span>, <span class="at">length.out =</span> <span class="dv">30</span>)</span>
+<span id="cb369-2"><a href="the-many-variables-the-spurious-waffles.html#cb369-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">link</span>(m5<span class="fl">.7</span>, <span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">N =</span> xseq, <span class="at">M =</span> <span class="dv">0</span>))</span>
+<span id="cb369-3"><a href="the-many-variables-the-spurious-waffles.html#cb369-3" aria-hidden="true" tabindex="-1"></a>mu_mean <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, mean)</span>
+<span id="cb369-4"><a href="the-many-variables-the-spurious-waffles.html#cb369-4" aria-hidden="true" tabindex="-1"></a>mu_PI <span class="ot">&lt;-</span> <span class="fu">apply</span>(mu, <span class="dv">2</span>, PI)</span>
+<span id="cb369-5"><a href="the-many-variables-the-spurious-waffles.html#cb369-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="cn">NULL</span>, <span class="at">xlim =</span> <span class="fu">range</span>(dcc<span class="sc">$</span>N), <span class="at">ylim =</span> <span class="fu">range</span>(dcc<span class="sc">$</span>K),</span>
+<span id="cb369-6"><a href="the-many-variables-the-spurious-waffles.html#cb369-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&#39;neocortex % (std)&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;kilocal / g (std)&#39;</span>)</span>
+<span id="cb369-7"><a href="the-many-variables-the-spurious-waffles.html#cb369-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&#39;Counterfactual holding M = 0&#39;</span>)</span>
+<span id="cb369-8"><a href="the-many-variables-the-spurious-waffles.html#cb369-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(xseq, mu_mean, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb369-9"><a href="the-many-variables-the-spurious-waffles.html#cb369-9" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>(mu_PI, xseq)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
+<p><strong>OVERTHINKING BOX</strong></p>
+</div>
+<div id="categorical-variables" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Categorical variables<a href="the-many-variables-the-spurious-waffles.html#categorical-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>How do we deal with non-continuous variables like categories (unordered, discrete)? First we will consider an easy binary example of categories from earlier.</p>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="the-many-variables-the-spurious-waffles.html#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Howell1)</span>
+<span id="cb370-2"><a href="the-many-variables-the-spurious-waffles.html#cb370-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> Howell1</span>
+<span id="cb370-3"><a href="the-many-variables-the-spurious-waffles.html#cb370-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(d)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    544 obs. of  4 variables:
+##  $ height: num  152 140 137 157 145 ...
+##  $ weight: num  47.8 36.5 31.9 53 41.3 ...
+##  $ age   : num  63 63 65 41 51 35 32 27 19 54 ...
+##  $ male  : int  1 0 0 1 0 1 0 1 0 1 ...</code></pre>
+<div id="binary-categories" class="section level3 hasAnchor" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Binary categories<a href="the-many-variables-the-spurious-waffles.html#binary-categories" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now we will see how sex influences height and weight in the Kalahari dataset. We can try and use the 0’s and 1’s already coded in the dataset for 1 meaning male and 0 meaning female.</p>
+<p><span class="math display">\[\begin{equation}
+h_{i} \sim \text{Normal}(\mu_{i}, \sigma)\
+\mu_{i} = \alpha + \beta_{m}m_{i}\
+\alpha \sim \text{Normal}(178, 20)\
+\beta_{m} \sim \text{Normal}(0, 10)\
+\sigma \sim \text{Uniform}(0, 50)
+\end{equation}\]</span></p>
+<p>So by this definition, being female means <span class="math inline">\(\mu_{i}\)</span> is solely dependent on <span class="math inline">\(\alpha\)</span> where as males have both <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta_{m}m_{i}\)</span> influencing the height outcome.</p>
+<p>Here is a brief look at the priors for this use of category:</p>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="the-many-variables-the-spurious-waffles.html#cb372-1" aria-hidden="true" tabindex="-1"></a>mu_female <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e4</span>, <span class="dv">178</span>, <span class="dv">20</span>)</span>
+<span id="cb372-2"><a href="the-many-variables-the-spurious-waffles.html#cb372-2" aria-hidden="true" tabindex="-1"></a>mu_male <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e4</span>, <span class="dv">178</span>, <span class="dv">20</span>) <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fl">1e4</span>, <span class="dv">0</span>, <span class="dv">10</span>)</span>
+<span id="cb372-3"><a href="the-many-variables-the-spurious-waffles.html#cb372-3" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(<span class="fu">data.frame</span>(mu_female, mu_male))</span></code></pre></div>
+<pre><code>##               mean       sd     5.5%    94.5%  histogram
+## mu_female 177.8739 20.01428 145.6530 209.7697  ▁▁▁▃▇▇▂▁▁
+## mu_male   177.9288 22.34394 142.2684 213.7899 ▁▁▁▃▇▇▂▁▁▁</code></pre>
+<p>As we can see here, the male prior is a bit wider because it is using both <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta_{m}\)</span> priors. To avoid these potentially problematic priors we can try <strong>Index variables</strong>. Index variables assign non-zero integers (in no particular order) to categorical variables.</p>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="the-many-variables-the-spurious-waffles.html#cb374-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(d<span class="sc">$</span>male <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb374-2"><a href="the-many-variables-the-spurious-waffles.html#cb374-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(d<span class="sc">$</span>sex)</span></code></pre></div>
+<pre><code>##  num [1:544] 2 1 1 2 1 2 1 2 1 2 ...</code></pre>
+<p>Now we have males labeled as ‘2’ and females as ‘1.’ And now we can adjust our model to reflect this change.<br />
+</p>
+<p><span class="math display">\[\begin{equation}
+h_{i} \sim \text{Normal}(\mu_{i}, \sigma)\
+\mu_{i} = \alpha_{SEX[i]}\
+\alpha_{j} \sim \text{Normal}(178, 20) \text{for} j = 1..2\
+\beta_{m} \sim \text{Normal}(0, 10)\
+\sigma \sim \text{Uniform}(0, 50)
+\end{equation}\]</span></p>
+<p>Now our model will have <span class="math inline">\(\alpha\)</span> values for each category in the dataset. For this example we will have <span class="math inline">\(\alpha_{1}\)</span> and <span class="math inline">\(\alpha_{2}\)</span> representing our two sex variables.</p>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="the-many-variables-the-spurious-waffles.html#cb376-1" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.8</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb376-2"><a href="the-many-variables-the-spurious-waffles.html#cb376-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb376-3"><a href="the-many-variables-the-spurious-waffles.html#cb376-3" aria-hidden="true" tabindex="-1"></a>    height <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb376-4"><a href="the-many-variables-the-spurious-waffles.html#cb376-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a[sex], </span>
+<span id="cb376-5"><a href="the-many-variables-the-spurious-waffles.html#cb376-5" aria-hidden="true" tabindex="-1"></a>    a[sex] <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">178</span>, <span class="dv">20</span>),</span>
+<span id="cb376-6"><a href="the-many-variables-the-spurious-waffles.html#cb376-6" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dunif</span>(<span class="dv">0</span>, <span class="dv">50</span>)</span>
+<span id="cb376-7"><a href="the-many-variables-the-spurious-waffles.html#cb376-7" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb376-8"><a href="the-many-variables-the-spurious-waffles.html#cb376-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb376-9"><a href="the-many-variables-the-spurious-waffles.html#cb376-9" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m5<span class="fl">.8</span>, <span class="at">depth =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##            mean        sd      5.5%     94.5%
+## a[1]  134.91030 1.6069179 132.34214 137.47847
+## a[2]  142.57820 1.6974562 139.86533 145.29106
+## sigma  27.30969 0.8280218  25.98635  28.63303</code></pre>
+<p>Now we can pull samples from the posterior to see the expected difference between males and females or <em>contrast</em></p>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="the-many-variables-the-spurious-waffles.html#cb378-1" aria-hidden="true" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">extract.samples</span>(m5<span class="fl">.8</span>)</span>
+<span id="cb378-2"><a href="the-many-variables-the-spurious-waffles.html#cb378-2" aria-hidden="true" tabindex="-1"></a>post<span class="sc">$</span>diff_fm <span class="ot">&lt;-</span> post<span class="sc">$</span>a[,<span class="dv">1</span>] <span class="sc">-</span> post<span class="sc">$</span>a[,<span class="dv">2</span>]</span>
+<span id="cb378-3"><a href="the-many-variables-the-spurious-waffles.html#cb378-3" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(post, <span class="at">depth =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##               mean        sd      5.5%      94.5%       histogram
+## sigma    27.303453 0.8343736  25.95509  28.627765   ▁▁▁▁▃▇▇▇▃▂▁▁▁
+## a[1]    134.903500 1.6175473 132.32788 137.514391 ▁▁▁▁▂▅▇▇▅▂▁▁▁▁▁
+## a[2]    142.560824 1.6936249 139.85860 145.276115  ▁▁▁▁▃▇▇▇▃▂▁▁▁▁
+## diff_fm  -7.657324 2.3177677 -11.34463  -3.879652     ▁▁▁▃▇▇▃▁▁▁▁</code></pre>
+<p>So the variable of interest here is the <code>diff_fm</code> which tells the difference from <span class="math inline">\(\alpha_{1}\)</span> and <span class="math inline">\(\alpha_{2}\)</span>. (or you could manually subtract the parameter means by hand).<br />
+</p>
+</div>
+<div id="many-categories" class="section level3 hasAnchor" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Many categories<a href="the-many-variables-the-spurious-waffles.html#many-categories" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="the-many-variables-the-spurious-waffles.html#cb380-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(milk)</span>
+<span id="cb380-2"><a href="the-many-variables-the-spurious-waffles.html#cb380-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> milk</span>
+<span id="cb380-3"><a href="the-many-variables-the-spurious-waffles.html#cb380-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(d<span class="sc">$</span>clade)</span></code></pre></div>
+<pre><code>## [1] &quot;Ape&quot;              &quot;New World Monkey&quot; &quot;Old World Monkey&quot; &quot;Strepsirrhine&quot;</code></pre>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="the-many-variables-the-spurious-waffles.html#cb382-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>clade_id <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(d<span class="sc">$</span>clade)</span></code></pre></div>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="the-many-variables-the-spurious-waffles.html#cb383-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>K <span class="ot">&lt;-</span> <span class="fu">standardize</span>(d<span class="sc">$</span>kcal.per.g)</span>
+<span id="cb383-2"><a href="the-many-variables-the-spurious-waffles.html#cb383-2" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.9</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb383-3"><a href="the-many-variables-the-spurious-waffles.html#cb383-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb383-4"><a href="the-many-variables-the-spurious-waffles.html#cb383-4" aria-hidden="true" tabindex="-1"></a>    K <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb383-5"><a href="the-many-variables-the-spurious-waffles.html#cb383-5" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a[clade_id],</span>
+<span id="cb383-6"><a href="the-many-variables-the-spurious-waffles.html#cb383-6" aria-hidden="true" tabindex="-1"></a>    a[clade_id] <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb383-7"><a href="the-many-variables-the-spurious-waffles.html#cb383-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb383-8"><a href="the-many-variables-the-spurious-waffles.html#cb383-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb383-9"><a href="the-many-variables-the-spurious-waffles.html#cb383-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb383-10"><a href="the-many-variables-the-spurious-waffles.html#cb383-10" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&#39;a[&#39;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="st">&#39;]:&#39;</span> , <span class="fu">levels</span>(d<span class="sc">$</span>clade), <span class="at">sep =</span> <span class="st">&#39;&#39;</span>)</span>
+<span id="cb383-11"><a href="the-many-variables-the-spurious-waffles.html#cb383-11" aria-hidden="true" tabindex="-1"></a><span class="fu">precis_plot</span>(<span class="fu">precis</span>(m5<span class="fl">.9</span>, <span class="at">depth =</span> <span class="dv">2</span>, <span class="at">pars =</span> <span class="st">&#39;a&#39;</span>), <span class="at">labels =</span> labels)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rode%205.52-1.png" width="672" /></p>
+<p>And you can easily add additional categorical variables to the same model. Here we can add a random assignment of <code>house</code> which can take the values of [1] Gryffindor, [2] Hufflepuff, [3] Ravenclaw, and [4] Slytherin.</p>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="the-many-variables-the-spurious-waffles.html#cb384-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb384-2"><a href="the-many-variables-the-spurious-waffles.html#cb384-2" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>house <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">each =</span> <span class="dv">8</span>), <span class="at">size =</span> <span class="fu">nrow</span>(d))</span></code></pre></div>
+<p>Now we can update our model to also consider an index variable of <code>house</code> and look at the expected values for each house.</p>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="the-many-variables-the-spurious-waffles.html#cb385-1" aria-hidden="true" tabindex="-1"></a>m5<span class="fl">.10</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb385-2"><a href="the-many-variables-the-spurious-waffles.html#cb385-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb385-3"><a href="the-many-variables-the-spurious-waffles.html#cb385-3" aria-hidden="true" tabindex="-1"></a>    K <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb385-4"><a href="the-many-variables-the-spurious-waffles.html#cb385-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a[clade_id] <span class="sc">+</span> h[house],</span>
+<span id="cb385-5"><a href="the-many-variables-the-spurious-waffles.html#cb385-5" aria-hidden="true" tabindex="-1"></a>    a[clade_id] <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb385-6"><a href="the-many-variables-the-spurious-waffles.html#cb385-6" aria-hidden="true" tabindex="-1"></a>    h[house] <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb385-7"><a href="the-many-variables-the-spurious-waffles.html#cb385-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb385-8"><a href="the-many-variables-the-spurious-waffles.html#cb385-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb385-9"><a href="the-many-variables-the-spurious-waffles.html#cb385-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb385-10"><a href="the-many-variables-the-spurious-waffles.html#cb385-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb385-11"><a href="the-many-variables-the-spurious-waffles.html#cb385-11" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m5<span class="fl">.10</span>, <span class="at">depth =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##              mean         sd        5.5%       94.5%
+## a[1]  -0.48971430 0.26371913 -0.91118840 -0.06824019
+## a[2]   0.38280264 0.26487240 -0.04051461  0.80611988
+## a[3]   0.69787422 0.29123455  0.23242516  1.16332328
+## a[4]  -0.59652803 0.30310713 -1.08095177 -0.11210430
+## h[1]  -0.19874066 0.27019092 -0.63055794  0.23307662
+## h[2]   0.07604072 0.28651618 -0.38186748  0.53394892
+## h[3]   0.09333180 0.26964281 -0.33760950  0.52427309
+## h[4]   0.02280471 0.27938165 -0.42370113  0.46931054
+## sigma  0.70188166 0.09466191  0.55059364  0.85316968</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="geocentric-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-haunted-dag-the-casual-terror.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-citations.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

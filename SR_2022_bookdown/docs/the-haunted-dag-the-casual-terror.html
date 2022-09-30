@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 The haunted dag &amp; the casual terror | Rethinking Companion</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 The haunted dag &amp; the casual terror | Rethinking Companion" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 The haunted dag &amp; the casual terror | Rethinking Companion" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Wade VanderWright" />
+
+
+<meta name="date" content="2022-09-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="the-many-variables-the-spurious-waffles.html"/>
+<link rel="next" href="ulysses-compass.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Rethinking Companion</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> The Golem of Prague</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#statistical-golems"><i class="fa fa-check"></i><b>1.1</b> Statistical golems</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#statistical-rethinking"><i class="fa fa-check"></i><b>1.2</b> Statistical Rethinking</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#what-are-we-trying-to-do-with-the-golems"><i class="fa fa-check"></i><b>1.2.1</b> What are we trying to do with the golems?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#tools-for-golem-engineering"><i class="fa fa-check"></i><b>1.3</b> Tools for golem engineering</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#bayesian-data-analysis"><i class="fa fa-check"></i><b>1.3.1</b> Bayesian data analysis</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#model-comparison-and-predictions"><i class="fa fa-check"></i><b>1.3.2</b> Model comparison and predictions</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#multilevel-models"><i class="fa fa-check"></i><b>1.3.3</b> Multilevel models</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#graphical-causal-models"><i class="fa fa-check"></i><b>1.3.4</b> Graphical causal models</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#summary"><i class="fa fa-check"></i><b>1.4</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#session-info"><i class="fa fa-check"></i>Session Info</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html"><i class="fa fa-check"></i><b>2</b> Small worlds and large worlds</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#the-garden-of-forking-data"><i class="fa fa-check"></i><b>2.1</b> The garden of forking data</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#counting-possibilities"><i class="fa fa-check"></i><b>2.1.1</b> Counting possibilities</a></li>
+<li class="chapter" data-level="2.1.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#combining-other-information"><i class="fa fa-check"></i><b>2.1.2</b> Combining other information</a></li>
+<li class="chapter" data-level="2.1.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#from-counts-to-probability"><i class="fa fa-check"></i><b>2.1.3</b> From counts to probability</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#building-a-model"><i class="fa fa-check"></i><b>2.2</b> Building a model</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#a-data-story"><i class="fa fa-check"></i><b>2.2.1</b> A data story</a></li>
+<li class="chapter" data-level="2.2.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#bayesian-updating"><i class="fa fa-check"></i><b>2.2.2</b> Bayesian updating</a></li>
+<li class="chapter" data-level="2.2.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#evaluate"><i class="fa fa-check"></i><b>2.2.3</b> Evaluate</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#components-of-the-model"><i class="fa fa-check"></i><b>2.3</b> Components of the model</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#variables"><i class="fa fa-check"></i><b>2.3.1</b> Variables</a></li>
+<li class="chapter" data-level="2.3.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#definitions"><i class="fa fa-check"></i><b>2.3.2</b> Definitions</a></li>
+<li class="chapter" data-level="2.3.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#a-model-is-born"><i class="fa fa-check"></i><b>2.3.3</b> A model is born</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#maiking-the-model-go"><i class="fa fa-check"></i><b>2.4</b> Maiking the model go</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#quadratic"><i class="fa fa-check"></i><b>2.4.1</b> Quadratic</a></li>
+<li class="chapter" data-level="2.4.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#mcmc"><i class="fa fa-check"></i><b>2.4.2</b> MCMC</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html"><i class="fa fa-check"></i><b>3</b> Sampling the imaginary</a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#probabilities-vs.-frequency-counts"><i class="fa fa-check"></i><b>3.0.1</b> Probabilities vs. Frequency counts</a></li>
+<li class="chapter" data-level="3.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-from-a-grid-approximate-posterior"><i class="fa fa-check"></i><b>3.1</b> Sampling from a grid-approximate posterior</a></li>
+<li class="chapter" data-level="3.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-to-summarize"><i class="fa fa-check"></i><b>3.2</b> Sampling to summarize</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#intervals-of-defined-boundaries"><i class="fa fa-check"></i><b>3.2.1</b> Intervals of defined boundaries</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#intervals-of-defined-mass"><i class="fa fa-check"></i><b>3.2.2</b> intervals of defined mass</a></li>
+<li class="chapter" data-level="3.2.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#point-estimates"><i class="fa fa-check"></i><b>3.2.3</b> Point estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-to-simulate-prediction"><i class="fa fa-check"></i><b>3.3</b> Sampling to simulate prediction</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#dummy-data"><i class="fa fa-check"></i><b>3.3.1</b> Dummy data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#model-checking"><i class="fa fa-check"></i><b>3.3.2</b> Model checking</a></li>
+<li class="chapter" data-level="3.3.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#practice-with-brms"><i class="fa fa-check"></i><b>3.3.3</b> Practice with brms</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="geocentric-models.html"><a href="geocentric-models.html"><i class="fa fa-check"></i><b>4</b> Geocentric models</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="geocentric-models.html"><a href="geocentric-models.html#why-normal-distributions-are-normal"><i class="fa fa-check"></i><b>4.1</b> Why normal distributions are normal</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-addition"><i class="fa fa-check"></i><b>4.1.1</b> Normal by addition</a></li>
+<li class="chapter" data-level="4.1.2" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-multiplication"><i class="fa fa-check"></i><b>4.1.2</b> Normal by multiplication</a></li>
+<li class="chapter" data-level="4.1.3" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-log-multiplication"><i class="fa fa-check"></i><b>4.1.3</b> Normal by log-multiplication</a></li>
+<li class="chapter" data-level="4.1.4" data-path="geocentric-models.html"><a href="geocentric-models.html#using-gaussian-distributions"><i class="fa fa-check"></i><b>4.1.4</b> Using Gaussian distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="geocentric-models.html"><a href="geocentric-models.html#a-language-for-describing-models"><i class="fa fa-check"></i><b>4.2</b> A language for describing models</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="geocentric-models.html"><a href="geocentric-models.html#re-describing-the-globe-tossing-model."><i class="fa fa-check"></i><b>4.2.1</b> Re-describing the globe tossing model.</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="geocentric-models.html"><a href="geocentric-models.html#gaussian-model-of-height"><i class="fa fa-check"></i><b>4.3</b> Gaussian model of height</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="geocentric-models.html"><a href="geocentric-models.html#the-data"><i class="fa fa-check"></i><b>4.3.1</b> The data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="geocentric-models.html"><a href="geocentric-models.html#the-model"><i class="fa fa-check"></i><b>4.3.2</b> The Model</a></li>
+<li class="chapter" data-level="4.3.3" data-path="geocentric-models.html"><a href="geocentric-models.html#grid-approximation-of-the-posterior-distribution"><i class="fa fa-check"></i><b>4.3.3</b> Grid approximation of the posterior distribution</a></li>
+<li class="chapter" data-level="4.3.4" data-path="geocentric-models.html"><a href="geocentric-models.html#sampling-from-the-posterior"><i class="fa fa-check"></i><b>4.3.4</b> Sampling from the posterior</a></li>
+<li class="chapter" data-level="4.3.5" data-path="geocentric-models.html"><a href="geocentric-models.html#finding-the-posterior-distribution-with-quap"><i class="fa fa-check"></i><b>4.3.5</b> Finding the posterior distribution with <code>quap</code></a></li>
+<li class="chapter" data-level="4.3.6" data-path="geocentric-models.html"><a href="geocentric-models.html#sampling-with-quap"><i class="fa fa-check"></i><b>4.3.6</b> Sampling with <code>quap</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="geocentric-models.html"><a href="geocentric-models.html#linear-prediction"><i class="fa fa-check"></i><b>4.4</b> Linear Prediction</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="geocentric-models.html"><a href="geocentric-models.html#finding-the-posterior-distribtuion"><i class="fa fa-check"></i><b>4.4.1</b> Finding the posterior distribtuion</a></li>
+<li class="chapter" data-level="4.4.2" data-path="geocentric-models.html"><a href="geocentric-models.html#interpreting-the-posterior-distribution"><i class="fa fa-check"></i><b>4.4.2</b> Interpreting the posterior distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="geocentric-models.html"><a href="geocentric-models.html#curves-from-lines"><i class="fa fa-check"></i><b>4.5</b> Curves from lines</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="geocentric-models.html"><a href="geocentric-models.html#polynomial-regression"><i class="fa fa-check"></i><b>4.5.1</b> Polynomial regression</a></li>
+<li class="chapter" data-level="4.5.2" data-path="geocentric-models.html"><a href="geocentric-models.html#splines"><i class="fa fa-check"></i><b>4.5.2</b> Splines</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html"><i class="fa fa-check"></i><b>5</b> The many variables &amp; the spurious waffles</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#spurious-assoiciation"><i class="fa fa-check"></i><b>5.1</b> Spurious assoiciation</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#think-before-to-regress"><i class="fa fa-check"></i><b>5.1.1</b> Think before to regress</a></li>
+<li class="chapter" data-level="5.1.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#testable-implications"><i class="fa fa-check"></i><b>5.1.2</b> Testable implications</a></li>
+<li class="chapter" data-level="5.1.3" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#multiple-regression-notation"><i class="fa fa-check"></i><b>5.1.3</b> Multiple regression notation</a></li>
+<li class="chapter" data-level="5.1.4" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#approximating-the-posterior"><i class="fa fa-check"></i><b>5.1.4</b> Approximating the posterior</a></li>
+<li class="chapter" data-level="5.1.5" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#plotting-multivariate-posteriors"><i class="fa fa-check"></i><b>5.1.5</b> Plotting multivariate posteriors</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#masked-relationship"><i class="fa fa-check"></i><b>5.2</b> Masked relationship</a></li>
+<li class="chapter" data-level="5.3" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Categorical variables</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#binary-categories"><i class="fa fa-check"></i><b>5.3.1</b> Binary categories</a></li>
+<li class="chapter" data-level="5.3.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#many-categories"><i class="fa fa-check"></i><b>5.3.2</b> Many categories</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html"><i class="fa fa-check"></i><b>6</b> The haunted dag &amp; the casual terror</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#multicollinearity"><i class="fa fa-check"></i><b>6.1</b> Multicollinearity</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#example-try-to-predict-height-from-length-of-a-persons-legs."><i class="fa fa-check"></i><b>6.1.1</b> Example: Try to predict height from length of a person’s legs.</a></li>
+<li class="chapter" data-level="6.1.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#multicollinear-milk"><i class="fa fa-check"></i><b>6.1.2</b> Multicollinear milk</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#post-treatrment-bias"><i class="fa fa-check"></i><b>6.2</b> Post-treatrment bias</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#a-prior-is-born"><i class="fa fa-check"></i><b>6.2.1</b> A prior is born</a></li>
+<li class="chapter" data-level="6.2.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#blocked-by-consequence"><i class="fa fa-check"></i><b>6.2.2</b> Blocked by consequence</a></li>
+<li class="chapter" data-level="6.2.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#fungus-and-d-separation"><i class="fa fa-check"></i><b>6.2.3</b> Fungus and d-separation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#collider-bias"><i class="fa fa-check"></i><b>6.3</b> Collider bias</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#collider-for-false-sorrow"><i class="fa fa-check"></i><b>6.3.1</b> Collider for false sorrow</a></li>
+<li class="chapter" data-level="6.3.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#the-haunted-dag"><i class="fa fa-check"></i><b>6.3.2</b> The haunted DAG</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#confronting-confounding"><i class="fa fa-check"></i><b>6.4</b> Confronting confounding</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#shutting-the-backdoor"><i class="fa fa-check"></i><b>6.4.1</b> Shutting the backdoor</a></li>
+<li class="chapter" data-level="6.4.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#two-roads"><i class="fa fa-check"></i><b>6.4.2</b> Two roads</a></li>
+<li class="chapter" data-level="6.4.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#backdoor-waffles"><i class="fa fa-check"></i><b>6.4.3</b> Backdoor waffles</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ulysses-compass.html"><a href="ulysses-compass.html"><i class="fa fa-check"></i><b>7</b> Ulysses’ compass</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#the-problem-with-parameters"><i class="fa fa-check"></i><b>7.1</b> The problem with parameters</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#more-parameters-almost-always-improve-fit"><i class="fa fa-check"></i><b>7.1.1</b> More parameters (almost) always improve fit</a></li>
+<li class="chapter" data-level="7.1.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#too-few-parameters-hurts-too"><i class="fa fa-check"></i><b>7.1.2</b> Too few parameters hurts, too</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#entropy-and-accuracy"><i class="fa fa-check"></i><b>7.2</b> Entropy and accuracy</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#firing-the-weatherperson"><i class="fa fa-check"></i><b>7.2.1</b> Firing the weatherperson</a></li>
+<li class="chapter" data-level="7.2.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#information-and-uncertainty"><i class="fa fa-check"></i><b>7.2.2</b> Information and uncertainty</a></li>
+<li class="chapter" data-level="7.2.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#from-entropy-to-accuracy"><i class="fa fa-check"></i><b>7.2.3</b> From entropy to accuracy</a></li>
+<li class="chapter" data-level="7.2.4" data-path="ulysses-compass.html"><a href="ulysses-compass.html#estimating-divergence"><i class="fa fa-check"></i><b>7.2.4</b> Estimating divergence</a></li>
+<li class="chapter" data-level="7.2.5" data-path="ulysses-compass.html"><a href="ulysses-compass.html#scoring-the-right-data"><i class="fa fa-check"></i><b>7.2.5</b> Scoring the right data</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#golem-taming-regularization"><i class="fa fa-check"></i><b>7.3</b> Golem taming: regularization</a></li>
+<li class="chapter" data-level="7.4" data-path="ulysses-compass.html"><a href="ulysses-compass.html#predicting-predictive-accuracy"><i class="fa fa-check"></i><b>7.4</b> Predicting predictive accuracy</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#cross-validation"><i class="fa fa-check"></i><b>7.4.1</b> Cross-validation</a></li>
+<li class="chapter" data-level="7.4.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#information-criteria"><i class="fa fa-check"></i><b>7.4.2</b> Information criteria</a></li>
+<li class="chapter" data-level="7.4.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#comparing-cv-psis-and-waic"><i class="fa fa-check"></i><b>7.4.3</b> Comparing CV, PSIS, and WAIC</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="ulysses-compass.html"><a href="ulysses-compass.html#model-comparison"><i class="fa fa-check"></i><b>7.5</b> Model comparison</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#model-mis-selection"><i class="fa fa-check"></i><b>7.5.1</b> Model mis-selection</a></li>
+<li class="chapter" data-level="7.5.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#outliers-and-other-illustions"><i class="fa fa-check"></i><b>7.5.2</b> Outliers and other illustions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="conditional-manatees.html"><a href="conditional-manatees.html"><i class="fa fa-check"></i><b>8</b> Conditional manatees</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#building-an-interaction"><i class="fa fa-check"></i><b>8.1</b> Building an interaction</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#making-a-rugged-model"><i class="fa fa-check"></i><b>8.1.1</b> Making a rugged model</a></li>
+<li class="chapter" data-level="8.1.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#adding-an-indicator-isnt-enough"><i class="fa fa-check"></i><b>8.1.2</b> Adding an indicator isn’t enough</a></li>
+<li class="chapter" data-level="8.1.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#adding-an-interaction-does-work"><i class="fa fa-check"></i><b>8.1.3</b> Adding an interaction does work</a></li>
+<li class="chapter" data-level="8.1.4" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-the-interaction"><i class="fa fa-check"></i><b>8.1.4</b> Plotting the interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#symmetry-of-interactions"><i class="fa fa-check"></i><b>8.2</b> Symmetry of interactions</a></li>
+<li class="chapter" data-level="8.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#continuous-interactions"><i class="fa fa-check"></i><b>8.3</b> Continuous interactions</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#a-winter-flower"><i class="fa fa-check"></i><b>8.3.1</b> A winter flower</a></li>
+<li class="chapter" data-level="8.3.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#the-models"><i class="fa fa-check"></i><b>8.3.2</b> the models</a></li>
+<li class="chapter" data-level="8.3.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-posterior-predictions"><i class="fa fa-check"></i><b>8.3.3</b> Plotting posterior predictions</a></li>
+<li class="chapter" data-level="8.3.4" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-prior-predictions"><i class="fa fa-check"></i><b>8.3.4</b> Plotting prior predictions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html"><i class="fa fa-check"></i><b>9</b> Markov Chain Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#good-king-markov-and-his-island-kingdom"><i class="fa fa-check"></i><b>9.1</b> Good King Markov and his island kingdom</a></li>
+<li class="chapter" data-level="9.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#metropolis-algorithims"><i class="fa fa-check"></i><b>9.2</b> Metropolis algorithims</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#gibbs-sampling"><i class="fa fa-check"></i><b>9.2.1</b> Gibbs sampling</a></li>
+<li class="chapter" data-level="9.2.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#high-dimensional-problems"><i class="fa fa-check"></i><b>9.2.2</b> High-dimensional problems</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#hamiltonian-monte-carlo"><i class="fa fa-check"></i><b>9.3</b> Hamiltonian Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#another-parable"><i class="fa fa-check"></i><b>9.3.1</b> Another parable</a></li>
+<li class="chapter" data-level="9.3.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#particles-in-space"><i class="fa fa-check"></i><b>9.3.2</b> Particles in space</a></li>
+<li class="chapter" data-level="9.3.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#limitations"><i class="fa fa-check"></i><b>9.3.3</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#easy-hmc-ulam-brm"><i class="fa fa-check"></i><b>9.4</b> Easy HMC: <code>ulam</code> (<code>brm</code>)</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#preperation"><i class="fa fa-check"></i><b>9.4.1</b> Preperation</a></li>
+<li class="chapter" data-level="9.4.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#sampling-from-the-posterior-1"><i class="fa fa-check"></i><b>9.4.2</b> Sampling from the posterior</a></li>
+<li class="chapter" data-level="9.4.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#sampling-again-in-parallel"><i class="fa fa-check"></i><b>9.4.3</b> Sampling again, in parallel</a></li>
+<li class="chapter" data-level="9.4.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#visualization"><i class="fa fa-check"></i><b>9.4.4</b> Visualization</a></li>
+<li class="chapter" data-level="9.4.5" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#checking-the-chain"><i class="fa fa-check"></i><b>9.4.5</b> Checking the chain</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#care-and-feeding-of-your-markov-chain"><i class="fa fa-check"></i><b>9.5</b> Care and feeding of your Markov chain</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#how-many-samples-do-you-need"><i class="fa fa-check"></i><b>9.5.1</b> How many samples do you need?</a></li>
+<li class="chapter" data-level="9.5.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#how-many-chains-do-you-need"><i class="fa fa-check"></i><b>9.5.2</b> How many chains do you need?</a></li>
+<li class="chapter" data-level="9.5.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#taming-a-wild-chain"><i class="fa fa-check"></i><b>9.5.3</b> Taming a wild chain</a></li>
+<li class="chapter" data-level="9.5.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#non-identifiable-parameters"><i class="fa fa-check"></i><b>9.5.4</b> Non-identifiable parameters</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html"><i class="fa fa-check"></i><b>10</b> Big entropy and the generalized linear model</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#maximum-entropy"><i class="fa fa-check"></i><b>10.1</b> Maximum entropy</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#gaussian"><i class="fa fa-check"></i><b>10.1.1</b> Gaussian</a></li>
+<li class="chapter" data-level="10.1.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#binomial"><i class="fa fa-check"></i><b>10.1.2</b> Binomial</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#generalized-linear-models"><i class="fa fa-check"></i><b>10.2</b> Generalized linear models</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#meet-the-family"><i class="fa fa-check"></i><b>10.2.1</b> Meet the family</a></li>
+<li class="chapter" data-level="10.2.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#linking-linear-models-to-distributions"><i class="fa fa-check"></i><b>10.2.2</b> Linking linear models to distributions</a></li>
+<li class="chapter" data-level="10.2.3" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#omitted-variable-bias-again"><i class="fa fa-check"></i><b>10.2.3</b> Omitted variable bias (again)</a></li>
+<li class="chapter" data-level="10.2.4" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#absolute-relative-differences"><i class="fa fa-check"></i><b>10.2.4</b> Absolute relative differences</a></li>
+<li class="chapter" data-level="10.2.5" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#glms-and-information-criteria"><i class="fa fa-check"></i><b>10.2.5</b> GLMs and information criteria</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html"><i class="fa fa-check"></i><b>11</b> God spiked the integers</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#binomial-regression"><i class="fa fa-check"></i><b>11.1</b> Binomial regression</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#logistic-regression-prosocial-chimpanzees"><i class="fa fa-check"></i><b>11.1.1</b> Logistic regression : Prosocial chimpanzees</a></li>
+<li class="chapter" data-level="11.1.2" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#relative-shark-and-absolute-deer"><i class="fa fa-check"></i><b>11.1.2</b> Relative shark and absolute deer</a></li>
+<li class="chapter" data-level="11.1.3" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#aggregated-binomial-chimps-condensed"><i class="fa fa-check"></i><b>11.1.3</b> Aggregated binomial: Chimps condensed</a></li>
+<li class="chapter" data-level="11.1.4" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#aggregated-admissions"><i class="fa fa-check"></i><b>11.1.4</b> Aggregated admissions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="monsters-and-mixtures.html"><a href="monsters-and-mixtures.html"><i class="fa fa-check"></i><b>12</b> Monsters and mixtures</a></li>
+<li class="chapter" data-level="13" data-path="models-with-memory.html"><a href="models-with-memory.html"><i class="fa fa-check"></i><b>13</b> Models with memory</a></li>
+<li class="chapter" data-level="14" data-path="adventures-in-covariance.html"><a href="adventures-in-covariance.html"><i class="fa fa-check"></i><b>14</b> Adventures in covariance</a></li>
+<li class="chapter" data-level="15" data-path="missing-data-and-other-opportunities.html"><a href="missing-data-and-other-opportunities.html"><i class="fa fa-check"></i><b>15</b> Missing data and other opportunities</a></li>
+<li class="chapter" data-level="16" data-path="generalized-linear-madness.html"><a href="generalized-linear-madness.html"><i class="fa fa-check"></i><b>16</b> Generalized linear madness</a></li>
+<li class="chapter" data-level="17" data-path="horoscopes.html"><a href="horoscopes.html"><i class="fa fa-check"></i><b>17</b> Horoscopes</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Rethinking Companion</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="the-haunted-dag-the-casual-terror" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> The haunted dag &amp; the casual terror<a href="the-haunted-dag-the-casual-terror.html#the-haunted-dag-the-casual-terror" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>If a review panel receives 200 proposals and can only fund 20 (10%) based on newsworthiness and trustworthiness, a negative correlation is bound to occur from strong selection.<br />
+</p>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="the-haunted-dag-the-casual-terror.html#cb387-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb387-2"><a href="the-haunted-dag-the-casual-terror.html#cb387-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">200</span> <span class="co">#number of proposals</span></span>
+<span id="cb387-3"><a href="the-haunted-dag-the-casual-terror.html#cb387-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.1</span> <span class="co">#proportion to select for funding</span></span>
+<span id="cb387-4"><a href="the-haunted-dag-the-casual-terror.html#cb387-4" aria-hidden="true" tabindex="-1"></a><span class="co">#set up random pairs of newsworthiness and trustworthiness</span></span>
+<span id="cb387-5"><a href="the-haunted-dag-the-casual-terror.html#cb387-5" aria-hidden="true" tabindex="-1"></a>nw <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N)</span>
+<span id="cb387-6"><a href="the-haunted-dag-the-casual-terror.html#cb387-6" aria-hidden="true" tabindex="-1"></a>tw <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N)</span>
+<span id="cb387-7"><a href="the-haunted-dag-the-casual-terror.html#cb387-7" aria-hidden="true" tabindex="-1"></a><span class="co">#select top 10% of total score</span></span>
+<span id="cb387-8"><a href="the-haunted-dag-the-casual-terror.html#cb387-8" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> nw <span class="sc">+</span> tw <span class="co">#total score</span></span>
+<span id="cb387-9"><a href="the-haunted-dag-the-casual-terror.html#cb387-9" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fu">quantile</span>(s, <span class="dv">1</span><span class="sc">-</span>p) <span class="co">#top 10% threshold</span></span>
+<span id="cb387-10"><a href="the-haunted-dag-the-casual-terror.html#cb387-10" aria-hidden="true" tabindex="-1"></a>selected <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(s <span class="sc">&gt;=</span> q, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>) <span class="co"># assign TRUE to selected values</span></span>
+<span id="cb387-11"><a href="the-haunted-dag-the-casual-terror.html#cb387-11" aria-hidden="true" tabindex="-1"></a>col.factor <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(s <span class="sc">&gt;=</span> q, <span class="dv">1</span>, <span class="dv">0</span>) <span class="co"># plotting colour code</span></span>
+<span id="cb387-12"><a href="the-haunted-dag-the-casual-terror.html#cb387-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb387-13"><a href="the-haunted-dag-the-casual-terror.html#cb387-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb387-14"><a href="the-haunted-dag-the-casual-terror.html#cb387-14" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(nw, tw, s, selected, <span class="fu">as.factor</span>(col.factor)) <span class="co"># stitch a df for plotting</span></span>
+<span id="cb387-15"><a href="the-haunted-dag-the-casual-terror.html#cb387-15" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df[selected <span class="sc">==</span> <span class="cn">TRUE</span>,] <span class="co"># grab selected values for quick linear model</span></span>
+<span id="cb387-16"><a href="the-haunted-dag-the-casual-terror.html#cb387-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb387-17"><a href="the-haunted-dag-the-casual-terror.html#cb387-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>nw, df<span class="sc">$</span>tw, <span class="at">col =</span> df<span class="sc">$</span>as.factor.col.factor, <span class="at">xlab =</span> <span class="st">&#39;newsworthiness&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;trustworthiness&#39;</span>)</span>
+<span id="cb387-18"><a href="the-haunted-dag-the-casual-terror.html#cb387-18" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(nw <span class="sc">~</span> tw, <span class="at">data =</span> df2), <span class="at">col =</span> <span class="st">&#39;red&#39;</span>)</span>
+<span id="cb387-19"><a href="the-haunted-dag-the-casual-terror.html#cb387-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb387-20"><a href="the-haunted-dag-the-casual-terror.html#cb387-20" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="fu">cor</span>(tw[selected], nw[selected]))</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%206.1-1.png" width="672" /></p>
+<blockquote>
+<p>Strong selection induces a negative correlation among the criteria used in the selection. Why? If the only way to corss the threshold is to score high, it is more common to score high on one item than on both.<br />
+<br />
+— p.161<br />
+</p>
+</blockquote>
+<p>This phenomenon is referred to as <strong>Berkson’s Paradox</strong>. But you can remember it as the <em>selection-distortion effect</em>. This effect can be very common inside multiple regression models. When you add a predictor to a model the model wants to statistically include that parameter at any cost. This can be referred to as <strong>collider bias</strong>.<br />
+</p>
+<div id="multicollinearity" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Multicollinearity<a href="the-haunted-dag-the-casual-terror.html#multicollinearity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To have multicollinearity, there must be a very strong association between two or more predictors in your model.</p>
+<div id="example-try-to-predict-height-from-length-of-a-persons-legs." class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Example: Try to predict height from length of a person’s legs.<a href="the-haunted-dag-the-casual-terror.html#example-try-to-predict-height-from-length-of-a-persons-legs." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="the-haunted-dag-the-casual-terror.html#cb388-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co">#number of people</span></span>
+<span id="cb388-2"><a href="the-haunted-dag-the-casual-terror.html#cb388-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb388-3"><a href="the-haunted-dag-the-casual-terror.html#cb388-3" aria-hidden="true" tabindex="-1"></a>height <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="dv">10</span>, <span class="dv">2</span>) <span class="co">#simulate total height</span></span>
+<span id="cb388-4"><a href="the-haunted-dag-the-casual-terror.html#cb388-4" aria-hidden="true" tabindex="-1"></a>leg_prop <span class="ot">&lt;-</span> <span class="fu">runif</span>(N, <span class="fl">0.4</span>, <span class="fl">0.5</span>) <span class="co">#leg as a proportion of height</span></span>
+<span id="cb388-5"><a href="the-haunted-dag-the-casual-terror.html#cb388-5" aria-hidden="true" tabindex="-1"></a>leg_left <span class="ot">&lt;-</span> leg_prop<span class="sc">*</span>height <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="fl">0.02</span>) <span class="co">#left leg with error</span></span>
+<span id="cb388-6"><a href="the-haunted-dag-the-casual-terror.html#cb388-6" aria-hidden="true" tabindex="-1"></a>leg_right <span class="ot">&lt;-</span> leg_prop<span class="sc">*</span>height <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="fl">0.02</span>) <span class="co"># right leg with error (only error will vary here)</span></span>
+<span id="cb388-7"><a href="the-haunted-dag-the-casual-terror.html#cb388-7" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(height, leg_left, leg_right)</span></code></pre></div>
+<p>Now we can build a model that predicts height from leg length. We set the <code>leg_prop</code> to be bound from 0.4 to 0.5 so on average the leg proportions should be about 45% (0.45) of a persons height. If we were to guess then what the <span class="math inline">\(\beta\)</span> coefficients would be we would ballpark somewhere around the average height (10) divided by 45% of the average height (10/0.45 = 4.5). This 10 / 4.5 is about 2.2. Let’s see if our guess is close.<br />
+</p>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="the-haunted-dag-the-casual-terror.html#cb389-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinking)</span>
+<span id="cb389-2"><a href="the-haunted-dag-the-casual-terror.html#cb389-2" aria-hidden="true" tabindex="-1"></a>m6<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb389-3"><a href="the-haunted-dag-the-casual-terror.html#cb389-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb389-4"><a href="the-haunted-dag-the-casual-terror.html#cb389-4" aria-hidden="true" tabindex="-1"></a>    height <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb389-5"><a href="the-haunted-dag-the-casual-terror.html#cb389-5" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bl<span class="sc">*</span>leg_left <span class="sc">+</span> br<span class="sc">*</span>leg_right,</span>
+<span id="cb389-6"><a href="the-haunted-dag-the-casual-terror.html#cb389-6" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">10</span>, <span class="dv">5</span>), <span class="co">#really wide priors </span></span>
+<span id="cb389-7"><a href="the-haunted-dag-the-casual-terror.html#cb389-7" aria-hidden="true" tabindex="-1"></a>    bl <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">2</span>, <span class="dv">5</span>),</span>
+<span id="cb389-8"><a href="the-haunted-dag-the-casual-terror.html#cb389-8" aria-hidden="true" tabindex="-1"></a>    br <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">2</span>, <span class="dv">5</span>),</span>
+<span id="cb389-9"><a href="the-haunted-dag-the-casual-terror.html#cb389-9" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb389-10"><a href="the-haunted-dag-the-casual-terror.html#cb389-10" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d)</span>
+<span id="cb389-11"><a href="the-haunted-dag-the-casual-terror.html#cb389-11" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m6<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>##             mean         sd       5.5%     94.5%
+## a     0.95222088 0.31790120  0.4441534 1.4602884
+## bl    0.06223552 1.99578411 -3.1274129 3.2518840
+## br    1.93732727 1.98698630 -1.2382606 5.1129151
+## sigma 0.59950562 0.04221453  0.5320386 0.6669726</code></pre>
+<p>These seem a bit wonky. What happened? Let’s plot to get a better understanding</p>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="the-haunted-dag-the-casual-terror.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precis_plot</span>(<span class="fu">precis</span>(m6<span class="fl">.1</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%206.4-1.png" width="672" /></p>
+<p>No matter how many times we run the simulation the leg length appears to be unimportant. This is because the model is trying to tell us how important knowing the other leg length is once we know the length of one leg. If we only knew right leg data, the right leg length would be pretty important.</p>
+<p>If we were to look at the posterior distribution of the two leg length coefficients we would see that one is not more informative than the other</p>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="the-haunted-dag-the-casual-terror.html#cb392-1" aria-hidden="true" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">extract.samples</span>(m6<span class="fl">.1</span>)</span>
+<span id="cb392-2"><a href="the-haunted-dag-the-casual-terror.html#cb392-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bl <span class="sc">~</span> br, post, <span class="at">col=</span><span class="fu">col.alpha</span>(rangi2, <span class="fl">0.1</span>), <span class="at">pch =</span> <span class="dv">16</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%206.5-1.png" width="672" /></p>
+<p>Basically this plot shows that any combination of <code>br</code> and <code>bl</code> will fall along a very thin line, suggesting any combination of these values will have equal predictive power.<br />
+</p>
+<p>We fit a model that looks like this:<br />
+</p>
+<p><span class="math display">\[\begin{equation}
+y_{i} \sim \text{Normal}(\mu_{i}, \sigma)\
+\mu_{i} = \alpha + \beta_{1}x_{i} + \beta_{2}x_{i}\
+\end{equation}\]</span></p>
+<p>Because the leg lengths are very similar we can write <span class="math inline">\(x_{i}\)</span> twice, and because of this the model golem simplifies the model to be:<br />
+</p>
+<p><span class="math display">\[\begin{equation}
+\mu_{i} = \alpha + (\beta_{1} + \beta_{2})x_{i}\
+\end{equation}\]</span></p>
+<p>In this version <span class="math inline">\(\beta_{1}\)</span> and <span class="math inline">\(\beta_{2}\)</span> can’t be considered separately because they do not have individual influences on <span class="math inline">\(\mu\)</span>. The sum of the coefficients does however influence <span class="math inline">\(\mu\)</span>, so we can calculate that to get a better idea of how leg lengths influence height.</p>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="the-haunted-dag-the-casual-terror.html#cb393-1" aria-hidden="true" tabindex="-1"></a>sum_blbr <span class="ot">&lt;-</span> post<span class="sc">$</span>bl <span class="sc">+</span> post<span class="sc">$</span>br</span>
+<span id="cb393-2"><a href="the-haunted-dag-the-casual-terror.html#cb393-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dens</span>(sum_blbr, <span class="at">col=</span>rangi2, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">xlab =</span> <span class="st">&#39;sum of bl and br&#39;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%206.6-1.png" width="672" /></p>
+<p>If you recall we did estimate the coefficient to be somewhere slightly larger than 2 which is shown here.</p>
+<p>Here is a single leg model for comparison :</p>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="the-haunted-dag-the-casual-terror.html#cb394-1" aria-hidden="true" tabindex="-1"></a>m6<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb394-2"><a href="the-haunted-dag-the-casual-terror.html#cb394-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb394-3"><a href="the-haunted-dag-the-casual-terror.html#cb394-3" aria-hidden="true" tabindex="-1"></a>    height <span class="sc">~</span><span class="fu">dnorm</span>(mu,sigma),</span>
+<span id="cb394-4"><a href="the-haunted-dag-the-casual-terror.html#cb394-4" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span>a<span class="sc">+</span>bl<span class="sc">*</span>leg_left,</span>
+<span id="cb394-5"><a href="the-haunted-dag-the-casual-terror.html#cb394-5" aria-hidden="true" tabindex="-1"></a>a <span class="sc">~</span><span class="fu">dnorm</span>(<span class="dv">10</span>,<span class="dv">100</span>),</span>
+<span id="cb394-6"><a href="the-haunted-dag-the-casual-terror.html#cb394-6" aria-hidden="true" tabindex="-1"></a>bl <span class="sc">~</span><span class="fu">dnorm</span>(<span class="dv">2</span>,<span class="dv">10</span>),</span>
+<span id="cb394-7"><a href="the-haunted-dag-the-casual-terror.html#cb394-7" aria-hidden="true" tabindex="-1"></a>sigma <span class="sc">~</span><span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb394-8"><a href="the-haunted-dag-the-casual-terror.html#cb394-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb394-9"><a href="the-haunted-dag-the-casual-terror.html#cb394-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Caution, model may not have converged.</code></pre>
+<pre><code>## Code 1: Maximum iterations reached.</code></pre>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="the-haunted-dag-the-casual-terror.html#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m6<span class="fl">.2</span>)</span></code></pre></div>
+<pre><code>## Warning in sqrt(diag(vcov(model))): NaNs produced
+
+## Warning in sqrt(diag(vcov(model))): NaNs produced
+
+## Warning in sqrt(diag(vcov(model))): NaNs produced</code></pre>
+<pre><code>##              mean        sd      5.5%     94.5%
+## a      25.5498117 54.248421 -61.14964 112.24927
+## bl      0.1562758  9.168886 -14.49738  14.80993
+## sigma 479.5199897       NaN       NaN       NaN</code></pre>
+</div>
+<div id="multicollinear-milk" class="section level3 hasAnchor" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Multicollinear milk<a href="the-haunted-dag-the-casual-terror.html#multicollinear-milk" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s look at some real data for an example of correlated predictors</p>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="the-haunted-dag-the-casual-terror.html#cb400-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(milk)</span>
+<span id="cb400-2"><a href="the-haunted-dag-the-casual-terror.html#cb400-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> milk</span>
+<span id="cb400-3"><a href="the-haunted-dag-the-casual-terror.html#cb400-3" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>K <span class="ot">&lt;-</span> <span class="fu">standardize</span>(d<span class="sc">$</span>kcal.per.g)</span>
+<span id="cb400-4"><a href="the-haunted-dag-the-casual-terror.html#cb400-4" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>F <span class="ot">&lt;-</span> <span class="fu">standardize</span>(d<span class="sc">$</span>perc.fat)</span>
+<span id="cb400-5"><a href="the-haunted-dag-the-casual-terror.html#cb400-5" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>L <span class="ot">&lt;-</span> <span class="fu">standardize</span>(d<span class="sc">$</span>perc.lactose)</span></code></pre></div>
+<p>Let’s see how percent fat and percent lactose do at predicting energy content of milk</p>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="the-haunted-dag-the-casual-terror.html#cb401-1" aria-hidden="true" tabindex="-1"></a><span class="co">#model for percent fat</span></span>
+<span id="cb401-2"><a href="the-haunted-dag-the-casual-terror.html#cb401-2" aria-hidden="true" tabindex="-1"></a>m6<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb401-3"><a href="the-haunted-dag-the-casual-terror.html#cb401-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb401-4"><a href="the-haunted-dag-the-casual-terror.html#cb401-4" aria-hidden="true" tabindex="-1"></a>    K <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb401-5"><a href="the-haunted-dag-the-casual-terror.html#cb401-5" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bF<span class="sc">*</span>F,</span>
+<span id="cb401-6"><a href="the-haunted-dag-the-casual-terror.html#cb401-6" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb401-7"><a href="the-haunted-dag-the-casual-terror.html#cb401-7" aria-hidden="true" tabindex="-1"></a>    bF <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb401-8"><a href="the-haunted-dag-the-casual-terror.html#cb401-8" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb401-9"><a href="the-haunted-dag-the-casual-terror.html#cb401-9" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb401-10"><a href="the-haunted-dag-the-casual-terror.html#cb401-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb401-11"><a href="the-haunted-dag-the-casual-terror.html#cb401-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb401-12"><a href="the-haunted-dag-the-casual-terror.html#cb401-12" aria-hidden="true" tabindex="-1"></a><span class="co">#model for percent lactose</span></span>
+<span id="cb401-13"><a href="the-haunted-dag-the-casual-terror.html#cb401-13" aria-hidden="true" tabindex="-1"></a>m6<span class="fl">.4</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb401-14"><a href="the-haunted-dag-the-casual-terror.html#cb401-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb401-15"><a href="the-haunted-dag-the-casual-terror.html#cb401-15" aria-hidden="true" tabindex="-1"></a>    K <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb401-16"><a href="the-haunted-dag-the-casual-terror.html#cb401-16" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bL<span class="sc">*</span>L,</span>
+<span id="cb401-17"><a href="the-haunted-dag-the-casual-terror.html#cb401-17" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb401-18"><a href="the-haunted-dag-the-casual-terror.html#cb401-18" aria-hidden="true" tabindex="-1"></a>    bL <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb401-19"><a href="the-haunted-dag-the-casual-terror.html#cb401-19" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb401-20"><a href="the-haunted-dag-the-casual-terror.html#cb401-20" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb401-21"><a href="the-haunted-dag-the-casual-terror.html#cb401-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb401-22"><a href="the-haunted-dag-the-casual-terror.html#cb401-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb401-23"><a href="the-haunted-dag-the-casual-terror.html#cb401-23" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m6<span class="fl">.3</span>)</span></code></pre></div>
+<pre><code>##                mean         sd       5.5%     94.5%
+## a     -2.185005e-06 0.07725163 -0.1234652 0.1234608
+## bF     8.618959e-01 0.08426050  0.7272313 0.9965604
+## sigma  4.510157e-01 0.05870685  0.3571909 0.5448406</code></pre>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="the-haunted-dag-the-casual-terror.html#cb403-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m6<span class="fl">.4</span>)</span></code></pre></div>
+<pre><code>##                mean         sd       5.5%      94.5%
+## a      7.997789e-07 0.06661645 -0.1064652  0.1064668
+## bL    -9.024550e-01 0.07132863 -1.0164520 -0.7884581
+## sigma  3.804660e-01 0.04958285  0.3012231  0.4597090</code></pre>
+<p>Pretty much polar opposites of each other. More fat = more energy, more lactose = less energy. But what happens if they are considered together?</p>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="the-haunted-dag-the-casual-terror.html#cb405-1" aria-hidden="true" tabindex="-1"></a>m6<span class="fl">.5</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb405-2"><a href="the-haunted-dag-the-casual-terror.html#cb405-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb405-3"><a href="the-haunted-dag-the-casual-terror.html#cb405-3" aria-hidden="true" tabindex="-1"></a>    K <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb405-4"><a href="the-haunted-dag-the-casual-terror.html#cb405-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bF<span class="sc">*</span>F <span class="sc">+</span> bL<span class="sc">*</span>L,</span>
+<span id="cb405-5"><a href="the-haunted-dag-the-casual-terror.html#cb405-5" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb405-6"><a href="the-haunted-dag-the-casual-terror.html#cb405-6" aria-hidden="true" tabindex="-1"></a>    bF <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb405-7"><a href="the-haunted-dag-the-casual-terror.html#cb405-7" aria-hidden="true" tabindex="-1"></a>    bL <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb405-8"><a href="the-haunted-dag-the-casual-terror.html#cb405-8" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb405-9"><a href="the-haunted-dag-the-casual-terror.html#cb405-9" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb405-10"><a href="the-haunted-dag-the-casual-terror.html#cb405-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb405-11"><a href="the-haunted-dag-the-casual-terror.html#cb405-11" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m6<span class="fl">.5</span>)</span></code></pre></div>
+<pre><code>##                mean         sd        5.5%      94.5%
+## a     -5.951129e-06 0.06603601 -0.10554425  0.1055323
+## bF     2.435066e-01 0.18357932 -0.04988858  0.5369018
+## bL    -6.780742e-01 0.18377740 -0.97178595 -0.3843624
+## sigma  3.767433e-01 0.04918443  0.29813710  0.4553495</code></pre>
+<p>Both coefficients have shifted much closer to 0 and the standard deviations have more than doubled.</p>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="the-haunted-dag-the-casual-terror.html#cb407-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(<span class="sc">~</span> kcal.per.g <span class="sc">+</span> perc.fat <span class="sc">+</span> perc.lactose, <span class="at">data =</span> d, <span class="at">col =</span> rangi2)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%206.11-1.png" width="672" /></p>
+<p>Pay attention to the first column of graphs where <code>kcal.per.g</code> is virtually mirrored across <code>perc.fat</code> and <code>perc.lactose</code>. These two predictors are so strongly correlated that knowing one is enough to predict <code>kcal.per.g</code>.</p>
+</div>
+</div>
+<div id="post-treatrment-bias" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Post-treatrment bias<a href="the-haunted-dag-the-casual-terror.html#post-treatrment-bias" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Post-treatment bias comes from included variable bias and experimental design. Say you grew plants in different soil types to test anti-fungal resistance of the soil. You measure the height of the plant at the start of the trial, add in the soil treatment, measure the height of the plant at the end of the trial, and check for presence of fungus.<br />
+So you have initial height, final height, treatment, and fungus. What should be in the model? If you are hypothesizing that fungus slows growth, final height is the outcome of interest and fungus presence should be discarded because it is a <em>post-treatment</em> effect.<br />
+</p>
+<p>Let’s simulate to be sure</p>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="the-haunted-dag-the-casual-terror.html#cb408-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb408-2"><a href="the-haunted-dag-the-casual-terror.html#cb408-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co">#number of plants</span></span>
+<span id="cb408-3"><a href="the-haunted-dag-the-casual-terror.html#cb408-3" aria-hidden="true" tabindex="-1"></a>h0 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N,<span class="dv">10</span>,<span class="dv">2</span>) <span class="co">#initial height</span></span>
+<span id="cb408-4"><a href="the-haunted-dag-the-casual-terror.html#cb408-4" aria-hidden="true" tabindex="-1"></a>treatment <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">each =</span> N<span class="sc">/</span><span class="dv">2</span>) <span class="co">#assign treatments</span></span>
+<span id="cb408-5"><a href="the-haunted-dag-the-casual-terror.html#cb408-5" aria-hidden="true" tabindex="-1"></a>fungus <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(N, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.5</span> <span class="sc">-</span> treatment<span class="sc">*</span><span class="fl">0.4</span>) <span class="co">#assign fungus</span></span>
+<span id="cb408-6"><a href="the-haunted-dag-the-casual-terror.html#cb408-6" aria-hidden="true" tabindex="-1"></a>h1 <span class="ot">&lt;-</span> h0 <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">5-3</span><span class="sc">*</span>fungus) <span class="co">#simulate growth</span></span>
+<span id="cb408-7"><a href="the-haunted-dag-the-casual-terror.html#cb408-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb408-8"><a href="the-haunted-dag-the-casual-terror.html#cb408-8" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">h0=</span>h0, <span class="at">h1=</span>h1, <span class="at">treatment=</span>treatment, <span class="at">fungus=</span>fungus)</span>
+<span id="cb408-9"><a href="the-haunted-dag-the-casual-terror.html#cb408-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb408-10"><a href="the-haunted-dag-the-casual-terror.html#cb408-10" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(d)</span></code></pre></div>
+<pre><code>##                mean        sd     5.5%    94.5%     histogram
+## h0         9.752973 1.8289342 6.976258 12.74917    ▁▂▂▇▅▅▃▂▁▁
+## h1        13.784304 2.5918058 9.598218 17.75557 ▁▂▃▃▇▇▅▃▅▃▁▁▁
+## treatment  0.500000 0.5025189 0.000000  1.00000    ▇▁▁▁▁▁▁▁▁▇
+## fungus     0.350000 0.4793725 0.000000  1.00000    ▇▁▁▁▁▁▁▁▁▃</code></pre>
+<div id="a-prior-is-born" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> A prior is born<a href="the-haunted-dag-the-casual-terror.html#a-prior-is-born" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If we didn’t know how the data was created and actually conducted the plant experiment, we would be able to assume that all plants will have grown some amount from the beginning to the end of the experiment. In this way we can scale the growth to be proportion of initial height such that:<br />
+</p>
+<p><span class="math display">\[\begin{equation}
+h_{1,i} \sim \text{Normal}(\mu_{i}, \sigma)\
+\mu_{i} = h_{0,i} \times p
+\end{equation}\]</span></p>
+<p>Here <span class="math inline">\(p\)</span> is a parameter that is standing in for the proportion grown from <span class="math inline">\(h_{0}\)</span> to <span class="math inline">\(h_{1}\)</span>. In another way, <span class="math inline">\(p = h_{1}/h_{0}\)</span> and <span class="math inline">\(p = 1\)</span> would mean no growth and <span class="math inline">\(p = 2\)</span> means the plant has doubled it’s size. Because <span class="math inline">\(p\)</span> is a proportion, it must be positive, even if the plant dies (<span class="math inline">\(p = 0\)</span>) so we will use the log normal distribution as a prior.</p>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="the-haunted-dag-the-casual-terror.html#cb410-1" aria-hidden="true" tabindex="-1"></a>sim_p <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>(<span class="fl">1e4</span>, <span class="dv">0</span>, <span class="fl">0.25</span>) <span class="co">#simulate p values</span></span>
+<span id="cb410-2"><a href="the-haunted-dag-the-casual-terror.html#cb410-2" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(<span class="fu">data.frame</span>(sim_p))</span></code></pre></div>
+<pre><code>##           mean        sd      5.5%   94.5%    histogram
+## sim_p 1.034501 0.2606664 0.6749326 1.49171 ▁▁▃▇▇▃▁▁▁▁▁▁</code></pre>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="the-haunted-dag-the-casual-terror.html#cb412-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dens</span>(sim_p)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%206.14-1.png" width="672" /></p>
+<p>This prior distribution expects that there should be roughly no growth but anywhere from 40% shrinkage to 50% growth. Let’s put the prior in the model without any predictors.</p>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="the-haunted-dag-the-casual-terror.html#cb413-1" aria-hidden="true" tabindex="-1"></a>m6<span class="fl">.6</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb413-2"><a href="the-haunted-dag-the-casual-terror.html#cb413-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb413-3"><a href="the-haunted-dag-the-casual-terror.html#cb413-3" aria-hidden="true" tabindex="-1"></a>    h1 <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb413-4"><a href="the-haunted-dag-the-casual-terror.html#cb413-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> h0<span class="sc">*</span>p,</span>
+<span id="cb413-5"><a href="the-haunted-dag-the-casual-terror.html#cb413-5" aria-hidden="true" tabindex="-1"></a>    p <span class="sc">~</span> <span class="fu">dlnorm</span>(<span class="dv">0</span>, <span class="fl">0.25</span>),</span>
+<span id="cb413-6"><a href="the-haunted-dag-the-casual-terror.html#cb413-6" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb413-7"><a href="the-haunted-dag-the-casual-terror.html#cb413-7" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb413-8"><a href="the-haunted-dag-the-casual-terror.html#cb413-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb413-9"><a href="the-haunted-dag-the-casual-terror.html#cb413-9" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m6<span class="fl">.6</span>)</span></code></pre></div>
+<pre><code>##           mean         sd     5.5%    94.5%
+## p     1.400621 0.01775487 1.372246 1.428997
+## sigma 1.762761 0.12303782 1.566123 1.959399</code></pre>
+<p>About 40% growth on average from the model. But what about adding some predictors? We will add both treatment and fungus.<br />
+</p>
+<p><span class="math display">\[\begin{equation}
+h_{1,i} \sim \text{Normal}(\mu_{i}, \sigma)\
+\mu_{i} = h_{0, i} \times p\
+p = \alpha + \beta_{T}T_{i} + \beta_{F}F_{i}\
+\alpha \sim \text{Log-Normal}(0, 0.25)\
+\beta_{T} \sim \text{Normal}(0, 0.5)\
+\beta_{F} \sim \text{Normal}(0, 0.5)\
+\sigma \sim \text{Exponential}(1)
+\end{equation}\]</span></p>
+<p>Notice how <span class="math inline">\(p\)</span> is now a linear model parameterized by the predictors treatment and fungus.<br />
+</p>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="the-haunted-dag-the-casual-terror.html#cb415-1" aria-hidden="true" tabindex="-1"></a>m6<span class="fl">.7</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb415-2"><a href="the-haunted-dag-the-casual-terror.html#cb415-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb415-3"><a href="the-haunted-dag-the-casual-terror.html#cb415-3" aria-hidden="true" tabindex="-1"></a>    h1 <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb415-4"><a href="the-haunted-dag-the-casual-terror.html#cb415-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> h0 <span class="sc">*</span> p,</span>
+<span id="cb415-5"><a href="the-haunted-dag-the-casual-terror.html#cb415-5" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> a <span class="sc">+</span> bt<span class="sc">*</span>treatment <span class="sc">+</span> bf<span class="sc">*</span>fungus,</span>
+<span id="cb415-6"><a href="the-haunted-dag-the-casual-terror.html#cb415-6" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dlnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb415-7"><a href="the-haunted-dag-the-casual-terror.html#cb415-7" aria-hidden="true" tabindex="-1"></a>    bt <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb415-8"><a href="the-haunted-dag-the-casual-terror.html#cb415-8" aria-hidden="true" tabindex="-1"></a>    bf <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb415-9"><a href="the-haunted-dag-the-casual-terror.html#cb415-9" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb415-10"><a href="the-haunted-dag-the-casual-terror.html#cb415-10" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb415-11"><a href="the-haunted-dag-the-casual-terror.html#cb415-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb415-12"><a href="the-haunted-dag-the-casual-terror.html#cb415-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb415-13"><a href="the-haunted-dag-the-casual-terror.html#cb415-13" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m6<span class="fl">.7</span>)</span></code></pre></div>
+<pre><code>##              mean         sd        5.5%         94.5%
+## a      1.52442223 0.02589644  1.48303472  1.5658097500
+## bt    -0.04742812 0.02926555 -0.09420012 -0.0006561103
+## bf    -0.30101915 0.03114703 -0.35079812 -0.2512401777
+## sigma  1.20701921 0.08461445  1.07178898  1.3422494372</code></pre>
+<p>So now <code>a</code> is like the previous <code>p</code> with a similar average growth of about 50%. Treatment (<code>bt</code>) seems to have no effect and fungus is slowing growth. How could treatment not have an effect if we built the data to ensure that it did?</p>
+</div>
+<div id="blocked-by-consequence" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Blocked by consequence<a href="the-haunted-dag-the-casual-terror.html#blocked-by-consequence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Because treatment influenced fungus presence and was not included in the growth estimation, it adds very little information once we know if fungus was present or not. here is a model without fungus<br />
+</p>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="the-haunted-dag-the-casual-terror.html#cb417-1" aria-hidden="true" tabindex="-1"></a>m6<span class="fl">.8</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb417-2"><a href="the-haunted-dag-the-casual-terror.html#cb417-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb417-3"><a href="the-haunted-dag-the-casual-terror.html#cb417-3" aria-hidden="true" tabindex="-1"></a>    h1 <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb417-4"><a href="the-haunted-dag-the-casual-terror.html#cb417-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> h0 <span class="sc">*</span> p,</span>
+<span id="cb417-5"><a href="the-haunted-dag-the-casual-terror.html#cb417-5" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> a <span class="sc">+</span> bt<span class="sc">*</span>treatment,</span>
+<span id="cb417-6"><a href="the-haunted-dag-the-casual-terror.html#cb417-6" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dlnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb417-7"><a href="the-haunted-dag-the-casual-terror.html#cb417-7" aria-hidden="true" tabindex="-1"></a>    bt <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb417-8"><a href="the-haunted-dag-the-casual-terror.html#cb417-8" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb417-9"><a href="the-haunted-dag-the-casual-terror.html#cb417-9" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb417-10"><a href="the-haunted-dag-the-casual-terror.html#cb417-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb417-11"><a href="the-haunted-dag-the-casual-terror.html#cb417-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb417-12"><a href="the-haunted-dag-the-casual-terror.html#cb417-12" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m6<span class="fl">.8</span>)</span></code></pre></div>
+<pre><code>##            mean         sd       5.5%     94.5%
+## a     1.3410577 0.02474841 1.30150494 1.3806104
+## bt    0.1108954 0.03387262 0.05676043 0.1650304
+## sigma 1.6826776 0.11753297 1.49483725 1.8705180</code></pre>
+<p>Now we have a strong positive coefficient (<code>bt</code>) for treatment on growth of the plants. This is good news. It means that the hypothesized mechanism (fungus slowing growth) appears to be true because including fungus <em>zeros</em> the treatment effect.</p>
+</div>
+<div id="fungus-and-d-separation" class="section level3 hasAnchor" number="6.2.3">
+<h3><span class="header-section-number">6.2.3</span> Fungus and d-separation<a href="the-haunted-dag-the-casual-terror.html#fungus-and-d-separation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s make a <strong>DAG</strong> for this plant model</p>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="the-haunted-dag-the-casual-terror.html#cb419-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dagitty)</span>
+<span id="cb419-2"><a href="the-haunted-dag-the-casual-terror.html#cb419-2" aria-hidden="true" tabindex="-1"></a>plant_dag <span class="ot">&lt;-</span> <span class="fu">dagitty</span>(<span class="st">&quot;dag {</span></span>
+<span id="cb419-3"><a href="the-haunted-dag-the-casual-terror.html#cb419-3" aria-hidden="true" tabindex="-1"></a><span class="st">                     H_0 -&gt; H_1</span></span>
+<span id="cb419-4"><a href="the-haunted-dag-the-casual-terror.html#cb419-4" aria-hidden="true" tabindex="-1"></a><span class="st">                     F -&gt; H_1</span></span>
+<span id="cb419-5"><a href="the-haunted-dag-the-casual-terror.html#cb419-5" aria-hidden="true" tabindex="-1"></a><span class="st">                     T -&gt; F</span></span>
+<span id="cb419-6"><a href="the-haunted-dag-the-casual-terror.html#cb419-6" aria-hidden="true" tabindex="-1"></a><span class="st">                     }&quot;</span>)</span>
+<span id="cb419-7"><a href="the-haunted-dag-the-casual-terror.html#cb419-7" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(plant_dag) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="at">H_0 =</span> <span class="dv">0</span>, <span class="at">T =</span> <span class="dv">2</span>, <span class="at">F =</span> <span class="fl">1.5</span>, <span class="at">H_1 =</span> <span class="dv">1</span>),</span>
+<span id="cb419-8"><a href="the-haunted-dag-the-casual-terror.html#cb419-8" aria-hidden="true" tabindex="-1"></a>                               <span class="at">y =</span> <span class="fu">c</span>(<span class="at">H_0 =</span> <span class="dv">0</span>, <span class="at">T =</span> <span class="dv">0</span>, <span class="at">F =</span> <span class="dv">0</span>, <span class="at">H_1 =</span> <span class="dv">0</span>))</span>
+<span id="cb419-9"><a href="the-haunted-dag-the-casual-terror.html#cb419-9" aria-hidden="true" tabindex="-1"></a><span class="fu">drawdag</span>(plant_dag)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Rcode%206.18-1.png" width="672" /></p>
+<p>In this framework treatment <span class="math inline">\(T\)</span> influences fungus <span class="math inline">\(F\)</span> which influences final plant height <span class="math inline">\(H_{1}\)</span>. And the initial plant height <span class="math inline">\(H_{0}\)</span> has a separate influence on <span class="math inline">\(H_{1}\)</span>. When we include fungus in the model we are blocking treatment from influencing the outcome <span class="math inline">\(H_{1}\)</span>. When a parameter is blocking the effect of another, it is called **d-separation* or <em>directional separation</em>. When we condition the model on <span class="math inline">\(F\)</span>, we create an independence between <span class="math inline">\(T\)</span> and <span class="math inline">\(H_{1}\)</span>. Here is how we can gather all conditional independencies for the above <strong>DAG</strong>:<br />
+</p>
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="the-haunted-dag-the-casual-terror.html#cb420-1" aria-hidden="true" tabindex="-1"></a><span class="fu">impliedConditionalIndependencies</span>(plant_dag)</span></code></pre></div>
+<pre><code>## F _||_ H_0
+## H_0 _||_ T
+## H_1 _||_ T | F</code></pre>
+<p>So we have three independencies. The first two simply separate the left side <span class="math inline">\(H_{0}\)</span> from the right side. The third one is the one of interest where <span class="math inline">\(H_{1}\)</span> is independent of <span class="math inline">\(T\)</span> when conditioned on <span class="math inline">\(F\)</span>. There is no additional information gained by including <span class="math inline">\(T\)</span> after <span class="math inline">\(F\)</span>.<br />
+</p>
+<p>Observational experiments have additional trouble with unobserved variables. What if there was something else that was influencing both <span class="math inline">\(H_{1}\)</span> and <span class="math inline">\(F\)</span> and broke their dependence? Let’s say moisture is that missing link.<br />
+<img src="_main_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
+<p>So now we have broken the path from <span class="math inline">\(T\)</span> to <span class="math inline">\(H_{1}\)</span> so there shouldn’t be an influence of <span class="math inline">\(T\)</span> on <span class="math inline">\(H_{1}\)</span>.<br />
+</p>
+<p>Let’s update the data</p>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="the-haunted-dag-the-casual-terror.html#cb422-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb422-2"><a href="the-haunted-dag-the-casual-terror.html#cb422-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb422-3"><a href="the-haunted-dag-the-casual-terror.html#cb422-3" aria-hidden="true" tabindex="-1"></a>h0 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, <span class="dv">10</span>, <span class="dv">2</span>)</span>
+<span id="cb422-4"><a href="the-haunted-dag-the-casual-terror.html#cb422-4" aria-hidden="true" tabindex="-1"></a>treatment <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">each =</span> N<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb422-5"><a href="the-haunted-dag-the-casual-terror.html#cb422-5" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">rbern</span>(N)</span>
+<span id="cb422-6"><a href="the-haunted-dag-the-casual-terror.html#cb422-6" aria-hidden="true" tabindex="-1"></a>fungus <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(N, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.5</span> <span class="sc">-</span> <span class="fl">0.4</span><span class="sc">*</span>treatment <span class="sc">+</span> <span class="fl">0.4</span><span class="sc">*</span>M)</span>
+<span id="cb422-7"><a href="the-haunted-dag-the-casual-terror.html#cb422-7" aria-hidden="true" tabindex="-1"></a>h1 <span class="ot">&lt;-</span> h0 <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">5</span> <span class="sc">+</span> <span class="dv">3</span><span class="sc">*</span>M)</span>
+<span id="cb422-8"><a href="the-haunted-dag-the-casual-terror.html#cb422-8" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">h0=</span>h0, <span class="at">h1=</span>h1, <span class="at">treatment=</span>treatment, <span class="at">fungus=</span>fungus)</span></code></pre></div>
+<p>So <span class="math inline">\(M\)</span> was used to influence <span class="math inline">\(F\)</span> and <span class="math inline">\(H_{1}\)</span> but was not included in the new data. Let’s see how this changes our models</p>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="the-haunted-dag-the-casual-terror.html#cb423-1" aria-hidden="true" tabindex="-1"></a>m6<span class="fl">.7</span>b <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb423-2"><a href="the-haunted-dag-the-casual-terror.html#cb423-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb423-3"><a href="the-haunted-dag-the-casual-terror.html#cb423-3" aria-hidden="true" tabindex="-1"></a>    h1 <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb423-4"><a href="the-haunted-dag-the-casual-terror.html#cb423-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> h0 <span class="sc">*</span> p,</span>
+<span id="cb423-5"><a href="the-haunted-dag-the-casual-terror.html#cb423-5" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> a <span class="sc">+</span> bt<span class="sc">*</span>treatment <span class="sc">+</span> bf<span class="sc">*</span>fungus,</span>
+<span id="cb423-6"><a href="the-haunted-dag-the-casual-terror.html#cb423-6" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dlnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb423-7"><a href="the-haunted-dag-the-casual-terror.html#cb423-7" aria-hidden="true" tabindex="-1"></a>    bt <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb423-8"><a href="the-haunted-dag-the-casual-terror.html#cb423-8" aria-hidden="true" tabindex="-1"></a>    bf <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb423-9"><a href="the-haunted-dag-the-casual-terror.html#cb423-9" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb423-10"><a href="the-haunted-dag-the-casual-terror.html#cb423-10" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d2</span>
+<span id="cb423-11"><a href="the-haunted-dag-the-casual-terror.html#cb423-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb423-12"><a href="the-haunted-dag-the-casual-terror.html#cb423-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb423-13"><a href="the-haunted-dag-the-casual-terror.html#cb423-13" aria-hidden="true" tabindex="-1"></a>m6<span class="fl">.8</span>b <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb423-14"><a href="the-haunted-dag-the-casual-terror.html#cb423-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb423-15"><a href="the-haunted-dag-the-casual-terror.html#cb423-15" aria-hidden="true" tabindex="-1"></a>    h1 <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb423-16"><a href="the-haunted-dag-the-casual-terror.html#cb423-16" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> h0 <span class="sc">*</span> p,</span>
+<span id="cb423-17"><a href="the-haunted-dag-the-casual-terror.html#cb423-17" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> a <span class="sc">+</span> bt<span class="sc">*</span>treatment,</span>
+<span id="cb423-18"><a href="the-haunted-dag-the-casual-terror.html#cb423-18" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dlnorm</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb423-19"><a href="the-haunted-dag-the-casual-terror.html#cb423-19" aria-hidden="true" tabindex="-1"></a>    bt <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb423-20"><a href="the-haunted-dag-the-casual-terror.html#cb423-20" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb423-21"><a href="the-haunted-dag-the-casual-terror.html#cb423-21" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d2</span>
+<span id="cb423-22"><a href="the-haunted-dag-the-casual-terror.html#cb423-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb423-23"><a href="the-haunted-dag-the-casual-terror.html#cb423-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb423-24"><a href="the-haunted-dag-the-casual-terror.html#cb423-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb423-25"><a href="the-haunted-dag-the-casual-terror.html#cb423-25" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m6<span class="fl">.7</span>b)</span></code></pre></div>
+<pre><code>##             mean         sd       5.5%      94.5%
+## a     1.51625146 0.01313354 1.49526152 1.53724139
+## bt    0.06862459 0.01398489 0.04627403 0.09097516
+## bf    0.16527116 0.01400138 0.14289426 0.18764807
+## sigma 2.06601352 0.04612638 1.99229465 2.13973239</code></pre>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="the-haunted-dag-the-casual-terror.html#cb425-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m6<span class="fl">.8</span>b)</span></code></pre></div>
+<pre><code>##              mean          sd        5.5%      94.5%
+## a     1.628343101 0.009667407  1.61289272 1.64379348
+## bt    0.001884175 0.013636836 -0.01991012 0.02367847
+## sigma 2.203247647 0.049185180  2.12464023 2.28185506</code></pre>
+<p>Now when fungus is in the model, <code>bt</code> seems to have a positive effect. The model without fungus shows <code>bt</code> to be useless. How did <span class="math inline">\(M\)</span> have this effect to make <span class="math inline">\(T\)</span> seem important when we know that it shouldn’t?</p>
+</div>
+</div>
+<div id="collider-bias" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Collider bias<a href="the-haunted-dag-the-casual-terror.html#collider-bias" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Returning now to the selection bias example with trustworthiness and newsworthiness, let’s see <em>Collider bias</em> in action</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-106-1.png" width="672" />
+Any parameter with two arrows pointing at it is called a <em>collider</em>. For this example, if we knew <span class="math inline">\(S\)</span> and <span class="math inline">\(T\)</span> for example, then adding <span class="math inline">\(N\)</span> would offer no additional information. If a proposal was accepted (<span class="math inline">\(S = \text{True}\)</span>) and we knew it had a high value of trustworthiness (<span class="math inline">\(T\)</span>) we would already have an idea that the newsworthiness (<span class="math inline">\(N\)</span>) would be low.</p>
+<div id="collider-for-false-sorrow" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Collider for false sorrow<a href="the-haunted-dag-the-casual-terror.html#collider-for-false-sorrow" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Is age associated with happiness?</p>
+<p>For hypothetical reasons, we will consider that happiness in part is determined at birth and is generally static through time. Additionally, happy people tend to get married more than unhappy people. Marriage is also influenced by age with people who live longer eventually get married. Together:<br />
+</p>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="the-haunted-dag-the-casual-terror.html#cb427-1" aria-hidden="true" tabindex="-1"></a>c2 <span class="ot">&lt;-</span> <span class="fu">dagitty</span>(<span class="st">&quot;dag{</span></span>
+<span id="cb427-2"><a href="the-haunted-dag-the-casual-terror.html#cb427-2" aria-hidden="true" tabindex="-1"></a><span class="st">              H -&gt; M</span></span>
+<span id="cb427-3"><a href="the-haunted-dag-the-casual-terror.html#cb427-3" aria-hidden="true" tabindex="-1"></a><span class="st">              A -&gt; M</span></span>
+<span id="cb427-4"><a href="the-haunted-dag-the-casual-terror.html#cb427-4" aria-hidden="true" tabindex="-1"></a><span class="st">              }&quot;</span>)</span>
+<span id="cb427-5"><a href="the-haunted-dag-the-casual-terror.html#cb427-5" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(c2) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="at">H =</span> <span class="dv">0</span>, <span class="at">M =</span> <span class="dv">1</span>, <span class="at">A =</span> <span class="dv">2</span>),</span>
+<span id="cb427-6"><a href="the-haunted-dag-the-casual-terror.html#cb427-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y =</span> <span class="fu">c</span>(<span class="at">H =</span> <span class="dv">0</span>, <span class="at">M =</span> <span class="dv">0</span>, <span class="at">A =</span> <span class="dv">0</span>))</span>
+<span id="cb427-7"><a href="the-haunted-dag-the-casual-terror.html#cb427-7" aria-hidden="true" tabindex="-1"></a><span class="fu">drawdag</span>(c2)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
+<p>So we have set up marriage to be a collider. If we were to include marriage as a predictor in a regression model, it will artificially create an association between happiness and age.<br />
+</p>
+<p>There is a algorithm built in the <code>rethinking</code> package that can simulate data for this example.<br />
+</p>
+<ol style="list-style-type: decimal">
+<li>each year 20 people are born with uniformly distributed happiness<br />
+</li>
+<li>each year age increases but happiness does not<br />
+</li>
+<li>after age 18 marriage is possible and odds of marriage are based on happiness<br />
+</li>
+<li>once married, individuals remain married<br />
+</li>
+<li>after age 65 individuals leave the system<br />
+</li>
+</ol>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="the-haunted-dag-the-casual-terror.html#cb428-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">sim_happiness</span>(<span class="at">seed =</span> <span class="dv">1977</span>, <span class="at">N_years =</span> <span class="dv">1000</span>)</span>
+<span id="cb428-2"><a href="the-haunted-dag-the-casual-terror.html#cb428-2" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(d)</span></code></pre></div>
+<pre><code>##                    mean        sd      5.5%     94.5%     histogram
+## age        3.300000e+01 18.768883  4.000000 62.000000 ▇▇▇▇▇▇▇▇▇▇▇▇▇
+## married    3.007692e-01  0.458769  0.000000  1.000000    ▇▁▁▁▁▁▁▁▁▃
+## happiness -1.000070e-16  1.214421 -1.789474  1.789474      ▇▅▇▅▅▇▅▇</code></pre>
+<p><code>d</code> now contains 1000 years of age, happiness, and marriage status. To avoid unmarried children from altering the results we can remove them.</p>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="the-haunted-dag-the-casual-terror.html#cb430-1" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> d[d<span class="sc">$</span>age <span class="sc">&gt;</span> <span class="dv">17</span>,] <span class="co">#pick out adults</span></span>
+<span id="cb430-2"><a href="the-haunted-dag-the-casual-terror.html#cb430-2" aria-hidden="true" tabindex="-1"></a>d2<span class="sc">$</span>A <span class="ot">&lt;-</span> (d2<span class="sc">$</span>age <span class="sc">-</span> <span class="dv">18</span>) <span class="sc">/</span> (<span class="dv">65</span> <span class="sc">-</span> <span class="dv">18</span>) <span class="co">#set age back to zero and bound between 0 and 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="the-haunted-dag-the-casual-terror.html#cb431-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d2<span class="sc">$</span>age, d2<span class="sc">$</span>happiness, <span class="at">col =</span> <span class="fu">as.factor</span>(d2<span class="sc">$</span>married))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-108-1.png" width="672" /></p>
+<p>Now we can create the model of happiness from age and marriage status</p>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="the-haunted-dag-the-casual-terror.html#cb432-1" aria-hidden="true" tabindex="-1"></a>d2<span class="sc">$</span>mid <span class="ot">&lt;-</span> d2<span class="sc">$</span>married <span class="sc">+</span> <span class="dv">1</span> <span class="co">#have marriage status either 1 (not) or 2 (married)</span></span>
+<span id="cb432-2"><a href="the-haunted-dag-the-casual-terror.html#cb432-2" aria-hidden="true" tabindex="-1"></a>m6<span class="fl">.9</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb432-3"><a href="the-haunted-dag-the-casual-terror.html#cb432-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb432-4"><a href="the-haunted-dag-the-casual-terror.html#cb432-4" aria-hidden="true" tabindex="-1"></a>    happiness <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb432-5"><a href="the-haunted-dag-the-casual-terror.html#cb432-5" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a[mid] <span class="sc">+</span> bA<span class="sc">*</span>A,</span>
+<span id="cb432-6"><a href="the-haunted-dag-the-casual-terror.html#cb432-6" aria-hidden="true" tabindex="-1"></a>    a[mid] <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb432-7"><a href="the-haunted-dag-the-casual-terror.html#cb432-7" aria-hidden="true" tabindex="-1"></a>    bA <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">2</span>),</span>
+<span id="cb432-8"><a href="the-haunted-dag-the-casual-terror.html#cb432-8" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb432-9"><a href="the-haunted-dag-the-casual-terror.html#cb432-9" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d2</span>
+<span id="cb432-10"><a href="the-haunted-dag-the-casual-terror.html#cb432-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb432-11"><a href="the-haunted-dag-the-casual-terror.html#cb432-11" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m6<span class="fl">.9</span>, <span class="at">depth =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##             mean         sd       5.5%      94.5%
+## a[1]  -0.2350877 0.06348986 -0.3365568 -0.1336186
+## a[2]   1.2585517 0.08495989  1.1227694  1.3943340
+## bA    -0.7490274 0.11320112 -0.9299447 -0.5681102
+## sigma  0.9897080 0.02255800  0.9536559  1.0257600</code></pre>
+<p>Our model believes that there is a strong negative relationship between age and happiness. The alpha values for intercepts make sense though with <code>a[1]</code> identifying non-married folks and <code>a[2]</code> identifying married people. What about if we ignore marriage?</p>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="the-haunted-dag-the-casual-terror.html#cb434-1" aria-hidden="true" tabindex="-1"></a>m6<span class="fl">.10</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb434-2"><a href="the-haunted-dag-the-casual-terror.html#cb434-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb434-3"><a href="the-haunted-dag-the-casual-terror.html#cb434-3" aria-hidden="true" tabindex="-1"></a>    happiness <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb434-4"><a href="the-haunted-dag-the-casual-terror.html#cb434-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> bA<span class="sc">*</span>A,</span>
+<span id="cb434-5"><a href="the-haunted-dag-the-casual-terror.html#cb434-5" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb434-6"><a href="the-haunted-dag-the-casual-terror.html#cb434-6" aria-hidden="true" tabindex="-1"></a>    bA <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">2</span>),</span>
+<span id="cb434-7"><a href="the-haunted-dag-the-casual-terror.html#cb434-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb434-8"><a href="the-haunted-dag-the-casual-terror.html#cb434-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d2</span>
+<span id="cb434-9"><a href="the-haunted-dag-the-casual-terror.html#cb434-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb434-10"><a href="the-haunted-dag-the-casual-terror.html#cb434-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb434-11"><a href="the-haunted-dag-the-casual-terror.html#cb434-11" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m6<span class="fl">.10</span>)</span></code></pre></div>
+<pre><code>##                mean         sd       5.5%     94.5%
+## a      1.649248e-07 0.07675015 -0.1226614 0.1226617
+## bA    -2.728620e-07 0.13225976 -0.2113769 0.2113764
+## sigma  1.213188e+00 0.02766080  1.1689803 1.2573949</code></pre>
+<p>And now the once negative association is gone.</p>
+</div>
+<div id="the-haunted-dag" class="section level3 hasAnchor" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> The haunted DAG<a href="the-haunted-dag-the-casual-terror.html#the-haunted-dag" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Sometimes colliders are created from unobserved variables
+<img src="_main_files/figure-html/unnamed-chunk-109-1.png" width="672" /></p>
+<p>Here we have a <strong>DAG</strong> that describes grandparents <span class="math inline">\(G\)</span> and parents <span class="math inline">\(P\)</span> influence on their children’s academic achievement <span class="math inline">\(C\)</span>. But what if there were influeneces that couldn’t be measured like neighbourhood effects or something that would effect the household of the parents and children but not grandparents. We will call this <span class="math inline">\(U\)</span>.</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
+<p>Even if <span class="math inline">\(U\)</span> remains unmeasured, it can still introduce bias in the model.</p>
+<p>Our set up:<br />
+1. <span class="math inline">\(P\)</span> is a function of <span class="math inline">\(G\)</span> and <span class="math inline">\(U\)</span><br />
+2. <span class="math inline">\(C\)</span> is a function of <span class="math inline">\(G\)</span>, <span class="math inline">\(P\)</span>, and <span class="math inline">\(U\)</span><br />
+3. <span class="math inline">\(G\)</span> and <span class="math inline">\(U\)</span> are not influenced by any other known variables<br />
+</p>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="the-haunted-dag-the-casual-terror.html#cb436-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">200</span> <span class="co">#number of families</span></span>
+<span id="cb436-2"><a href="the-haunted-dag-the-casual-terror.html#cb436-2" aria-hidden="true" tabindex="-1"></a>b_GP <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co">#effect of G on P</span></span>
+<span id="cb436-3"><a href="the-haunted-dag-the-casual-terror.html#cb436-3" aria-hidden="true" tabindex="-1"></a>b_GC <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#effect of G on C</span></span>
+<span id="cb436-4"><a href="the-haunted-dag-the-casual-terror.html#cb436-4" aria-hidden="true" tabindex="-1"></a>b_PC <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co">#effect of P on C</span></span>
+<span id="cb436-5"><a href="the-haunted-dag-the-casual-terror.html#cb436-5" aria-hidden="true" tabindex="-1"></a>b_U <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co">#effect of U on P and C</span></span></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="the-haunted-dag-the-casual-terror.html#cb437-1" aria-hidden="true" tabindex="-1"></a><span class="co">#random observations</span></span>
+<span id="cb437-2"><a href="the-haunted-dag-the-casual-terror.html#cb437-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb437-3"><a href="the-haunted-dag-the-casual-terror.html#cb437-3" aria-hidden="true" tabindex="-1"></a>U <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span><span class="fu">rbern</span>(N, <span class="fl">0.5</span>) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb437-4"><a href="the-haunted-dag-the-casual-terror.html#cb437-4" aria-hidden="true" tabindex="-1"></a>G <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N)</span>
+<span id="cb437-5"><a href="the-haunted-dag-the-casual-terror.html#cb437-5" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, b_GP<span class="sc">*</span>G <span class="sc">+</span> b_U<span class="sc">*</span>U)</span>
+<span id="cb437-6"><a href="the-haunted-dag-the-casual-terror.html#cb437-6" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, b_PC<span class="sc">*</span>P <span class="sc">+</span> b_GC<span class="sc">*</span>G <span class="sc">+</span> b_U<span class="sc">*</span>U)</span>
+<span id="cb437-7"><a href="the-haunted-dag-the-casual-terror.html#cb437-7" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">C=</span>C, <span class="at">P=</span>P, <span class="at">G=</span>G, <span class="at">U=</span>U)</span></code></pre></div>
+<p>So if we wanted to know the influence of <span class="math inline">\(G\)</span> on <span class="math inline">\(C\)</span> we would also have to include <span class="math inline">\(P\)</span> because some effect passes from <span class="math inline">\(G\)</span> to <span class="math inline">\(C\)</span> through <span class="math inline">\(P\)</span>.</p>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="the-haunted-dag-the-casual-terror.html#cb438-1" aria-hidden="true" tabindex="-1"></a>m6<span class="fl">.11</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb438-2"><a href="the-haunted-dag-the-casual-terror.html#cb438-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb438-3"><a href="the-haunted-dag-the-casual-terror.html#cb438-3" aria-hidden="true" tabindex="-1"></a>    C <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb438-4"><a href="the-haunted-dag-the-casual-terror.html#cb438-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> b_PC<span class="sc">*</span>P <span class="sc">+</span> b_GC<span class="sc">*</span>G,</span>
+<span id="cb438-5"><a href="the-haunted-dag-the-casual-terror.html#cb438-5" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb438-6"><a href="the-haunted-dag-the-casual-terror.html#cb438-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(b_PC, b_GC) <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb438-7"><a href="the-haunted-dag-the-casual-terror.html#cb438-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb438-8"><a href="the-haunted-dag-the-casual-terror.html#cb438-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb438-9"><a href="the-haunted-dag-the-casual-terror.html#cb438-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb438-10"><a href="the-haunted-dag-the-casual-terror.html#cb438-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb438-11"><a href="the-haunted-dag-the-casual-terror.html#cb438-11" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m6<span class="fl">.11</span>)</span></code></pre></div>
+<pre><code>##              mean         sd       5.5%      94.5%
+## a      0.04096459 0.09759488 -0.1150109  0.1969401
+## b_PC   1.84994960 0.04376129  1.7800106  1.9198886
+## b_GC  -0.83312218 0.10787908 -1.0055338 -0.6607106
+## sigma  1.37707320 0.06850756  1.2675849  1.4865615</code></pre>
+<p>The estimated effect of parents on children seems to be too large, likely from the input of <span class="math inline">\(U\)</span> which the model doesn’t know about. But the negative effect of grandparents on their grandchildren is absurd.</p>
+<p>If we were to plot the grandparent education against grandchild education we would see positive relationships in each neighbourhood. But if we subsampled by middle percentiles of parent education we would see the negative relationship from the above model.</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
+<p>This is possible because of how we constructed the data using <span class="math inline">\(U\)</span> as an influence on <span class="math inline">\(P\)</span> and <span class="math inline">\(C\)</span>. If the model knows <span class="math inline">\(P\)</span> then the <span class="math inline">\(G\)</span> parameter secretly tells the model about <span class="math inline">\(U\)</span> even though it isn’t included in the model. This is a confusing concept to explain so consider the graph above. The filled in dots are family groups where parents have roughly the same education level. So here when the model conditions on <span class="math inline">\(P\)</span> (imagine only the filled in dots exist) the outcome of <span class="math inline">\(G\)</span> on <span class="math inline">\(C\)</span> appears to be negative where we are selecting the top of the ‘bad neighbourhood’ families, and the bottom of the ‘good neighbourhood’ families.</p>
+<p>So measuring <span class="math inline">\(U\)</span> and including it in the model is the only real way to get around this.</p>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="the-haunted-dag-the-casual-terror.html#cb440-1" aria-hidden="true" tabindex="-1"></a>m6<span class="fl">.12</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb440-2"><a href="the-haunted-dag-the-casual-terror.html#cb440-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb440-3"><a href="the-haunted-dag-the-casual-terror.html#cb440-3" aria-hidden="true" tabindex="-1"></a>    C <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb440-4"><a href="the-haunted-dag-the-casual-terror.html#cb440-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a <span class="sc">+</span> b_PC<span class="sc">*</span>P <span class="sc">+</span> b_GC<span class="sc">*</span>G <span class="sc">+</span> b_U<span class="sc">*</span>U,</span>
+<span id="cb440-5"><a href="the-haunted-dag-the-casual-terror.html#cb440-5" aria-hidden="true" tabindex="-1"></a>    a <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb440-6"><a href="the-haunted-dag-the-casual-terror.html#cb440-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(b_PC, b_GC, b_U) <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb440-7"><a href="the-haunted-dag-the-casual-terror.html#cb440-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb440-8"><a href="the-haunted-dag-the-casual-terror.html#cb440-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> d</span>
+<span id="cb440-9"><a href="the-haunted-dag-the-casual-terror.html#cb440-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb440-10"><a href="the-haunted-dag-the-casual-terror.html#cb440-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb440-11"><a href="the-haunted-dag-the-casual-terror.html#cb440-11" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m6<span class="fl">.12</span>)</span></code></pre></div>
+<pre><code>##              mean         sd         5.5%     94.5%
+## a      0.12195789 0.07084901  0.008727491 0.2351883
+## b_PC   1.04847302 0.06712619  0.941192398 1.1557536
+## b_GC  -0.06698041 0.09661348 -0.221387419 0.0874266
+## b_U    2.04106421 0.15035130  1.800773788 2.2813546
+## sigma  0.99391904 0.04952629  0.914766468 1.0730716</code></pre>
+<p>Once we account for <span class="math inline">\(U\)</span>, we are able to recover our slopes that we set previously. (0, 1, 2)</p>
+</div>
+</div>
+<div id="confronting-confounding" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Confronting confounding<a href="the-haunted-dag-the-casual-terror.html#confronting-confounding" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s see if we can tie it all together to deal with the multiple ways condfounding appears. Suppose we are interested in the relationship between education <span class="math inline">\(E\)</span> and wages <span class="math inline">\(W\)</span>. Unfortunately there are multiple unobserved variables that can influence both <span class="math inline">\(E\)</span> and <span class="math inline">\(W\)</span> such as neighbourhood, parents, friends, etc. We will call these <span class="math inline">\(U\)</span>.
+<img src="_main_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
+<p>So if we are interested in <span class="math inline">\(W\)</span> as the outcome and <span class="math inline">\(E\)</span> as the predictor, it is confounded by the two paths that lead connect <span class="math inline">\(E\)</span> and <span class="math inline">\(W\)</span>. <span class="math inline">\(E \rightarrow W\)</span> and <span class="math inline">\(E \leftarrow U \rightarrow W\)</span> are both considered paths as the direction of the arrows doesn’t matter in this sense. What matters is that <span class="math inline">\(E\)</span> and <span class="math inline">\(W\)</span> have two different connections, one of which has an unobserved piece.<br />
+</p>
+<p>If we were able to have absolute control <span class="math inline">\(E\)</span> it would break the second path by blocking the influence of <span class="math inline">\(U\)</span> on <span class="math inline">\(E\)</span>.
+<img src="_main_files/figure-html/unnamed-chunk-113-1.png" width="672" /></p>
+<p>When we are unable to manipulate <span class="math inline">\(E\)</span> we have to condition on <span class="math inline">\(U\)</span> so that knowing <span class="math inline">\(U\)</span> disrupts any information gained by knowing <span class="math inline">\(E\)</span>. If <span class="math inline">\(U\)</span> in this case was regions and different regions had different average wealth levels. Higher wealth regions <span class="math inline">\(U\)</span> would have higher wages contributing to wealth <span class="math inline">\(W\)</span> and to get high <span class="math inline">\(W\)</span> you need higher education <span class="math inline">\(E\)</span>. So once you condition on <span class="math inline">\(U\)</span> knowing <span class="math inline">\(E\)</span> doesn’t add any useful information to the model. But knowing <span class="math inline">\(E\)</span> still informs us of <span class="math inline">\(W\)</span>.</p>
+<div id="shutting-the-backdoor" class="section level3 hasAnchor" number="6.4.1">
+<h3><span class="header-section-number">6.4.1</span> Shutting the backdoor<a href="the-haunted-dag-the-casual-terror.html#shutting-the-backdoor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Blocking confounding paths from a predictor <span class="math inline">\(X\)</span> to an outcome of interest <span class="math inline">\(Y\)</span> is called shutting the backdoor. Above, the <span class="math inline">\(E \leftarrow U \rightarrow W\)</span> path would be considered a backdoor path.<br />
+</p>
+<p>Here we will run through the four types of paths that can crop up and possibly create backdoors<br />
+</p>
+<ol style="list-style-type: decimal">
+<li><strong>FORK</strong>: <span class="math inline">\(X \leftarrow Z \rightarrow Y\)</span> ; <span class="math inline">\(Z\)</span> influences both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> and conditioning on <span class="math inline">\(Z\)</span> will make <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> independent<br />
+</li>
+<li><strong>PIPE</strong>: <span class="math inline">\(X \rightarrow Z \rightarrow Y\)</span> ; <span class="math inline">\(X\)</span> influences <span class="math inline">\(Z\)</span> which influences <span class="math inline">\(Y\)</span> and conditioning on <span class="math inline">\(Z\)</span> will make <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> independent<br />
+</li>
+<li><strong>COLLIDER</strong>: <span class="math inline">\(X \rightarrow Z \leftarrow Y\)</span> ; No relation exists between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> UNLESS you condition on <span class="math inline">\(Z\)</span> which will open the path but doesn’t contain any causation<br />
+</li>
+<li><strong>DESCENDENT</strong>: <span class="math inline">\(X \rightarrow Z \leftarrow Y\)</span> &amp; <span class="math inline">\(Z \rightarrow D\)</span> ; It is like the collider but <span class="math inline">\(Z\)</span> is a parent of descendent <span class="math inline">\(D\)</span> and conditioning on <span class="math inline">\(D\)</span> will be a partial condition on <span class="math inline">\(Z\)</span>. <em>Note that descendents aren’t only present in colliders. They could crop up in many places</em></li>
+</ol>
+<p>And here is the proposed recipe on how to open or close these potential backdoors<br />
+1. List all paths from <span class="math inline">\(X\)</span> to <span class="math inline">\(Y\)</span><br />
+2. Classify paths from step 1 as open (fork or pipe) or closed (collider)<br />
+3. Classify paths as backdoor paths (arrow entering <span class="math inline">\(X\)</span>)<br />
+4. If there are any open backdoor paths, decide which variable to condition on to close it<br />
+</p>
+</div>
+<div id="two-roads" class="section level3 hasAnchor" number="6.4.2">
+<h3><span class="header-section-number">6.4.2</span> Two roads<a href="the-haunted-dag-the-casual-terror.html#two-roads" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="_main_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
+<p>As an example, we have an exposure of interest <span class="math inline">\(X\)</span> on outcome <span class="math inline">\(Y\)</span>. <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, and <span class="math inline">\(C\)</span> are observed with <span class="math inline">\(U\)</span> being unobserved.<br />
+</p>
+<ul>
+<li>Step 1: list all paths from <span class="math inline">\(X\)</span> to <span class="math inline">\(Y\)</span><br />
+
+<ul>
+<li><span class="math inline">\(X \rightarrow Y\)</span><br />
+</li>
+<li><span class="math inline">\(X \leftarrow U \leftarrow A \rightarrow C \rightarrow Y\)</span><br />
+</li>
+<li><span class="math inline">\(X \leftarrow U \rightarrow B \leftarrow C \rightarrow Y\)</span><br />
+</li>
+</ul></li>
+<li>Step 2: classify all paths as open or closed<br />
+
+<ul>
+<li>Open (direct)</li>
+<li>Open</li>
+<li>Closed on B</li>
+</ul></li>
+<li>Step 3: classify backdoor paths
+<ul>
+<li>NA (direct)</li>
+<li>backdoor</li>
+<li>backdoor (closed)</li>
+</ul></li>
+<li>Step 4: Find which variable to condition on to make <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> independent<br />
+
+<ul>
+<li>NA</li>
+<li><span class="math inline">\(A\)</span> or <span class="math inline">\(C\)</span> should work as <span class="math inline">\(U\)</span> is unobserved</li>
+<li>NA</li>
+</ul></li>
+</ul>
+<p>We can also ask our computer to do this for us if we know the <strong>DAG</strong></p>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="the-haunted-dag-the-casual-terror.html#cb442-1" aria-hidden="true" tabindex="-1"></a>dag_6<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">dagitty</span>(<span class="st">&quot;dag {</span></span>
+<span id="cb442-2"><a href="the-haunted-dag-the-casual-terror.html#cb442-2" aria-hidden="true" tabindex="-1"></a><span class="st">                   U [unobserved]</span></span>
+<span id="cb442-3"><a href="the-haunted-dag-the-casual-terror.html#cb442-3" aria-hidden="true" tabindex="-1"></a><span class="st">                   X -&gt; Y</span></span>
+<span id="cb442-4"><a href="the-haunted-dag-the-casual-terror.html#cb442-4" aria-hidden="true" tabindex="-1"></a><span class="st">                   X &lt;- U &lt;- A -&gt; C -&gt; Y</span></span>
+<span id="cb442-5"><a href="the-haunted-dag-the-casual-terror.html#cb442-5" aria-hidden="true" tabindex="-1"></a><span class="st">                   U -&gt; B &lt;- C</span></span>
+<span id="cb442-6"><a href="the-haunted-dag-the-casual-terror.html#cb442-6" aria-hidden="true" tabindex="-1"></a><span class="st">                   }&quot;</span>)</span>
+<span id="cb442-7"><a href="the-haunted-dag-the-casual-terror.html#cb442-7" aria-hidden="true" tabindex="-1"></a><span class="fu">adjustmentSets</span>(dag_6<span class="fl">.1</span>, <span class="at">exposure =</span> <span class="st">&quot;X&quot;</span>, <span class="at">outcome =</span> <span class="st">&quot;Y&quot;</span>)</span></code></pre></div>
+<pre><code>## { C }
+## { A }</code></pre>
+</div>
+<div id="backdoor-waffles" class="section level3 hasAnchor" number="6.4.3">
+<h3><span class="header-section-number">6.4.3</span> Backdoor waffles<a href="the-haunted-dag-the-casual-terror.html#backdoor-waffles" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="the-haunted-dag-the-casual-terror.html#cb444-1" aria-hidden="true" tabindex="-1"></a>BW_dag <span class="ot">&lt;-</span> <span class="fu">dagitty</span>(<span class="st">&quot;dag{</span></span>
+<span id="cb444-2"><a href="the-haunted-dag-the-casual-terror.html#cb444-2" aria-hidden="true" tabindex="-1"></a><span class="st">                  A -&gt; M</span></span>
+<span id="cb444-3"><a href="the-haunted-dag-the-casual-terror.html#cb444-3" aria-hidden="true" tabindex="-1"></a><span class="st">                  A -&gt; D</span></span>
+<span id="cb444-4"><a href="the-haunted-dag-the-casual-terror.html#cb444-4" aria-hidden="true" tabindex="-1"></a><span class="st">                  S -&gt; A</span></span>
+<span id="cb444-5"><a href="the-haunted-dag-the-casual-terror.html#cb444-5" aria-hidden="true" tabindex="-1"></a><span class="st">                  S -&gt; M</span></span>
+<span id="cb444-6"><a href="the-haunted-dag-the-casual-terror.html#cb444-6" aria-hidden="true" tabindex="-1"></a><span class="st">                  S -&gt; W</span></span>
+<span id="cb444-7"><a href="the-haunted-dag-the-casual-terror.html#cb444-7" aria-hidden="true" tabindex="-1"></a><span class="st">                  W -&gt; D</span></span>
+<span id="cb444-8"><a href="the-haunted-dag-the-casual-terror.html#cb444-8" aria-hidden="true" tabindex="-1"></a><span class="st">                  M -&gt; D</span></span>
+<span id="cb444-9"><a href="the-haunted-dag-the-casual-terror.html#cb444-9" aria-hidden="true" tabindex="-1"></a><span class="st">                  }&quot;</span>)</span>
+<span id="cb444-10"><a href="the-haunted-dag-the-casual-terror.html#cb444-10" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(BW_dag) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="at">A =</span> <span class="dv">0</span>, <span class="at">S =</span> <span class="dv">0</span>, <span class="at">W =</span> <span class="dv">2</span>, <span class="at">M =</span> <span class="dv">1</span>, <span class="at">D =</span> <span class="dv">2</span>),</span>
+<span id="cb444-11"><a href="the-haunted-dag-the-casual-terror.html#cb444-11" aria-hidden="true" tabindex="-1"></a>                            <span class="at">y =</span> <span class="fu">c</span>(<span class="at">A =</span> <span class="dv">0</span>, <span class="at">S =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">W =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">M =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">D =</span> <span class="dv">0</span>))</span>
+<span id="cb444-12"><a href="the-haunted-dag-the-casual-terror.html#cb444-12" aria-hidden="true" tabindex="-1"></a><span class="fu">drawdag</span>(BW_dag)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
+<p>Let’s go back to the waffle divorce rate example in ch. 5. So what we want to know is if the number of Waffle House restaurants <span class="math inline">\(W\)</span> actually influences divorce rate <span class="math inline">\(D\)</span> in each state. <span class="math inline">\(A\)</span> is median age of marriage, <span class="math inline">\(M\)</span> is the marriage rate of the state and <span class="math inline">\(S\)</span> tells us if it is a southern state or not. So from the graph, <span class="math inline">\(S\)</span> has low age <span class="math inline">\(A\)</span> high marriage rate <span class="math inline">\(M\)</span> (through <span class="math inline">\(S \rightarrow M\)</span> and <span class="math inline">\(S \rightarrow A \rightarrow M\)</span>) and more waffle houses <span class="math inline">\(W\)</span> (<span class="math inline">\(S \rightarrow W\)</span>). Both <span class="math inline">\(A\)</span> and <span class="math inline">\(M\)</span> influence <span class="math inline">\(D\)</span>.<br />
+</p>
+<ul>
+<li>Step 1: list paths from <span class="math inline">\(W\)</span> to <span class="math inline">\(D\)</span>
+<ul>
+<li><span class="math inline">\(W \rightarrow D\)</span></li>
+<li><span class="math inline">\(W \leftarrow S \rightarrow M \rightarrow D\)</span></li>
+<li><span class="math inline">\(W \leftarrow S \rightarrow A \rightarrow M \rightarrow D\)</span></li>
+<li><span class="math inline">\(W \leftarrow S \rightarrow A \rightarrow D\)</span></li>
+</ul></li>
+<li>Step 2: classify open or closed
+<ul>
+<li>direct</li>
+<li>open</li>
+<li>open</li>
+<li>open</li>
+</ul></li>
+<li>Step 3: classify backdoors
+<ul>
+<li>direct</li>
+<li>backdoor</li>
+<li>backdoor</li>
+<li>backdoor</li>
+</ul></li>
+<li>Step 4: where do we condition?
+<ul>
+<li>NA</li>
+<li><span class="math inline">\(S\)</span></li>
+<li><span class="math inline">\(S\)</span></li>
+<li><span class="math inline">\(S\)</span></li>
+</ul></li>
+</ul>
+<p>We can ask the computer to confirm</p>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="the-haunted-dag-the-casual-terror.html#cb445-1" aria-hidden="true" tabindex="-1"></a>dag_6<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">dagitty</span>(<span class="st">&quot;dag {</span></span>
+<span id="cb445-2"><a href="the-haunted-dag-the-casual-terror.html#cb445-2" aria-hidden="true" tabindex="-1"></a><span class="st">                   A -&gt; D</span></span>
+<span id="cb445-3"><a href="the-haunted-dag-the-casual-terror.html#cb445-3" aria-hidden="true" tabindex="-1"></a><span class="st">                   A -&gt;M -&gt; D</span></span>
+<span id="cb445-4"><a href="the-haunted-dag-the-casual-terror.html#cb445-4" aria-hidden="true" tabindex="-1"></a><span class="st">                   A &lt;- S -&gt; M</span></span>
+<span id="cb445-5"><a href="the-haunted-dag-the-casual-terror.html#cb445-5" aria-hidden="true" tabindex="-1"></a><span class="st">                   S -&gt; W -&gt; D</span></span>
+<span id="cb445-6"><a href="the-haunted-dag-the-casual-terror.html#cb445-6" aria-hidden="true" tabindex="-1"></a><span class="st">                   }&quot;</span>)</span>
+<span id="cb445-7"><a href="the-haunted-dag-the-casual-terror.html#cb445-7" aria-hidden="true" tabindex="-1"></a><span class="fu">adjustmentSets</span>(dag_6<span class="fl">.2</span>, <span class="at">exposure =</span> <span class="st">&quot;W&quot;</span>, <span class="at">outcome =</span> <span class="st">&quot;D&quot;</span>)</span></code></pre></div>
+<pre><code>## { A, M }
+## { S }</code></pre>
+<p>We could do <span class="math inline">\(A\)</span> and <span class="math inline">\(M\)</span> together or just condition on <span class="math inline">\(S\)</span>.</p>
+<p>What about implied conditonal independencies?</p>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="the-haunted-dag-the-casual-terror.html#cb447-1" aria-hidden="true" tabindex="-1"></a><span class="fu">impliedConditionalIndependencies</span>(dag_6<span class="fl">.2</span>)</span></code></pre></div>
+<pre><code>## A _||_ W | S
+## D _||_ S | A, M, W
+## M _||_ W | S</code></pre>
+<p>From this output we can say that: (i) <span class="math inline">\(A\)</span> is independent of <span class="math inline">\(W\)</span> when conditioned on <span class="math inline">\(S\)</span> (ii) <span class="math inline">\(D\)</span> is independent of <span class="math inline">\(S\)</span> when conditioned on <span class="math inline">\(A\)</span>, <span class="math inline">\(M\)</span>, and <span class="math inline">\(W\)</span> (iii) <span class="math inline">\(M\)</span> is independent of <span class="math inline">\(W\)</span> when conditioned on <span class="math inline">\(S\)</span>.<br />
+</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="the-many-variables-the-spurious-waffles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ulysses-compass.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/05-blocks.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 Markov Chain Monte Carlo | Rethinking Companion</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9 Markov Chain Monte Carlo | Rethinking Companion" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 Markov Chain Monte Carlo | Rethinking Companion" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Wade VanderWright" />
+
+
+<meta name="date" content="2022-09-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="conditional-manatees.html"/>
+<link rel="next" href="big-entropy-and-the-generalized-linear-model.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Rethinking Companion</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> The Golem of Prague</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#statistical-golems"><i class="fa fa-check"></i><b>1.1</b> Statistical golems</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#statistical-rethinking"><i class="fa fa-check"></i><b>1.2</b> Statistical Rethinking</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#what-are-we-trying-to-do-with-the-golems"><i class="fa fa-check"></i><b>1.2.1</b> What are we trying to do with the golems?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#tools-for-golem-engineering"><i class="fa fa-check"></i><b>1.3</b> Tools for golem engineering</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#bayesian-data-analysis"><i class="fa fa-check"></i><b>1.3.1</b> Bayesian data analysis</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#model-comparison-and-predictions"><i class="fa fa-check"></i><b>1.3.2</b> Model comparison and predictions</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#multilevel-models"><i class="fa fa-check"></i><b>1.3.3</b> Multilevel models</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#graphical-causal-models"><i class="fa fa-check"></i><b>1.3.4</b> Graphical causal models</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#summary"><i class="fa fa-check"></i><b>1.4</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#session-info"><i class="fa fa-check"></i>Session Info</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html"><i class="fa fa-check"></i><b>2</b> Small worlds and large worlds</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#the-garden-of-forking-data"><i class="fa fa-check"></i><b>2.1</b> The garden of forking data</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#counting-possibilities"><i class="fa fa-check"></i><b>2.1.1</b> Counting possibilities</a></li>
+<li class="chapter" data-level="2.1.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#combining-other-information"><i class="fa fa-check"></i><b>2.1.2</b> Combining other information</a></li>
+<li class="chapter" data-level="2.1.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#from-counts-to-probability"><i class="fa fa-check"></i><b>2.1.3</b> From counts to probability</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#building-a-model"><i class="fa fa-check"></i><b>2.2</b> Building a model</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#a-data-story"><i class="fa fa-check"></i><b>2.2.1</b> A data story</a></li>
+<li class="chapter" data-level="2.2.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#bayesian-updating"><i class="fa fa-check"></i><b>2.2.2</b> Bayesian updating</a></li>
+<li class="chapter" data-level="2.2.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#evaluate"><i class="fa fa-check"></i><b>2.2.3</b> Evaluate</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#components-of-the-model"><i class="fa fa-check"></i><b>2.3</b> Components of the model</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#variables"><i class="fa fa-check"></i><b>2.3.1</b> Variables</a></li>
+<li class="chapter" data-level="2.3.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#definitions"><i class="fa fa-check"></i><b>2.3.2</b> Definitions</a></li>
+<li class="chapter" data-level="2.3.3" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#a-model-is-born"><i class="fa fa-check"></i><b>2.3.3</b> A model is born</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#maiking-the-model-go"><i class="fa fa-check"></i><b>2.4</b> Maiking the model go</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#quadratic"><i class="fa fa-check"></i><b>2.4.1</b> Quadratic</a></li>
+<li class="chapter" data-level="2.4.2" data-path="small-worlds-and-large-worlds.html"><a href="small-worlds-and-large-worlds.html#mcmc"><i class="fa fa-check"></i><b>2.4.2</b> MCMC</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html"><i class="fa fa-check"></i><b>3</b> Sampling the imaginary</a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#probabilities-vs.-frequency-counts"><i class="fa fa-check"></i><b>3.0.1</b> Probabilities vs. Frequency counts</a></li>
+<li class="chapter" data-level="3.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-from-a-grid-approximate-posterior"><i class="fa fa-check"></i><b>3.1</b> Sampling from a grid-approximate posterior</a></li>
+<li class="chapter" data-level="3.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-to-summarize"><i class="fa fa-check"></i><b>3.2</b> Sampling to summarize</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#intervals-of-defined-boundaries"><i class="fa fa-check"></i><b>3.2.1</b> Intervals of defined boundaries</a></li>
+<li class="chapter" data-level="3.2.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#intervals-of-defined-mass"><i class="fa fa-check"></i><b>3.2.2</b> intervals of defined mass</a></li>
+<li class="chapter" data-level="3.2.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#point-estimates"><i class="fa fa-check"></i><b>3.2.3</b> Point estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#sampling-to-simulate-prediction"><i class="fa fa-check"></i><b>3.3</b> Sampling to simulate prediction</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#dummy-data"><i class="fa fa-check"></i><b>3.3.1</b> Dummy data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#model-checking"><i class="fa fa-check"></i><b>3.3.2</b> Model checking</a></li>
+<li class="chapter" data-level="3.3.3" data-path="sampling-the-imaginary.html"><a href="sampling-the-imaginary.html#practice-with-brms"><i class="fa fa-check"></i><b>3.3.3</b> Practice with brms</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="geocentric-models.html"><a href="geocentric-models.html"><i class="fa fa-check"></i><b>4</b> Geocentric models</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="geocentric-models.html"><a href="geocentric-models.html#why-normal-distributions-are-normal"><i class="fa fa-check"></i><b>4.1</b> Why normal distributions are normal</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-addition"><i class="fa fa-check"></i><b>4.1.1</b> Normal by addition</a></li>
+<li class="chapter" data-level="4.1.2" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-multiplication"><i class="fa fa-check"></i><b>4.1.2</b> Normal by multiplication</a></li>
+<li class="chapter" data-level="4.1.3" data-path="geocentric-models.html"><a href="geocentric-models.html#normal-by-log-multiplication"><i class="fa fa-check"></i><b>4.1.3</b> Normal by log-multiplication</a></li>
+<li class="chapter" data-level="4.1.4" data-path="geocentric-models.html"><a href="geocentric-models.html#using-gaussian-distributions"><i class="fa fa-check"></i><b>4.1.4</b> Using Gaussian distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="geocentric-models.html"><a href="geocentric-models.html#a-language-for-describing-models"><i class="fa fa-check"></i><b>4.2</b> A language for describing models</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="geocentric-models.html"><a href="geocentric-models.html#re-describing-the-globe-tossing-model."><i class="fa fa-check"></i><b>4.2.1</b> Re-describing the globe tossing model.</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="geocentric-models.html"><a href="geocentric-models.html#gaussian-model-of-height"><i class="fa fa-check"></i><b>4.3</b> Gaussian model of height</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="geocentric-models.html"><a href="geocentric-models.html#the-data"><i class="fa fa-check"></i><b>4.3.1</b> The data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="geocentric-models.html"><a href="geocentric-models.html#the-model"><i class="fa fa-check"></i><b>4.3.2</b> The Model</a></li>
+<li class="chapter" data-level="4.3.3" data-path="geocentric-models.html"><a href="geocentric-models.html#grid-approximation-of-the-posterior-distribution"><i class="fa fa-check"></i><b>4.3.3</b> Grid approximation of the posterior distribution</a></li>
+<li class="chapter" data-level="4.3.4" data-path="geocentric-models.html"><a href="geocentric-models.html#sampling-from-the-posterior"><i class="fa fa-check"></i><b>4.3.4</b> Sampling from the posterior</a></li>
+<li class="chapter" data-level="4.3.5" data-path="geocentric-models.html"><a href="geocentric-models.html#finding-the-posterior-distribution-with-quap"><i class="fa fa-check"></i><b>4.3.5</b> Finding the posterior distribution with <code>quap</code></a></li>
+<li class="chapter" data-level="4.3.6" data-path="geocentric-models.html"><a href="geocentric-models.html#sampling-with-quap"><i class="fa fa-check"></i><b>4.3.6</b> Sampling with <code>quap</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="geocentric-models.html"><a href="geocentric-models.html#linear-prediction"><i class="fa fa-check"></i><b>4.4</b> Linear Prediction</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="geocentric-models.html"><a href="geocentric-models.html#finding-the-posterior-distribtuion"><i class="fa fa-check"></i><b>4.4.1</b> Finding the posterior distribtuion</a></li>
+<li class="chapter" data-level="4.4.2" data-path="geocentric-models.html"><a href="geocentric-models.html#interpreting-the-posterior-distribution"><i class="fa fa-check"></i><b>4.4.2</b> Interpreting the posterior distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="geocentric-models.html"><a href="geocentric-models.html#curves-from-lines"><i class="fa fa-check"></i><b>4.5</b> Curves from lines</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="geocentric-models.html"><a href="geocentric-models.html#polynomial-regression"><i class="fa fa-check"></i><b>4.5.1</b> Polynomial regression</a></li>
+<li class="chapter" data-level="4.5.2" data-path="geocentric-models.html"><a href="geocentric-models.html#splines"><i class="fa fa-check"></i><b>4.5.2</b> Splines</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html"><i class="fa fa-check"></i><b>5</b> The many variables &amp; the spurious waffles</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#spurious-assoiciation"><i class="fa fa-check"></i><b>5.1</b> Spurious assoiciation</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#think-before-to-regress"><i class="fa fa-check"></i><b>5.1.1</b> Think before to regress</a></li>
+<li class="chapter" data-level="5.1.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#testable-implications"><i class="fa fa-check"></i><b>5.1.2</b> Testable implications</a></li>
+<li class="chapter" data-level="5.1.3" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#multiple-regression-notation"><i class="fa fa-check"></i><b>5.1.3</b> Multiple regression notation</a></li>
+<li class="chapter" data-level="5.1.4" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#approximating-the-posterior"><i class="fa fa-check"></i><b>5.1.4</b> Approximating the posterior</a></li>
+<li class="chapter" data-level="5.1.5" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#plotting-multivariate-posteriors"><i class="fa fa-check"></i><b>5.1.5</b> Plotting multivariate posteriors</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#masked-relationship"><i class="fa fa-check"></i><b>5.2</b> Masked relationship</a></li>
+<li class="chapter" data-level="5.3" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Categorical variables</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#binary-categories"><i class="fa fa-check"></i><b>5.3.1</b> Binary categories</a></li>
+<li class="chapter" data-level="5.3.2" data-path="the-many-variables-the-spurious-waffles.html"><a href="the-many-variables-the-spurious-waffles.html#many-categories"><i class="fa fa-check"></i><b>5.3.2</b> Many categories</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html"><i class="fa fa-check"></i><b>6</b> The haunted dag &amp; the casual terror</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#multicollinearity"><i class="fa fa-check"></i><b>6.1</b> Multicollinearity</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#example-try-to-predict-height-from-length-of-a-persons-legs."><i class="fa fa-check"></i><b>6.1.1</b> Example: Try to predict height from length of a person’s legs.</a></li>
+<li class="chapter" data-level="6.1.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#multicollinear-milk"><i class="fa fa-check"></i><b>6.1.2</b> Multicollinear milk</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#post-treatrment-bias"><i class="fa fa-check"></i><b>6.2</b> Post-treatrment bias</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#a-prior-is-born"><i class="fa fa-check"></i><b>6.2.1</b> A prior is born</a></li>
+<li class="chapter" data-level="6.2.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#blocked-by-consequence"><i class="fa fa-check"></i><b>6.2.2</b> Blocked by consequence</a></li>
+<li class="chapter" data-level="6.2.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#fungus-and-d-separation"><i class="fa fa-check"></i><b>6.2.3</b> Fungus and d-separation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#collider-bias"><i class="fa fa-check"></i><b>6.3</b> Collider bias</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#collider-for-false-sorrow"><i class="fa fa-check"></i><b>6.3.1</b> Collider for false sorrow</a></li>
+<li class="chapter" data-level="6.3.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#the-haunted-dag"><i class="fa fa-check"></i><b>6.3.2</b> The haunted DAG</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#confronting-confounding"><i class="fa fa-check"></i><b>6.4</b> Confronting confounding</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#shutting-the-backdoor"><i class="fa fa-check"></i><b>6.4.1</b> Shutting the backdoor</a></li>
+<li class="chapter" data-level="6.4.2" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#two-roads"><i class="fa fa-check"></i><b>6.4.2</b> Two roads</a></li>
+<li class="chapter" data-level="6.4.3" data-path="the-haunted-dag-the-casual-terror.html"><a href="the-haunted-dag-the-casual-terror.html#backdoor-waffles"><i class="fa fa-check"></i><b>6.4.3</b> Backdoor waffles</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ulysses-compass.html"><a href="ulysses-compass.html"><i class="fa fa-check"></i><b>7</b> Ulysses’ compass</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#the-problem-with-parameters"><i class="fa fa-check"></i><b>7.1</b> The problem with parameters</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#more-parameters-almost-always-improve-fit"><i class="fa fa-check"></i><b>7.1.1</b> More parameters (almost) always improve fit</a></li>
+<li class="chapter" data-level="7.1.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#too-few-parameters-hurts-too"><i class="fa fa-check"></i><b>7.1.2</b> Too few parameters hurts, too</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#entropy-and-accuracy"><i class="fa fa-check"></i><b>7.2</b> Entropy and accuracy</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#firing-the-weatherperson"><i class="fa fa-check"></i><b>7.2.1</b> Firing the weatherperson</a></li>
+<li class="chapter" data-level="7.2.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#information-and-uncertainty"><i class="fa fa-check"></i><b>7.2.2</b> Information and uncertainty</a></li>
+<li class="chapter" data-level="7.2.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#from-entropy-to-accuracy"><i class="fa fa-check"></i><b>7.2.3</b> From entropy to accuracy</a></li>
+<li class="chapter" data-level="7.2.4" data-path="ulysses-compass.html"><a href="ulysses-compass.html#estimating-divergence"><i class="fa fa-check"></i><b>7.2.4</b> Estimating divergence</a></li>
+<li class="chapter" data-level="7.2.5" data-path="ulysses-compass.html"><a href="ulysses-compass.html#scoring-the-right-data"><i class="fa fa-check"></i><b>7.2.5</b> Scoring the right data</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#golem-taming-regularization"><i class="fa fa-check"></i><b>7.3</b> Golem taming: regularization</a></li>
+<li class="chapter" data-level="7.4" data-path="ulysses-compass.html"><a href="ulysses-compass.html#predicting-predictive-accuracy"><i class="fa fa-check"></i><b>7.4</b> Predicting predictive accuracy</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#cross-validation"><i class="fa fa-check"></i><b>7.4.1</b> Cross-validation</a></li>
+<li class="chapter" data-level="7.4.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#information-criteria"><i class="fa fa-check"></i><b>7.4.2</b> Information criteria</a></li>
+<li class="chapter" data-level="7.4.3" data-path="ulysses-compass.html"><a href="ulysses-compass.html#comparing-cv-psis-and-waic"><i class="fa fa-check"></i><b>7.4.3</b> Comparing CV, PSIS, and WAIC</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="ulysses-compass.html"><a href="ulysses-compass.html#model-comparison"><i class="fa fa-check"></i><b>7.5</b> Model comparison</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="ulysses-compass.html"><a href="ulysses-compass.html#model-mis-selection"><i class="fa fa-check"></i><b>7.5.1</b> Model mis-selection</a></li>
+<li class="chapter" data-level="7.5.2" data-path="ulysses-compass.html"><a href="ulysses-compass.html#outliers-and-other-illustions"><i class="fa fa-check"></i><b>7.5.2</b> Outliers and other illustions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="conditional-manatees.html"><a href="conditional-manatees.html"><i class="fa fa-check"></i><b>8</b> Conditional manatees</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#building-an-interaction"><i class="fa fa-check"></i><b>8.1</b> Building an interaction</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#making-a-rugged-model"><i class="fa fa-check"></i><b>8.1.1</b> Making a rugged model</a></li>
+<li class="chapter" data-level="8.1.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#adding-an-indicator-isnt-enough"><i class="fa fa-check"></i><b>8.1.2</b> Adding an indicator isn’t enough</a></li>
+<li class="chapter" data-level="8.1.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#adding-an-interaction-does-work"><i class="fa fa-check"></i><b>8.1.3</b> Adding an interaction does work</a></li>
+<li class="chapter" data-level="8.1.4" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-the-interaction"><i class="fa fa-check"></i><b>8.1.4</b> Plotting the interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#symmetry-of-interactions"><i class="fa fa-check"></i><b>8.2</b> Symmetry of interactions</a></li>
+<li class="chapter" data-level="8.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#continuous-interactions"><i class="fa fa-check"></i><b>8.3</b> Continuous interactions</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="conditional-manatees.html"><a href="conditional-manatees.html#a-winter-flower"><i class="fa fa-check"></i><b>8.3.1</b> A winter flower</a></li>
+<li class="chapter" data-level="8.3.2" data-path="conditional-manatees.html"><a href="conditional-manatees.html#the-models"><i class="fa fa-check"></i><b>8.3.2</b> the models</a></li>
+<li class="chapter" data-level="8.3.3" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-posterior-predictions"><i class="fa fa-check"></i><b>8.3.3</b> Plotting posterior predictions</a></li>
+<li class="chapter" data-level="8.3.4" data-path="conditional-manatees.html"><a href="conditional-manatees.html#plotting-prior-predictions"><i class="fa fa-check"></i><b>8.3.4</b> Plotting prior predictions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html"><i class="fa fa-check"></i><b>9</b> Markov Chain Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#good-king-markov-and-his-island-kingdom"><i class="fa fa-check"></i><b>9.1</b> Good King Markov and his island kingdom</a></li>
+<li class="chapter" data-level="9.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#metropolis-algorithims"><i class="fa fa-check"></i><b>9.2</b> Metropolis algorithims</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#gibbs-sampling"><i class="fa fa-check"></i><b>9.2.1</b> Gibbs sampling</a></li>
+<li class="chapter" data-level="9.2.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#high-dimensional-problems"><i class="fa fa-check"></i><b>9.2.2</b> High-dimensional problems</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#hamiltonian-monte-carlo"><i class="fa fa-check"></i><b>9.3</b> Hamiltonian Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#another-parable"><i class="fa fa-check"></i><b>9.3.1</b> Another parable</a></li>
+<li class="chapter" data-level="9.3.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#particles-in-space"><i class="fa fa-check"></i><b>9.3.2</b> Particles in space</a></li>
+<li class="chapter" data-level="9.3.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#limitations"><i class="fa fa-check"></i><b>9.3.3</b> Limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#easy-hmc-ulam-brm"><i class="fa fa-check"></i><b>9.4</b> Easy HMC: <code>ulam</code> (<code>brm</code>)</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#preperation"><i class="fa fa-check"></i><b>9.4.1</b> Preperation</a></li>
+<li class="chapter" data-level="9.4.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#sampling-from-the-posterior-1"><i class="fa fa-check"></i><b>9.4.2</b> Sampling from the posterior</a></li>
+<li class="chapter" data-level="9.4.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#sampling-again-in-parallel"><i class="fa fa-check"></i><b>9.4.3</b> Sampling again, in parallel</a></li>
+<li class="chapter" data-level="9.4.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#visualization"><i class="fa fa-check"></i><b>9.4.4</b> Visualization</a></li>
+<li class="chapter" data-level="9.4.5" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#checking-the-chain"><i class="fa fa-check"></i><b>9.4.5</b> Checking the chain</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#care-and-feeding-of-your-markov-chain"><i class="fa fa-check"></i><b>9.5</b> Care and feeding of your Markov chain</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#how-many-samples-do-you-need"><i class="fa fa-check"></i><b>9.5.1</b> How many samples do you need?</a></li>
+<li class="chapter" data-level="9.5.2" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#how-many-chains-do-you-need"><i class="fa fa-check"></i><b>9.5.2</b> How many chains do you need?</a></li>
+<li class="chapter" data-level="9.5.3" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#taming-a-wild-chain"><i class="fa fa-check"></i><b>9.5.3</b> Taming a wild chain</a></li>
+<li class="chapter" data-level="9.5.4" data-path="markov-chain-monte-carlo.html"><a href="markov-chain-monte-carlo.html#non-identifiable-parameters"><i class="fa fa-check"></i><b>9.5.4</b> Non-identifiable parameters</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html"><i class="fa fa-check"></i><b>10</b> Big entropy and the generalized linear model</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#maximum-entropy"><i class="fa fa-check"></i><b>10.1</b> Maximum entropy</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#gaussian"><i class="fa fa-check"></i><b>10.1.1</b> Gaussian</a></li>
+<li class="chapter" data-level="10.1.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#binomial"><i class="fa fa-check"></i><b>10.1.2</b> Binomial</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#generalized-linear-models"><i class="fa fa-check"></i><b>10.2</b> Generalized linear models</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#meet-the-family"><i class="fa fa-check"></i><b>10.2.1</b> Meet the family</a></li>
+<li class="chapter" data-level="10.2.2" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#linking-linear-models-to-distributions"><i class="fa fa-check"></i><b>10.2.2</b> Linking linear models to distributions</a></li>
+<li class="chapter" data-level="10.2.3" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#omitted-variable-bias-again"><i class="fa fa-check"></i><b>10.2.3</b> Omitted variable bias (again)</a></li>
+<li class="chapter" data-level="10.2.4" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#absolute-relative-differences"><i class="fa fa-check"></i><b>10.2.4</b> Absolute relative differences</a></li>
+<li class="chapter" data-level="10.2.5" data-path="big-entropy-and-the-generalized-linear-model.html"><a href="big-entropy-and-the-generalized-linear-model.html#glms-and-information-criteria"><i class="fa fa-check"></i><b>10.2.5</b> GLMs and information criteria</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html"><i class="fa fa-check"></i><b>11</b> God spiked the integers</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#binomial-regression"><i class="fa fa-check"></i><b>11.1</b> Binomial regression</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#logistic-regression-prosocial-chimpanzees"><i class="fa fa-check"></i><b>11.1.1</b> Logistic regression : Prosocial chimpanzees</a></li>
+<li class="chapter" data-level="11.1.2" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#relative-shark-and-absolute-deer"><i class="fa fa-check"></i><b>11.1.2</b> Relative shark and absolute deer</a></li>
+<li class="chapter" data-level="11.1.3" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#aggregated-binomial-chimps-condensed"><i class="fa fa-check"></i><b>11.1.3</b> Aggregated binomial: Chimps condensed</a></li>
+<li class="chapter" data-level="11.1.4" data-path="god-spiked-the-integers.html"><a href="god-spiked-the-integers.html#aggregated-admissions"><i class="fa fa-check"></i><b>11.1.4</b> Aggregated admissions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="monsters-and-mixtures.html"><a href="monsters-and-mixtures.html"><i class="fa fa-check"></i><b>12</b> Monsters and mixtures</a></li>
+<li class="chapter" data-level="13" data-path="models-with-memory.html"><a href="models-with-memory.html"><i class="fa fa-check"></i><b>13</b> Models with memory</a></li>
+<li class="chapter" data-level="14" data-path="adventures-in-covariance.html"><a href="adventures-in-covariance.html"><i class="fa fa-check"></i><b>14</b> Adventures in covariance</a></li>
+<li class="chapter" data-level="15" data-path="missing-data-and-other-opportunities.html"><a href="missing-data-and-other-opportunities.html"><i class="fa fa-check"></i><b>15</b> Missing data and other opportunities</a></li>
+<li class="chapter" data-level="16" data-path="generalized-linear-madness.html"><a href="generalized-linear-madness.html"><i class="fa fa-check"></i><b>16</b> Generalized linear madness</a></li>
+<li class="chapter" data-level="17" data-path="horoscopes.html"><a href="horoscopes.html"><i class="fa fa-check"></i><b>17</b> Horoscopes</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Rethinking Companion</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="markov-chain-monte-carlo" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Markov Chain Monte Carlo<a href="markov-chain-monte-carlo.html#markov-chain-monte-carlo" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="good-king-markov-and-his-island-kingdom" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Good King Markov and his island kingdom<a href="markov-chain-monte-carlo.html#good-king-markov-and-his-island-kingdom" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Ring of 10 islands increasing in size and population as you go around the ring.</p>
+<p>How do we visit each in proportion to population without too much time at see?</p>
+<p><em>Metropolis Algorithm</em><br />
+</p>
+<ol style="list-style-type: decimal">
+<li>flip a coin each week to decide stay or leave<br />
+</li>
+<li>Heads - consider clockwise ; Tails - Counterclockwise ; <em>proposal</em><br />
+</li>
+<li>Count seashells proportionate to <em>proposal</em> population. Count stones of current island.<br />
+</li>
+<li>If seashells &gt; stones then go to <em>proposal</em>. If stones &gt; seashells then discard stones equal to the number of seashells and mix remaining seashells and stones together. If he draws a seashell then move to <em>proposal</em>. If he draws a stone, stays for a week. This draw probability of moving is equal to seashells / stones.<br />
+</li>
+</ol>
+<p>In code:</p>
+<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="markov-chain-monte-carlo.html#cb567-1" aria-hidden="true" tabindex="-1"></a>num_weeks <span class="ot">&lt;-</span> <span class="fl">1e5</span></span>
+<span id="cb567-2"><a href="markov-chain-monte-carlo.html#cb567-2" aria-hidden="true" tabindex="-1"></a>positions <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, num_weeks)</span>
+<span id="cb567-3"><a href="markov-chain-monte-carlo.html#cb567-3" aria-hidden="true" tabindex="-1"></a>current <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb567-4"><a href="markov-chain-monte-carlo.html#cb567-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>num_weeks){</span>
+<span id="cb567-5"><a href="markov-chain-monte-carlo.html#cb567-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#record current island</span></span>
+<span id="cb567-6"><a href="markov-chain-monte-carlo.html#cb567-6" aria-hidden="true" tabindex="-1"></a>  positions[i] <span class="ot">&lt;-</span> current</span>
+<span id="cb567-7"><a href="markov-chain-monte-carlo.html#cb567-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#flip a coin</span></span>
+<span id="cb567-8"><a href="markov-chain-monte-carlo.html#cb567-8" aria-hidden="true" tabindex="-1"></a>  proposal <span class="ot">&lt;-</span> current <span class="sc">+</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb567-9"><a href="markov-chain-monte-carlo.html#cb567-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#link the loop between 10 and 1</span></span>
+<span id="cb567-10"><a href="markov-chain-monte-carlo.html#cb567-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(proposal <span class="sc">&lt;</span> <span class="dv">1</span>) proposal <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb567-11"><a href="markov-chain-monte-carlo.html#cb567-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(proposal <span class="sc">&gt;</span> <span class="dv">10</span>) proposal <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb567-12"><a href="markov-chain-monte-carlo.html#cb567-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># move ?</span></span>
+<span id="cb567-13"><a href="markov-chain-monte-carlo.html#cb567-13" aria-hidden="true" tabindex="-1"></a>  prob_move <span class="ot">&lt;-</span> proposal<span class="sc">/</span>current</span>
+<span id="cb567-14"><a href="markov-chain-monte-carlo.html#cb567-14" aria-hidden="true" tabindex="-1"></a>  current <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> prob_move, proposal, current)</span>
+<span id="cb567-15"><a href="markov-chain-monte-carlo.html#cb567-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Visualized:</p>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="markov-chain-monte-carlo.html#cb568-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb568-2"><a href="markov-chain-monte-carlo.html#cb568-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, positions[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>], <span class="at">col =</span> rangi2, <span class="at">xlab =</span> <span class="st">&quot;week&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;island&quot;</span>)</span>
+<span id="cb568-3"><a href="markov-chain-monte-carlo.html#cb568-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">table</span>(positions), <span class="at">col =</span> rangi2, <span class="at">xlab =</span> <span class="st">&quot;island&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;# of weeks&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-165-1.png" width="672" /></p>
+</div>
+<div id="metropolis-algorithims" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Metropolis algorithims<a href="markov-chain-monte-carlo.html#metropolis-algorithims" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We can equate the King Markov example to estimating a posterior probability distribution.</p>
+<ul>
+<li>Islands are like parameters that can take on any value<br />
+</li>
+<li>Population sizes are like posterior probabilities at each parameter value<br />
+</li>
+<li>Weeks are like the samples from the joint posterior between the parameters<br />
+</li>
+</ul>
+<div id="gibbs-sampling" class="section level3 hasAnchor" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Gibbs sampling<a href="markov-chain-monte-carlo.html#gibbs-sampling" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Gibbs sampling uses adaptive proposals that adjusts proposed parameter values in an intelligent manner. It does this by using <em>conjugate pairs</em> of prior distributions and likelihoods.</p>
+</div>
+<div id="high-dimensional-problems" class="section level3 hasAnchor" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> High-dimensional problems<a href="markov-chain-monte-carlo.html#high-dimensional-problems" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Gibbs can get stuck in small regions of the posterior in models with thousands of parameters or highly correlated parameters.</p>
+<p>This arises from the <strong>Concentration of measure</strong>. Basically the mode is not the most likely to be sampled.</p>
+<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="markov-chain-monte-carlo.html#cb569-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>)</span>
+<span id="cb569-2"><a href="markov-chain-monte-carlo.html#cb569-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb569-3"><a href="markov-chain-monte-carlo.html#cb569-3" aria-hidden="true" tabindex="-1"></a>concentration_sim <span class="ot">&lt;-</span> <span class="cf">function</span>(D, <span class="at">T =</span> <span class="fl">1e3</span>){</span>
+<span id="cb569-4"><a href="markov-chain-monte-carlo.html#cb569-4" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(T, <span class="fu">rep</span>(<span class="dv">0</span>, D), <span class="fu">diag</span>(D))</span>
+<span id="cb569-5"><a href="markov-chain-monte-carlo.html#cb569-5" aria-hidden="true" tabindex="-1"></a>rad_dist <span class="ot">&lt;-</span> <span class="cf">function</span>(Y) <span class="fu">sqrt</span>(<span class="fu">sum</span>(Y<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb569-6"><a href="markov-chain-monte-carlo.html#cb569-6" aria-hidden="true" tabindex="-1"></a>Rd <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>T, <span class="cf">function</span>(i) <span class="fu">rad_dist</span>(Y[i,]))</span>
+<span id="cb569-7"><a href="markov-chain-monte-carlo.html#cb569-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb569-8"><a href="markov-chain-monte-carlo.html#cb569-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb569-9"><a href="markov-chain-monte-carlo.html#cb569-9" aria-hidden="true" tabindex="-1"></a>Rd_a <span class="ot">&lt;-</span> <span class="fu">lapply</span>(d, concentration_sim)</span>
+<span id="cb569-10"><a href="markov-chain-monte-carlo.html#cb569-10" aria-hidden="true" tabindex="-1"></a>Rd_b <span class="ot">&lt;-</span> <span class="fu">unlist</span>(Rd_a)</span>
+<span id="cb569-11"><a href="markov-chain-monte-carlo.html#cb569-11" aria-hidden="true" tabindex="-1"></a><span class="fu">dens</span>(Rd_b)</span>
+<span id="cb569-12"><a href="markov-chain-monte-carlo.html#cb569-12" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">5</span>, <span class="fl">0.10</span>, <span class="st">&quot;1 &amp; 10&quot;</span>)</span>
+<span id="cb569-13"><a href="markov-chain-monte-carlo.html#cb569-13" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">11</span>, <span class="fl">0.10</span>, <span class="st">&quot;100&quot;</span>)</span>
+<span id="cb569-14"><a href="markov-chain-monte-carlo.html#cb569-14" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">33</span>, <span class="fl">0.10</span>, <span class="st">&quot;1000&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-166-1.png" width="672" /></p>
+</div>
+</div>
+<div id="hamiltonian-monte-carlo" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Hamiltonian Monte Carlo<a href="markov-chain-monte-carlo.html#hamiltonian-monte-carlo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="another-parable" class="section level3 hasAnchor" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> Another parable<a href="markov-chain-monte-carlo.html#another-parable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>King Monty is Markov’s cousin on the mainland. Monty’s kingdom lays in a narrow valley that runs North-south. The population is inversely related to elevation with most in the bottom of the valley and fewer on the mountainsides. King Monty picks a random direction and takes off with a random momentum. It will travel up and down as far as the momentum will carry it in a determined amount of time. When the time is reached, they stop. They then repeat. This removes any autocorrelation between neighbours. This is the basis of <strong>HMC</strong></p>
+</div>
+<div id="particles-in-space" class="section level3 hasAnchor" number="9.3.2">
+<h3><span class="header-section-number">9.3.2</span> Particles in space<a href="markov-chain-monte-carlo.html#particles-in-space" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If King Monty’s vehicle was like a marble that contained the current parameter values, and the parameter space was a bowl, HMC would be like randomly flicking the marble in the bowl and taking a new position sample at a random amount of time has passed. The marble must follow laws of physics and so too does HMC.</p>
+<p>Suppose there are 100 <span class="math inline">\(x\)</span> values and 100 <span class="math inline">\(y\)</span> values all sampled from Normal(0, 1).</p>
+<p><span class="math display">\[x_{i} \sim \text{Normal}(\mu_{x}, 1)\\
+y_{i} \sim \text{Normal}(\mu_{y}, 1)\\
+\mu_{x} \sim \text{Normal}(0, 0.5)\\
+\mu_{y} \sim \text{Normal}(0, 0.5)\]</span></p>
+<p>Computing the log-probability of parameters and data:
+<span class="math display">\[\sum_{i}\text{log}p(y_{i}|\mu_{y}, 1) + \sum_{i}\text{log}p(x_{i}|\mu_{x}, 1) + \text{log}p(\mu_{y}|0, 0.5) + \text{log}p(\mu_{x}|0, 0.5)\]</span></p>
+<p>Compute the gradient or slope in all directions from current position (same for <span class="math inline">\(y\)</span>):
+<span class="math display">\[\frac{\partial M}{\partial\mu_{x}}=\frac{\partial\text{log}N(x|\mu_{x},1)}{\partial\mu_{x}}+\frac{\partial\text{log}N(\mu_{x}|0, 0.5)}{\partial\mu_{x}}=\sum_{i}\frac{x_{i}-\mu_{x}}{1^2}+\frac{0-\mu_{x}}{0.5^2}\]</span></p>
+<p>Set leapfrog steps and step size. This is largely done for you. If the leapfrog steps and step size were to be the right combination you could run into <em>U turns</em> where the samples look a lot like the starting position. This is avoided in newer samplers with a <em>no-U-Turn Sampler</em> or <em>NUTS</em>.</p>
+<p>Write out HMC in raw code here**</p>
+</div>
+<div id="limitations" class="section level3 hasAnchor" number="9.3.3">
+<h3><span class="header-section-number">9.3.3</span> Limitations<a href="markov-chain-monte-carlo.html#limitations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote>
+<blockquote>
+<p>As always, there are some limitations. HMC requires continuous parameters. It can’t glide through a discrete parameter. In practice, this means that certain techniques, like the imputation of discrete missing data, have to be done differently with HMC. HMC can certainly sample from such models, often much more efficiently than a Gibbs sampler could. But you have to change how you code them. (p. 278)</p>
+</blockquote>
+</blockquote>
+</div>
+</div>
+<div id="easy-hmc-ulam-brm" class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Easy HMC: <code>ulam</code> (<code>brm</code>)<a href="markov-chain-monte-carlo.html#easy-hmc-ulam-brm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Revisiting the African ruggedness example from the last chapter.</p>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="markov-chain-monte-carlo.html#cb570-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(rugged)</span>
+<span id="cb570-2"><a href="markov-chain-monte-carlo.html#cb570-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> rugged</span>
+<span id="cb570-3"><a href="markov-chain-monte-carlo.html#cb570-3" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>log_gdp <span class="ot">&lt;-</span> <span class="fu">log</span>(d<span class="sc">$</span>rgdppc_2000)</span>
+<span id="cb570-4"><a href="markov-chain-monte-carlo.html#cb570-4" aria-hidden="true" tabindex="-1"></a>dd <span class="ot">&lt;-</span> d[<span class="fu">complete.cases</span>(d<span class="sc">$</span>rgdppc_2000),]</span>
+<span id="cb570-5"><a href="markov-chain-monte-carlo.html#cb570-5" aria-hidden="true" tabindex="-1"></a>dd<span class="sc">$</span>log_gdp_std <span class="ot">&lt;-</span> dd<span class="sc">$</span>log_gdp <span class="sc">/</span> <span class="fu">mean</span>(dd<span class="sc">$</span>log_gdp)</span>
+<span id="cb570-6"><a href="markov-chain-monte-carlo.html#cb570-6" aria-hidden="true" tabindex="-1"></a>dd<span class="sc">$</span>rugged_std <span class="ot">&lt;-</span> dd<span class="sc">$</span>rugged <span class="sc">/</span> <span class="fu">max</span>(dd<span class="sc">$</span>rugged)</span>
+<span id="cb570-7"><a href="markov-chain-monte-carlo.html#cb570-7" aria-hidden="true" tabindex="-1"></a>dd<span class="sc">$</span>cid <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dd<span class="sc">$</span>cont_africa <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
+<p>The old way:</p>
+<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="markov-chain-monte-carlo.html#cb571-1" aria-hidden="true" tabindex="-1"></a>m8<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">quap</span>(</span>
+<span id="cb571-2"><a href="markov-chain-monte-carlo.html#cb571-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb571-3"><a href="markov-chain-monte-carlo.html#cb571-3" aria-hidden="true" tabindex="-1"></a>    log_gdp_std <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb571-4"><a href="markov-chain-monte-carlo.html#cb571-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a[cid] <span class="sc">+</span> b[cid]<span class="sc">*</span>(rugged_std <span class="sc">-</span> <span class="fl">0.215</span>),</span>
+<span id="cb571-5"><a href="markov-chain-monte-carlo.html#cb571-5" aria-hidden="true" tabindex="-1"></a>    a[cid] <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">1</span>, <span class="fl">0.1</span>),</span>
+<span id="cb571-6"><a href="markov-chain-monte-carlo.html#cb571-6" aria-hidden="true" tabindex="-1"></a>    b[cid] <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.3</span>),</span>
+<span id="cb571-7"><a href="markov-chain-monte-carlo.html#cb571-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb571-8"><a href="markov-chain-monte-carlo.html#cb571-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> dd</span>
+<span id="cb571-9"><a href="markov-chain-monte-carlo.html#cb571-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb571-10"><a href="markov-chain-monte-carlo.html#cb571-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb571-11"><a href="markov-chain-monte-carlo.html#cb571-11" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m8<span class="fl">.3</span>, <span class="at">depth =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##             mean          sd        5.5%       94.5%
+## a[1]   0.8865703 0.015675587  0.86151766  0.91162289
+## a[2]   1.0505696 0.009936529  1.03468907  1.06645006
+## b[1]   0.1324943 0.074203905  0.01390215  0.25108650
+## b[2]  -0.1425928 0.054748970 -0.23009225 -0.05509339
+## sigma  0.1094933 0.005935183  0.10000769  0.11897882</code></pre>
+<div id="preperation" class="section level3 hasAnchor" number="9.4.1">
+<h3><span class="header-section-number">9.4.1</span> Preperation<a href="markov-chain-monte-carlo.html#preperation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Things to do before using HMC:<br />
+1. Preprocess any variable transformations. You don’t want to waste computing power by having these transformations in your model.<br />
+2. create a trimmed data frame of only parameters of interest. Also, remove <code>NA</code> values.<br />
+</p>
+<p>Create a slim list:</p>
+<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="markov-chain-monte-carlo.html#cb573-1" aria-hidden="true" tabindex="-1"></a>dat_slim <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb573-2"><a href="markov-chain-monte-carlo.html#cb573-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">log_gdp_std =</span> dd<span class="sc">$</span>log_gdp_std,</span>
+<span id="cb573-3"><a href="markov-chain-monte-carlo.html#cb573-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">rugged_std =</span> dd<span class="sc">$</span>rugged_std,</span>
+<span id="cb573-4"><a href="markov-chain-monte-carlo.html#cb573-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_rugged_std =</span> <span class="fu">mean</span>(dd<span class="sc">$</span>rugged_std),</span>
+<span id="cb573-5"><a href="markov-chain-monte-carlo.html#cb573-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">cid =</span> <span class="fu">as.integer</span>(dd<span class="sc">$</span>cid)</span>
+<span id="cb573-6"><a href="markov-chain-monte-carlo.html#cb573-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb573-7"><a href="markov-chain-monte-carlo.html#cb573-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dat_slim)</span></code></pre></div>
+<pre><code>## List of 4
+##  $ log_gdp_std    : num [1:170] 0.88 0.965 1.166 1.104 0.915 ...
+##  $ rugged_std     : num [1:170] 0.138 0.553 0.124 0.125 0.433 ...
+##  $ mean_rugged_std: num 0.215
+##  $ cid            : int [1:170] 1 2 2 2 2 2 2 2 2 1 ...</code></pre>
+</div>
+<div id="sampling-from-the-posterior-1" class="section level3 hasAnchor" number="9.4.2">
+<h3><span class="header-section-number">9.4.2</span> Sampling from the posterior<a href="markov-chain-monte-carlo.html#sampling-from-the-posterior-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="markov-chain-monte-carlo.html#cb575-1" aria-hidden="true" tabindex="-1"></a>m9<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">ulam</span>(</span>
+<span id="cb575-2"><a href="markov-chain-monte-carlo.html#cb575-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb575-3"><a href="markov-chain-monte-carlo.html#cb575-3" aria-hidden="true" tabindex="-1"></a>    log_gdp_std <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb575-4"><a href="markov-chain-monte-carlo.html#cb575-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a[cid] <span class="sc">+</span> b[cid]<span class="sc">*</span>(rugged_std <span class="sc">-</span> <span class="fl">0.215</span>),</span>
+<span id="cb575-5"><a href="markov-chain-monte-carlo.html#cb575-5" aria-hidden="true" tabindex="-1"></a>    a[cid] <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">1</span>, <span class="fl">0.1</span>),</span>
+<span id="cb575-6"><a href="markov-chain-monte-carlo.html#cb575-6" aria-hidden="true" tabindex="-1"></a>    b[cid] <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.3</span>),</span>
+<span id="cb575-7"><a href="markov-chain-monte-carlo.html#cb575-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb575-8"><a href="markov-chain-monte-carlo.html#cb575-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> dat_slim, <span class="at">chains =</span> <span class="dv">1</span></span>
+<span id="cb575-9"><a href="markov-chain-monte-carlo.html#cb575-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Warning in &#39;/var/folders/mm/1f07t6b52_5cp3r1k03vcnvh0000gn/T/RtmpfntIhr/model-d71202462e.stan&#39;, line 5, column 4: Declaration
+##     of arrays by placing brackets after a variable name is deprecated and
+##     will be removed in Stan 2.32.0. Instead use the array keyword before the
+##     type. This can be changed automatically using the auto-format flag to
+##     stanc</code></pre>
+<pre><code>## Running MCMC with 1 chain, with 1 thread(s) per chain...
+## 
+## Chain 1 Iteration:   1 / 1000 [  0%]  (Warmup) 
+## Chain 1 Iteration: 100 / 1000 [ 10%]  (Warmup) 
+## Chain 1 Iteration: 200 / 1000 [ 20%]  (Warmup) 
+## Chain 1 Iteration: 300 / 1000 [ 30%]  (Warmup) 
+## Chain 1 Iteration: 400 / 1000 [ 40%]  (Warmup) 
+## Chain 1 Iteration: 500 / 1000 [ 50%]  (Warmup) 
+## Chain 1 Iteration: 501 / 1000 [ 50%]  (Sampling) 
+## Chain 1 Iteration: 600 / 1000 [ 60%]  (Sampling) 
+## Chain 1 Iteration: 700 / 1000 [ 70%]  (Sampling) 
+## Chain 1 Iteration: 800 / 1000 [ 80%]  (Sampling) 
+## Chain 1 Iteration: 900 / 1000 [ 90%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1000 [100%]  (Sampling)</code></pre>
+<pre><code>## Chain 1 Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:</code></pre>
+<pre><code>## Chain 1 Exception: normal_lpdf: Scale parameter is 0, but must be positive! (in &#39;/var/folders/mm/1f07t6b52_5cp3r1k03vcnvh0000gn/T/RtmpfntIhr/model-d71202462e.stan&#39;, line 20, column 4 to column 39)</code></pre>
+<pre><code>## Chain 1 If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,</code></pre>
+<pre><code>## Chain 1 but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.</code></pre>
+<pre><code>## Chain 1</code></pre>
+<pre><code>## Chain 1 finished in 0.1 seconds.</code></pre>
+<div class="sourceCode" id="cb584"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb584-1"><a href="markov-chain-monte-carlo.html#cb584-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m9<span class="fl">.1</span>, <span class="at">depth =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##             mean          sd        5.5%       94.5%    n_eff     Rhat4
+## a[1]   0.8869532 0.015830713  0.86261676  0.91190040 454.1181 0.9992850
+## a[2]   1.0505183 0.009935779  1.03498795  1.06636110 683.5363 0.9979989
+## b[1]   0.1337524 0.075649421  0.01257881  0.25452763 512.2719 0.9997851
+## b[2]  -0.1410113 0.053844208 -0.22725398 -0.05794813 708.8812 1.0028886
+## sigma  0.1117050 0.005804116  0.10340290  0.12112133 591.0803 0.9980074</code></pre>
+<p><code>n_eff</code> is a crude estimate of independent samples. Rhat (<span class="math inline">\(\hat{R}\)</span>) is a measure of model convergence.</p>
+</div>
+<div id="sampling-again-in-parallel" class="section level3 hasAnchor" number="9.4.3">
+<h3><span class="header-section-number">9.4.3</span> Sampling again, in parallel<a href="markov-chain-monte-carlo.html#sampling-again-in-parallel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To save time and maximize computing power you can run chains at the same time.</p>
+<div class="sourceCode" id="cb586"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb586-1"><a href="markov-chain-monte-carlo.html#cb586-1" aria-hidden="true" tabindex="-1"></a>m9<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">ulam</span>(</span>
+<span id="cb586-2"><a href="markov-chain-monte-carlo.html#cb586-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb586-3"><a href="markov-chain-monte-carlo.html#cb586-3" aria-hidden="true" tabindex="-1"></a>    log_gdp_std <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb586-4"><a href="markov-chain-monte-carlo.html#cb586-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a[cid] <span class="sc">+</span> b[cid]<span class="sc">*</span>(rugged_std <span class="sc">-</span> <span class="fl">0.215</span>),</span>
+<span id="cb586-5"><a href="markov-chain-monte-carlo.html#cb586-5" aria-hidden="true" tabindex="-1"></a>    a[cid] <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">1</span>, <span class="fl">0.1</span>),</span>
+<span id="cb586-6"><a href="markov-chain-monte-carlo.html#cb586-6" aria-hidden="true" tabindex="-1"></a>    b[cid] <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="fl">0.3</span>),</span>
+<span id="cb586-7"><a href="markov-chain-monte-carlo.html#cb586-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb586-8"><a href="markov-chain-monte-carlo.html#cb586-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> dat_slim, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span></span>
+<span id="cb586-9"><a href="markov-chain-monte-carlo.html#cb586-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Warning in &#39;/var/folders/mm/1f07t6b52_5cp3r1k03vcnvh0000gn/T/RtmpfntIhr/model-d714e8ef537.stan&#39;, line 5, column 4: Declaration
+##     of arrays by placing brackets after a variable name is deprecated and
+##     will be removed in Stan 2.32.0. Instead use the array keyword before the
+##     type. This can be changed automatically using the auto-format flag to
+##     stanc</code></pre>
+<pre><code>## Running MCMC with 4 parallel chains, with 1 thread(s) per chain...
+## 
+## Chain 1 Iteration:   1 / 1000 [  0%]  (Warmup) 
+## Chain 1 Iteration: 100 / 1000 [ 10%]  (Warmup) 
+## Chain 1 Iteration: 200 / 1000 [ 20%]  (Warmup) 
+## Chain 1 Iteration: 300 / 1000 [ 30%]  (Warmup) 
+## Chain 1 Iteration: 400 / 1000 [ 40%]  (Warmup) 
+## Chain 1 Iteration: 500 / 1000 [ 50%]  (Warmup) 
+## Chain 1 Iteration: 501 / 1000 [ 50%]  (Sampling) 
+## Chain 1 Iteration: 600 / 1000 [ 60%]  (Sampling) 
+## Chain 1 Iteration: 700 / 1000 [ 70%]  (Sampling) 
+## Chain 1 Iteration: 800 / 1000 [ 80%]  (Sampling) 
+## Chain 1 Iteration: 900 / 1000 [ 90%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1000 [100%]  (Sampling)</code></pre>
+<pre><code>## Chain 1 Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:</code></pre>
+<pre><code>## Chain 1 Exception: normal_lpdf: Scale parameter is 0, but must be positive! (in &#39;/var/folders/mm/1f07t6b52_5cp3r1k03vcnvh0000gn/T/RtmpfntIhr/model-d714e8ef537.stan&#39;, line 20, column 4 to column 39)</code></pre>
+<pre><code>## Chain 1 If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,</code></pre>
+<pre><code>## Chain 1 but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.</code></pre>
+<pre><code>## Chain 1</code></pre>
+<pre><code>## Chain 2 Iteration:   1 / 1000 [  0%]  (Warmup) 
+## Chain 2 Iteration: 100 / 1000 [ 10%]  (Warmup) 
+## Chain 2 Iteration: 200 / 1000 [ 20%]  (Warmup) 
+## Chain 2 Iteration: 300 / 1000 [ 30%]  (Warmup) 
+## Chain 2 Iteration: 400 / 1000 [ 40%]  (Warmup) 
+## Chain 2 Iteration: 500 / 1000 [ 50%]  (Warmup) 
+## Chain 2 Iteration: 501 / 1000 [ 50%]  (Sampling)</code></pre>
+<pre><code>## Chain 2 Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:</code></pre>
+<pre><code>## Chain 2 Exception: normal_lpdf: Scale parameter is 0, but must be positive! (in &#39;/var/folders/mm/1f07t6b52_5cp3r1k03vcnvh0000gn/T/RtmpfntIhr/model-d714e8ef537.stan&#39;, line 20, column 4 to column 39)</code></pre>
+<pre><code>## Chain 2 If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,</code></pre>
+<pre><code>## Chain 2 but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.</code></pre>
+<pre><code>## Chain 2</code></pre>
+<pre><code>## Chain 3 Iteration:   1 / 1000 [  0%]  (Warmup) 
+## Chain 3 Iteration: 100 / 1000 [ 10%]  (Warmup) 
+## Chain 3 Iteration: 200 / 1000 [ 20%]  (Warmup) 
+## Chain 3 Iteration: 300 / 1000 [ 30%]  (Warmup) 
+## Chain 3 Iteration: 400 / 1000 [ 40%]  (Warmup) 
+## Chain 3 Iteration: 500 / 1000 [ 50%]  (Warmup) 
+## Chain 3 Iteration: 501 / 1000 [ 50%]  (Sampling)</code></pre>
+<pre><code>## Chain 3 Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:</code></pre>
+<pre><code>## Chain 3 Exception: normal_lpdf: Scale parameter is 0, but must be positive! (in &#39;/var/folders/mm/1f07t6b52_5cp3r1k03vcnvh0000gn/T/RtmpfntIhr/model-d714e8ef537.stan&#39;, line 20, column 4 to column 39)</code></pre>
+<pre><code>## Chain 3 If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,</code></pre>
+<pre><code>## Chain 3 but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.</code></pre>
+<pre><code>## Chain 3</code></pre>
+<pre><code>## Chain 4 Iteration:   1 / 1000 [  0%]  (Warmup) 
+## Chain 4 Iteration: 100 / 1000 [ 10%]  (Warmup) 
+## Chain 4 Iteration: 200 / 1000 [ 20%]  (Warmup) 
+## Chain 4 Iteration: 300 / 1000 [ 30%]  (Warmup) 
+## Chain 4 Iteration: 400 / 1000 [ 40%]  (Warmup) 
+## Chain 4 Iteration: 500 / 1000 [ 50%]  (Warmup) 
+## Chain 4 Iteration: 501 / 1000 [ 50%]  (Sampling) 
+## Chain 4 Iteration: 600 / 1000 [ 60%]  (Sampling)</code></pre>
+<pre><code>## Chain 4 Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:</code></pre>
+<pre><code>## Chain 4 Exception: normal_lpdf: Scale parameter is 0, but must be positive! (in &#39;/var/folders/mm/1f07t6b52_5cp3r1k03vcnvh0000gn/T/RtmpfntIhr/model-d714e8ef537.stan&#39;, line 20, column 4 to column 39)</code></pre>
+<pre><code>## Chain 4 If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,</code></pre>
+<pre><code>## Chain 4 but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.</code></pre>
+<pre><code>## Chain 4</code></pre>
+<pre><code>## Chain 1 finished in 0.3 seconds.
+## Chain 2 Iteration: 600 / 1000 [ 60%]  (Sampling) 
+## Chain 2 Iteration: 700 / 1000 [ 70%]  (Sampling) 
+## Chain 2 Iteration: 800 / 1000 [ 80%]  (Sampling) 
+## Chain 2 Iteration: 900 / 1000 [ 90%]  (Sampling) 
+## Chain 2 Iteration: 1000 / 1000 [100%]  (Sampling) 
+## Chain 3 Iteration: 600 / 1000 [ 60%]  (Sampling) 
+## Chain 3 Iteration: 700 / 1000 [ 70%]  (Sampling) 
+## Chain 3 Iteration: 800 / 1000 [ 80%]  (Sampling) 
+## Chain 3 Iteration: 900 / 1000 [ 90%]  (Sampling) 
+## Chain 3 Iteration: 1000 / 1000 [100%]  (Sampling) 
+## Chain 4 Iteration: 700 / 1000 [ 70%]  (Sampling) 
+## Chain 4 Iteration: 800 / 1000 [ 80%]  (Sampling) 
+## Chain 4 Iteration: 900 / 1000 [ 90%]  (Sampling) 
+## Chain 4 Iteration: 1000 / 1000 [100%]  (Sampling) 
+## Chain 2 finished in 0.3 seconds.
+## Chain 3 finished in 0.3 seconds.
+## Chain 4 finished in 0.3 seconds.
+## 
+## All 4 chains finished successfully.
+## Mean chain execution time: 0.3 seconds.
+## Total execution time: 0.6 seconds.</code></pre>
+<div class="sourceCode" id="cb613"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb613-1"><a href="markov-chain-monte-carlo.html#cb613-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(m9<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>## Hamiltonian Monte Carlo approximation
+## 2000 samples from 4 chains
+## 
+## Sampling durations (seconds):
+##         warmup sample total
+## chain:1   0.10   0.18  0.28
+## chain:2   0.22   0.11  0.34
+## chain:3   0.24   0.09  0.33
+## chain:4   0.18   0.08  0.26
+## 
+## Formula:
+## log_gdp_std ~ dnorm(mu, sigma)
+## mu &lt;- a[cid] + b[cid] * (rugged_std - 0.215)
+## a[cid] ~ dnorm(1, 0.1)
+## b[cid] ~ dnorm(0, 0.3)
+## sigma ~ dexp(1)</code></pre>
+<div class="sourceCode" id="cb615"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb615-1"><a href="markov-chain-monte-carlo.html#cb615-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m9<span class="fl">.1</span>, <span class="at">depth =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##             mean          sd        5.5%       94.5%    n_eff     Rhat4
+## a[1]   0.8866043 0.015086816  0.86307619  0.91070816 2496.039 0.9983660
+## a[2]   1.0504062 0.010079394  1.03455670  1.06664110 3540.261 0.9986465
+## b[1]   0.1321143 0.071303286  0.02013114  0.24660710 2596.586 1.0010825
+## b[2]  -0.1402688 0.055262930 -0.22792168 -0.05498101 2530.129 1.0000719
+## sigma  0.1114732 0.006281128  0.10178552  0.12225914 2453.089 0.9994101</code></pre>
+<p>How did we get more than 1000 independent samples? Stan is so good at sampling that it out performs random. It creates anit-correlated samples that increases the crude estimate of independent samples.</p>
+</div>
+<div id="visualization" class="section level3 hasAnchor" number="9.4.4">
+<h3><span class="header-section-number">9.4.4</span> Visualization<a href="markov-chain-monte-carlo.html#visualization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Everything is still pretty Gaussian</p>
+<div class="sourceCode" id="cb617"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb617-1"><a href="markov-chain-monte-carlo.html#cb617-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(m9<span class="fl">.1</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-176-1.png" width="672" /></p>
+</div>
+<div id="checking-the-chain" class="section level3 hasAnchor" number="9.4.5">
+<h3><span class="header-section-number">9.4.5</span> Checking the chain<a href="markov-chain-monte-carlo.html#checking-the-chain" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb618"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb618-1"><a href="markov-chain-monte-carlo.html#cb618-1" aria-hidden="true" tabindex="-1"></a><span class="fu">traceplot</span>(m9<span class="fl">.1</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-177-1.png" width="672" /></p>
+<p>Things to look for in a traceplot:<br />
+1. stationarity - staying in the same region<br />
+2. good mixing - good strong zigzags around the parameter space<br />
+3. convergence - independent chains end up in the same region<br />
+</p>
+<p>There are also trace rank plots that show histograms of ranked samples for each chain. You want them to be largely similar and overlapping.</p>
+<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="markov-chain-monte-carlo.html#cb619-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trankplot</span>(m9<span class="fl">.1</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-178-1.png" width="672" /></p>
+</div>
+</div>
+<div id="care-and-feeding-of-your-markov-chain" class="section level2 hasAnchor" number="9.5">
+<h2><span class="header-section-number">9.5</span> Care and feeding of your Markov chain<a href="markov-chain-monte-carlo.html#care-and-feeding-of-your-markov-chain" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="how-many-samples-do-you-need" class="section level3 hasAnchor" number="9.5.1">
+<h3><span class="header-section-number">9.5.1</span> How many samples do you need?<a href="markov-chain-monte-carlo.html#how-many-samples-do-you-need" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="how-many-chains-do-you-need" class="section level3 hasAnchor" number="9.5.2">
+<h3><span class="header-section-number">9.5.2</span> How many chains do you need?<a href="markov-chain-monte-carlo.html#how-many-chains-do-you-need" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Start with 1 for debugging purposes. After that 1 chain works as expected, run multiples to make sure they all behave the same. Then you can draw your inference from the multiple chains.</p>
+<p>Example: <code>warmup = 1000, iter = 10000</code>. You could do 3 chains of <code>warmup = 1000, iter = 4000</code> but then you end up throwing away 3000 samples. It is really up to you and your hardware.</p>
+</div>
+<div id="taming-a-wild-chain" class="section level3 hasAnchor" number="9.5.3">
+<h3><span class="header-section-number">9.5.3</span> Taming a wild chain<a href="markov-chain-monte-carlo.html#taming-a-wild-chain" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb620"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb620-1"><a href="markov-chain-monte-carlo.html#cb620-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb620-2"><a href="markov-chain-monte-carlo.html#cb620-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb620-3"><a href="markov-chain-monte-carlo.html#cb620-3" aria-hidden="true" tabindex="-1"></a>m9<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">ulam</span>(</span>
+<span id="cb620-4"><a href="markov-chain-monte-carlo.html#cb620-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb620-5"><a href="markov-chain-monte-carlo.html#cb620-5" aria-hidden="true" tabindex="-1"></a>    y <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb620-6"><a href="markov-chain-monte-carlo.html#cb620-6" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> alpha,</span>
+<span id="cb620-7"><a href="markov-chain-monte-carlo.html#cb620-7" aria-hidden="true" tabindex="-1"></a>    alpha <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">1000</span>),</span>
+<span id="cb620-8"><a href="markov-chain-monte-carlo.html#cb620-8" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="fl">0.0001</span>)</span>
+<span id="cb620-9"><a href="markov-chain-monte-carlo.html#cb620-9" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> <span class="fu">list</span>(<span class="at">y=</span>y), <span class="at">chains =</span> <span class="dv">3</span></span>
+<span id="cb620-10"><a href="markov-chain-monte-carlo.html#cb620-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Running MCMC with 3 sequential chains, with 1 thread(s) per chain...
+## 
+## Chain 1 Iteration:   1 / 1000 [  0%]  (Warmup) 
+## Chain 1 Iteration: 100 / 1000 [ 10%]  (Warmup) 
+## Chain 1 Iteration: 200 / 1000 [ 20%]  (Warmup) 
+## Chain 1 Iteration: 300 / 1000 [ 30%]  (Warmup) 
+## Chain 1 Iteration: 400 / 1000 [ 40%]  (Warmup) 
+## Chain 1 Iteration: 500 / 1000 [ 50%]  (Warmup) 
+## Chain 1 Iteration: 501 / 1000 [ 50%]  (Sampling) 
+## Chain 1 Iteration: 600 / 1000 [ 60%]  (Sampling) 
+## Chain 1 Iteration: 700 / 1000 [ 70%]  (Sampling) 
+## Chain 1 Iteration: 800 / 1000 [ 80%]  (Sampling) 
+## Chain 1 Iteration: 900 / 1000 [ 90%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1000 [100%]  (Sampling) 
+## Chain 1 finished in 0.1 seconds.
+## Chain 2 Iteration:   1 / 1000 [  0%]  (Warmup) 
+## Chain 2 Iteration: 100 / 1000 [ 10%]  (Warmup) 
+## Chain 2 Iteration: 200 / 1000 [ 20%]  (Warmup) 
+## Chain 2 Iteration: 300 / 1000 [ 30%]  (Warmup) 
+## Chain 2 Iteration: 400 / 1000 [ 40%]  (Warmup) 
+## Chain 2 Iteration: 500 / 1000 [ 50%]  (Warmup) 
+## Chain 2 Iteration: 501 / 1000 [ 50%]  (Sampling) 
+## Chain 2 Iteration: 600 / 1000 [ 60%]  (Sampling) 
+## Chain 2 Iteration: 700 / 1000 [ 70%]  (Sampling) 
+## Chain 2 Iteration: 800 / 1000 [ 80%]  (Sampling) 
+## Chain 2 Iteration: 900 / 1000 [ 90%]  (Sampling) 
+## Chain 2 Iteration: 1000 / 1000 [100%]  (Sampling) 
+## Chain 2 finished in 0.1 seconds.
+## Chain 3 Iteration:   1 / 1000 [  0%]  (Warmup) 
+## Chain 3 Iteration: 100 / 1000 [ 10%]  (Warmup) 
+## Chain 3 Iteration: 200 / 1000 [ 20%]  (Warmup) 
+## Chain 3 Iteration: 300 / 1000 [ 30%]  (Warmup) 
+## Chain 3 Iteration: 400 / 1000 [ 40%]  (Warmup) 
+## Chain 3 Iteration: 500 / 1000 [ 50%]  (Warmup) 
+## Chain 3 Iteration: 501 / 1000 [ 50%]  (Sampling) 
+## Chain 3 Iteration: 600 / 1000 [ 60%]  (Sampling) 
+## Chain 3 Iteration: 700 / 1000 [ 70%]  (Sampling) 
+## Chain 3 Iteration: 800 / 1000 [ 80%]  (Sampling) 
+## Chain 3 Iteration: 900 / 1000 [ 90%]  (Sampling) 
+## Chain 3 Iteration: 1000 / 1000 [100%]  (Sampling) 
+## Chain 3 finished in 0.1 seconds.
+## 
+## All 3 chains finished successfully.
+## Mean chain execution time: 0.1 seconds.
+## Total execution time: 0.5 seconds.</code></pre>
+<pre><code>## Warning: 108 of 1500 (7.0%) transitions ended with a divergence.
+## See https://mc-stan.org/misc/warnings for details.</code></pre>
+<div class="sourceCode" id="cb623"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb623-1"><a href="markov-chain-monte-carlo.html#cb623-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m9<span class="fl">.2</span>)</span></code></pre></div>
+<pre><code>##            mean       sd       5.5%     94.5%    n_eff    Rhat4
+## alpha -27.98188 280.3293 -485.10613  291.7374 121.2064 1.006568
+## sigma 390.82029 993.0716    1.83045 1870.8598 169.2490 1.025695</code></pre>
+<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb625-1"><a href="markov-chain-monte-carlo.html#cb625-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(m9<span class="fl">.2</span><span class="sc">@</span>stanfit)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-180-1.png" width="672" /></p>
+<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="markov-chain-monte-carlo.html#cb626-1" aria-hidden="true" tabindex="-1"></a><span class="fu">traceplot</span>(m9<span class="fl">.2</span>)</span>
+<span id="cb626-2"><a href="markov-chain-monte-carlo.html#cb626-2" aria-hidden="true" tabindex="-1"></a><span class="fu">trankplot</span>(m9<span class="fl">.2</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-180-2.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-180-3.png" width="672" /></p>
+<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="markov-chain-monte-carlo.html#cb627-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb627-2"><a href="markov-chain-monte-carlo.html#cb627-2" aria-hidden="true" tabindex="-1"></a>m9<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">ulam</span>(</span>
+<span id="cb627-3"><a href="markov-chain-monte-carlo.html#cb627-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb627-4"><a href="markov-chain-monte-carlo.html#cb627-4" aria-hidden="true" tabindex="-1"></a>    y <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb627-5"><a href="markov-chain-monte-carlo.html#cb627-5" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> alpha,</span>
+<span id="cb627-6"><a href="markov-chain-monte-carlo.html#cb627-6" aria-hidden="true" tabindex="-1"></a>    alpha <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">10</span>),</span>
+<span id="cb627-7"><a href="markov-chain-monte-carlo.html#cb627-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb627-8"><a href="markov-chain-monte-carlo.html#cb627-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> <span class="fu">list</span>(<span class="at">y=</span>y), <span class="at">chains =</span> <span class="dv">3</span></span>
+<span id="cb627-9"><a href="markov-chain-monte-carlo.html#cb627-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Running MCMC with 3 sequential chains, with 1 thread(s) per chain...
+## 
+## Chain 1 Iteration:   1 / 1000 [  0%]  (Warmup) 
+## Chain 1 Iteration: 100 / 1000 [ 10%]  (Warmup) 
+## Chain 1 Iteration: 200 / 1000 [ 20%]  (Warmup) 
+## Chain 1 Iteration: 300 / 1000 [ 30%]  (Warmup) 
+## Chain 1 Iteration: 400 / 1000 [ 40%]  (Warmup) 
+## Chain 1 Iteration: 500 / 1000 [ 50%]  (Warmup) 
+## Chain 1 Iteration: 501 / 1000 [ 50%]  (Sampling) 
+## Chain 1 Iteration: 600 / 1000 [ 60%]  (Sampling) 
+## Chain 1 Iteration: 700 / 1000 [ 70%]  (Sampling) 
+## Chain 1 Iteration: 800 / 1000 [ 80%]  (Sampling) 
+## Chain 1 Iteration: 900 / 1000 [ 90%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1000 [100%]  (Sampling) 
+## Chain 1 finished in 0.0 seconds.
+## Chain 2 Iteration:   1 / 1000 [  0%]  (Warmup) 
+## Chain 2 Iteration: 100 / 1000 [ 10%]  (Warmup) 
+## Chain 2 Iteration: 200 / 1000 [ 20%]  (Warmup) 
+## Chain 2 Iteration: 300 / 1000 [ 30%]  (Warmup) 
+## Chain 2 Iteration: 400 / 1000 [ 40%]  (Warmup) 
+## Chain 2 Iteration: 500 / 1000 [ 50%]  (Warmup) 
+## Chain 2 Iteration: 501 / 1000 [ 50%]  (Sampling) 
+## Chain 2 Iteration: 600 / 1000 [ 60%]  (Sampling) 
+## Chain 2 Iteration: 700 / 1000 [ 70%]  (Sampling) 
+## Chain 2 Iteration: 800 / 1000 [ 80%]  (Sampling) 
+## Chain 2 Iteration: 900 / 1000 [ 90%]  (Sampling) 
+## Chain 2 Iteration: 1000 / 1000 [100%]  (Sampling) 
+## Chain 2 finished in 0.0 seconds.
+## Chain 3 Iteration:   1 / 1000 [  0%]  (Warmup) 
+## Chain 3 Iteration: 100 / 1000 [ 10%]  (Warmup) 
+## Chain 3 Iteration: 200 / 1000 [ 20%]  (Warmup) 
+## Chain 3 Iteration: 300 / 1000 [ 30%]  (Warmup) 
+## Chain 3 Iteration: 400 / 1000 [ 40%]  (Warmup) 
+## Chain 3 Iteration: 500 / 1000 [ 50%]  (Warmup) 
+## Chain 3 Iteration: 501 / 1000 [ 50%]  (Sampling) 
+## Chain 3 Iteration: 600 / 1000 [ 60%]  (Sampling) 
+## Chain 3 Iteration: 700 / 1000 [ 70%]  (Sampling) 
+## Chain 3 Iteration: 800 / 1000 [ 80%]  (Sampling) 
+## Chain 3 Iteration: 900 / 1000 [ 90%]  (Sampling) 
+## Chain 3 Iteration: 1000 / 1000 [100%]  (Sampling) 
+## Chain 3 finished in 0.0 seconds.
+## 
+## All 3 chains finished successfully.
+## Mean chain execution time: 0.0 seconds.
+## Total execution time: 0.5 seconds.</code></pre>
+<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb629-1"><a href="markov-chain-monte-carlo.html#cb629-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m9<span class="fl">.3</span>)</span></code></pre></div>
+<pre><code>##           mean        sd      5.5%    94.5%    n_eff    Rhat4
+## alpha 0.135228 1.1001034 -1.566137 1.895650 606.2608 1.003484
+## sigma 1.607333 0.8904931  0.669326 3.117943 592.4768 1.001492</code></pre>
+<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb631-1"><a href="markov-chain-monte-carlo.html#cb631-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(m9<span class="fl">.3</span><span class="sc">@</span>stanfit)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-182-1.png" width="672" /></p>
+<div class="sourceCode" id="cb632"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb632-1"><a href="markov-chain-monte-carlo.html#cb632-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb632-2"><a href="markov-chain-monte-carlo.html#cb632-2" aria-hidden="true" tabindex="-1"></a><span class="fu">traceplot</span>(m9<span class="fl">.3</span>)</span>
+<span id="cb632-3"><a href="markov-chain-monte-carlo.html#cb632-3" aria-hidden="true" tabindex="-1"></a><span class="fu">trankplot</span>(m9<span class="fl">.3</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-182-2.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-182-3.png" width="672" /></p>
+</div>
+<div id="non-identifiable-parameters" class="section level3 hasAnchor" number="9.5.4">
+<h3><span class="header-section-number">9.5.4</span> Non-identifiable parameters<a href="markov-chain-monte-carlo.html#non-identifiable-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb633-1"><a href="markov-chain-monte-carlo.html#cb633-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb633-2"><a href="markov-chain-monte-carlo.html#cb633-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><span class="math display">\[
+y_{i} \sim \text{Normal}(\mu, \sigma)\\
+\mu = \alpha_{1} + \alpha_{2}\\
+\alpha_{1} \sim \text{Normal}(0, 1000)\\
+\alpha_{2} \sim \text{Normal}(0, 1000)\\
+\sigma \sim \text{Exponential}(1)
+\]</span></p>
+<p>Here <span class="math inline">\(\alpha_{1}\)</span> and <span class="math inline">\(\alpha_{2}\)</span> are unknown but we know that they will sum to nearly 0 (the mean of the simulated <span class="math inline">\(y\)</span>)</p>
+<div class="sourceCode" id="cb634"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb634-1"><a href="markov-chain-monte-carlo.html#cb634-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb634-2"><a href="markov-chain-monte-carlo.html#cb634-2" aria-hidden="true" tabindex="-1"></a>m9<span class="fl">.4</span> <span class="ot">&lt;-</span> <span class="fu">ulam</span>(</span>
+<span id="cb634-3"><a href="markov-chain-monte-carlo.html#cb634-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb634-4"><a href="markov-chain-monte-carlo.html#cb634-4" aria-hidden="true" tabindex="-1"></a>    y <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb634-5"><a href="markov-chain-monte-carlo.html#cb634-5" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a1 <span class="sc">+</span> a2,</span>
+<span id="cb634-6"><a href="markov-chain-monte-carlo.html#cb634-6" aria-hidden="true" tabindex="-1"></a>    a1 <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">1000</span>),</span>
+<span id="cb634-7"><a href="markov-chain-monte-carlo.html#cb634-7" aria-hidden="true" tabindex="-1"></a>    a2 <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">1000</span>),</span>
+<span id="cb634-8"><a href="markov-chain-monte-carlo.html#cb634-8" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb634-9"><a href="markov-chain-monte-carlo.html#cb634-9" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> <span class="fu">list</span>(<span class="at">y =</span> y), <span class="at">chains =</span> <span class="dv">3</span></span>
+<span id="cb634-10"><a href="markov-chain-monte-carlo.html#cb634-10" aria-hidden="true" tabindex="-1"></a>) <span class="co">#this will take a few minutes</span></span></code></pre></div>
+<pre><code>## Running MCMC with 3 sequential chains, with 1 thread(s) per chain...
+## 
+## Chain 1 Iteration:   1 / 1000 [  0%]  (Warmup) 
+## Chain 1 Iteration: 100 / 1000 [ 10%]  (Warmup) 
+## Chain 1 Iteration: 200 / 1000 [ 20%]  (Warmup) 
+## Chain 1 Iteration: 300 / 1000 [ 30%]  (Warmup) 
+## Chain 1 Iteration: 400 / 1000 [ 40%]  (Warmup) 
+## Chain 1 Iteration: 500 / 1000 [ 50%]  (Warmup) 
+## Chain 1 Iteration: 501 / 1000 [ 50%]  (Sampling) 
+## Chain 1 Iteration: 600 / 1000 [ 60%]  (Sampling) 
+## Chain 1 Iteration: 700 / 1000 [ 70%]  (Sampling) 
+## Chain 1 Iteration: 800 / 1000 [ 80%]  (Sampling) 
+## Chain 1 Iteration: 900 / 1000 [ 90%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1000 [100%]  (Sampling) 
+## Chain 1 finished in 1.6 seconds.
+## Chain 2 Iteration:   1 / 1000 [  0%]  (Warmup) 
+## Chain 2 Iteration: 100 / 1000 [ 10%]  (Warmup) 
+## Chain 2 Iteration: 200 / 1000 [ 20%]  (Warmup) 
+## Chain 2 Iteration: 300 / 1000 [ 30%]  (Warmup) 
+## Chain 2 Iteration: 400 / 1000 [ 40%]  (Warmup) 
+## Chain 2 Iteration: 500 / 1000 [ 50%]  (Warmup) 
+## Chain 2 Iteration: 501 / 1000 [ 50%]  (Sampling) 
+## Chain 2 Iteration: 600 / 1000 [ 60%]  (Sampling) 
+## Chain 2 Iteration: 700 / 1000 [ 70%]  (Sampling) 
+## Chain 2 Iteration: 800 / 1000 [ 80%]  (Sampling) 
+## Chain 2 Iteration: 900 / 1000 [ 90%]  (Sampling) 
+## Chain 2 Iteration: 1000 / 1000 [100%]  (Sampling) 
+## Chain 2 finished in 1.5 seconds.
+## Chain 3 Iteration:   1 / 1000 [  0%]  (Warmup) 
+## Chain 3 Iteration: 100 / 1000 [ 10%]  (Warmup) 
+## Chain 3 Iteration: 200 / 1000 [ 20%]  (Warmup) 
+## Chain 3 Iteration: 300 / 1000 [ 30%]  (Warmup) 
+## Chain 3 Iteration: 400 / 1000 [ 40%]  (Warmup) 
+## Chain 3 Iteration: 500 / 1000 [ 50%]  (Warmup) 
+## Chain 3 Iteration: 501 / 1000 [ 50%]  (Sampling) 
+## Chain 3 Iteration: 600 / 1000 [ 60%]  (Sampling) 
+## Chain 3 Iteration: 700 / 1000 [ 70%]  (Sampling) 
+## Chain 3 Iteration: 800 / 1000 [ 80%]  (Sampling) 
+## Chain 3 Iteration: 900 / 1000 [ 90%]  (Sampling) 
+## Chain 3 Iteration: 1000 / 1000 [100%]  (Sampling) 
+## Chain 3 finished in 1.5 seconds.
+## 
+## All 3 chains finished successfully.
+## Mean chain execution time: 1.5 seconds.
+## Total execution time: 4.7 seconds.</code></pre>
+<pre><code>## Warning: 1166 of 1500 (78.0%) transitions hit the maximum treedepth limit of 10.
+## See https://mc-stan.org/misc/warnings for details.</code></pre>
+<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb637-1"><a href="markov-chain-monte-carlo.html#cb637-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m9<span class="fl">.4</span>)</span></code></pre></div>
+<pre><code>##               mean           sd          5.5%       94.5%    n_eff    Rhat4
+## a1     174.6107422 608.12646691  -681.9274950 1036.605700 1.574017 6.011029
+## a2    -174.7320368 608.12642123 -1036.7634500  681.796330 1.574013 6.011069
+## sigma    0.8961799   0.06550096     0.7913783    1.001362 4.268243 1.330069</code></pre>
+<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb639-1"><a href="markov-chain-monte-carlo.html#cb639-1" aria-hidden="true" tabindex="-1"></a><span class="fu">traceplot</span>(m9<span class="fl">.4</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-185-1.png" width="672" /></p>
+<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb640-1"><a href="markov-chain-monte-carlo.html#cb640-1" aria-hidden="true" tabindex="-1"></a>m9<span class="fl">.5</span> <span class="ot">&lt;-</span> <span class="fu">ulam</span>(</span>
+<span id="cb640-2"><a href="markov-chain-monte-carlo.html#cb640-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">alist</span>(</span>
+<span id="cb640-3"><a href="markov-chain-monte-carlo.html#cb640-3" aria-hidden="true" tabindex="-1"></a> y <span class="sc">~</span> <span class="fu">dnorm</span>(mu, sigma),</span>
+<span id="cb640-4"><a href="markov-chain-monte-carlo.html#cb640-4" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> a1 <span class="sc">+</span> a2,</span>
+<span id="cb640-5"><a href="markov-chain-monte-carlo.html#cb640-5" aria-hidden="true" tabindex="-1"></a>    a1 <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">10</span>),</span>
+<span id="cb640-6"><a href="markov-chain-monte-carlo.html#cb640-6" aria-hidden="true" tabindex="-1"></a>    a2 <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">10</span>),</span>
+<span id="cb640-7"><a href="markov-chain-monte-carlo.html#cb640-7" aria-hidden="true" tabindex="-1"></a>    sigma <span class="sc">~</span> <span class="fu">dexp</span>(<span class="dv">1</span>)</span>
+<span id="cb640-8"><a href="markov-chain-monte-carlo.html#cb640-8" aria-hidden="true" tabindex="-1"></a>  ), <span class="at">data =</span> <span class="fu">list</span>(<span class="at">y =</span> y), <span class="at">chains =</span> <span class="dv">3</span></span>
+<span id="cb640-9"><a href="markov-chain-monte-carlo.html#cb640-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Running MCMC with 3 sequential chains, with 1 thread(s) per chain...
+## 
+## Chain 1 Iteration:   1 / 1000 [  0%]  (Warmup) 
+## Chain 1 Iteration: 100 / 1000 [ 10%]  (Warmup) 
+## Chain 1 Iteration: 200 / 1000 [ 20%]  (Warmup)</code></pre>
+<pre><code>## Chain 1 Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:</code></pre>
+<pre><code>## Chain 1 Exception: normal_lpdf: Scale parameter is 0, but must be positive! (in &#39;/var/folders/mm/1f07t6b52_5cp3r1k03vcnvh0000gn/T/RtmpfntIhr/model-d715e6f455d.stan&#39;, line 15, column 4 to column 29)</code></pre>
+<pre><code>## Chain 1 If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,</code></pre>
+<pre><code>## Chain 1 but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.</code></pre>
+<pre><code>## Chain 1</code></pre>
+<pre><code>## Chain 1 Iteration: 300 / 1000 [ 30%]  (Warmup) 
+## Chain 1 Iteration: 400 / 1000 [ 40%]  (Warmup) 
+## Chain 1 Iteration: 500 / 1000 [ 50%]  (Warmup) 
+## Chain 1 Iteration: 501 / 1000 [ 50%]  (Sampling) 
+## Chain 1 Iteration: 600 / 1000 [ 60%]  (Sampling) 
+## Chain 1 Iteration: 700 / 1000 [ 70%]  (Sampling) 
+## Chain 1 Iteration: 800 / 1000 [ 80%]  (Sampling) 
+## Chain 1 Iteration: 900 / 1000 [ 90%]  (Sampling) 
+## Chain 1 Iteration: 1000 / 1000 [100%]  (Sampling) 
+## Chain 1 finished in 0.6 seconds.
+## Chain 2 Iteration:   1 / 1000 [  0%]  (Warmup) 
+## Chain 2 Iteration: 100 / 1000 [ 10%]  (Warmup) 
+## Chain 2 Iteration: 200 / 1000 [ 20%]  (Warmup) 
+## Chain 2 Iteration: 300 / 1000 [ 30%]  (Warmup) 
+## Chain 2 Iteration: 400 / 1000 [ 40%]  (Warmup) 
+## Chain 2 Iteration: 500 / 1000 [ 50%]  (Warmup) 
+## Chain 2 Iteration: 501 / 1000 [ 50%]  (Sampling) 
+## Chain 2 Iteration: 600 / 1000 [ 60%]  (Sampling) 
+## Chain 2 Iteration: 700 / 1000 [ 70%]  (Sampling) 
+## Chain 2 Iteration: 800 / 1000 [ 80%]  (Sampling) 
+## Chain 2 Iteration: 900 / 1000 [ 90%]  (Sampling) 
+## Chain 2 Iteration: 1000 / 1000 [100%]  (Sampling) 
+## Chain 2 finished in 0.7 seconds.
+## Chain 3 Iteration:   1 / 1000 [  0%]  (Warmup) 
+## Chain 3 Iteration: 100 / 1000 [ 10%]  (Warmup)</code></pre>
+<pre><code>## Chain 3 Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:</code></pre>
+<pre><code>## Chain 3 Exception: normal_lpdf: Scale parameter is 0, but must be positive! (in &#39;/var/folders/mm/1f07t6b52_5cp3r1k03vcnvh0000gn/T/RtmpfntIhr/model-d715e6f455d.stan&#39;, line 15, column 4 to column 29)</code></pre>
+<pre><code>## Chain 3 If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,</code></pre>
+<pre><code>## Chain 3 but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.</code></pre>
+<pre><code>## Chain 3</code></pre>
+<pre><code>## Chain 3 Iteration: 200 / 1000 [ 20%]  (Warmup) 
+## Chain 3 Iteration: 300 / 1000 [ 30%]  (Warmup) 
+## Chain 3 Iteration: 400 / 1000 [ 40%]  (Warmup) 
+## Chain 3 Iteration: 500 / 1000 [ 50%]  (Warmup) 
+## Chain 3 Iteration: 501 / 1000 [ 50%]  (Sampling) 
+## Chain 3 Iteration: 600 / 1000 [ 60%]  (Sampling) 
+## Chain 3 Iteration: 700 / 1000 [ 70%]  (Sampling) 
+## Chain 3 Iteration: 800 / 1000 [ 80%]  (Sampling) 
+## Chain 3 Iteration: 900 / 1000 [ 90%]  (Sampling) 
+## Chain 3 Iteration: 1000 / 1000 [100%]  (Sampling) 
+## Chain 3 finished in 0.9 seconds.
+## 
+## All 3 chains finished successfully.
+## Mean chain execution time: 0.8 seconds.
+## Total execution time: 2.4 seconds.</code></pre>
+<pre><code>## Warning: 12 of 1500 (1.0%) transitions hit the maximum treedepth limit of 10.
+## See https://mc-stan.org/misc/warnings for details.</code></pre>
+<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb655-1"><a href="markov-chain-monte-carlo.html#cb655-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precis</span>(m9<span class="fl">.5</span>)</span></code></pre></div>
+<pre><code>##             mean         sd        5.5%     94.5%    n_eff    Rhat4
+## a1    -0.3084331 6.44184205 -10.7135755 10.130659 422.4934 1.002721
+## a2     0.1855495 6.43880572 -10.2473870 10.618578 422.6697 1.002665
+## sigma  0.9279288 0.06630305   0.8234673  1.035225 330.4001 1.010305</code></pre>
+<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb657-1"><a href="markov-chain-monte-carlo.html#cb657-1" aria-hidden="true" tabindex="-1"></a><span class="fu">traceplot</span>(m9<span class="fl">.5</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-187-1.png" width="672" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="conditional-manatees.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="big-entropy-and-the-generalized-linear-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/10-mcmc.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

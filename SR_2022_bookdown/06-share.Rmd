@@ -17,6 +17,9 @@ $$R^{2} = \frac{\text{var(outcome)} - \text{var(residuals)}} {\text{var(outcome)
 But $R^2$ is misleading because adding in more predictor variables almost always improves model fit, even if they are a bunch of random numbers that aren't related to the outcome.\
 
 ### More parameters (almost) always improve fit
+```{r, echo=FALSE}
+detach(package:brms)
+```
 
 Unfortunately overfitting happens automatically. To see this in action, we will look at seven hominin species' average body mass and brain volume.
 
@@ -390,7 +393,7 @@ Here, $\sigma$ is static, $\alpha = 0$, and our $\beta$ coefficients are known.
 
 How it works:
 ```{r}
-n_sim <- 100 #number of simulations
+n_sim <- 10 #number of simulations
 kseq <- 1:5 #number of parameters in the model
 
 #simulation function 
@@ -504,7 +507,7 @@ pWAIC <- sapply(1:n_cases, function(i) var(logprob[i,]))
 
 ```{r, Rcode 7.24}
 #compare to automatic function
-WAIC(m)
+rethinking::WAIC(m)
 
 #calculate the standard error of the WAIC for yourself
 waic_vec <- -2*(lppd - pWAIC)
