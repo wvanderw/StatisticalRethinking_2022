@@ -1,3 +1,169 @@
+--- 
+title: "Rethinking Companion"
+author: "Wade VanderWright"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The HTML output format for this example is bookdown::gitbook,
+  set in the _output.yml file.
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+---
+
+# url: your book url like https://bookdown.org/yihui/bookdown
+
+Placeholder
+
+
+## Statistical golems
+## Statistical Rethinking
+### What are we trying to do with the golems?
+## Tools for golem engineering
+### Bayesian data analysis
+### Model comparison and predictions
+### Multilevel models
+### Graphical causal models
+## Summary
+## Session Info {-} 
+
+<!--chapter:end:index.Rmd-->
+
+
+# Small worlds and large worlds
+
+Placeholder
+
+
+## The garden of forking data
+### Counting possibilities
+### Combining other information
+### From counts to probability
+## Building a model
+### A data story
+### Bayesian updating
+### Evaluate
+## Components of the model
+### Variables
+### Definitions
+#### Observed variables
+#### Unobserved variables
+### A model is born
+## Maiking the model go
+### Quadratic
+### MCMC
+## Select practice questions
+
+<!--chapter:end:01-intro.Rmd-->
+
+
+# Sampling the imaginary
+
+Placeholder
+
+
+### Probabilities vs. Frequency counts
+## Sampling from a grid-approximate posterior
+## Sampling to summarize
+### Intervals of defined boundaries
+### intervals of defined mass
+### Point estimates
+## Sampling to simulate prediction
+### Dummy data
+### Model checking
+#### Did the software work? 
+#### Is the model adequate? 
+### Practice with brms
+
+<!--chapter:end:02-cross-refs.Rmd-->
+
+
+# Geocentric models
+
+Placeholder
+
+
+## Why normal distributions are normal
+### Normal by addition
+### Normal by multiplication
+### Normal by log-multiplication
+### Using Gaussian distributions
+## A language for describing models
+### Re-describing the globe tossing model. 
+## Gaussian model of height
+### The data
+### The Model
+### Grid approximation of the posterior distribution
+### Sampling from the posterior
+### Finding the posterior distribution with ```quap```
+### Sampling with ```quap```
+## Linear Prediction
+#### Probability of the data (first line of the model)
+#### Linear model (second line of the model)
+#### Priors (lines 3-5 of the model)
+### Finding the posterior distribtuion
+### Interpreting the posterior distribution
+#### Tables of marginal distributions
+#### Plotting the posterior inference against the data
+#### Adding uncertainty around the mean
+#### Plotting regression intervals and contours
+#### Prediction Intervals
+## Curves from lines
+### Polynomial regression
+### Splines
+
+<!--chapter:end:03-parts.Rmd-->
+
+
+# The many variables & the spurious waffles
+
+Placeholder
+
+
+## Spurious assoiciation 
+### Think before to regress
+### Testable implications  
+### Multiple regression notation
+### Approximating the posterior
+### Plotting multivariate posteriors
+#### Predictor residual plots
+#### Posterior prediction plots
+#### Counterfactual plots
+#### Simulate counterfactuals by hand
+## Masked relationship
+## Categorical variables
+### Binary categories
+### Many categories
+
+<!--chapter:end:04-citations.Rmd-->
+
+
+# The haunted dag & the casual terror
+
+Placeholder
+
+
+## Multicollinearity
+### Example: Try to predict height from length of a person's legs.
+### Multicollinear milk
+## Post-treatrment bias
+### A prior is born
+### Blocked by consequence
+### Fungus and d-separation
+## Collider bias
+### Collider for false sorrow
+### The haunted DAG
+## Confronting confounding
+### Shutting the backdoor
+### Two roads
+### Backdoor waffles
+
+<!--chapter:end:05-blocks.Rmd-->
+
 # Ulysses' compass
 
 The hero of Homer's *Odyssey*, Ulysses, had two navigate between two dire consequences to complete his voyage. On one side, a beast with many heads and a taste for men, on the other side, a sea monster that sank boats. In statistical modelling, we are navigating equally treacherous waters while trying to avoid two things\
@@ -659,3 +825,116 @@ precis(m5.3t)
 ```
 
 The age of marriage effect has been increased (farther from zero) slightly and the marriage rate has gotten closer to zero with a wider sd.
+
+<!--chapter:end:06-share.Rmd-->
+
+
+# Conditional manatees
+
+Placeholder
+
+
+## Building an interaction
+### Making a rugged model
+### Adding an indicator isn't enough
+### Adding an interaction does work
+### Plotting the interaction
+## Symmetry of interactions
+## Continuous interactions
+### A winter flower
+### the models
+### Plotting posterior predictions
+### Plotting prior predictions
+
+<!--chapter:end:09-manatees.Rmd-->
+
+
+# Markov Chain Monte Carlo
+
+Placeholder
+
+
+## Good King Markov and his island kingdom
+## Metropolis algorithims
+### Gibbs sampling
+### High-dimensional problems
+## Hamiltonian Monte Carlo
+### Another parable
+### Particles in space
+### Limitations
+## Easy HMC: `ulam` (`brm`)
+### Preperation
+### Sampling from the posterior
+### Sampling again, in parallel
+### Visualization
+### Checking the chain
+## Care and feeding of your Markov chain
+### How many samples do you need?
+### How many chains do you need?
+### Taming a wild chain
+### Non-identifiable parameters
+
+<!--chapter:end:10-mcmc.Rmd-->
+
+
+# Big entropy and the generalized linear model
+
+Placeholder
+
+
+## Maximum entropy
+### Gaussian
+### Binomial
+## Generalized linear models
+### Meet the family
+### Linking linear models to distributions 
+### Omitted variable bias (again)
+### Absolute relative differences
+### GLMs and information criteria
+
+<!--chapter:end:11-GLM.Rmd-->
+
+
+# God spiked the integers
+
+Placeholder
+
+
+## Binomial regression
+### Logistic regression : Prosocial chimpanzees
+### Relative shark and absolute deer
+### Aggregated binomial: Chimps condensed
+### Aggregated admissions
+
+<!--chapter:end:12-godspiked.Rmd-->
+
+# Monsters and mixtures
+
+<!--chapter:end:13-monsters.Rmd-->
+
+# Models with memory
+
+<!--chapter:end:14-modelmemory.Rmd-->
+
+# Adventures in covariance
+
+<!--chapter:end:15-adventures.Rmd-->
+
+# Missing data and other opportunities
+
+<!--chapter:end:16-missingdata.Rmd-->
+
+# Generalized linear madness
+
+<!--chapter:end:17-GLmadness.Rmd-->
+
+# Horoscopes
+
+<!--chapter:end:18-horoscopes.Rmd-->
+
+`r if (knitr::is_html_output()) '
+# References {-}
+'`
+
+<!--chapter:end:19-references.Rmd-->
+

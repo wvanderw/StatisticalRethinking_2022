@@ -410,14 +410,15 @@ d <- sim_happiness(seed = 1977, N_years = 1000)
 precis(d)
 ```
 
-```{r}
-plot(d2$age, d2$happiness, col = as.factor(d2$married))
-```
 
 `d` now contains 1000 years of age, happiness, and marriage status. To avoid unmarried children from altering the results we can remove them.
 ```{r, Rcode 6.22}
 d2 <- d[d$age > 17,] #pick out adults
 d2$A <- (d2$age - 18) / (65 - 18) #set age back to zero and bound between 0 and 1
+```
+
+```{r}
+plot(d2$age, d2$happiness, col = as.factor(d2$married))
 ```
 
 Now we can create the model of happiness from age and marriage status
