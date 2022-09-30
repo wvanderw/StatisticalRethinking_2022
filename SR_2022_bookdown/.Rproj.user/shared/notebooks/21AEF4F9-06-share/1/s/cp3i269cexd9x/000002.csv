@@ -1,0 +1,5 @@
+"0","R2_is_bad <- function(quap_fit){"
+"0","  s <- sim(quap_fit, refresh = 0)"
+"0","  r <- apply(s, 2, mean) - d$brain_std"
+"0","  1 - var2(r)/var2(d$brain_std)"
+"0","}"

@@ -1,0 +1,47 @@
+"0","show(m9.1)"
+"1","Hamiltonian Monte Carlo approximation
+"
+"1","2000 samples from 4 chains
+"
+"1","
+Sampling durations (seconds):
+"
+"1","       "
+"1"," warmup"
+"1"," sample"
+"1"," total"
+"1","
+chain:1"
+"1","   0.15"
+"1","   0.11"
+"1","  0.26"
+"1","
+chain:2"
+"1","   0.16"
+"1","   0.12"
+"1","  0.27"
+"1","
+chain:3"
+"1","   0.16"
+"1","   0.10"
+"1","  0.26"
+"1","
+chain:4"
+"1","   0.13"
+"1","   0.11"
+"1","  0.24"
+"1","
+"
+"1","
+Formula:
+"
+"1","log_gdp_std ~ dnorm(mu, sigma)
+"
+"1","mu <- a[cid] + b[cid] * (rugged_std - 0.215)
+"
+"1","a[cid] ~ dnorm(1, 0.1)
+"
+"1","b[cid] ~ dnorm(0, 0.3)
+"
+"1","sigma ~ dexp(1)
+"

@@ -1,0 +1,2 @@
+"0","#penalty term in WAIC"
+"0","pWAIC <- sapply(1:n_cases, function(i) var(logprob[i,]))"

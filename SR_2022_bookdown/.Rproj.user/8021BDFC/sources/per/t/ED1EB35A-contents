@@ -1,0 +1,153 @@
+--- 
+title: "Rethinking Companion"
+author: "Wade VanderWright"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The HTML output format for this example is bookdown::gitbook,
+  set in the _output.yml file.
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+---
+
+# The Golem of Prague
+
+This is a _companion_ book written in Markdown for McElreath's *Statistical Rethinking* (2020). You can set up your R console by running:
+
+```{r eval=FALSE}
+install.packages(c("coda","mvtnorm","devtools","dagitty"))
+library(devtools)
+devtools::install_github("rmcelreath/rethinking")
+```
+
+## Statistical golems
+
+The Golem of Prague and statistical golems (models) are powerful but lack wisdom. As McElreath tells us, there are many kinds of golems and figuring out how to build the one you need to carry out the task at hand can be tricky. 
+
+Figure 1.1
+```{r echo=FALSE}
+knitr::include_graphics("./_images/fig1.1.png")
+```
+
+
+In addition, novel research often requires novel methods and the researchers may have to stray from the common tests to engineer their own golems.
+
+
+
+## Statistical Rethinking
+
+>A lot can go wrong with statistical inference, and this is one reason that beginners are
+>so anxious about it. When the goal is to choose a pre-made test from a flowchart, then the
+>anxiety can mount as one worries about choosing the “correct” test.
+
+More work is needed to ensure researchers understand all the moving parts of their golems and how to interpret their results.
+
+### What are we trying to do with the golems?
+
+The popular belief is that we need to create models that use statistical means to test the null hypothesis. 
+
+Two reasons why deductive falsification doesn't work:
+
+>1. Hypotheses are not models. The relations among hypothese and different kinds of models are complex. Many models correspond to the same hypothesis, and many hypotheses corresponf to asingle model. This makes strict falsification impossible. 
+
+All models are false, but some are useful.
+
+Figure 1.2
+```{r echo=FALSE}
+knitr::include_graphics("./_images/fig1.2.png")
+```
+
+Two opposing hypothesis for evolutionary change:
+
+H~0~: Neutral theory (random mutation and drift) 
+
+H~1~: Natural selection (fitness leads to observed change)
+
+Process models for each hypothesis:
+
+P~0a~: steady state in time (null)
+
+P~0b~: fluctuations in population size through time
+
+P~1a~: selection favours the same alleles through time
+
+P~1b~: selection preference fluctuates through time (different alleles)
+
+Statistical Models:
+
+M~i~: unique to P~0b~
+
+M~ii~: Power law in the data (frequency) shared expectation of *P~0a~ and P~1b~*
+
+M~iii~: unique to P~1a~
+
+*Note that all process models contain time, solidifying directionality*
+
+
+
+
+>2. Measurements matter. Even when we think the data falsify a model, another observer will debate our methods and measures. They don't trust the data. Sometime sthey are right.
+
+_The colour of swans_
+
+Before Australia was discovered, all swans were white and no number of observations could prove this fact to be true.
+
+H~0~: All swans are white
+
+Australia had black swans, which instantly makes H~0~ false.
+
+Remember, observations are prone to error and hypotheses are quantitative rather than discrete. 
+
+>"At the edges of scientific knowledge, the ability to measure a hypothetical phenomenon is often in question as much as the phenomenon itself."
+
+
+
+## Tools for golem engineering
+
+>You'll wreck Prague eventually, you just need to notice the destruction.
+
+We want our models to be able to design inquiry, extract information from data, and make predictions. To do this we will need:
+
+1. Bayesian data analysis
+2. Model comparison
+3. Multilevel Models
+4. Graphical causal models
+
+### Bayesian data analysis
+
+Bayesian data analysis takes questions in the form of a model and produces logical probability distributions of the answer. This represents plausibility. 
+
+### Model comparison and predictions
+
+Model comparison is often thought of in terms of 'which model will make the best predictions?' Two tools for this are Cross-validation and Information Criteria. 
+
+Complex models usually make worse predictions than simple ones due to *overfitting*. The smarter the golem, the dumber its predictions. Fitting is easy; prediction is hard.
+
+### Multilevel models
+
+### Graphical causal models
+
+
+
+## Summary
+
+
+
+## Session Info {-} 
+
+```{r}
+sessionInfo()
+```
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```

@@ -1,0 +1,1 @@
+"0","plot(dbinom(6, size = 9, prob = seq(from = 0, to = 1, by = 0.1)))"

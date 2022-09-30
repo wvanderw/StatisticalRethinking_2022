@@ -1,0 +1,1 @@
+"0","text(d$mass[6]-2, d$brain[6], labels = d$species[6])"

@@ -1,0 +1,2 @@
+"0","sum_blbr <- post$bl + post$br"
+"0","dens(sum_blbr, col=rangi2, lwd = 2, xlab = 'sum of bl and br')"

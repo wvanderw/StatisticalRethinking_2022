@@ -1,0 +1,1 @@
+"0","pairs(~ kcal.per.g + perc.fat + perc.lactose, data = d, col = rangi2)"

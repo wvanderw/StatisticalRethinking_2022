@@ -1,0 +1,593 @@
+# Conditional manatees
+
+## Building an interaction
+$R$ = ruggedness, $G$ = GDP, $C$ = continent, $U$ = unobserved variables.
+```{r}
+library(dagitty)
+library(rethinking)
+dag_8.1 <- dagitty("dag{
+                   R -> G
+                   C -> G
+                   U -> G
+                   U -> R
+                   }")
+coordinates(dag_8.1) <- list(y = c(R = 0, G = 0, C = 0, U = 1),
+                             x = c(R = 0, G = 1, U = 1, C = 2))
+drawdag(dag_8.1)
+```
+
+$G = f(R,C)$ 
+
+### Making a rugged model
+
+```{r, Rcode 8.1}
+library(rethinking)
+data(rugged)
+d <- rugged
+
+#log transform GDP
+d$log_gdp <- log(d$rgdppc_2000)
+
+#only include countries with GDP data
+dd <- d[complete.cases(d$rgdppc_2000),]
+
+#rescale variables
+dd$log_gdp_std <- (dd$log_gdp) / mean(dd$log_gdp) # values of 1 is average
+dd$rugged_std <- (dd$rugged) / max(dd$rugged) # values range from 0 to max ruggedness (1)
+
+```
+
+Basic model
+$$\text{log}(y_{i}) \sim \text{Normal}(\mu_{i}, \sigma)\\
+\mu_{i} = \alpha + \beta(r_{i} - \overline{r})\\
+\alpha \sim \text{Normal}|(1,1)\\
+\beta \sim \text{Normal}(0, 1)\\
+\sigma \sim \text{Exponential}(1)$$
+
+In R:
+```{r, Rcode 8.2}
+m8.1 <- quap(
+  alist(
+    log_gdp_std ~ dnorm(mu, sigma),
+    mu <- a + b*(rugged_std - 0.215),
+    a ~ dnorm(1, 1),
+    b ~ dnorm(0, 1),
+    sigma ~ dexp(1)
+  ), data = dd
+)
+```
+
+Sample priors:
+```{r, Rcode 8.3}
+set.seed(11)
+prior <- extract.prior(m8.1)
+
+#set plot
+plot(NULL, xlim=c(0,1), ylim=c(0.5, 1.5), xlab = "ruggedness", ylab = "log GDP")
+abline(h=min(dd$log_gdp_std), lty = 2)
+abline(h=max(dd$log_gdp_std), lty = 2)
+
+#draw lines from prior
+rugged_seq <- seq(from = -0.1, to = 1.1, length.out=30)
+mu <- link(m8.1, post = prior, data = data.frame(rugged_std=rugged_seq))
+for(i in 1:50){
+  lines(rugged_seq, mu[i,], col=col.alpha('black',0.3))
+  }
+```
+
+$\alpha$ is too wild. intercept should be somewhere around where the mean of ruggedness hits 1 on the log GDP scale so adjust to Normal(1, 0.1).
+
+$\beta$ is also out of control. we need something (positive or negative) that spans the difference between the dashed lines
+
+Slope should be $\pm 0.6$ which is the differece between the maximum and minimum values of GDP
+```{r}
+max(dd$log_gdp_std) - min(dd$log_gdp_std)
+```
+
+```{r, echo=FALSE}
+#set plot
+plot(NULL, xlim=c(0,1), ylim=c(0.5, 1.5), xlab = "ruggedness", ylab = "log GDP")
+abline(h=min(dd$log_gdp_std), lty = 2)
+abline(h=max(dd$log_gdp_std), lty = 2)
+
+#draw lines from prior
+rugged_seq <- seq(from = -0.1, to = 1.1, length.out=30)
+mu <- link(m8.1, post = prior, data = data.frame(rugged_std=rugged_seq))
+for(i in 1:50){
+  lines(rugged_seq, mu[i,], col=col.alpha('black',0.3))
+  }
+
+abline(a=1.3, b = -0.6, lwd = 3, col = rangi2)
+abline(a = 0.7, 0.6, lwd = 3, col = rangi2)
+
+```
+
+```{r}
+#proportion of slopes greater than 0.6
+sum(abs(prior$b) > 0.6) / length(prior$b)
+```
+
+Let's fix the model
+```{r}
+m8.1 <- quap(
+  alist(
+    log_gdp_std ~dnorm(mu,sigma),
+    mu <-a+b*(rugged_std-0.215),
+    a ~dnorm(1,0.1),
+    b ~dnorm(0,0.3),
+    sigma ~dexp(1)
+  ), data = dd
+)
+
+```
+
+```{r, echo=FALSE}
+set.seed(11)
+prior <- extract.prior(m8.1)
+
+
+#set plot
+plot(NULL, xlim=c(0,1), ylim=c(0.5, 1.5), xlab = "ruggedness", ylab = "log GDP")
+abline(h=min(dd$log_gdp_std), lty = 2)
+abline(h=max(dd$log_gdp_std), lty = 2)
+
+#draw lines from prior
+rugged_seq <- seq(from = -0.1, to = 1.1, length.out=30)
+mu <- link(m8.1, post = prior, data = data.frame(rugged_std=rugged_seq))
+for(i in 1:50){
+  lines(rugged_seq, mu[i,], col=col.alpha('black',0.3))
+  }
+
+abline(a=1.3, b = -0.6, lwd = 3, col = rangi2)
+abline(a = 0.7, 0.6, lwd = 3, col = rangi2)
+
+```
+
+```{r}
+precis(m8.1)
+```
+
+
+No association seen yet
+
+### Adding an indicator isn't enough
+
+Update $\mu$ 
+
+$$\mu_{i} = \alpha_{CID[i]} + \beta(r_{i} - \overline{r})$$
+
+
+
+```{r}
+#make an index variable for Africa (1) and other continents (2)
+dd$cid <- ifelse(dd$cont_africa == 1, 1, 2)
+```
+
+Now update the model
+```{r}
+m8.2 <- quap(
+  alist(
+    log_gdp_std ~ dnorm(mu, sigma),
+    mu <-a[cid] + b * (rugged_std - 0.215),
+    a[cid] ~ dnorm(1, 0.1),
+    b ~ dnorm(0, 0.3),
+    sigma ~dexp(1)
+  ), data = dd
+)
+```
+
+
+```{r}
+compare(m8.1, m8.2)
+```
+
+```{r}
+precis(m8.2, depth = 2)
+```
+
+```{r}
+post <- extract.samples(m8.2)
+diff_a1_a2 <- post$a[,1] - post$a[,2]
+PI(diff_a1_a2)
+```
+
+```{r}
+rugged.seq <- seq(from = -0.1, to = 1.1, length.out = 30)
+mu.NotAfrica <- link(m8.2, data = data.frame(cid=2, rugged_std=rugged.seq))
+mu.Africa <- link(m8.2, data = data.frame(cid = 1, rugged_std = rugged.seq))
+mu.NotAfrica_mu <- apply(mu.NotAfrica, 2, mean)
+mu.NotAfrica_ci <- apply(mu.NotAfrica, 2, PI, prob = 0.97)
+mu.Africa_mu <- apply(mu.Africa, 2, mean)
+mu.Africa_ci <- apply(mu.Africa, 2, PI)
+
+plot(NULL, xlim=c(0,1), ylim=c(0.5, 1.5), xlab = "ruggedness", ylab = "log GDP")
+points(dd$rugged_std, dd$log_gdp_std, col = dd$cid, pch = 16)
+lines(rugged.seq, mu.Africa_mu, lwd = 2, col = 1)
+shade(mu.Africa_ci, rugged.seq)
+lines(rugged.seq, mu.NotAfrica_mu, lwd = 2, col = 2)
+shade(mu.NotAfrica_ci, rugged.seq, col = col.alpha(2, 0.3))
+
+```
+
+### Adding an interaction does work
+
+$$\mu_{i} = \alpha_{CID[i]} + \beta_{CID[i]}(r_{i} - \overline{r})$$
+
+```{r}
+m8.3 <- quap(
+  alist(
+     log_gdp_std ~ dnorm(mu, sigma),
+    mu <-a[cid] + b[cid] * (rugged_std - 0.215),
+    a[cid] ~ dnorm(1, 0.1),
+    b[cid] ~ dnorm(0, 0.3),
+    sigma ~dexp(1)
+  ), data = dd
+)
+
+precis(m8.3, depth = 2)
+```
+
+```{r}
+compare(m8.1, m8.2, m8.3, func=PSIS)
+```
+
+```{r}
+plot(PSIS(m8.3, pointwise = TRUE)$k)
+```
+
+### Plotting the interaction
+
+```{r}
+par(mfrow=c(1,2))
+# plot Africa - cid = 1
+d.A1 <-dd[dd$cid == 1,]
+plot(d.A1$rugged_std, d.A1$log_gdp_std, pch=16, col=rangi2,
+xlab="ruggedness (standardized)",ylab="log GDP (as proportion of mean)",
+xlim=c(0,1) )
+mu <-link(m8.3,data=data.frame(cid=1,rugged_std=rugged_seq))
+mu_mean <-apply(mu,2,mean)
+mu_ci <-apply(mu,2,PI,prob=0.97)
+lines( rugged_seq,mu_mean,lwd=2)
+shade( mu_ci,rugged_seq,col=col.alpha(rangi2,0.3))
+mtext("African nations")
+# plotnon-Africa-cid=2
+d.A0 <-dd[dd$cid==2,]
+plot( d.A0$rugged_std,d.A0$log_gdp_std,pch=1,col="black",
+xlab="ruggedness (standardized)",ylab="logGDP(asproportionofmean)",
+xlim=c(0,1) )
+mu <-link(m8.3,data=data.frame(cid=2,rugged_std=rugged_seq))
+mu_mean <-apply(mu,2,mean)
+mu_ci <-apply(mu,2,PI,prob=0.97)
+lines( rugged_seq,mu_mean,lwd=2)
+shade( mu_ci,rugged_seq)
+mtext("Non-African nations")
+```
+
+## Symmetry of interactions
+
+You can break an interaction into 2 identical phrasings\
+1. GDP ~ ruggedness depending on Africa\
+2. Africa ~ GDP depending on rugedness\
+
+$$\mu_{i} = (2 - CID_{i})(\alpha_{1} + \beta_{1}(r_{i} - \overline{r})) + (CID_{i} - 1)(\alpha_{2} + \beta_{2}(r_{i} - \overline{r}))$$
+
+```{r}
+rugged_seq <- seq(from = -0.2, to = 1.2, length.out = 30)
+muA <- link(m8.3, data=data.frame(cid=1, rugged_std=rugged_seq))
+muN <- link(m8.3, data=data.frame(cid=2, rugged_std=rugged_seq))
+delta <- muA - muN
+
+
+mu.delta <- apply(delta, 2, mean)
+PI.delta <- apply(delta, 2, PI)
+
+plot(x=rugged_seq, type = 'n', xlim = c(0,1), ylim = c(-0.3, 0.2),
+     xlab = 'ruggedness (std)', ylab = 'expected difference log GDP')
+shade(PI.delta, rugged_seq, col='grey')
+abline(h = 0, lty = 2)
+text(x = 0.2, y = 0, label = "Africa higher GDP\nAfrica lower GDP")
+lines(rugged_seq, mu.delta)
+
+
+```
+
+At high ruggedness, being in Africa gives higher than expected GDP.
+
+## Continuous interactions
+
+### A winter flower
+
+```{r}
+data(tulips)
+d <- tulips
+str(d)
+```
+
+### the models
+
+Water and Shade work together to create Blooms; $W \rightarrow B \leftarrow S ; B = f(W,S)$
+
+1. water\
+$$\beta_{i} \sim \text{Normal}(\mu_{i}, \sigma)\\
+\mu_{i} = \alpha + \beta_{W}(W_{i} - \overline{W})\\
+\alpha \sim \text{Normal}(0.5,1)\\
+\beta_{W} \sim \text{Normal}(0,1)\\
+\sigma \sim \text{Exponential}(1)$$
+2. shade\
+$$\beta_{i} \sim \text{Normal}(\mu_{i}, \sigma)\\
+\mu_{i} = \alpha + \beta_{S}(S_{i} - \overline{S})\\
+\alpha \sim \text{Normal}(0.5,1)\\
+\beta_{S} \sim \text{Normal}(0,1)\\
+\sigma \sim \text{Exponential}(1)$$
+3. water + shade\
+$$\beta_{i} \sim \text{Normal}(\mu_{i}, \sigma)\\
+\mu_{i} = \alpha + \beta_{W}(W_{i} - \overline{W}) + \beta_{S}(S_{i} - \overline{S})\\
+\alpha \sim \text{Normal}(0.5,1)\\
+\beta_{W} \sim \text{Normal}(0,1)\\
+\beta_{S} \sim \text{Normal}(0,1)\\
+\sigma \sim \text{Exponential}(1)$$
+4. water * shade\
+$$$$
+
+```{r}
+#center predictors and scale outcome
+d$blooms_std <- d$blooms / max(d$blooms)
+d$water_cent <- d$water - mean(d$water)
+d$shade_cent <- d$shade - mean(d$shade)
+```
+
+
+The $\alpha$ prior is likely too broad. We need it to be between 0 and 1. How much is outside that?
+```{r}
+a <- rnorm(1e4, 0.5, 1); sum(a < 0 | a > 1) / length(a)
+
+```
+
+Let's tighten it
+
+```{r}
+a <- rnorm(1e4, 0.5, 0.25); sum(a < 0 | a > 1) / length(a)
+```
+
+range of water and shade are each 2 units. range of blooms is one unit. max slopes = 2/1 (0.5) so we can set the prior to 0 with 0.25 sd to get values ranging from -0.5 to 0.5.
+
+```{r}
+#water
+m8.4a <- quap(
+  alist(
+    blooms_std ~ dnorm(mu, sigma),
+    mu <- a + bw*water_cent,
+    a ~ dnorm(0.5,0.25),
+    bw ~ dnorm(0, 0.25),
+    sigma ~ dexp(1)
+  ), data = d
+)
+
+#shade
+m8.4b <- quap(
+  alist(
+    blooms_std ~ dnorm(mu, sigma),
+    mu <- a + bs*shade_cent,
+    a ~ dnorm(0.5,0.25),
+    bs ~ dnorm(0, 0.25),
+    sigma ~ dexp(1)
+  ), data = d
+)
+
+# water + shade
+m8.4c <- quap(
+  alist(
+    blooms_std ~ dnorm(mu, sigma),
+    mu <- a + bw*water_cent + bs*shade_cent,
+    a ~ dnorm(0.5,0.25),
+    bw ~ dnorm(0, 0.25),
+    bs ~ dnorm(0, 0.25),
+    sigma ~ dexp(1)
+  ), data = d
+)
+
+#water * shade
+m8.4d <- quap(
+  alist(
+    blooms_std ~ dnorm(mu, sigma),
+    mu <- a + bw*water_cent + bs*shade_cent + bws*water_cent*shade_cent,
+    a ~ dnorm(0.5,0.25),
+    bw ~ dnorm(0, 0.25),
+    bs ~ dnorm(0, 0.25),
+    bws ~ dnorm(0, 0.25),
+    sigma ~ dexp(1)
+  ), data = d
+)
+```
+
+prior simulations
+```{r}
+set.seed(11)
+prior_a <- extract.prior(m8.4a) #water
+prior_b <- extract.prior(m8.4b) #shade
+prior_c <- extract.prior(m8.4c) #water + shade
+prior_d <- extract.prior(m8.4d) #water * shade
+
+
+#set plot
+plot(NULL, xlim=c(0,2), ylim=c(0, 1.25), xlab = "Water / shade", ylab = "blooms")
+abline(h=min(d$blooms_std), lty = 2)
+abline(h=max(d$blooms_std), lty = 2)
+
+#draw lines from prior
+water_seq <- seq(from = -1.1, to = 1.1, length.out=30)
+shade_seq <- seq(from = -1.1, to = 1.1, length.out=30)
+
+mu_a <- link(m8.4a, post = prior_a, data = data.frame(water_cent=water_seq))
+mu_b <- link(m8.4b, post = prior_b, data = data.frame(shade_cent=shade_seq))
+mu_c <- link(m8.4c, post = prior_c, data = data.frame(water_cent=water_seq, shade_cent=shade_seq))
+mu_d <- link(m8.4d, post = prior_d, data = data.frame(water_cent=water_seq, shade_cent=shade_seq))
+
+#set plot
+plot(NULL, xlim=c(-1,1), ylim=c(0, 1.25), xlab = "Water / shade (centered)", ylab = "blooms (std)")
+abline(h=min(d$blooms_std), lty = 2)
+abline(h=max(d$blooms_std), lty = 2)
+
+
+for(i in 1:50){
+  lines(water_seq, mu_a[i,], col=col.alpha('blue',0.3))
+  }
+
+for(i in 1:50){
+  lines(water_seq, mu_b[i,], col=col.alpha('black',0.3))
+}
+for(i in 1:50){
+  lines(water_seq, mu_c[i,], col=col.alpha('green',0.3))
+}
+
+for(i in 1:50){
+  lines(water_seq, mu_d[i,], col=col.alpha('red',0.3))
+  }
+
+text(x = -0.75, y = 1.2, label = "Water", col = "blue")
+text(x = -0.45, y = 1.2, label = "Shade", col = "black")
+text(x = 0, y = 1.2, label = "Water + Shade", col = "green")
+text(x = 0.5, y = 1.2, label = "Water * Shade", col = 'red')
+```
+
+```{r}
+precis(m8.4a)
+precis(m8.4b)
+precis(m8.4c)
+precis(m8.4d)
+
+```
+
+### Plotting posterior predictions
+
+```{r}
+par(mfrow = c(1,3))
+for (s in -1:1){
+  idx <- d[d$shade_cent == s,]
+  plot(x = idx$water_cent, y = idx$blooms_std, xlim = c(-1,1), ylim = c(0,1),
+       xlab = "water", ylab = "blooms", pch = 16, col = rangi2)
+  mu <- link(m8.4c, data = data.frame(shade_cent=s, water_cent = -1:1))
+  for(i in 1:20){
+    lines(-1:1, mu[i,], col = col.alpha('black',0.3))
+  }
+   mtext(concat("m8.4c post: shade = ", s))
+}
+```
+
+```{r}
+par(mfrow = c(1,3))
+for (s in -1:1){
+  idx <- d[d$shade_cent == s,]
+  plot(x = idx$water_cent, y = idx$blooms_std, xlim = c(-1,1), ylim = c(0,1),
+       xlab = "water", ylab = "blooms", pch = 16, col = rangi2)
+  mu <- link(m8.4d, data = data.frame(shade_cent=s, water_cent = -1:1))
+  for(i in 1:20){
+    lines(-1:1, mu[i,], col = col.alpha('black',0.3))
+  }
+   mtext(concat("m8.4d post: shade = ", s))
+}
+```
+
+
+```{r}
+par(mfrow = c(1,3))
+for (s in -1:1){
+  idx <- d[d$water_cent == s,]
+  plot(x = idx$shade_cent, y = idx$blooms_std, xlim = c(-1,1), ylim = c(0,1),
+       xlab = "shade", ylab = "blooms", pch = 16, col = rangi2)
+  mu <- link(m8.4c, data = data.frame(water_cent=s, shade_cent = -1:1))
+  for(i in 1:20){
+    lines(-1:1, mu[i,], col = col.alpha('black',0.3))
+  }
+  mtext(concat("m8.4c post: water = ", s))
+}
+
+```
+
+
+```{r}
+par(mfrow = c(1,3))
+for (s in -1:1){
+  idx <- d[d$water_cent == s,]
+  plot(x = idx$shade_cent, y = idx$blooms_std, xlim = c(-1,1), ylim = c(0,1),
+       xlab = "shade", ylab = "blooms", pch = 16, col = rangi2)
+  mu <- link(m8.4d, data = data.frame(water_cent=s, shade_cent = -1:1))
+  for(i in 1:20){
+    lines(-1:1, mu[i,], col = col.alpha('black',0.3))
+  }
+  mtext(concat("m8.4c post: water = ", s))
+}
+```
+
+
+### Plotting prior predictions
+
+```{r}
+par(mfrow = c(1,3))
+for (s in -1:1){
+  idx <- d[d$shade_cent == s,]
+  plot(x = idx$water_cent, y = idx$blooms_std, type = 'n', xlim = c(-1,1), ylim = c(-0.5,1.5),
+       xlab = "water", ylab = "blooms")
+  mu <- link(m8.4c, post = prior_c, data = data.frame(shade_cent=s, water_cent = -1:1))
+  for(i in 1:20){
+    lines(-1:1, mu[i,], col = col.alpha('black',0.3))
+  }
+  lines(-1:1, mu[11,], lwd = 2, col = rangi2)
+  abline(h = 0, lty = 2)
+  abline(h = 1, lty = 2)
+  mtext(concat("m8.4c post: shade = ", s))
+}
+```
+
+```{r}
+par(mfrow = c(1,3))
+for (s in -1:1){
+  idx <- d[d$shade_cent == s,]
+  plot(x = idx$water_cent, y = idx$blooms_std, type = 'n', xlim = c(-1,1), ylim = c(-0.5,1.5),
+       xlab = "water", ylab = "blooms")
+  mu <- link(m8.4d, post = prior_d, data = data.frame(shade_cent=s, water_cent = -1:1))
+  for(i in 1:20){
+    lines(-1:1, mu[i,], col = col.alpha('black',0.3))
+  }
+  lines(-1:1, mu[11,], lwd = 2, col = rangi2)
+  abline(h = 0, lty = 2)
+  abline(h = 1, lty = 2)
+  mtext(concat("m8.4c post: shade = ", s))
+}
+```
+
+
+```{r}
+par(mfrow = c(1,3))
+for (s in -1:1){
+  idx <- d[d$water_cent == s,]
+  plot(x = idx$shade_cent, y = idx$blooms_std, type = 'n', xlim = c(-1,1), ylim = c(-0.5,1.5),
+       xlab = "shade", ylab = "blooms")
+  mu <- link(m8.4c, post = prior_c, data = data.frame(water_cent=s, shade_cent = -1:1))
+  for(i in 1:20){
+    lines(-1:1, mu[i,], col = col.alpha('black',0.3))
+  }
+  lines(-1:1, mu[11,], lwd = 2, col = rangi2)
+  abline(h = 0, lty = 2)
+  abline(h = 1, lty = 2)
+  mtext(concat("m8.4c post: water = ", s))
+}
+```
+
+```{r}
+par(mfrow = c(1,3))
+for (s in -1:1){
+  idx <- d[d$water_cent == s,]
+  plot(x = idx$shade_cent, y = idx$blooms_std, type = 'n', xlim = c(-1,1), ylim = c(-0.5,1.5),
+       xlab = "shade", ylab = "blooms")
+  mu <- link(m8.4d, post = prior_d, data = data.frame(water_cent=s, shade_cent = -1:1))
+  for(i in 1:20){
+    lines(-1:1, mu[i,], col = col.alpha('black',0.3))
+  }
+  lines(-1:1, mu[11,], lwd = 2, col = rangi2)
+  abline(h = 0, lty = 2)
+  abline(h = 1, lty = 2)
+  mtext(concat("m8.4c post: water = ", s))
+}
+```
+

@@ -1,0 +1,3 @@
+"0","#library(rethinking)"
+"0","data(chimpanzees)"
+"0","d <- chimpanzees"

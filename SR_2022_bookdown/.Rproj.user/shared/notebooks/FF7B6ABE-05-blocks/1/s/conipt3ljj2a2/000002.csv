@@ -1,0 +1,2 @@
+"0","post <- extract.samples(m6.1)"
+"0","plot(bl ~ br, post, col=col.alpha(rangi2, 0.1), pch = 16)"

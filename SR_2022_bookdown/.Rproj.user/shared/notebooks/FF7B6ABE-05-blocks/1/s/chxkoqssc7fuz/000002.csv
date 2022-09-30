@@ -1,0 +1,7 @@
+"0","c2 <- dagitty(""dag{"
+"0","              H -> M"
+"0","              A -> M"
+"0","              }"")"
+"0","coordinates(c2) <- list(x = c(H = 0, M = 1, A = 2),"
+"0","                        y = c(H = 0, M = 0, A = 0))"
+"0","drawdag(c2)"

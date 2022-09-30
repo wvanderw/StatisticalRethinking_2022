@@ -1,0 +1,5 @@
+"0","data(milk)"
+"0","d <- milk"
+"0","d$K <- standardize(d$kcal.per.g)"
+"0","d$F <- standardize(d$perc.fat)"
+"0","d$L <- standardize(d$perc.lactose)"

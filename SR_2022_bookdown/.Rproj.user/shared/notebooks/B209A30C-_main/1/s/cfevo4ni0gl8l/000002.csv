@@ -1,0 +1,3 @@
+"0","#dens(p, xlim=c(0,1))"
+"0","d <- density(p)"
+"0","plot(d)"

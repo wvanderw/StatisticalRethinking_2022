@@ -1,0 +1,8 @@
+"0",""
+"0","#calculate the standard error of the WAIC for yourself"
+"0","waic_vec <- -2*(lppd - pWAIC)"
+"0","sqrt(n_cases*var(waic_vec))"
+"1","[1]"
+"1"," 17.83138"
+"1","
+"

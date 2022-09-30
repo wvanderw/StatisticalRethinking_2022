@@ -1,0 +1,21 @@
+"0","title: ""Rethinking Companion""
+author: ""Wade VanderWright""
+date: ""`r Sys.Date()`""
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The HTML output format for this example is bookdown::gitbook,
+  set in the _output.yml file.
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+---
+
+# The Golem of Prague
+
+This is a _companion_ book written in Markdown for McElreath's *Statistical Rethinking* (2020). You can set up your R console by running:"
+"2","/bin/sh: ---: command not found
+"

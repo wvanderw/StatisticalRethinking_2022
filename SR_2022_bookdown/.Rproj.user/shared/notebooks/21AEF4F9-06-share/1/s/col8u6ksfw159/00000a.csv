@@ -1,0 +1,6 @@
+"0","for(i in kseq){"
+"0","  pts_in <- dev_20[1,i] + c(-1,+1)*dev_20[3,i]"
+"0","  pts_out <- dev_20[2,i] + c(-1, +1)*dev_20[4,i]"
+"0","  lines(c(i,i), pts_in, col=rangi2)"
+"0","  lines(c(i,i)+0.1, pts_out)"
+"0","}"

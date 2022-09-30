@@ -1,0 +1,2 @@
+"0","set.seed(11)"
+"0","prior <- extract.prior(m11.1, n=1e4)"

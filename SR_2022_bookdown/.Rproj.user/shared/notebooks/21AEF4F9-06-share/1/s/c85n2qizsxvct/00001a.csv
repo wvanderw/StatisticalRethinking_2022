@@ -1,0 +1,4 @@
+"0","#set plot layout"
+"0","par(mfrow = c(3,2))"
+"0",""
+"0","brain_plot(m7.1)"

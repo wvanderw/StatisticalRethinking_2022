@@ -1,0 +1,2 @@
+"0","H <- replicate(1e5, sim.p(1.4))"
+"0","dens(as.numeric(H[1,]), adj=0.1)"

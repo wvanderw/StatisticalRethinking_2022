@@ -1,0 +1,5 @@
+"0","# plotnon-Africa-cid=2"
+"0","d.A0 <-dd[dd$cid==2,]"
+"0","plot( d.A0$rugged_std,d.A0$log_gdp_std,pch=1,col=""black"","
+"0","xlab=""ruggedness (standardized)"",ylab=""logGDP(asproportionofmean)"","
+"0","xlim=c(0,1) )"

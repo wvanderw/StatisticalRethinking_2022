@@ -1,0 +1,2 @@
+"0","p <- inv_logit(prior$a)"
+"0","dens(p, adj = 0.1)"

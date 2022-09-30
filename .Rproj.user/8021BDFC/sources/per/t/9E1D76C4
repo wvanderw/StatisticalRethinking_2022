@@ -1,0 +1,27 @@
+{
+    "id": "9E1D76C4",
+    "path": "~/Desktop/StatisticalRethinking_2022/StatisticalRethinking_2022.Rmd",
+    "project_path": "StatisticalRethinking_2022.Rmd",
+    "type": "r_markdown",
+    "hash": "3897719098",
+    "contents": "",
+    "dirty": false,
+    "created": 1651609386909.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "chunk_output_type": "inline",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "11,6",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1651609410,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1651609410637,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -1,0 +1,7 @@
+"0","# need to calculate likelihood for each observation"
+"0","n_samples <- 1000"
+"0","logprob <- sapply(1:n_samples,"
+"0","                  function(s){"
+"0","                    mu <- post$a[s] + post$b[s]*cars$speed"
+"0","                    dnorm(cars$dist, mu, post$sigma[s], log = TRUE)"
+"0","                  })"

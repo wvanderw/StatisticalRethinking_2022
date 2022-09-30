@@ -1,0 +1,2 @@
+"0","d2 <- d[d$age > 17,] #pick out adults"
+"0","d2$A <- (d2$age - 18) / (65 - 18) #set age back to zero and bound between 0 and 1"

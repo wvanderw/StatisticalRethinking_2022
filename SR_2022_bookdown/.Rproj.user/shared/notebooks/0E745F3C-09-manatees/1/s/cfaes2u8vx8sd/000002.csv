@@ -1,0 +1,6 @@
+"0","par(mfrow=c(1,2))"
+"0","# plot Africa - cid = 1"
+"0","d.A1 <-dd[dd$cid == 1,]"
+"0","plot(d.A1$rugged_std, d.A1$log_gdp_std, pch=16, col=rangi2,"
+"0","xlab=""ruggedness (standardized)"",ylab=""log GDP (as proportion of mean)"","
+"0","xlim=c(0,1) )"

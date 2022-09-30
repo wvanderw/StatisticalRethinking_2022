@@ -1,0 +1,4 @@
+"0","rugged_seq <- seq(from = -0.2, to = 1.2, length.out = 30)"
+"0","muA <- link(m8.3, data=data.frame(cid=1, rugged_std=rugged_seq))"
+"0","muN <- link(m8.3, data=data.frame(cid=2, rugged_std=rugged_seq))"
+"0","delta <- muA - muN"

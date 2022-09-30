@@ -1,0 +1,2 @@
+"0","d$side <- d$prosoc_left + 1 #right = 1, left = 2"
+"0","d$cond <- d$condition + 1 #no partner = 1, partner = 2"

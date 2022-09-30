@@ -1,0 +1,7 @@
+"0","m11.1 <- quap("
+"0","  alist("
+"0","    pulled_left ~ dbinom(1, p),"
+"0","    logit(p) <- a,"
+"0","    a ~ dnorm(0, 10)"
+"0","  ), data = d"
+"0",")"

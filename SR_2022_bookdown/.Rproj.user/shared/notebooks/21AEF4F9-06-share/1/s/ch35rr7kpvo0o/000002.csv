@@ -1,0 +1,2 @@
+"0","m7.1_OLS <- lm(brain_std ~ mass_std, data = d)"
+"0","post <- extract.samples(m7.1_OLS)"

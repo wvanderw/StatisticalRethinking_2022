@@ -1,0 +1,42 @@
+"0","library(dplyr)"
+"2","
+Attaching package: ‘dplyr’
+
+"
+"2","The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+"
+"0","library(ggplot2)"
+"0","library(stringr)"
+"0","n_grid <- 100"
+"0",""
+"0","tibble(p_grid                  = seq(from = 0, to = 1, length.out = n_grid) %>% rep(., times = 3),"
+"0","       prior                   = 1,"
+"0","       w                       = rep(c(6, 12, 24), each = n_grid),"
+"0","       n                       = rep(c(9, 18, 36), each = n_grid),"
+"0","       m                       = .67,"
+"0","       s                       = rep(c(.16, .11, .08), each = n_grid)) %>%"
+"0","  mutate(likelihood            = dbinom(w, size = n, prob = p_grid)) %>%"
+"0","  mutate(unstd_grid_posterior  = likelihood * prior,"
+"0","         unstd_quad_posterior  = dnorm(p_grid, m, s)) %>%"
+"0","  group_by(w) %>% "
+"0","  mutate(grid_posterior        = unstd_grid_posterior / sum(unstd_grid_posterior),"
+"0","         quad_posterior        = unstd_quad_posterior / sum(unstd_quad_posterior),"
+"0","         n = str_c(""n = "", n)) %>% "
+"0","  mutate(n = factor(n, levels = c(""n = 9"", ""n = 18"", ""n = 36""))) %>% "
+"0","  "
+"0","  ggplot(aes(x = p_grid)) +"
+"0","  geom_line(aes(y = grid_posterior), color = ""blue"") +"
+"0","  geom_line(aes(y = quad_posterior),"
+"0","            color = ""black"") +"
+"0","  labs(x = ""proportion water"","
+"0","       y = ""density"") +"
+"0","  theme(panel.grid = element_blank()) +"
+"0","  facet_wrap(~n, scales = ""free"")"

@@ -1,0 +1,2 @@
+"0","par(mfrow = c(1,2))"
+"0","plot(1:100, positions[1:100], col = rangi2, xlab = ""week"", ylab = ""island"")"

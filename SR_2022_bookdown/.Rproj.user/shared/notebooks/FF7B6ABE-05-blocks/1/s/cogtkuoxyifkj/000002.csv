@@ -1,0 +1,7 @@
+"0","c1 <- dagitty(""dag{"
+"0","              T -> S"
+"0","              N -> S"
+"0","              }"")"
+"0","coordinates(c1) <- list(x = c(T = 0, S = 1, N = 2),"
+"0","                        y = c(T = 0, S = 0, N = 0))"
+"0","drawdag(c1)"

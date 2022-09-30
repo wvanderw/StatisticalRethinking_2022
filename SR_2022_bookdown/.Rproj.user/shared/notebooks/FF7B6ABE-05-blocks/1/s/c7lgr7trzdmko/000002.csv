@@ -1,0 +1,7 @@
+"0","N <- 100 #number of people"
+"0","set.seed(11)"
+"0","height <- rnorm(N, 10, 2) #simulate total height"
+"0","leg_prop <- runif(N, 0.4, 0.5) #leg as a proportion of height"
+"0","leg_left <- leg_prop*height + rnorm(N, 0, 0.02) #left leg with error"
+"0","leg_right <- leg_prop*height + rnorm(N, 0, 0.02) # right leg with error (only error will vary here)"
+"0","d <- data.frame(height, leg_left, leg_right)"

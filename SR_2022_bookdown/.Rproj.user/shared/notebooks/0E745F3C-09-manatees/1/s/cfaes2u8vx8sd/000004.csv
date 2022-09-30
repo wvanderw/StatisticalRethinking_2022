@@ -1,0 +1,4 @@
+"0","mu <-link(m8.3,data=data.frame(cid=1,rugged_std=rugged_seq))"
+"0","mu_mean <-apply(mu,2,mean)"
+"0","mu_ci <-apply(mu,2,PI,prob=0.97)"
+"0","lines( rugged_seq,mu_mean,lwd=2)"

@@ -1,0 +1,6 @@
+"0","CBC <- rep(c(-1, -0.6), times = c(3,7))"
+"0","CTV <- rep(c(-5, 0), times = c(3,7))"
+"0",""
+"0","d <- rbind(Day, Observed, CBC, CTV)"
+"0",""
+"0","knitr::kable(d, ""html"")"

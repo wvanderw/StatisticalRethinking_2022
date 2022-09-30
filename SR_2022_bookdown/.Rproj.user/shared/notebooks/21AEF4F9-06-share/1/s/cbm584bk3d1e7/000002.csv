@@ -1,0 +1,2 @@
+"0","d$mass_std <- (d$mass - mean(d$mass))/sd(d$mass)"
+"0","d$brain_std <- d$brain / max(d$brain)"

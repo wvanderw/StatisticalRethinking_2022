@@ -1,0 +1,23 @@
+"0","m6.2 <- quap("
+"0","  alist("
+"0","    height ~dnorm(mu,sigma),"
+"0","mu <-a+bl*leg_left,"
+"0","a ~dnorm(10,100),"
+"0","bl ~dnorm(2,10),"
+"0","sigma ~dexp(1)"
+"0","  ), data = d"
+"0",")"
+"2","Caution, model may not have converged.
+"
+"2","Code 1: Maximum iterations reached.
+"
+"0","precis(m6.2)"
+"2","Warning in sqrt(diag(vcov(model))) :"
+"2"," NaNs produced
+"
+"2","Warning in sqrt(diag(vcov(model))) :"
+"2"," NaNs produced
+"
+"2","Warning in sqrt(diag(vcov(model))) :"
+"2"," NaNs produced
+"

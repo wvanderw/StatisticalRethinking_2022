@@ -1,0 +1,17 @@
+"0","data(chimapnzees)"
+"2","Warning in data(chimapnzees) :"
+"2"," data set ‘chimapnzees’ not found
+"
+"0","d <- chimpanzees"
+"0","d$treatment <- 1 + d$prosoc_left + 2*d$condition"
+"0","d$side <- d$prosoc_left + 1 #right 1, left 2"
+"0","d$cond <- d$condition + 1 # no partner 1, partner 2"
+"0","d_aggregated <- aggregate("
+"0","  d$pulled_left, list("
+"0","    treatment = d$treatment, actor = d$actor, side = d$side, cond = d$cond"
+"0","  ), sum"
+"0",")"
+"0","colnames(d_aggregate)[5] <- ""left_pulls"""
+"2","Error in colnames(d_aggregate)[5] <- ""left_pulls"" : 
+  object 'd_aggregate' not found
+"

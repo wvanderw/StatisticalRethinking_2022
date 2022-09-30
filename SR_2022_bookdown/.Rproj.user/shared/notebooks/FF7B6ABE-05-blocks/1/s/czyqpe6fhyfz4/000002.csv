@@ -1,0 +1,5 @@
+"0","d <- sim_happiness(seed = 1977, N_years = 1000)"
+"0","precis(d)"
+"1","'data.frame': 1300 obs. of 3 variables:"
+"1","
+"

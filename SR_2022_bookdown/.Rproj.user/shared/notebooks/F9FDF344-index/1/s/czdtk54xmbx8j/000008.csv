@@ -1,0 +1,5 @@
+"0","devtools::install_github(""rmcelreath/rethinking"")
+"
+"2","Error in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) : 
+  namespace ‘rlang’ 0.4.11 is already loaded, but >= 1.0.5 is required
+"

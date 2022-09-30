@@ -1,0 +1,1 @@
+"0","plot(x = logwayspp, y = H, xlab = ""log(ways) per pebble"", ylab = ""entropy"", pch = 16)"
